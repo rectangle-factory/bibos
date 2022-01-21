@@ -15,3 +15,5 @@ Build
 ```
 forge build
 ```
+
+`npm install` for prettier

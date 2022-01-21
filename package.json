@@ -1,0 +1,26 @@
+{
+  "name": "bibos",
+  "version": "1.0.0",
+  "description": "![bibos](./bibos.png)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bibocorp/bibos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bibocorp/bibos/issues"
+  },
+  "homepage": "https://github.com/bibocorp/bibos#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19"
+  }
+}
