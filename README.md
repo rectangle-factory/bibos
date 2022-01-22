@@ -1,5 +1,3 @@
-![bibos](./bibos.png)
-
 ## Development
 
 Install [Foundry](https://github.com/gakonst/foundry/).

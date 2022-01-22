@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.10;
 
-library Colors {
-  function getBodyLight(uint256 _index) internal pure returns (string memory) {
+library Color {
+  function getBodyLight(bytes1 _index) internal pure returns (string memory) {
     string[64] memory bodyLight = [
       "#d5a8bf",
       "#d6cb8b",
@@ -69,7 +69,7 @@ library Colors {
       "#87e7eb",
       "#cc8880"
     ];
-    return bodyLight[_index % 64];
+    return bodyLight[uint8(_index) % 64];
   }
 
   function getBodyDark(uint256 _index) internal pure returns (string memory) {
