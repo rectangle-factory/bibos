@@ -7,14 +7,11 @@ import "../Bibos.sol";
 contract BibosTest is DSTest {
   Bibos bibos;
 
-  event Log(address deployedAddress);
-
   function setUp() public {
     bibos = new Bibos();
-    emit Log(address(bibos));
   }
 
-  function testMint() public {
+  function testSomething() public {
     bibos.mint();
     assertEq(bibos.totalSupply(), 1);
   }

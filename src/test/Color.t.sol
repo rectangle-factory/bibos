@@ -2,7 +2,7 @@
 pragma solidity 0.8.10;
 
 import "ds-test/test.sol";
-import "../Libraries/Color.sol";
+import "../Color.sol";
 
 contract ColorTest is DSTest {
   function setUp() public {}
