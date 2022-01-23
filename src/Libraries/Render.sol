@@ -7,7 +7,7 @@ import "./Ascii.sol";
 
 library Render {
   function tokenURI(uint256 id, bytes32 data)
-    external
+    internal
     pure
     returns (string memory)
   {
