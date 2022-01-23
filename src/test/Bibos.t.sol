@@ -11,7 +11,7 @@ contract BibosTest is DSTest {
     bibos = new Bibos();
   }
 
-  function testSomething() public {
+  function testMint() public {
     bibos.mint();
     assertEq(bibos.totalSupply(), 1);
   }

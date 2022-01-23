@@ -10,15 +10,6 @@ library Render {
     return "Something";
   }
 
-  /// @notice constructs the name of the token
-  function tokenName(string memory _name, uint256 _tokenId)
-    internal
-    pure
-    returns (bytes memory)
-  {
-    return abi.encodePacked(_name, "hi");
-  }
-
   function svg(bytes32 data) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
