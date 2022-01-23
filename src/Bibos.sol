@@ -8,15 +8,13 @@ contract Bibos is ERC721 {
   address public owner;
   uint256 public totalSupply;
 
-  mapping(uint256 => bytes32) public data;
-
   constructor() ERC721("Bibos", "BBO") {
     owner = msg.sender;
   }
 
   function tokenURI(uint256 id) public view override returns (string memory) {
     require(id < totalSupply, "invalid id");
-    return Render.tokenURI(id, data[id]);
+    return Render.tokenURI(id);
   }
 
   function mint() external payable {
