@@ -13,7 +13,7 @@ echo $decoded_metadata > output/metadata.json
 image_data=$(echo $decoded_metadata | jq '. | .image' | tr -d '"')
 
 # replace img src in index.html
-# replace all instances of "...." in the whole record $0 with "$image_data"
+# update <img/> tag
 # write to temporary buffer
 awk -v var="<img src=\"$image_data\"/>" '{ gsub(/<img.*\>/,var,$0); print $0}' output/index.html > output/tmp.html
 
