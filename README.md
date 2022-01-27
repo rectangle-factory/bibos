@@ -1,3 +1,7 @@
+# Bibos
+
+---
+
 ## Development
 
 Install [Foundry](https://github.com/gakonst/foundry/).
@@ -23,8 +27,8 @@ For git submodules:
     git submodule update
 ```
 
-
 Install `jq`:
+
 ```
     brew install jq
 ```
