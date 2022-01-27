@@ -1,0 +1,4 @@
+img {
+    width: min(800px, 96vw);
+    height: min(800px, 96vh);
+}

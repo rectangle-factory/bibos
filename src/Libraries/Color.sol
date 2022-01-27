@@ -72,7 +72,7 @@ library Color {
     return bodyLight[uint8(_index) % 64];
   }
 
-  function getBodyDark(uint256 _index) internal pure returns (string memory) {
+  function getBodyDark(bytes1 _index) internal pure returns (string memory) {
     string[64] memory bodyDark = [
       "#5b301c",
       "#5f0067",
@@ -139,10 +139,10 @@ library Color {
       "#534e3d",
       "#9d4910"
     ];
-    return bodyDark[_index % 64];
+    return bodyDark[uint8(_index) % 64];
   }
 
-  function getBgLight(uint256 _index) internal pure returns (string memory) {
+  function getBgLight(bytes1 _index) internal pure returns (string memory) {
     string[64] memory bgLight = [
       "#020406",
       "#0d070a",
@@ -210,10 +210,10 @@ library Color {
       "#100126"
     ];
 
-    return bgLight[_index % 64];
+    return bgLight[uint8(_index) % 64];
   }
 
-  function getBgDark(uint256 _index) internal pure returns (string memory) {
+  function getBgDark(bytes1 _index) internal pure returns (string memory) {
     string[64] memory bgDark = [
       "#f1f0fe",
       "#fde2e4",
@@ -280,6 +280,6 @@ library Color {
       "#f6e2fd",
       "#e4e5fd"
     ];
-    return bgDark[_index % 64];
+    return bgDark[uint8(_index) % 64];
   }
 }
