@@ -50,7 +50,7 @@ library Render {
     return
       abi.encodePacked(
         '<rect width="100%" height="100%" fill="',
-        Color.getBodyLight(data[5]),
+        Color.getBodyLight(data[0]),
         '"/>'
       );
   }

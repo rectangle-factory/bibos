@@ -13,11 +13,8 @@ contract BibosTest is DSTest {
   Cheatcodes cheatcodes =
     Cheatcodes(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
 
-  event Log(address deployedAddress);
-
   function setUp() public {
     bibos = new Bibos();
-    emit Log(address(bibos));
   }
 
   function testMint() public {
