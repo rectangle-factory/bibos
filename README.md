@@ -1,24 +1,11 @@
 # Bibos
 
----
-
 ## Development
 
+### Install
+
 Install [Foundry](https://github.com/gakonst/foundry/).
-
-Test
-
-```
-forge test --ffi
-```
-
-Build
-
-```
-forge build
-```
-
-`npm install` for prettier
+`npm install` for prettier.
 
 For git submodules:
 
@@ -27,8 +14,22 @@ For git submodules:
     git submodule update
 ```
 
-Install `jq`:
+Install `jq` with `brew install jq`
 
+---
+
+### Test
+
+```[bash]
+forge test --ffi --force
 ```
-    brew install jq
+
+Seems we need `--force`, otherwise the tokenUri won't update. Use `--block-timestamp` if you want to change the timestamp that is used to compute the token data.
+
+---
+
+### Build
+
+```[bash]
+forge build
 ```

@@ -20,7 +20,7 @@ contract Bibos is ERC721 {
   }
 
   function mint() external payable {
-    uint256 id = ++totalSupply;
+    uint256 id = totalSupply++;
 
     // derive random data
     data[id] = keccak256(abi.encodePacked(msg.sender, block.timestamp));
