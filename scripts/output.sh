@@ -15,10 +15,7 @@ image_data=$(echo $decoded_metadata | jq '. | .image' | tr -d '"')
 # replace img src in index.html
 # update <img/> tag
 # write to temporary buffer
-awk -v var="<img src=\"$image_data\"/>" '{ gsub(/<img.*\>/,var,$0); print $0}' output/index.html > output/tmp.html
-
-# replace original
-mv output/tmp.html output/index.html
+awk -v var="<img src=\"$image_data\"/>" '{ gsub(/<img.*\>/,var,$0); print $0}' output/template.html > output/index.html
 
 # return bytes for ffi
 printf 0x00
