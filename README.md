@@ -1,7 +1,5 @@
 # Bibos
 
----
-
 ## Development
 
 ### Install
