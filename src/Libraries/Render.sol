@@ -51,7 +51,7 @@ library Render {
   }
 
   function svgChildren(bytes32 data) internal pure returns (bytes memory) {
-    Color.CM cm = Color.CM.DARK;
+    Color.CM cm = Color.CM.LIGHT;
     return abi.encodePacked(Body.background(cm, data[0]), Body.blurGroup(data));
   }
 
