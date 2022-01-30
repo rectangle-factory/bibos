@@ -1,5 +1,6 @@
 {
   "solidity.compileUsingRemoteVersion": "v0.8.10+commit.fc410830",
   "solidity.packageDefaultDependenciesContractsDirectory": "src",
-  "solidity.packageDefaultDependenciesDirectory": "lib"
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "prettier.singleQuote": true
 }
