@@ -18,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: forge install
       - name: Run tests
-        run: forge test -vvv
+        run: forge test --ffi -vvv
