@@ -163,45 +163,50 @@ library Body {
 
   function bodyCircle(
     Color.CM cm,
-    bytes memory r,
-    bytes1 v
+    bytes memory radius,
+    bytes1 value
   ) internal pure returns (bytes memory) {
     string memory mixMode = cm == Color.CM.LIGHT ? 'overlay' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT
-      ? Color.bodyLight(v)
-      : Color.bodyDark(v);
+      ? Color.bodyLight(value)
+      : Color.bodyDark(value);
 
-    string memory dur = shortTimes(v);
-    string[2] memory c = bodyPoints(v);
+    string memory dur = shortTimes(value);
+    string[2] memory coords = bodyPoints(value);
 
-    string memory rev = v & 0x01 == 0 ? 'keyPoints="1;0" keyTimes="0;1" ' : '';
+    // switch on first byte of val
+    // equiv to val % 2 == 0
+    string memory points = value & 0x01 == 0
+      ? 'keyPoints="1;0" keyTimes="0;1" '
+      : '';
+
     return
       abi.encodePacked(
         '<circle r=',
-        quote(r),
+        quote(radius),
         'cx=',
-        quote(c[0]),
+        quote(coords[0]),
         'cy=',
-        quote(c[1]),
+        quote(coords[1]),
         'style=',
         quote(abi.encodePacked('mix-blend-mode:', mixMode)),
         'shape-rendering="optimizeSpeed" ',
         'fill=',
         quote(fill),
         '>',
-        animation(rev, dur),
+        animation(points, dur),
         '</circle>'
       );
   }
 
-  function background(Color.CM cm, bytes1 v)
+  function background(Color.CM cm, bytes1 value)
     internal
     pure
     returns (bytes memory)
   {
     string memory bg = cm == Color.CM.LIGHT
-      ? Color.bgLight(v)
-      : Color.bgDark(v);
+      ? Color.bgLight(value)
+      : Color.bgDark(value);
     return
       abi.encodePacked(
         '<rect width="300" height="300" ',
@@ -211,7 +216,7 @@ library Body {
       );
   }
 
-  function animation(string memory rev, string memory dur)
+  function animation(string memory points, string memory dur)
     internal
     pure
     returns (bytes memory)
@@ -219,7 +224,7 @@ library Body {
     return
       abi.encodePacked(
         '<animateMotion ',
-        rev,
+        points,
         'dur=',
         quote(dur),
         'repeatCount="indefinite" ',
