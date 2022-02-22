@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.10;
 
-import "ds-test/test.sol";
-import "../Bibos.sol";
+import 'ds-test/test.sol';
+import '../Bibos.sol';
 
 interface Cheatcodes {
   function ffi(string[] calldata) external returns (bytes memory);
@@ -25,7 +25,7 @@ contract BibosTest is DSTest {
   function testOutputSvg() public {
     bibos.mint();
     string[] memory inputs = new string[](2);
-    inputs[0] = "scripts/output.sh";
+    inputs[0] = 'scripts/output.sh';
     inputs[1] = bibos.tokenURI(0);
     cheatcodes.ffi(inputs);
   }

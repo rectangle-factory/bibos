@@ -5,6 +5,7 @@ import './Color.sol';
 import './Times.sol';
 import './Points.sol';
 import './Util.sol';
+import './SVG.sol';
 
 library Body {
   function render(bytes32 data) internal pure returns (bytes memory) {
@@ -25,7 +26,7 @@ library Body {
 
   function bodyCircle(
     Color.CM cm,
-    bytes memory radius,
+    string memory radius,
     bytes1 value
   ) internal pure returns (bytes memory) {
     string memory mixMode = cm == Color.CM.LIGHT ? 'overlay' : 'color-burn';
@@ -44,18 +45,7 @@ library Body {
 
     return
       abi.encodePacked(
-        '<circle r=',
-        Util.quote(radius),
-        'cx=',
-        Util.quote(coords[0]),
-        'cy=',
-        Util.quote(coords[1]),
-        'style=',
-        Util.quote(abi.encodePacked('mix-blend-mode:', mixMode)),
-        'shape-rendering="optimizeSpeed" ',
-        'fill=',
-        Util.quote(fill),
-        '>',
+        SVG.circle(radius, coords, mixMode, fill, '1', ''),
         animation(points, dur),
         '</circle>'
       );
@@ -69,13 +59,7 @@ library Body {
     string memory bg = cm == Color.CM.LIGHT
       ? Color.bgLight(value)
       : Color.bgDark(value);
-    return
-      abi.encodePacked(
-        '<rect width="300" height="300" ',
-        'fill=',
-        Util.quote(bg),
-        '/>'
-      );
+    return SVG.rect('300', '300', bg);
   }
 
   function animation(string memory points, string memory dur)
