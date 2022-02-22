@@ -12,6 +12,7 @@ library Body {
     Color.CM cm = Color.CM.LIGHT;
     return
       abi.encodePacked(
+        bodyBackground(cm, data[0]),
         '<g filter="url(#blur)">',
         bodyBackground(cm, data[0]),
         bodyCircle(cm, '64', data[1]),
@@ -39,14 +40,19 @@ library Body {
 
     // switch on first byte of val
     // equiv to val % 2 == 0
-    string memory points = value & 0x01 == 0
+    string memory rev = value & 0x01 == 0
       ? 'keyPoints="1;0" keyTimes="0;1" '
       : '';
 
     return
       abi.encodePacked(
-        SVG.circle(radius, coords, mixMode, fill, '1', ''),
-        animation(points, dur),
+        SVG.circle(radius, coords, mixMode, fill, '1'),
+        SVG.animateMotion(
+          rev,
+          dur,
+          'linear',
+          '<mpath xlink:href="#jitter-lg"/>'
+        ),
         '</circle>'
       );
   }
@@ -60,24 +66,5 @@ library Body {
       ? Color.bgLight(value)
       : Color.bgDark(value);
     return SVG.rect('300', '300', bg);
-  }
-
-  function animation(string memory points, string memory dur)
-    internal
-    pure
-    returns (bytes memory)
-  {
-    return
-      abi.encodePacked(
-        '<animateMotion ',
-        points,
-        'dur=',
-        Util.quote(dur),
-        'repeatCount="indefinite" ',
-        'calcMode="linear" ',
-        '>',
-        '<mpath xlink:href="#jitter-lg"/>',
-        '</animateMotion>'
-      );
   }
 }

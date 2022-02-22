@@ -8,9 +8,8 @@ library SVG {
     string memory radius,
     string[2] memory coords,
     string memory mixMode,
-    string memory fill,
     string memory opacity,
-    bytes memory animation
+    string memory fill
   ) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
@@ -27,7 +26,6 @@ library SVG {
         Util.quote(opacity),
         'fill=',
         Util.quote(fill),
-        animation,
         '>'
       );
   }
@@ -50,44 +48,37 @@ library SVG {
       );
   }
 
-  function animateTransform(string memory dur, bytes memory to)
-    internal
-    pure
-    returns (bytes memory)
-  {
-    return
-      abi.encodePacked(
-        '<animateTransform ',
-        'attributeType="XML" ',
-        'attributeName="transform" ',
-        'dur=',
-        Util.quote(dur),
-        'repeatCount="indefinite" ',
-        'calcMode="paced" ',
-        'type="translate" ',
-        'additive="sum" ',
-        'from="0 0" ',
-        'to="0 ',
-        to,
-        '" ',
-        '/>'
-      );
-  }
-
-  function animateMotion(string memory dur, string memory rev)
-    internal
-    pure
-    returns (bytes memory)
-  {
+  function animateMotion(
+    string memory rev,
+    string memory dur,
+    string memory calcMode,
+    string memory mpath
+  ) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
         '<animateMotion ',
+        rev,
         'dur=',
         Util.quote(dur),
         'repeatCount="indefinite" ',
-        'calcMode="paced" ',
-        rev,
-        '>'
+        'calcMode=',
+        Util.quote(calcMode),
+        '>',
+        mpath,
+        '</animateMotion>'
+      );
+  }
+
+  function animate(string memory dur) internal pure returns (bytes memory) {
+    return
+      abi.encodePacked(
+        '<animate ',
+        'attributeName="opacity" ',
+        'values="0;1;0" ',
+        'dur=',
+        Util.quote(dur),
+        'repeatCount="indefinite" ',
+        '/>'
       );
   }
 }

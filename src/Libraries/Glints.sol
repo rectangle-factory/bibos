@@ -35,17 +35,9 @@ library Glints {
         result = abi.encodePacked(
           result,
           '<g transform="translate(0,50)">',
-          SVG.circle(radius, coords, mixMode, fill, '0.5', ''),
-          abi.encodePacked(
-            SVG.animateTransform(dur, '-100'),
-            '<animate ',
-            'attributeName="opacity" ',
-            'values="0;1;0" ',
-            'dur=',
-            Util.quote(dur),
-            'repeatCount="indefinite" ',
-            '/>'
-          ),
+          SVG.circle(radius, coords, mixMode, fill, '0.5'),
+          animateTransform(dur, '-100'),
+          SVG.animate(dur),
           '</circle>',
           '</g>'
         );
@@ -55,10 +47,13 @@ library Glints {
       if (value & 0x11 == 0x01) {
         result = abi.encodePacked(
           result,
-          SVG.circle(radius, coords, mixMode, fill, '0.75', ''),
-          SVG.animateMotion(dur, rev),
-          '<mpath xlink:href="#jitter-sm"/>',
-          '</animateMotion>',
+          SVG.circle(radius, coords, mixMode, fill, '0.75'),
+          SVG.animateMotion(
+            rev,
+            dur,
+            'paced',
+            '<mpath xlink:href="#jitter-sm"/>'
+          ),
           '</circle>'
         );
       }
@@ -68,19 +63,37 @@ library Glints {
         result = abi.encodePacked(
           result,
           '<g>',
-          SVG.circle(radius, coords, mixMode, fill, '0.5', ''),
-          SVG.animateTransform(dur, '100'),
-          '<animate ',
-          'attributeName="opacity" ',
-          'values="0;1;0" ',
-          'dur=',
-          Util.quote(dur),
-          'repeatCount="indefinite" ',
-          '/>',
+          SVG.circle(radius, coords, mixMode, fill, '0.5'),
+          animateTransform(dur, '100'),
+          SVG.animate(dur),
           '</circle>',
           '</g>'
         );
       }
     }
+  }
+
+  function animateTransform(string memory dur, bytes memory to)
+    internal
+    pure
+    returns (bytes memory)
+  {
+    return
+      abi.encodePacked(
+        '<animateTransform ',
+        'attributeType="XML" ',
+        'attributeName="transform" ',
+        'dur=',
+        Util.quote(dur),
+        'repeatCount="indefinite" ',
+        'calcMode="paced" ',
+        'type="translate" ',
+        'additive="sum" ',
+        'from="0 0" ',
+        'to="0 ',
+        to,
+        '" ',
+        '/>'
+      );
   }
 }
