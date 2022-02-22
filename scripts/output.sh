@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # first arg is tokenUri, base64 encoded
 token_uri=$1
 
