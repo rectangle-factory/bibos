@@ -3,8 +3,12 @@ pragma solidity 0.8.10;
 
 import 'ds-test/test.sol';
 import '../Bibos.sol';
+import '../Util/console.sol';
 
 interface Cheatcodes {
+  // Set block.timestamp
+  function warp(uint256) external;
+
   function ffi(string[] calldata) external returns (bytes memory);
 }
 
@@ -23,10 +27,21 @@ contract BibosTest is DSTest {
   }
 
   function testOutputSvg() public {
+    // get random seed
+    string[] memory inputs1 = new string[](1);
+    inputs1[0] = 'scripts/seed.sh';
+    bytes32 seed = keccak256(cheatcodes.ffi(inputs1));
+
+    // set timestamp
+    cheatcodes.warp(uint256(seed));
+
+    // mint
     bibos.mint();
-    string[] memory inputs = new string[](2);
-    inputs[0] = 'scripts/output.sh';
-    inputs[1] = bibos.tokenURI(0);
-    cheatcodes.ffi(inputs);
+
+    // handle tokenUri
+    string[] memory inputs2 = new string[](2);
+    inputs2[0] = 'scripts/output.sh';
+    inputs2[1] = bibos.tokenURI(0);
+    cheatcodes.ffi(inputs2);
   }
 }
