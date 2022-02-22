@@ -27,11 +27,11 @@ contract BibosTest is DSTest {
   }
 
   function testOutputSvg() public {
-    // get random seed
+    // set block.timestamp to current unix time
     string[] memory inputs1 = new string[](1);
-    inputs1[0] = 'scripts/seed.sh';
+    inputs1[0] = 'scripts/time.sh';
     bytes32 seed = keccak256(cheatcodes.ffi(inputs1));
-
+    console.logBytes32(seed);
     // set timestamp
     cheatcodes.warp(uint256(seed));
 
