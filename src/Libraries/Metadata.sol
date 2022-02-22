@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
-import "./Base64.sol";
-import "./Ascii.sol";
+import './Base64.sol';
+import './Util.sol';
 
 library Metadata {
   /// @notice base64 encode json metadata for the token
@@ -18,15 +18,15 @@ library Metadata {
     bytes memory _svg
   ) internal pure returns (bytes memory) {
     bytes memory metadata = abi.encodePacked(
-      "{",
-      keyValue("tokenId", Ascii.uint256ToAscii(_id)),
-      ",",
-      keyValue("name", _name),
-      ",",
-      keyValue("description", _description),
-      ",",
-      keyValue("image", encodeSvg(_svg)),
-      "}"
+      '{',
+      keyValue('tokenId', Util.uint256ToAscii(_id)),
+      ',',
+      keyValue('name', _name),
+      ',',
+      keyValue('description', _description),
+      ',',
+      keyValue('image', encodeSvg(_svg)),
+      '}'
     );
 
     return encodeJson(metadata);
@@ -37,7 +37,7 @@ library Metadata {
   /// @return string, bytes64 encoded json with prefix
   function encodeJson(bytes memory _json) internal pure returns (bytes memory) {
     return
-      abi.encodePacked("data:application/json;base64,", Base64.encode(_json));
+      abi.encodePacked('data:application/json;base64,', Base64.encode(_json));
   }
 
   /// @notice base64 encode svg
@@ -46,7 +46,7 @@ library Metadata {
   function encodeSvg(bytes memory _svg) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
-        "data:image/svg+xml;base64,",
+        'data:image/svg+xml;base64,',
         Base64.encode(bytes(_svg))
       );
   }

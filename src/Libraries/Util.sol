@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-/// @title the bibos ascii library
-/// @notice utility functions for converting to ascii
-library Ascii {
+/// @title the bibos utility library
+/// @notice utility functions
+library Util {
   /// @notice converts a uint256 to string
   /// @param _value, uint256, the value to convert
   /// @return result the resulting string
@@ -13,7 +13,7 @@ library Ascii {
     pure
     returns (bytes memory result)
   {
-    if (_value == 0) return "0";
+    if (_value == 0) return '0';
 
     assembly {
       // largest uint = 2^256-1 has 78 digits
