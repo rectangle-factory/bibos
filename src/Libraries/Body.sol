@@ -13,8 +13,8 @@ library Body {
     return
       abi.encodePacked(
         bodyBackground(cm, data[0]),
+        ' <!-- BODY --> ',
         '<g filter="url(#blur)">',
-        '// BODY',
         bodyBackground(cm, data[0]),
         bodyCircle(cm, '64', data[1]),
         bodyCircle(cm, '56', data[2]),

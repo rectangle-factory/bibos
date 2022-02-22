@@ -8,8 +8,8 @@ library SVG {
     string memory radius,
     string[2] memory coords,
     string memory mixMode,
-    string memory opacity,
-    string memory fill
+    string memory fill,
+    string memory opacity
   ) internal pure returns (bytes memory) {
     return
       abi.encodePacked(
@@ -22,10 +22,10 @@ library SVG {
         'style=',
         Util.quote(abi.encodePacked('mix-blend-mode:', mixMode)),
         'shape-rendering="optimizeSpeed" ',
-        'opacity=',
-        Util.quote(opacity),
         'fill=',
         Util.quote(fill),
+        'opacity=',
+        Util.quote(opacity),
         '>'
       );
   }
