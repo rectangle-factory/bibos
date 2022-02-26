@@ -38,7 +38,7 @@ library Glints {
           SVG.circle(radius, coords, mixMode, fill, '0.5'),
           animateTransform(dur, '-100'),
           SVG.animate(dur),
-          '</circle>',
+          SVG.circleClose(),
           '</g>'
         );
       }
@@ -54,7 +54,7 @@ library Glints {
             'paced',
             '<mpath xlink:href="#jitter-sm"/>'
           ),
-          '</circle>'
+          SVG.circleClose()
         );
       }
 
@@ -66,7 +66,7 @@ library Glints {
           SVG.circle(radius, coords, mixMode, fill, '0.5'),
           animateTransform(dur, '100'),
           SVG.animate(dur),
-          '</circle>',
+          SVG.circleClose(),
           '</g>'
         );
       }

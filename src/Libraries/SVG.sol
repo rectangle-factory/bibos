@@ -30,6 +30,10 @@ library SVG {
       );
   }
 
+  function circleClose() internal pure returns (bytes memory) {
+    return abi.encodePacked('</circle>');
+  }
+
   function rect(
     string memory width,
     string memory height,
