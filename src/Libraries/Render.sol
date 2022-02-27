@@ -6,6 +6,7 @@ import './Color.sol';
 import './Util.sol';
 import './Body.sol';
 import './Glints.sol';
+import './Faces.sol';
 
 library Render {
   function tokenURI(uint256 id, bytes32 data)
@@ -52,7 +53,8 @@ library Render {
   }
 
   function svgChildren(bytes32 data) internal pure returns (bytes memory) {
-    return abi.encodePacked(Body.render(data), Glints.render(data));
+    return
+      abi.encodePacked(Body.render(data), Glints.render(data), Faces.render());
   }
 
   function defs() internal pure returns (bytes memory) {
