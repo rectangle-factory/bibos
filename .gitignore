@@ -4,3 +4,4 @@ node_modules
 .DS_Store
 output/index.html
 output/metadata.json
+output/render.svg

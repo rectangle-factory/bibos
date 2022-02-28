@@ -5,6 +5,16 @@ pragma solidity ^0.8.0;
 /// @title the bibos utility library
 /// @notice utility functions
 library Util {
+  /// @notice wraps a string in quotes and adds a space after
+  function quote(bytes memory value) internal pure returns (bytes memory) {
+    return abi.encodePacked('"', value, '" ');
+  }
+
+  /// @notice wraps a string in quotes and adds a space after
+  function quote(string memory value) internal pure returns (bytes memory) {
+    return quote(bytes(value));
+  }
+
   /// @notice converts a uint256 to string
   /// @param _value, uint256, the value to convert
   /// @return result the resulting string

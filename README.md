@@ -5,13 +5,14 @@
 ### Install
 
 Install [Foundry](https://github.com/gakonst/foundry/).
-`npm install` for prettier.
+Run `foundryup` to update to nightly builds.
 
-For git submodules:
+Run `yarn install` or `npm install` for prettier.
+
+For submodules:
 
 ```[bash]
-    git submodule init
-    git submodule update
+    forge update
 ```
 
 Install `jq` with `brew install jq`
@@ -20,11 +21,13 @@ Install `jq` with `brew install jq`
 
 ### Test
 
+`yarn run test` or
+
 ```[bash]
 forge test --ffi --force
 ```
 
-Seems we need `--force`, otherwise the tokenUri won't update. Use `--block-timestamp` if you want to change the timestamp that is used to compute the token data.
+Use `--block-timestamp` if you want to change the timestamp that is used to compute the token data.
 
 ---
 

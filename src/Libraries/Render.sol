@@ -5,6 +5,7 @@ import './Metadata.sol';
 import './Color.sol';
 import './Util.sol';
 import './Body.sol';
+import './Glints.sol';
 
 library Render {
   function tokenURI(uint256 id, bytes32 data)
@@ -51,19 +52,22 @@ library Render {
   }
 
   function svgChildren(bytes32 data) internal pure returns (bytes memory) {
-    Color.CM cm = Color.CM.LIGHT;
-    return abi.encodePacked(Body.background(cm, data[0]), Body.blurGroup(data));
+    return abi.encodePacked(Body.render(data), Glints.render(data));
   }
 
   function defs() internal pure returns (bytes memory) {
     return
       abi.encodePacked(
         '<defs>',
-        '<!-- Blur filter -->',
-        '<filter id="blur" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">',
+        '<filter id="lighten" color-interpolation-filters="sRGB">',
         '<feFlood flood-opacity="0" result="BackgroundImageFix"/>',
-        '<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>',
-        '<feGaussianBlur stdDeviation="${showDebug ? 0 : 15}"/>',
+        ' <feBlend mode="screen" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>',
+        '</filter>',
+        '<filter id="blur" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">',
+        '<feGaussianBlur stdDeviation="15" result="out" />',
+        '</filter>',
+        '<filter id="blur-sm" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">',
+        '<feGaussianBlur stdDeviation="5" result="out" />',
         '</filter>',
         '<!-- Figure Eights -->',
         '<path id="jitter-sm" d="M10.4485 2.98177C14.4091 4.48135 20 6.52342 20 2.98176C20 -0.548164 14.617 1.40118 10.4485 2.98177ZM10.4485 2.98177C10.4347 2.98703 10.4208 2.99226 10.4069 2.99751C6.23277 4.58084 1 6.5628 1 3.02114C1 -0.520506 6.48798 1.4822 10.4485 2.98177Z" />',
