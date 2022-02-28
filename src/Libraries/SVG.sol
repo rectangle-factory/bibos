@@ -30,6 +30,10 @@ library SVG {
       );
   }
 
+  function circleClose() internal pure returns (bytes memory) {
+    return abi.encodePacked('</circle>');
+  }
+
   function rect(
     string memory width,
     string memory height,
@@ -44,6 +48,49 @@ library SVG {
         Util.quote(height),
         'fill=',
         Util.quote(bg),
+        '/>'
+      );
+  }
+
+  function path(
+    string memory d,
+    string memory fill,
+    string memory stroke,
+    string memory strokeWidth,
+    string memory strokeLinecap
+  ) internal pure returns (bytes memory) {
+    return
+      abi.encodePacked(
+        '<path d=',
+        Util.quote(d),
+        'stroke=',
+        Util.quote(stroke),
+        'stroke-width=',
+        Util.quote(strokeWidth),
+        'stroke-linecap=',
+        Util.quote(strokeLinecap),
+        '/>'
+      );
+  }
+
+  function ellipse(
+    string[2] memory coords,
+    string memory radiusX,
+    string memory radiusY,
+    string memory fill
+  ) internal pure returns (bytes memory) {
+    return
+      abi.encodePacked(
+        '<ellipse cx=',
+        Util.quote(coords[0]),
+        'cy=',
+        Util.quote(coords[1]),
+        'rx=',
+        Util.quote(radiusX),
+        'ry=',
+        Util.quote(radiusY),
+        'fill=',
+        Util.quote(fill),
         '/>'
       );
   }
