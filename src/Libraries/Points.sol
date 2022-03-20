@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
 library Points {
   function body(bytes1 value) internal pure returns (string[2] memory) {

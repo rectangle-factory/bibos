@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import './Metadata.sol';
-import './Color.sol';
-import './Util.sol';
-import './Body.sol';
-import './Glints.sol';
+import { Metadata } from './Metadata.sol';
+import { Color } from './Color.sol';
+import { Util } from './Util.sol';
+import { Body } from './Body.sol';
+import { Glints } from './Glints.sol';
 
 library Render {
   function tokenURI(uint256 id, bytes32 data)
@@ -28,14 +28,14 @@ library Render {
   function tokenName(string memory _name, uint256 _tokenId)
     internal
     pure
-    returns (bytes memory)
+    returns (string memory)
   {
-    return abi.encodePacked(_name, Util.uint256ToAscii(_tokenId));
+    return string.concat(_name, Util.uint256ToAscii(_tokenId));
   }
 
-  function svg(bytes32 data) internal pure returns (bytes memory) {
+  function svg(bytes32 data) internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<svg ',
         'pauseAnimations="true" '
         'xmlns="http://www.w3.org/2000/svg" '
@@ -51,13 +51,13 @@ library Render {
       );
   }
 
-  function svgChildren(bytes32 data) internal pure returns (bytes memory) {
-    return abi.encodePacked(Body.render(data), Glints.render(data));
+  function svgChildren(bytes32 data) internal pure returns (string memory) {
+    return string.concat(Body.render(data), Glints.render(data));
   }
 
-  function defs() internal pure returns (bytes memory) {
+  function defs() internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<defs>',
         '<filter id="lighten" color-interpolation-filters="sRGB">',
         '<feFlood flood-opacity="0" result="BackgroundImageFix"/>',

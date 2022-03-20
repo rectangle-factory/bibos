@@ -2,7 +2,8 @@
   "name": "bibos",
   "license": "MIT",
   "scripts": {
-    "test": "forge test --ffi --force"
+    "test": "forge test",
+    "render": "forge run src/scripts/mint.sol"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

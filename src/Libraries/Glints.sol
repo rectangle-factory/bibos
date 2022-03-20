@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import './Color.sol';
-import './Times.sol';
-import './Points.sol';
-import './Util.sol';
-import './SVG.sol';
+import { Color } from './Color.sol';
+import { Times } from './Times.sol';
+import { Points } from './Points.sol';
+import { Util } from './Util.sol';
+import { SVG } from './SVG.sol';
 
 library Glints {
-  function render(bytes32 data) internal pure returns (bytes memory result) {
+  function render(bytes32 _data) internal pure returns (string memory result) {
     Color.CM cm = Color.CM.DARK;
     string memory mixMode = cm == Color.CM.LIGHT ? 'lighten' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT ? 'white' : 'black';
 
-    bytes1 value = data[0];
+    bytes1 value = _data[0];
     // string[4] memory glintTypes = ['RISING', 'FLOATING', 'FALLING', 'NONE'];
     // string glintType = glintTypes[value % 4];
 
@@ -21,7 +21,7 @@ library Glints {
 
     for (uint8 index = 0; index < glintCount; index++) {
       // get the next byte in data
-      value = data[index];
+      value = _data[index];
 
       string memory dur = Times.long(value);
       string[2] memory coords = Points.glint(value);
@@ -32,7 +32,7 @@ library Glints {
 
       // glintType == RISING
       if (value & 0x11 == 0x00) {
-        result = abi.encodePacked(
+        result = string.concat(
           result,
           '<g transform="translate(0,50)">',
           SVG.circle(radius, coords, mixMode, fill, '0.5'),
@@ -45,7 +45,7 @@ library Glints {
 
       // glintType == FLOATING
       if (value & 0x11 == 0x01) {
-        result = abi.encodePacked(
+        result = string.concat(
           result,
           SVG.circle(radius, coords, mixMode, fill, '0.75'),
           SVG.animateMotion(
@@ -60,7 +60,7 @@ library Glints {
 
       // glintType == FALLING
       if (value & 0x11 == 0x10) {
-        result = abi.encodePacked(
+        result = string.concat(
           result,
           '<g>',
           SVG.circle(radius, coords, mixMode, fill, '0.5'),
@@ -73,25 +73,25 @@ library Glints {
     }
   }
 
-  function animateTransform(string memory dur, bytes memory to)
+  function animateTransform(string memory _dur, string memory _to)
     internal
     pure
-    returns (bytes memory)
+    returns (string memory)
   {
     return
-      abi.encodePacked(
+      string.concat(
         '<animateTransform ',
         'attributeType="XML" ',
         'attributeName="transform" ',
         'dur=',
-        Util.quote(dur),
+        Util.quote(_dur),
         'repeatCount="indefinite" ',
         'calcMode="paced" ',
         'type="translate" ',
         'additive="sum" ',
         'from="0 0" ',
         'to="0 ',
-        to,
+        _to,
         '" ',
         '/>'
       );

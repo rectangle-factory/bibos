@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import 'ds-test/test.sol';
-import '../Libraries/Color.sol';
+import { DSTest } from 'ds-test/test.sol';
+import { Color } from '../libraries/Color.sol';
 
 contract ColorTest is DSTest {
   bytes1 constant BYTES_1_SIXTY_THREE = bytes1(uint8(63));

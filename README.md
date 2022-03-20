@@ -2,6 +2,8 @@
 
 ## Development
 
+---
+
 ### Install
 
 Install [Foundry](https://github.com/gakonst/foundry/).
@@ -12,27 +14,23 @@ Run `yarn install` or `npm install` for prettier.
 For submodules:
 
 ```[bash]
-    forge update
+forge update
 ```
 
-Install `jq` with `brew install jq`
+For the render scripts, you'll need `jq`. Install `brew install jq`.
 
 ---
 
 ### Test
 
-`yarn run test` or
-
 ```[bash]
-forge test --ffi --force
+yarn run test
 ```
-
-Use `--block-timestamp` if you want to change the timestamp that is used to compute the token data.
 
 ---
 
-### Build
+### Render New Bibo
 
 ```[bash]
-forge build
+yarn run render
 ```

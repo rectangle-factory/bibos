@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.8.0;
 
-pragma solidity ^0.8.0;
-import './Base64.sol';
-import './Util.sol';
+import { Base64 } from './Base64.sol';
+import { Util } from './Util.sol';
 
 library Metadata {
+  string constant JSON_BASE64_HEADER = 'data:application/json;base64,';
+  string constant SVG_XML_BASE64_HEADER = 'data:image/svg+xml;base64,';
+
   /// @notice base64 encode json metadata for the token
   /// @param _id, the tokenId
   /// @param _name, the name of the token
@@ -13,11 +16,11 @@ library Metadata {
   /// @return string, the name of the color
   function encodeTokenMetadata(
     uint256 _id,
-    bytes memory _name,
-    bytes memory _description,
-    bytes memory _svg
-  ) internal pure returns (bytes memory) {
-    bytes memory metadata = abi.encodePacked(
+    string memory _name,
+    string memory _description,
+    string memory _svg
+  ) internal pure returns (string memory) {
+    string memory metadata = string.concat(
       '{',
       keyValue('tokenId', Util.uint256ToAscii(_id)),
       ',',
@@ -35,35 +38,35 @@ library Metadata {
   /// @notice base64 encode json
   /// @param _json, stringified json
   /// @return string, bytes64 encoded json with prefix
-  function encodeJson(bytes memory _json) internal pure returns (bytes memory) {
-    return
-      abi.encodePacked('data:application/json;base64,', Base64.encode(_json));
+  function encodeJson(string memory _json)
+    internal
+    pure
+    returns (string memory)
+  {
+    return string.concat(JSON_BASE64_HEADER, Base64.encode(_json));
   }
 
   /// @notice base64 encode svg
   /// @param _svg, stringified json
   /// @return string, bytes64 encoded svg with prefix
-  function encodeSvg(bytes memory _svg) internal pure returns (bytes memory) {
+  function encodeSvg(string memory _svg) internal pure returns (string memory) {
     return
-      abi.encodePacked(
-        'data:image/svg+xml;base64,',
-        Base64.encode(bytes(_svg))
-      );
+      string.concat('data:image/svg+xml;base64,', Base64.encode(bytes(_svg)));
   }
 
-  function keyValue(bytes memory _key, bytes memory _value)
+  function keyValue(string memory _key, string memory _value)
     internal
     pure
-    returns (bytes memory)
+    returns (string memory)
   {
-    return abi.encodePacked('"', _key, '":"', _value, '"');
+    return string.concat('"', _key, '":"', _value, '"');
   }
 
-  function keyValueNoQuotes(bytes memory _key, bytes memory _value)
+  function keyValueNoQuotes(string memory _key, string memory _value)
     internal
     pure
-    returns (bytes memory)
+    returns (string memory)
   {
-    return abi.encodePacked('"', _key, '":', _value);
+    return string.concat('"', _key, '":', _value);
   }
 }
