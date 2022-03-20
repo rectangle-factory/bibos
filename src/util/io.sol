@@ -7,7 +7,7 @@ library io {
   function read(string memory file) internal returns (bytes memory) {
     string[] memory readInputs = new string[](2);
     readInputs[0] = 'cat';
-    readInputs[1] = string(abi.encodePacked('./tmp/', file));
+    readInputs[1] = string.concat('./tmp/', file);
 
     bytes memory result = vm.std_cheats.ffi(readInputs);
     return result;
