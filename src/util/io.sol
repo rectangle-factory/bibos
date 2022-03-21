@@ -4,10 +4,10 @@ pragma solidity >=0.8.0;
 import { vm } from './vm.sol';
 
 library io {
-  function read(string memory file) internal returns (bytes memory) {
+  function read(string memory filePath) internal returns (bytes memory) {
     string[] memory readInputs = new string[](2);
     readInputs[0] = 'cat';
-    readInputs[1] = string(abi.encodePacked('./tmp/', file));
+    readInputs[1] = filePath;
 
     bytes memory result = vm.std_cheats.ffi(readInputs);
     return result;
