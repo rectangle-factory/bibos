@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0;
 
 import { ERC721 } from 'solmate/tokens/ERC721.sol';
-import { Render } from './Libraries/Render.sol';
+import { Render } from './libraries/Render.sol';
 
 contract Bibos is ERC721 {
   address public owner;
