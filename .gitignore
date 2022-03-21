@@ -5,3 +5,4 @@ node_modules
 output/index.html
 output/metadata.json
 output/render.svg
+output/token_uri.base64
