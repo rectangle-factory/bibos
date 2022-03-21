@@ -2,13 +2,13 @@
 
 # run mint script, outputs token uri to output/token_uri.base64
 forge run src/scripts/mint.sol 1> /dev/null
-token_uri=$(cat output/token_uri.base64)
+token_uri=$(cat ./output/token_uri.base64)
 
 # remove header, cut at ","
-encoded_metadata=$( | cut -d "," -f 2)
+encoded_metadata=$(cut -d "," -f 2 <<< $token_uri)
 
 # decode base64 into ascii text, metadata is in json format
-decoded_metadata=$(echo $encoded_metadata | base64 -d)
+decoded_metadata=$(base64 -d <<< $encoded_metadata)
 echo $decoded_metadata > output/metadata.json
 
 # pipe to jq, get the image subfield, trim off quotes

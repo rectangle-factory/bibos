@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "test": "forge test",
-    "render": "forge run src/scripts/mint.sol"
+    "render": "./scripts/render.sh"
   },
   "devDependencies": {
     "prettier": "^2.5.1",
