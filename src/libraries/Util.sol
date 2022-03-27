@@ -1,18 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 
-pragma solidity ^0.8.0;
+pragma solidity >=0.8.0;
 
 /// @title the bibos utility library
 /// @notice utility functions
 library Util {
   /// @notice wraps a string in quotes and adds a space after
-  function quote(bytes memory value) internal pure returns (bytes memory) {
-    return abi.encodePacked('"', value, '" ');
-  }
-
-  /// @notice wraps a string in quotes and adds a space after
-  function quote(string memory value) internal pure returns (bytes memory) {
-    return quote(bytes(value));
+  function quote(string memory value) internal pure returns (string memory) {
+    return string.concat('"', value, '" ');
   }
 
   /// @notice converts a uint256 to string
@@ -21,7 +16,7 @@ library Util {
   function uint256ToAscii(uint256 _value)
     internal
     pure
-    returns (bytes memory result)
+    returns (string memory result)
   {
     if (_value == 0) return '0';
 

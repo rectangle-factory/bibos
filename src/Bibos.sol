@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import { ERC721 } from "solmate/tokens/ERC721.sol";
-import "./Libraries/Render.sol";
+import { ERC721 } from 'solmate/tokens/ERC721.sol';
+import { Render } from './libraries/Render.sol';
 
 contract Bibos is ERC721 {
   address public owner;
@@ -10,12 +10,12 @@ contract Bibos is ERC721 {
 
   mapping(uint256 => bytes32) public data;
 
-  constructor() ERC721("Bibos", "BBO") {
+  constructor() ERC721('Bibos', 'BBO') {
     owner = msg.sender;
   }
 
   function tokenURI(uint256 id) public view override returns (string memory) {
-    require(id < totalSupply, "invalid id");
+    require(id < totalSupply, 'invalid id');
     return Render.tokenURI(id, data[id]);
   }
 

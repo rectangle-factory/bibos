@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import './Color.sol';
-import './Times.sol';
-import './Points.sol';
-import './Util.sol';
-import './SVG.sol';
+import { Color } from './Color.sol';
+import { Times } from './Times.sol';
+import { Points } from './Points.sol';
+import { Util } from './Util.sol';
+import { SVG } from './SVG.sol';
 
 library Body {
-  function render(bytes32 data) internal pure returns (bytes memory) {
+  function render(bytes32 data) internal pure returns (string memory) {
     Color.CM cm = Color.CM.LIGHT;
     return
-      abi.encodePacked(
+      string.concat(
         bodyBackground(cm, data[0]),
         ' <!-- BODY --> ',
         '<g filter="url(#blur)">',
@@ -30,7 +30,7 @@ library Body {
     Color.CM cm,
     string memory radius,
     bytes1 value
-  ) internal pure returns (bytes memory) {
+  ) internal pure returns (string memory) {
     string memory mixMode = cm == Color.CM.LIGHT ? 'overlay' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT
       ? Color.bodyLight(value)
@@ -46,7 +46,7 @@ library Body {
       : '';
 
     return
-      abi.encodePacked(
+      string.concat(
         SVG.circle(radius, coords, mixMode, fill, '1'),
         SVG.animateMotion(
           rev,
@@ -61,7 +61,7 @@ library Body {
   function bodyBackground(Color.CM cm, bytes1 value)
     internal
     pure
-    returns (bytes memory)
+    returns (string memory)
   {
     string memory bg = cm == Color.CM.LIGHT
       ? Color.bgLight(value)

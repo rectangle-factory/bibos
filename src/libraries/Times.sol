@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import './Color.sol';
+import { Color } from './Color.sol';
 
 library Times {
   function short(bytes1 value) internal pure returns (string memory) {

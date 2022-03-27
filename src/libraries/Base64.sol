@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
-
-pragma solidity ^0.8.0;
+pragma solidity >=0.8.0;
 
 /// @title Base64
 /// @author Brecht Devos - <brecht@loopring.org>
@@ -8,6 +7,10 @@ pragma solidity ^0.8.0;
 library Base64 {
   string internal constant TABLE =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+  function encode(string memory _data) internal pure returns (string memory) {
+    return encode(bytes(_data));
+  }
 
   function encode(bytes memory _data) internal pure returns (string memory) {
     if (_data.length == 0) return '';

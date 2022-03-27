@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.10;
+pragma solidity >=0.8.0;
 
-import './Util.sol';
+import { Util } from './Util.sol';
 
 library SVG {
   function circle(
@@ -10,9 +10,9 @@ library SVG {
     string memory mixMode,
     string memory fill,
     string memory opacity
-  ) internal pure returns (bytes memory) {
+  ) internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<circle r=',
         Util.quote(radius),
         'cx=',
@@ -20,7 +20,7 @@ library SVG {
         'cy=',
         Util.quote(coords[1]),
         'style=',
-        Util.quote(abi.encodePacked('mix-blend-mode:', mixMode)),
+        Util.quote(string.concat('mix-blend-mode:', mixMode)),
         'shape-rendering="optimizeSpeed" ',
         'fill=',
         Util.quote(fill),
@@ -34,9 +34,9 @@ library SVG {
     string memory width,
     string memory height,
     string memory bg
-  ) internal pure returns (bytes memory) {
+  ) internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<rect ',
         'width=',
         Util.quote(width),
@@ -53,9 +53,9 @@ library SVG {
     string memory dur,
     string memory calcMode,
     string memory mpath
-  ) internal pure returns (bytes memory) {
+  ) internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<animateMotion ',
         rev,
         'dur=',
@@ -69,9 +69,9 @@ library SVG {
       );
   }
 
-  function animate(string memory dur) internal pure returns (bytes memory) {
+  function animate(string memory dur) internal pure returns (string memory) {
     return
-      abi.encodePacked(
+      string.concat(
         '<animate ',
         'attributeName="opacity" ',
         'values="0;1;0" ',
