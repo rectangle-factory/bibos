@@ -51,8 +51,8 @@ library Render {
       );
   }
 
-  function svgChildren(bytes32 data) internal pure returns (string memory) {
-    return string.concat(Body.render(data), Glints.render(data));
+  function svgChildren(bytes32 _seed) internal pure returns (string memory) {
+    return string.concat(Body.render(_seed), Glints.render(_seed));
   }
 
   function defs() internal pure returns (string memory) {

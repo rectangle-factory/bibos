@@ -11,7 +11,7 @@ library Glints {
   uint256 constant GLINT_COUNT = 16;
 
   function render(bytes32 _seed) internal pure returns (string memory result) {
-    Color.CM cm = Color.CM.DARK;
+    Color.CM cm = Color.getRefractivityType(_seed);
     string memory mixMode = cm == Color.CM.LIGHT ? 'lighten' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT ? 'white' : 'black';
 

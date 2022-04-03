@@ -8,7 +8,7 @@ import { Util } from './Util.sol';
 import { SVG } from './SVG.sol';
 
 library Body {
-  function render(bytes32 data) internal pure returns (string memory) {
+  function render(bytes32 _seed) internal pure returns (string memory) {
     Color.CM cm = Color.CM.LIGHT;
     return
       string.concat(
@@ -29,7 +29,7 @@ library Body {
   function bodyCircle(
     Color.CM cm,
     string memory radius,
-    bytes1 value
+    uint256 value
   ) internal pure returns (string memory) {
     string memory mixMode = cm == Color.CM.LIGHT ? 'overlay' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT

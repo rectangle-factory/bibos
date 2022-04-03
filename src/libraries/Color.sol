@@ -7,7 +7,18 @@ library Color {
     DARK
   }
 
-  function bodyLight(bytes1 _index) internal pure returns (string memory) {
+  function getRefractivityType(bytes32 _seed) internal pure returns (CM) {
+    uint256 refractivitySeed = uint256(
+      keccak256(abi.encodePacked(_seed, 'refractivity'))
+    );
+
+    // 80%
+    if (refractivitySeed % 100 < 80) return CM.LIGHT;
+    // 20%
+    return CM.DARK;
+  }
+
+  function bodyLight(uint256 _index) internal pure returns (string memory) {
     string[64] memory bodyLightValues = [
       '#d5a8bf',
       '#d6cb8b',
@@ -74,10 +85,10 @@ library Color {
       '#87e7eb',
       '#cc8880'
     ];
-    return bodyLightValues[uint8(_index) % 64];
+    return bodyLightValues[_index % 64];
   }
 
-  function bodyDark(bytes1 _index) internal pure returns (string memory) {
+  function bodyDark(uint256 _index) internal pure returns (string memory) {
     string[64] memory bodyDarkValues = [
       '#5b301c',
       '#5f0067',
@@ -144,10 +155,10 @@ library Color {
       '#534e3d',
       '#9d4910'
     ];
-    return bodyDarkValues[uint8(_index) % 64];
+    return bodyDarkValues[_index % 64];
   }
 
-  function bgLight(bytes1 _index) internal pure returns (string memory) {
+  function bgLight(uint256 _index) internal pure returns (string memory) {
     string[64] memory bgLightValues = [
       '#020406',
       '#0d070a',
@@ -215,10 +226,10 @@ library Color {
       '#100126'
     ];
 
-    return bgLightValues[uint8(_index) % 64];
+    return bgLightValues[_index % 64];
   }
 
-  function bgDark(bytes1 _index) internal pure returns (string memory) {
+  function bgDark(uint256 _index) internal pure returns (string memory) {
     string[64] memory bgDarkValues = [
       '#f1f0fe',
       '#fde2e4',
@@ -285,6 +296,6 @@ library Color {
       '#f6e2fd',
       '#e4e5fd'
     ];
-    return bgDarkValues[uint8(_index) % 64];
+    return bgDarkValues[_index % 64];
   }
 }
