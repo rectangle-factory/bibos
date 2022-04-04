@@ -52,6 +52,31 @@ library Render {
   }
 
   function svgChildren(bytes32 _seed) internal pure returns (string memory) {
+    //     // Core trait selection
+    // // Formerly 'colorMode' - determines which color palettes to use
+    // const refractivity = refractivityTypes[seed.slice(0, 3) % refractivityTypes.length]
+
+    // // Glint (formerly 'dust')
+    // const glint = glintTypes[seed.slice(0, 3) % glintTypes.length]
+
+    // // Motes
+    // const mote = moteTypes[seed.slice(1, 4) % moteTypes.length]
+    // const moteCount = moteCountChoices[seed.slice(0, 3) % moteCountChoices.length]
+
+    // // Face traits
+    // const eyes = eyeTypes[seed.slice(2, 5) % eyeTypes.length]
+    // const mouth = mouthTypes[seed.slice(4, 7) % mouthTypes.length]
+    // const accessory = accessoryTypes[seed.slice(5, 8) % accessoryTypes.length]
+
+    // // Gets background color, also used in face
+    // const background = refractivity === "Light"
+    //     ? darkestPalette[seed.slice(5, 8) % darkestPalette.length]
+    //     : darkestPalette[seed.slice(5, 8) % darkestPalette.length]
+
+    // // Gets palette for body and other traits based on refractivity
+    // const palette = refractivity === "Light"
+    //     ? lightPalette
+    //     : lightestPalette
     return string.concat(Body.render(_seed), Glints.render(_seed));
   }
 

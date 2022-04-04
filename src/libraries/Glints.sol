@@ -10,17 +10,41 @@ import { SVG } from './SVG.sol';
 library Glints {
   uint256 constant GLINT_COUNT = 16;
 
+  enum GlintType {
+    NONE,
+    FLOATING,
+    RISING,
+    FALLING
+  }
+
   function render(bytes32 _seed) internal pure returns (string memory result) {
+    // color mode can be computed somewhere else
     Color.CM cm = Color.getRefractivityType(_seed);
     string memory mixMode = cm == Color.CM.LIGHT ? 'lighten' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT ? 'white' : 'black';
 
-    for (uint8 index = 0; index < GLINT_COUNT; index++) {
-      // generate new random seed
-      uint256 glintSeed = uint256(
-        keccak256(abi.encodePacked(_seed, 'glint', index))
-      );
+    uint256 glintSeed = uint256(keccak256(abi.encodePacked(_seed, 'glint')));
 
+    // determine glint type
+    GlintType glintType;
+    if (glintSeed % 100 < 20) {
+      glintType = GlintType.FLOATING;
+    }
+    // glintType == RISING
+    // 15%
+    else if (glintSeed % 100 < 35) {
+      glintType = GlintType.RISING;
+    }
+    // 5%
+    // glintType == FALLING
+    else if (glintSeed % 100 < 40) {
+      glintType = GlintType.RISING;
+    }
+
+    if (glintType == GlintType.NONE) return '';
+    glintSeed /= 100;
+
+    for (uint8 i = 0; i < GLINT_COUNT; i++) {
       string memory dur = Times.long(glintSeed);
       glintSeed = glintSeed / Times.length;
       string[2] memory coords = Points.glint(glintSeed);
@@ -28,27 +52,19 @@ library Glints {
       string memory radius = glintSeed % 2 == 0 ? '1' : '2';
       glintSeed = glintSeed / 2;
 
-      // glintType == FLOATING
-      // 20%
-      if (glintSeed % 100 < 20) {
+      if (glintType == GlintType.FLOATING) {
         string memory reverse = glintSeed % 2 == 0
           ? "keyPoints='1;0' keyTimes='0;1'"
           : '';
         addFloatingGlint(result, radius, coords, mixMode, fill, dur, reverse);
-      }
-      // glintType == RISING
-      // 15%
-      else if (glintSeed % 100 < 35) {
+      } else if (glintType == GlintType.RISING) {
         addRisingGlint(result, radius, coords, mixMode, fill, dur);
-      }
-      // 40%
-      // glintType == FALLING
-      else if (glintSeed % 100 < 40) {
+      } else if (glintType == GlintType.FALLING) {
         addFallingGlint(result, radius, coords, mixMode, fill, dur);
       }
-      // else no glint
-      // 60%
     }
+
+    return result;
   }
 
   function addRisingGlint(
