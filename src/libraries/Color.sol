@@ -7,7 +7,34 @@ library Color {
     DARK
   }
 
-  function getRefractivityType(bytes32 _seed) internal pure returns (CM) {
+  function getBodyFill(bytes32 _seed, uint256 _i)
+    internal
+    pure
+    returns (string memory)
+  {
+    uint256 bodyFillIndex = uint256(
+      keccak256(abi.encodePacked(_seed, 'bodyFill', _i))
+    );
+
+    if (getRefractivity(_seed) == CM.LIGHT) return lightPalette(bodyFillIndex);
+    else return lightestPalette(bodyFillIndex);
+  }
+
+  function getBackgroundFill(bytes32 _seed)
+    internal
+    pure
+    returns (string memory)
+  {
+    uint256 backgroundFillIndex = uint256(
+      keccak256(abi.encodePacked(_seed, 'backgroundFill'))
+    );
+
+    if (getRefractivity(_seed) == CM.LIGHT)
+      return darkestPalette(backgroundFillIndex);
+    else return darkestPalette(backgroundFillIndex);
+  }
+
+  function getRefractivity(bytes32 _seed) internal pure returns (CM) {
     uint256 refractivitySeed = uint256(
       keccak256(abi.encodePacked(_seed, 'refractivity'))
     );
@@ -18,148 +45,226 @@ library Color {
     return CM.DARK;
   }
 
-  function bodyLight(uint256 _index) internal pure returns (string memory) {
-    string[64] memory bodyLightValues = [
-      '#d5a8bf',
-      '#d6cb8b',
-      '#a4acfa',
-      '#afebc8',
-      '#d1deb3',
-      '#97b690',
-      '#dc96ff',
-      '#b0fcc2',
-      '#b9f66b',
-      '#ae9ed8',
-      '#afdaac',
-      '#fef3c3',
-      '#f4c14d',
-      '#b86582',
-      '#e9b1ed',
-      '#a240dc',
-      '#c0ecd9',
-      '#cd456f',
-      '#c7a1f6',
-      '#9fc387',
-      '#cbf9c9',
-      '#dcc087',
-      '#e8f9a5',
-      '#efcbb3',
-      '#d29bf1',
-      '#bdb9f0',
-      '#e47130',
-      '#a7b4f6',
-      '#dbc9c0',
-      '#c8d342',
-      '#ce93b8',
-      '#782ff4',
-      '#ebc2c8',
-      '#e2c769',
-      '#a4fd94',
-      '#a3bb78',
-      '#abf7af',
-      '#ffd764',
-      '#64b6dd',
-      '#c89fc2',
-      '#e5fa6b',
-      '#d430df',
-      '#ffddcc',
-      '#cefcf2',
-      '#a9d8a1',
-      '#96f299',
-      '#6ad3b2',
-      '#fc9c6f',
-      '#f6f8b9',
-      '#d3def7',
-      '#d743cf',
-      '#d2caf5',
-      '#e4c6f0',
-      '#dcccf1',
-      '#1fedc2',
-      '#7c9ae2',
-      '#d1c846',
-      '#6bee9c',
-      '#cef4ec',
-      '#8cff1d',
-      '#ca76ab',
-      '#c8e0f0',
-      '#87e7eb',
-      '#cc8880'
+  function lightestPalette(uint256 _index)
+    internal
+    pure
+    returns (string memory)
+  {
+    string[64] memory lightestPaletteValues = [
+      '#baf7c7',
+      '#d8edfd',
+      '#fbf8d5',
+      '#fdb0f8',
+      '#ddfdef',
+      '#d4c1fb',
+      '#f8ffe6',
+      '#fbf9e9',
+      '#fafefb',
+      '#f4f5b7',
+      '#f8c9da',
+      '#f6f7ba',
+      '#bdfac0',
+      '#fdd3fd',
+      '#d7fef6',
+      '#fafffc',
+      '#fef7fb',
+      '#ffeaae',
+      '#fbb2ea',
+      '#fee2ed',
+      '#d7fef5',
+      '#faccce',
+      '#c3e2fe',
+      '#f1fad1',
+      '#fbacd8',
+      '#fafffd',
+      '#f3edfd',
+      '#d8fbac',
+      '#f6fdfe',
+      '#fefbfb',
+      '#d7f9a9',
+      '#ebf0ff',
+      '#ffffff',
+      '#f4edfd',
+      '#dbf8fb',
+      '#c9f8d1',
+      '#faa8d6',
+      '#f9dced',
+      '#c7fcbf',
+      '#f1f7fe',
+      '#ffeff3',
+      '#ebd6fa',
+      '#fed0a4',
+      '#aec0f4',
+      '#f8f2fd',
+      '#f7b5d4',
+      '#aef6ac',
+      '#e9bef4',
+      '#c4fdc6',
+      '#e4feb9',
+      '#dff5a8',
+      '#b4e6f8',
+      '#eec1f6',
+      '#fac4bc',
+      '#fbfee1',
+      '#cefddf',
+      '#feeadc',
+      '#e8d1fa',
+      '#f1fef0',
+      '#f9fff4',
+      '#f6d1c6',
+      '#dbb1fc',
+      '#f9d3c8',
+      '#e6f5fe'
     ];
-    return bodyLightValues[_index % 64];
+    return lightestPaletteValues[_index % 64];
   }
 
-  function bodyDark(uint256 _index) internal pure returns (string memory) {
-    string[64] memory bodyDarkValues = [
-      '#5b301c',
-      '#5f0067',
-      '#4a242d',
-      '#0d89d9',
-      '#97373c',
-      '#ce257e',
-      '#726a83',
-      '#7f777a',
-      '#642d08',
-      '#028628',
-      '#509e46',
-      '#09e3d2',
-      '#ec068e',
-      '#c21577',
-      '#31964b',
-      '#a21f2d',
-      '#6f9422',
-      '#867c15',
-      '#b1f703',
-      '#17539f',
-      '#19c012',
-      '#c59231',
-      '#331868',
-      '#76832d',
-      '#096e64',
-      '#426a27',
-      '#6f3749',
-      '#39a98a',
-      '#55a328',
-      '#22aa0a',
-      '#c7070a',
-      '#17d014',
-      '#23819d',
-      '#428658',
-      '#1a5684',
-      '#c42714',
-      '#4aa0a7',
-      '#7b0cac',
-      '#062496',
-      '#1e5836',
-      '#419b54',
-      '#315280',
-      '#703f21',
-      '#7e1446',
-      '#621145',
-      '#470e9a',
-      '#8a240a',
-      '#0c9fa5',
-      '#139731',
-      '#0f792c',
-      '#6e0fce',
-      '#d41855',
-      '#4509a4',
-      '#43159f',
-      '#738c58',
-      '#8da60d',
-      '#5800cc',
-      '#1dc9a1',
-      '#57168f',
-      '#8333bf',
-      '#ba08f5',
-      '#676611',
-      '#534e3d',
-      '#9d4910'
+  function lightPalette(uint256 _index) internal pure returns (string memory) {
+    string[64] memory lightPaletteValues = [
+      '#f47b9d',
+      '#c9f273',
+      '#31f6e1',
+      '#7c14d7',
+      '#04bce6',
+      '#13fbe7',
+      '#62ee79',
+      '#f7c84f',
+      '#81b1fe',
+      '#99d6f5',
+      '#58f967',
+      '#fbf974',
+      '#fd91e0',
+      '#f03d5c',
+      '#50ed86',
+      '#fa8d85',
+      '#a933ff',
+      '#fed75c',
+      '#fc82be',
+      '#e80c3d',
+      '#0bb4d5',
+      '#31ed9b',
+      '#4931ec',
+      '#2bf275',
+      '#9eaefa',
+      '#fca978',
+      '#3114c2',
+      '#d85f08',
+      '#ef1aad',
+      '#c634fe',
+      '#c95412',
+      '#cef467',
+      '#ea411a',
+      '#fb838f',
+      '#3bca0d',
+      '#6078fb',
+      '#fbec65',
+      '#19b3e6',
+      '#e792fc',
+      '#3dfa4e',
+      '#fa84e7',
+      '#6bff00',
+      '#cba615',
+      '#2a0dc9',
+      '#cdf967',
+      '#1ff443',
+      '#2b76ee',
+      '#b7f183',
+      '#04d7c9',
+      '#590ed8',
+      '#fe9b95',
+      '#cb3df5',
+      '#95f995',
+      '#48fef6',
+      '#681bf8',
+      '#40fc6b',
+      '#097dd2',
+      '#a28df2',
+      '#5be00b',
+      '#0cbde4',
+      '#c476f4',
+      '#bb15e5',
+      '#6c4efd',
+      '#79bd0f'
     ];
-    return bodyDarkValues[_index % 64];
+    return lightPaletteValues[_index % 64];
   }
 
-  function bgLight(uint256 _index) internal pure returns (string memory) {
-    string[64] memory bgLightValues = [
+  function darkPalette(uint256 _index) internal pure returns (string memory) {
+    string[64] memory darkPaletteValues = [
+      '#50071d',
+      '#404305',
+      '#555a1b',
+      '#0c127e',
+      '#552f43',
+      '#223a31',
+      '#671419',
+      '#391155',
+      '#193d3e',
+      '#111b74',
+      '#35374f',
+      '#416614',
+      '#0c6b83',
+      '#461515',
+      '#526416',
+      '#2f1e76',
+      '#300a52',
+      '#0e384d',
+      '#1b0c83',
+      '#022f69',
+      '#663f0a',
+      '#073d5f',
+      '#285761',
+      '#8c0380',
+      '#152319',
+      '#1e1b27',
+      '#081431',
+      '#454d0f',
+      '#0f2329',
+      '#1a0150',
+      '#3d0864',
+      '#000a3d',
+      '#0e4453',
+      '#024550',
+      '#333d2e',
+      '#52142b',
+      '#162c17',
+      '#5b0a61',
+      '#461c64',
+      '#180e4e',
+      '#786812',
+      '#4a2e0d',
+      '#68033a',
+      '#3b2525',
+      '#393d15',
+      '#024b82',
+      '#4e1259',
+      '#190254',
+      '#177861',
+      '#4f187c',
+      '#1c0a5c',
+      '#202565',
+      '#0d0958',
+      '#210d63',
+      '#203555',
+      '#2f0731',
+      '#043d7c',
+      '#275672',
+      '#102e14',
+      '#1e5334',
+      '#080a44',
+      '#105e0d',
+      '#343104',
+      '#551b50'
+    ];
+    return darkPaletteValues[_index % 64];
+  }
+
+  function darkestPalette(uint256 _index)
+    internal
+    pure
+    returns (string memory)
+  {
+    string[64] memory darkestPaletteValues = [
       '#020406',
       '#0d070a',
       '#0c090b',
@@ -225,77 +330,6 @@ library Color {
       '#0e1615',
       '#100126'
     ];
-
-    return bgLightValues[_index % 64];
-  }
-
-  function bgDark(uint256 _index) internal pure returns (string memory) {
-    string[64] memory bgDarkValues = [
-      '#f1f0fe',
-      '#fde2e4',
-      '#fafdfd',
-      '#fdfaf6',
-      '#feeff7',
-      '#ebfcdf',
-      '#fcf0fb',
-      '#fff2fb',
-      '#f1fef7',
-      '#f8fffe',
-      '#f2fef5',
-      '#deddfa',
-      '#ffdaed',
-      '#f4f4ea',
-      '#fedfe2',
-      '#f3ebf3',
-      '#e5f9f4',
-      '#fffafe',
-      '#def0f8',
-      '#ecf9fc',
-      '#efe7e9',
-      '#eee7f7',
-      '#f8fcfd',
-      '#eafef1',
-      '#fdfdf9',
-      '#fef0eb',
-      '#fef6f8',
-      '#ebfffe',
-      '#f8f8fd',
-      '#f9e2ef',
-      '#f8f8f1',
-      '#fbf4e7',
-      '#f8fbfa',
-      '#dbfceb',
-      '#e3e9fd',
-      '#eef5ec',
-      '#fef3f6',
-      '#eefffb',
-      '#f3f1ff',
-      '#f6f7ef',
-      '#ebf9f9',
-      '#ece0fd',
-      '#f5fff7',
-      '#f7e5f8',
-      '#fef6f5',
-      '#f0f5fa',
-      '#e4f9f0',
-      '#f7fff5',
-      '#eefcf4',
-      '#dffcfd',
-      '#e4e6f4',
-      '#f9fff7',
-      '#eeeaf0',
-      '#f5e7eb',
-      '#f6f6fb',
-      '#fee8ec',
-      '#fefafd',
-      '#fff5f7',
-      '#e7f2fb',
-      '#fdf3ed',
-      '#e9fedf',
-      '#faf7ef',
-      '#f6e2fd',
-      '#e4e5fd'
-    ];
-    return bgDarkValues[_index % 64];
+    return darkestPaletteValues[_index % 64];
   }
 }

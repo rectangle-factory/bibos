@@ -19,7 +19,7 @@ library Glints {
 
   function render(bytes32 _seed) internal pure returns (string memory result) {
     // color mode can be computed somewhere else
-    Color.CM cm = Color.getRefractivityType(_seed);
+    Color.CM cm = Color.getRefractivity(_seed);
     string memory mixMode = cm == Color.CM.LIGHT ? 'lighten' : 'color-burn';
     string memory fill = cm == Color.CM.LIGHT ? 'white' : 'black';
 
