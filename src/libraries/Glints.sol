@@ -56,11 +56,19 @@ library Glints {
         string memory reverse = glintSeed % 2 == 0
           ? "keyPoints='1;0' keyTimes='0;1'"
           : '';
-        addFloatingGlint(result, radius, coords, mixMode, fill, dur, reverse);
+        result = addFloatingGlint(
+          result,
+          radius,
+          coords,
+          mixMode,
+          fill,
+          dur,
+          reverse
+        );
       } else if (glintType == GlintType.RISING) {
-        addRisingGlint(result, radius, coords, mixMode, fill, dur);
+        result = addRisingGlint(result, radius, coords, mixMode, fill, dur);
       } else if (glintType == GlintType.FALLING) {
-        addFallingGlint(result, radius, coords, mixMode, fill, dur);
+        result = addFallingGlint(result, radius, coords, mixMode, fill, dur);
       }
     }
 
@@ -74,16 +82,17 @@ library Glints {
     string memory _mixMode,
     string memory _fill,
     string memory _dur
-  ) internal pure {
-    _result = string.concat(
-      _result,
-      '<g transform="translate(0,50)">',
-      SVG.circle(_radius, _coords, _mixMode, _fill, '0.5'),
-      animateTransform(_dur, '-100'),
-      SVG.animate(_dur),
-      '</circle>',
-      '</g>'
-    );
+  ) internal pure returns (string memory) {
+    return
+      string.concat(
+        _result,
+        '<g transform="translate(0,50)">',
+        SVG.circle(_radius, _coords, _mixMode, _fill, '0.5'),
+        animateTransform(_dur, '-100'),
+        SVG.animate(_dur),
+        '</circle>',
+        '</g>'
+      );
   }
 
   function addFloatingGlint(
@@ -94,18 +103,19 @@ library Glints {
     string memory _fill,
     string memory _dur,
     string memory _reverse
-  ) internal pure {
-    _result = string.concat(
-      _result,
-      SVG.circle(_radius, _coords, _mixMode, _fill, '0.75'),
-      SVG.animateMotion(
-        _reverse,
-        _dur,
-        'paced',
-        '<mpath xlink:href="#jitter-sm"/>'
-      ),
-      '</circle>'
-    );
+  ) internal pure returns (string memory) {
+    return
+      string.concat(
+        _result,
+        SVG.circle(_radius, _coords, _mixMode, _fill, '0.75'),
+        SVG.animateMotion(
+          _reverse,
+          _dur,
+          'paced',
+          '<mpath xlink:href="#jitter-sm"/>'
+        ),
+        '</circle>'
+      );
   }
 
   function addFallingGlint(
@@ -115,16 +125,17 @@ library Glints {
     string memory _mixMode,
     string memory _fill,
     string memory _dur
-  ) internal pure {
-    _result = string.concat(
-      _result,
-      '<g>',
-      SVG.circle(_radius, _coords, _mixMode, _fill, '0.5'),
-      animateTransform(_dur, '100'),
-      SVG.animate(_dur),
-      '</circle>',
-      '</g>'
-    );
+  ) internal pure returns (string memory) {
+    return
+      string.concat(
+        _result,
+        '<g>',
+        SVG.circle(_radius, _coords, _mixMode, _fill, '0.5'),
+        animateTransform(_dur, '100'),
+        SVG.animate(_dur),
+        '</circle>',
+        '</g>'
+      );
   }
 
   function animateTransform(string memory _dur, string memory _to)

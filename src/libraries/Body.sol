@@ -59,8 +59,8 @@ library Body {
     string[2] memory _coords,
     string memory _mixMode,
     string memory _fill,
-    string memory _reverse,
-    string memory _dur
+    string memory _dur,
+    string memory _reverse
   ) internal pure returns (string memory) {
     string memory mpath = '<mpath xlink:href="#jitter-lg"/>';
     string memory calcMode = 'linear';

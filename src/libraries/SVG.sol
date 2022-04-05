@@ -58,6 +58,7 @@ library SVG {
       string.concat(
         '<animateMotion ',
         rev,
+        ' ',
         'dur=',
         Util.quote(dur),
         'repeatCount="indefinite" ',
