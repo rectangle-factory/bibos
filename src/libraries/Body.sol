@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import { Color } from './Color.sol';
+import { Palette } from './Palette.sol';
 import { Times } from './Times.sol';
 import { Points } from './Points.sol';
 import { Util } from './Util.sol';
@@ -15,12 +15,12 @@ library Body {
 
     uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, 'body')));
 
-    string memory backgroundFill = Color.getBackgroundFill(_seed);
+    string memory backgroundFill = Palette.getBackgroundFill(_seed);
     result = addBodyBackground(result, backgroundFill);
 
     for (uint8 i = 0; i < 7; i++) {
       string memory radius = radii[i];
-      string memory fill = Color.getBodyFill(_seed, i);
+      string memory fill = Palette.getBodyFill(_seed, i);
 
       string memory dur = Times.short(bodySeed);
       bodySeed /= Times.length;
@@ -30,8 +30,6 @@ library Body {
         : Points.body(bodySeed);
       bodySeed /= Points.length;
 
-      // switch on first byte of val
-      // equiv to val % 2 == 0
       string memory reverse = bodySeed % 2 == 0
         ? 'keyPoints="1;0" keyTimes="0;1" '
         : '';
@@ -40,7 +38,7 @@ library Body {
       result = addBodyCircle(result, radius, coords, fill, dur, reverse);
     }
 
-    return result;
+    return string.concat('<g filter="url(#blur)">', result, '</g>');
   }
 
   function addBodyCircle(

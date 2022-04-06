@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import { Color } from './Color.sol';
+import { Palette } from './Palette.sol';
 import { Times } from './Times.sol';
 import { Points } from './Points.sol';
 import { Util } from './Util.sol';
@@ -19,38 +19,19 @@ library Glints {
 
   function render(bytes32 _seed) internal pure returns (string memory) {
     string memory result = '';
-    Color.CM cm = Color.getRefractivity(_seed);
-    string[5] memory opacities = cm == Color.CM.LIGHT
+    Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
+    string[5] memory opacities = refractivity == Palette.Refractivity.LIGHT
       ? ['0.3', '0.4', '0.5', '0.6', '0.7']
       : ['0.6', '0.7', '0.8', '0.9', '1.0'];
     string memory mixMode = 'lighten';
     string memory fill = 'white';
 
-    uint256 glintMainSeed = uint256(
-      keccak256(abi.encodePacked(_seed, 'glint'))
-    );
-
-    // determine glint type
-    GlintType glintType;
-    if (glintMainSeed % 100 < 20) {
-      glintType = GlintType.FLOATING;
-    }
-    // glintType == RISING
-    // 15%
-    else if (glintMainSeed % 100 < 35) {
-      glintType = GlintType.RISING;
-    }
-    // 5%
-    // glintType == FALLING
-    else if (glintMainSeed % 100 < 40) {
-      glintType = GlintType.RISING;
-    }
-
+    GlintType glintType = getGlintType(_seed);
     if (glintType == GlintType.NONE) return '';
 
     for (uint8 i = 0; i < GLINT_COUNT; i++) {
       uint256 glintSeed = uint256(
-        keccak256(abi.encodePacked(glintMainSeed, i))
+        keccak256(abi.encodePacked(_seed, 'glint', i))
       );
 
       string memory dur = Times.long(glintSeed);
@@ -59,7 +40,7 @@ library Glints {
       glintSeed = glintSeed / Points.length;
       string memory radius = glintSeed % 2 == 0 ? '1' : '2';
       glintSeed = glintSeed / 2;
-      string memory opacity = opacities[glintSeed];
+      string memory opacity = opacities[glintSeed % opacities.length];
       glintSeed /= opacities.length;
 
       if (glintType == GlintType.FLOATING) {
@@ -76,7 +57,7 @@ library Glints {
           dur,
           reverse
         );
-      } else if (glintType == GlintType.RISING) {
+      } else if (glintType == GlintType.RISING)
         result = addRisingGlint(
           result,
           radius,
@@ -86,7 +67,7 @@ library Glints {
           opacity,
           dur
         );
-      } else if (glintType == GlintType.FALLING) {
+      else if (glintType == GlintType.FALLING) {
         result = addFallingGlint(
           result,
           radius,
@@ -99,7 +80,18 @@ library Glints {
       }
     }
 
-    return result;
+    return string.concat('<g>', result, '</g>');
+  }
+
+  function getGlintType(bytes32 _seed) internal pure returns (GlintType) {
+    uint256 glintTypeSeed = uint256(
+      keccak256(abi.encodePacked(_seed, 'glintType'))
+    ) % 100;
+
+    if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
+    if (glintTypeSeed % 100 < 35) return GlintType.RISING;
+    if (glintTypeSeed % 100 < 40) return GlintType.FALLING;
+    return GlintType.NONE;
   }
 
   function addRisingGlint(

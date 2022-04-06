@@ -1,10 +1,21 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-library Color {
-  enum CM {
+library Palette {
+  enum Refractivity {
     LIGHT,
     DARK
+  }
+
+  function getRefractivity(bytes32 _seed) internal pure returns (Refractivity) {
+    uint256 refractivitySeed = uint256(
+      keccak256(abi.encodePacked(_seed, 'refractivity'))
+    );
+
+    // 80%
+    if (refractivitySeed % 100 < 80) return Refractivity.LIGHT;
+    // 20%
+    return Refractivity.DARK;
   }
 
   function getBodyFill(bytes32 _seed, uint256 _i)
@@ -12,12 +23,13 @@ library Color {
     pure
     returns (string memory)
   {
-    uint256 bodyFillIndex = uint256(
+    uint256 bodyFillValue = uint256(
       keccak256(abi.encodePacked(_seed, 'bodyFill', _i))
     );
 
-    if (getRefractivity(_seed) == CM.LIGHT) return lightPalette(bodyFillIndex);
-    else return lightestPalette(bodyFillIndex);
+    if (getRefractivity(_seed) == Refractivity.LIGHT)
+      return lightPalette(bodyFillValue);
+    else return lightestPalette(bodyFillValue);
   }
 
   function getBackgroundFill(bytes32 _seed)
@@ -25,27 +37,16 @@ library Color {
     pure
     returns (string memory)
   {
-    uint256 backgroundFillIndex = uint256(
+    uint256 backgroundFillValue = uint256(
       keccak256(abi.encodePacked(_seed, 'backgroundFill'))
     );
 
-    if (getRefractivity(_seed) == CM.LIGHT)
-      return darkestPalette(backgroundFillIndex);
-    else return darkestPalette(backgroundFillIndex);
+    if (getRefractivity(_seed) == Refractivity.LIGHT)
+      return darkestPalette(backgroundFillValue);
+    else return darkestPalette(backgroundFillValue);
   }
 
-  function getRefractivity(bytes32 _seed) internal pure returns (CM) {
-    uint256 refractivitySeed = uint256(
-      keccak256(abi.encodePacked(_seed, 'refractivity'))
-    );
-
-    // 80%
-    if (refractivitySeed % 100 < 80) return CM.LIGHT;
-    // 20%
-    return CM.DARK;
-  }
-
-  function lightestPalette(uint256 _index)
+  function lightestPalette(uint256 _value)
     internal
     pure
     returns (string memory)
@@ -116,10 +117,10 @@ library Color {
       '#f9d3c8',
       '#e6f5fe'
     ];
-    return lightestPaletteValues[_index % 64];
+    return lightestPaletteValues[_value % 64];
   }
 
-  function lightPalette(uint256 _index) internal pure returns (string memory) {
+  function lightPalette(uint256 _value) internal pure returns (string memory) {
     string[64] memory lightPaletteValues = [
       '#f47b9d',
       '#c9f273',
@@ -186,10 +187,10 @@ library Color {
       '#6c4efd',
       '#79bd0f'
     ];
-    return lightPaletteValues[_index % 64];
+    return lightPaletteValues[_value % 64];
   }
 
-  function darkPalette(uint256 _index) internal pure returns (string memory) {
+  function darkPalette(uint256 _value) internal pure returns (string memory) {
     string[64] memory darkPaletteValues = [
       '#50071d',
       '#404305',
@@ -256,10 +257,10 @@ library Color {
       '#343104',
       '#551b50'
     ];
-    return darkPaletteValues[_index % 64];
+    return darkPaletteValues[_value % 64];
   }
 
-  function darkestPalette(uint256 _index)
+  function darkestPalette(uint256 _value)
     internal
     pure
     returns (string memory)
@@ -330,6 +331,6 @@ library Color {
       '#0e1615',
       '#100126'
     ];
-    return darkestPaletteValues[_index % 64];
+    return darkestPaletteValues[_value % 64];
   }
 }

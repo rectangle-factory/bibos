@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import { Color } from './Color.sol';
-
 library Times {
   uint256 constant length = 64;
 

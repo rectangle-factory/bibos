@@ -2,7 +2,6 @@
 pragma solidity >=0.8.0;
 
 import { Metadata } from './Metadata.sol';
-import { Color } from './Color.sol';
 import { Util } from './Util.sol';
 import { Body } from './Body.sol';
 import { Glints } from './Glints.sol';
