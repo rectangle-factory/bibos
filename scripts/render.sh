@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-echo ''
-echo ''
-echo 'b:/bibOS/home$ ./renderBibos.sh'
-echo 'executing bibosRenderScript...'
 
-echo '® BibosCorp 2022'
-echo '---'
-echo 'rendering bibos...'
+echo ''
+echo '© BibosCorp® Research Group 2022'
+echo ''
+echo 'b:/bibOS/home$ ./simulateBibos.sh'
+echo 'deploying bibos simulation environment...'
+echo 'synthesizing bibos...'
 # run mint script, outputs token uri to output/token_uri.base64
 forge_render_script="./src/scripts/render.sol"
 forge run $forge_render_script 1> /dev/null
