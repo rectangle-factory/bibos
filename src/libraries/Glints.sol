@@ -70,7 +70,6 @@ library Glints {
         return
             string.concat(
                 "<animateTransform ",
-                'attributeType="XML" ',
                 'attributeName="transform" ',
                 "dur=",
                 Util.quote(_dur),
