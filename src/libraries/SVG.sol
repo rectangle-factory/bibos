@@ -21,7 +21,6 @@ library SVG {
                 Util.quote(coords[1]),
                 "style=",
                 Util.quote(string.concat("mix-blend-mode:", mixMode)),
-                'shape-rendering="optimizeSpeed" ',
                 "fill=",
                 Util.quote(fill),
                 "opacity=",

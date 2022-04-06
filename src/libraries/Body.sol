@@ -14,7 +14,7 @@ library Body {
             string.concat(
                 bodyBackground(cm, data[0]),
                 " <!-- BODY --> ",
-                '<g filter="url(#blur)">',
+                '<g filter="url(#blur)" shape-rendering="optimizeSpeed">',
                 bodyBackground(cm, data[0]),
                 bodyCircle(cm, "64", data[1]),
                 bodyCircle(cm, "56", data[2]),
