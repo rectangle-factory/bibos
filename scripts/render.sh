@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+echo ''
+echo ''
+echo 'b:/bibOS/home$ ./renderBibos.sh'
+echo 'executing bibosRenderScript...'
+
+echo '® BibosCorp 2022'
+echo '---'
+echo 'rendering bibos...'
 # run mint script, outputs token uri to output/token_uri.base64
 forge_render_script="./src/scripts/render.sol"
 forge run $forge_render_script 1> /dev/null
@@ -22,3 +30,5 @@ awk -v var="<img src=\"$image_data\"/>" '{ gsub(/<img.*\>/,var,$0); print $0}' o
 # remove the header text, decode the svg from base64, and save to file 
 raw_svg=$(echo $image_data | cut -d "," -f 2 | base64 -d)
 echo $raw_svg > output/render.svg
+
+echo 'done.'
