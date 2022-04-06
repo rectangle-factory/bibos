@@ -13,14 +13,12 @@ library Body {
 
     string[7] memory radii = ['64', '64', '64', '56', '48', '32', '24'];
 
-    // const bodyCircles = [ 64, 64, 64, 56, 48, 32, 24 ]
     uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, 'body')));
 
     string memory backgroundFill = Color.getBackgroundFill(_seed);
     result = addBodyBackground(result, backgroundFill);
 
     for (uint8 i = 0; i < 7; i++) {
-      string memory mixMode = 'lighten';
       string memory radius = radii[i];
       string memory fill = Color.getBodyFill(_seed, i);
 
@@ -39,15 +37,7 @@ library Body {
         : '';
       bodySeed /= 2;
 
-      result = addBodyCircle(
-        result,
-        radius,
-        coords,
-        mixMode,
-        fill,
-        dur,
-        reverse
-      );
+      result = addBodyCircle(result, radius, coords, fill, dur, reverse);
     }
 
     return result;
@@ -57,11 +47,11 @@ library Body {
     string memory _result,
     string memory _radius,
     string[2] memory _coords,
-    string memory _mixMode,
     string memory _fill,
     string memory _dur,
     string memory _reverse
   ) internal pure returns (string memory) {
+    string memory mixMode = 'lighten';
     string memory mpath = '<mpath xlink:href="#jitter-lg"/>';
     string memory calcMode = 'linear';
     string memory opacity = '1';
@@ -69,7 +59,7 @@ library Body {
     return
       string.concat(
         _result,
-        SVG.circle(_radius, _coords, _mixMode, _fill, opacity),
+        SVG.circle(_radius, _coords, mixMode, _fill, opacity),
         SVG.animateMotion(_reverse, _dur, calcMode, mpath),
         '</circle>'
       );
