@@ -31,7 +31,6 @@ library Body {
         string memory radius,
         bytes1 value
     ) internal pure returns (string memory) {
-        string memory mixMode = cm == Color.CM.LIGHT ? "overlay" : "color-burn";
         string memory fill = cm == Color.CM.LIGHT ? Color.bodyLight(value) : Color.bodyDark(value);
 
         string memory dur = Times.short(value);
@@ -43,7 +42,7 @@ library Body {
 
         return
             string.concat(
-                SVG.circle(radius, coords, mixMode, fill, "1"),
+                SVG.circle(radius, coords, "lighten", fill, "1"),
                 SVG.animateMotion(rev, dur, "linear", '<mpath xlink:href="#jitter-lg"/>'),
                 "</circle>"
             );
@@ -51,6 +50,6 @@ library Body {
 
     function bodyBackground(Color.CM cm, bytes1 value) internal pure returns (string memory) {
         string memory bg = cm == Color.CM.LIGHT ? Color.bgLight(value) : Color.bgDark(value);
-        return SVG.rect("300", "300", bg);
+        return SVG.rect("100%", "100%", bg);
     }
 }
