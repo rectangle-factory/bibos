@@ -12,7 +12,7 @@ library Traits {
         // refractivity
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
         string memory refractivityTrait = getRefractivityTrait(refractivity);
-        result = appendTrait(result, trait("refractivity", refractivityTrait));
+        result = trait("refractivity", refractivityTrait);
 
         // glint type
         Glints.GlintType glintType = Glints.getGlintType(_seed);
