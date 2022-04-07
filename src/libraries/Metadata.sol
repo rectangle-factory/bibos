@@ -22,6 +22,7 @@ library Metadata {
     ) internal pure returns (string memory) {
         string memory metadata = string.concat(
             "{",
+<<<<<<< HEAD
             Util.keyValue("tokenId", Util.uint256ToAscii(_id)),
             ",",
             Util.keyValue("name", _name),
@@ -29,6 +30,15 @@ library Metadata {
             Util.keyValue("description", _description),
             ",",
             Util.keyValue("image", encodeSvg(_svg)),
+=======
+            keyValue("tokenId", Util.uint256ToAscii(_id)),
+            ",",
+            keyValue("name", _name),
+            ",",
+            keyValue("description", _description),
+            ",",
+            keyValue("image", encodeSvg(_svg)),
+>>>>>>> main
             "}"
         );
 
@@ -48,4 +58,15 @@ library Metadata {
     function encodeSvg(string memory _svg) internal pure returns (string memory) {
         return string.concat("data:image/svg+xml;base64,", Base64.encode(bytes(_svg)));
     }
+<<<<<<< HEAD
+=======
+
+    function keyValue(string memory _key, string memory _value) internal pure returns (string memory) {
+        return string.concat('"', _key, '":"', _value, '"');
+    }
+
+    function keyValueNoQuotes(string memory _key, string memory _value) internal pure returns (string memory) {
+        return string.concat('"', _key, '":', _value);
+    }
+>>>>>>> main
 }

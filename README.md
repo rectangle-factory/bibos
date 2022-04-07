@@ -9,7 +9,13 @@
 Install [Foundry](https://github.com/gakonst/foundry/).
 Run `foundryup` to update to nightly builds.
 
-Run `yarn install` or `npm install` for prettier.
+This project uses [pnpm](https://pnpm.io/) for maximum javascript acceleration.
+
+To install dependences:
+
+```[bash]
+pnpm i
+```
 
 For submodules:
 
@@ -24,7 +30,7 @@ For the render scripts, you'll need `jq`. Install `brew install jq`.
 ### Test
 
 ```[bash]
-yarn run test
+pnpm test
 ```
 
 ---
@@ -32,5 +38,5 @@ yarn run test
 ### Render New Bibo
 
 ```[bash]
-yarn run render
+pnpm render
 ```

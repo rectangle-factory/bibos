@@ -18,9 +18,12 @@ contract BibosTest is DSTest {
         bibos.mint();
         assertEq(bibos.totalSupply(), 1);
     }
+<<<<<<< HEAD
 
     function testGetTokenURI() public {
         bibos.mint();
         bibos.tokenURI(0);
     }
+=======
+>>>>>>> main
 }
