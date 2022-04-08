@@ -9,11 +9,11 @@ import {SVG} from "./SVG.sol";
 
 library Mote {
     function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "moteCount"))) % 100;
+        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
 
-        if (glintTypeSeed % 100 < 1) return 3;
-        if (glintTypeSeed % 100 < 5) return 2;
-        if (glintTypeSeed % 100 < 35) return 1;
+        if (moteSeed % 100 < 1) return 3;
+        if (moteSeed % 100 < 5) return 2;
+        if (moteSeed % 100 < 35) return 1;
         return 0;
     }
 }

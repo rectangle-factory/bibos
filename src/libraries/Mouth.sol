@@ -8,12 +8,27 @@ import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Mouth {
-    function getGlintType(bytes32 _seed) internal pure returns (GlintType) {
-        uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
+    enum MouthType {
+        SMILE,
+        MEDIUM_SMILE,
+        SMALL_SMILE,
+        FLAT,
+        FROWN,
+        GRIN,
+        SMOOCH,
+        SMIRK
+    }
 
-        if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
-        if (glintTypeSeed % 100 < 35) return GlintType.RISING;
-        if (glintTypeSeed % 100 < 40) return GlintType.FALLING;
-        return GlintType.NONE;
+    function getMouthType(bytes32 _seed) internal pure returns (MouthType) {
+        uint256 mouthTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "mouthType"))) % 100;
+
+        if (mouthTypeSeed % 100 < 30) return MouthType.SMILE;
+        if (mouthTypeSeed % 100 < 60) return MouthType.MEDIUM_SMILE;
+        if (mouthTypeSeed % 100 < 80) return MouthType.SMALL_SMILE;
+        if (mouthTypeSeed % 100 < 90) return MouthType.FLAT;
+        if (mouthTypeSeed % 100 < 94) return MouthType.FROWN;
+        if (mouthTypeSeed % 100 < 97) return MouthType.GRIN;
+        if (mouthTypeSeed % 100 < 99) return MouthType.SMOOCH;
+        return MouthType.SMIRK;
     }
 }

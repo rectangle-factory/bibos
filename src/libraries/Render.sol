@@ -2,10 +2,6 @@
 pragma solidity >=0.8.0;
 
 import {Metadata} from "./Metadata.sol";
-<<<<<<< HEAD
-=======
-import {Color} from "./Color.sol";
->>>>>>> main
 import {Util} from "./Util.sol";
 import {Body} from "./Body.sol";
 import {Glints} from "./Glints.sol";
@@ -35,16 +31,10 @@ library Render {
                 'pauseAnimations="true" '
                 'xmlns="http://www.w3.org/2000/svg" '
                 'xmlns:xlink="http://www.w3.org/1999/xlink" '
-<<<<<<< HEAD
                 'width="100%" '
                 'height="100%" '
                 'viewBox="0 0 300 300" ',
                 'preserveAspectRatio="xMidYMid meet" ',
-=======
-                'width="500" '
-                'height="500" '
-                'viewBox="0 0 300 300" '
->>>>>>> main
                 'fill="none" '
                 ">",
                 defs(),
@@ -53,26 +43,14 @@ library Render {
             );
     }
 
-<<<<<<< HEAD
     function svgChildren(bytes32 _seed) internal pure returns (string memory) {
         return string.concat(Body.render(_seed), Glints.render(_seed));
-=======
-    function svgChildren(bytes32 data) internal pure returns (string memory) {
-        return string.concat(Body.render(data), Glints.render(data));
->>>>>>> main
     }
 
     function defs() internal pure returns (string memory) {
         return
             string.concat(
                 "<defs>",
-<<<<<<< HEAD
-=======
-                '<filter id="lighten" color-interpolation-filters="sRGB">',
-                '<feFlood flood-opacity="0" result="BackgroundImageFix"/>',
-                ' <feBlend mode="screen" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>',
-                "</filter>",
->>>>>>> main
                 '<filter id="blur" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">',
                 '<feGaussianBlur stdDeviation="15" result="out" />',
                 "</filter>",

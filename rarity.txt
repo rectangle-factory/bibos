@@ -29,8 +29,8 @@ export const moteCountChoices = [
 
 4
 export const eyeTypes = [
-    'Open', // 30%
-    'Smiley', // 30%
+    'Open', // 25%
+    'Smiley', // 25%
     'Wink', // 15%
     'Sleepy', // 10%
     'Clover', // 8%
@@ -47,7 +47,7 @@ export const mouthTypes = [
     'Medium Smile', // 30%
     'Small Smile', // 20%
     'Flat', // 10%
-    'Frown', // 5%
+    'Frown', // 4%
     'Grin', // 3%
     'Smooch', // 2%
     'Smirk', // 1%

@@ -48,10 +48,7 @@ library SVG {
             string.concat(
                 "<animateMotion ",
                 rev,
-<<<<<<< HEAD
                 " ",
-=======
->>>>>>> main
                 "dur=",
                 Util.quote(dur),
                 'repeatCount="indefinite" ',

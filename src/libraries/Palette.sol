@@ -10,9 +10,7 @@ library Palette {
     function getRefractivity(bytes32 _seed) internal pure returns (Refractivity) {
         uint256 refractivitySeed = uint256(keccak256(abi.encodePacked(_seed, "refractivity")));
 
-        // 80%
         if (refractivitySeed % 100 < 80) return Refractivity.LIGHT;
-        // 20%
         return Refractivity.DARK;
     }
 

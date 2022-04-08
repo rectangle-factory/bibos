@@ -1,17 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-<<<<<<< HEAD
 library Times {
     uint256 constant length = 64;
 
     function short(uint256 _index) internal pure returns (string memory) {
-=======
-import {Color} from "./Color.sol";
-
-library Times {
-    function short(bytes1 value) internal pure returns (string memory) {
->>>>>>> main
         string[64] memory times = [
             "8.93",
             "9.74",
@@ -78,17 +71,10 @@ library Times {
             "9.66",
             "9.92"
         ];
-<<<<<<< HEAD
         return times[_index % 64];
     }
 
     function long(uint256 _index) internal pure returns (string memory) {
-=======
-        return times[uint8(value) % 64];
-    }
-
-    function long(bytes1 value) internal pure returns (string memory) {
->>>>>>> main
         string[64] memory times = [
             "11.20",
             "14.65",
@@ -155,10 +141,6 @@ library Times {
             "14.64",
             "13.66"
         ];
-<<<<<<< HEAD
         return times[_index % 64];
-=======
-        return times[uint8(value) % 64];
->>>>>>> main
     }
 }
