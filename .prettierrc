@@ -9,5 +9,6 @@
         "tabWidth": 4
       }
     }
-  ]
+  ],
+  "plugins": ["prettier-plugin-solidity"]
 }
