@@ -7,7 +7,7 @@ import {Points} from "./Points.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
-library Mote {
+library Motes {
     function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
         uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
 

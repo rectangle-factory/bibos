@@ -19,8 +19,6 @@ library Cheeks {
 
         if (cheeksSeed % 100 < 70) return CheekType.NONE;
         if (cheeksSeed % 100 < 95) return CheekType.CIRCULAR;
-        if (cheeksSeed % 100 < 100) return CheekType.FRECKLES;
-
-        return 0;
+        return CheekType.FRECKLES;
     }
 }

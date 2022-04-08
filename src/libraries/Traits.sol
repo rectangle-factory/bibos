@@ -4,8 +4,9 @@ pragma solidity >=0.8.0;
 import {Palette} from "./Palette.sol";
 import {Glints} from "./Glints.sol";
 import {Eyes} from "./Eyes.sol";
+import {Cheeks} from "./Cheeks.sol";
 import {Mouth} from "./Mouth.sol";
-import {Mote} from "./Mote.sol";
+import {Motes} from "./Motes.sol";
 import {Util} from "./Util.sol";
 
 library Traits {
@@ -19,12 +20,12 @@ library Traits {
 
         // glint
         Glints.GlintType glintType = Glints.getGlintType(_seed);
-        string memory glintTrait = getGlintTypeTrait(glintType);
+        string memory glintTrait = getGlintTrait(glintType);
         result = appendTrait(result, trait("glint", glintTrait));
 
         // eyes
-        Eyes.EyeType eyeType = eyes.getEyeType(_seed);
-        string memory eyeTrait = getEyeTrait(eye);
+        Eyes.EyeType eyeType = Eyes.getEyeType(_seed);
+        string memory eyeTrait = getEyeTrait(eyeType);
         result = appendTrait(result, trait("eyes", eyeTrait));
 
         // mouth
@@ -33,19 +34,19 @@ library Traits {
         result = appendTrait(result, trait("mouth", mouthTrait));
 
         // cheeks
-        Cheeks.CheekType cheekType = cheeks.getcheekType(_seed);
+        Cheeks.CheekType cheekType = Cheeks.getCheekType(_seed);
         string memory cheekTrait = getCheekTrait(cheekType);
         result = appendTrait(result, trait("cheeks", cheekTrait));
 
         // mote
-        uint256 moteCount = motes.getMoteCount(_seed);
-        string memory moteTrait = getMoteTrait(_moteCount);
+        uint256 moteCount = Motes.getMoteCount(_seed);
+        string memory moteTrait = getMoteTrait(moteCount);
         result = appendTrait(result, trait("motes", moteTrait));
 
         return result;
     }
 
-    function getRefractivityTrait(Palette.Refractivity _refracivity) internal pure returns (string memory) {
+    function getRefractivityTrait(Palette.Refractivity _refractivity) internal pure returns (string memory) {
         return _refractivity == Palette.Refractivity.LIGHT ? "Light" : "Dark";
     }
 
@@ -56,17 +57,17 @@ library Traits {
         return "none";
     }
 
-    function getEyeTrait(Eye.EyeType _eyeType) internal pure returns (string memory) {
-        if (_eyeType == Eye.EyeType.Star) return "Star";
-        if (_eyeType == Eye.EyeType.Cyclops) return "Cyclops";
-        if (_eyeType == Eye.EyeType.Wince) return "Wince";
-        if (_eyeType == Eye.EyeType.Heart) return "Heart";
-        if (_eyeType == Eye.EyeType.Dizzy) return "Dizzy";
-        if (_eyeType == Eye.EyeType.Clover) return "Clover";
-        if (_eyeType == Eye.EyeType.Sleepy) return "Sleepy";
-        if (_eyeType == Eye.EyeType.Wink) return "Wink";
-        if (_eyeType == Eye.EyeType.Smiley) return "Smiley";
-        return "Open";
+    function getEyeTrait(Eyes.EyeType _eyeType) internal pure returns (string memory) {
+        if (_eyeType == Eyes.EyeType.OPEN) return "Open";
+        if (_eyeType == Eyes.EyeType.SMILEY) return "Smiley";
+        if (_eyeType == Eyes.EyeType.WINK) return "Wink";
+        if (_eyeType == Eyes.EyeType.SLEEPY) return "Sleepy";
+        if (_eyeType == Eyes.EyeType.CLOVER) return "Clover";
+        if (_eyeType == Eyes.EyeType.DIZZY) return "Dizzy";
+        if (_eyeType == Eyes.EyeType.HEART) return "Heart";
+        if (_eyeType == Eyes.EyeType.WINCE) return "Wince";
+        if (_eyeType == Eyes.EyeType.CYCLOPS) return "Cyclops";
+        return "Star";
     }
 
     function getMouthTrait(Mouth.MouthType _mouthType) internal pure returns (string memory) {
@@ -80,8 +81,8 @@ library Traits {
     }
 
     function getCheekTrait(Cheeks.CheekType _cheekType) internal pure returns (string memory) {
-        if (_mouthType == Cheeks.CheekType.NONE) return "None";
-        if (_mouthType == Cheeks.CheekType.CIRCULAR) return "Circular";
+        if (_cheekType == Cheeks.CheekType.NONE) return "None";
+        if (_cheekType == Cheeks.CheekType.CIRCULAR) return "Circular";
         return "Freckles";
     }
 

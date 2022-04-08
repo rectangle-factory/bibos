@@ -21,7 +21,7 @@ library Eyes {
         STAR
     }
 
-    function getEyeType(bytes32 _seed) internal pure returns (string memory) {
+    function getEyeType(bytes32 _seed) internal pure returns (EyeType) {
         uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
 
         if (eyeSeed % 100 < 25) return EyeType.OPEN;
