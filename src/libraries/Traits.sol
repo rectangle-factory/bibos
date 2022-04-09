@@ -11,12 +11,12 @@ import {Util} from "./Util.sol";
 
 library Traits {
     function getTraits(bytes32 _seed) internal pure returns (string memory) {
-        string memory result;
+        string memory result = "[";
 
         // refractivity
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
         string memory refractivityTrait = getRefractivityTrait(refractivity);
-        result = trait("refractivity", refractivityTrait);
+        result = string.concat(result, trait("refractivity", refractivityTrait));
 
         // glint
         Glints.GlintType glintType = Glints.getGlintType(_seed);
@@ -43,7 +43,7 @@ library Traits {
         string memory moteTrait = getMoteTrait(moteCount);
         result = appendTrait(result, trait("motes", moteTrait));
 
-        return result;
+        return string.concat(result, "]");
     }
 
     function getRefractivityTrait(Palette.Refractivity _refractivity) internal pure returns (string memory) {

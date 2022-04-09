@@ -5,16 +5,18 @@ import {Metadata} from "./Metadata.sol";
 import {Util} from "./Util.sol";
 import {Body} from "./Body.sol";
 import {Glints} from "./Glints.sol";
+import {Traits} from "./Traits.sol";
 
 library Render {
-    function tokenURI(uint256 id, bytes32 data) internal pure returns (string memory) {
+    function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
         return
             string(
                 Metadata.encodeTokenMetadata(
-                    id,
-                    tokenName("Bibos #", id), // name
+                    _tokenId,
+                    tokenName("Bibos #", _tokenId), // name
                     "Bibos", // description
-                    svg(data) // svg
+                    attributes(_seed), // attributes
+                    svg(_seed) // svg
                 )
             );
     }
@@ -24,7 +26,11 @@ library Render {
         return string.concat(_name, Util.uint256ToAscii(_tokenId));
     }
 
-    function svg(bytes32 data) internal pure returns (string memory) {
+    function attributes(bytes32 _seed) internal pure returns (string memory) {
+        return Traits.getTraits(_seed);
+    }
+
+    function svg(bytes32 _seed) internal pure returns (string memory) {
         return
             string.concat(
                 "<svg ",
@@ -38,7 +44,7 @@ library Render {
                 'fill="none" '
                 ">",
                 defs(),
-                svgChildren(data),
+                svgChildren(_seed),
                 "</svg>"
             );
     }
