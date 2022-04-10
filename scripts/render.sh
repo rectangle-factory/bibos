@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+
+echo ''
+echo '© BibosCorp® Research Group 2022'
+echo ''
+echo 'b:/bibOS/home$ ./simulateBibos.sh'
+echo 'deploying bibos simulation environment...'
+echo 'synthesizing bibos...'
 # run mint script, outputs token uri to output/token_uri.base64
-forge run src/scripts/mint.sol 1> /dev/null
+forge_render_script="./src/scripts/render.sol"
+forge run $forge_render_script 1> /dev/null
 token_uri=$(cat ./output/token_uri.base64)
 
 # remove header, cut at ","
@@ -21,3 +29,5 @@ awk -v var="<img src=\"$image_data\"/>" '{ gsub(/<img.*\>/,var,$0); print $0}' o
 # remove the header text, decode the svg from base64, and save to file 
 raw_svg=$(echo $image_data | cut -d "," -f 2 | base64 -d)
 echo $raw_svg > output/render.svg
+
+echo 'done.'

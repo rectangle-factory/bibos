@@ -10,6 +10,14 @@ library Util {
         return string.concat('"', value, '" ');
     }
 
+    function keyValue(string memory _key, string memory _value) internal pure returns (string memory) {
+        return string.concat('"', _key, '":"', _value, '"');
+    }
+
+    function keyValueNoQuotes(string memory _key, string memory _value) internal pure returns (string memory) {
+        return string.concat('"', _key, '":', _value);
+    }
+
     /// @notice converts a uint256 to string
     /// @param _value, uint256, the value to convert
     /// @return result the resulting string

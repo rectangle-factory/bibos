@@ -1,0 +1,62 @@
+strategy: derive all traits from a single bytes32 seed
+
+
+1
+export const refractivityTypes = [
+    'Light', // 80%
+    'Dark', // 20%
+]
+
+2
+export const glintTypes = [
+    'None', // 60%  
+    'Floating', // 20% 
+    'Rising', // 15%
+    'Falling', // 5% 
+]
+
+export const moteTypes = [
+    'Gleam',
+]
+
+3
+export const moteCountChoices = [
+    0, // 65%  
+    1, // 30%  
+    2, // 4%  
+    3, // 1%  
+]
+
+4
+export const eyeTypes = [
+    'Open', // 25%
+    'Smiley', // 25%
+    'Wink', // 15%
+    'Sleepy', // 10%
+    'Clover', // 8%
+    'Dizzy', // 6%
+    'Heart', // 5%
+    'Wince', // 3%
+    'Cyclops', // 2%
+    'Star', // 1%
+]
+
+5
+export const mouthTypes = [
+    'Smile', // 30%
+    'Medium Smile', // 30%
+    'Small Smile', // 20%
+    'Flat', // 10%
+    'Frown', // 4%
+    'Grin', // 3%
+    'Smooch', // 2%
+    'Smirk', // 1%
+]
+
+6
+// should be called 'cheeks' instead
+export const accessoryTypes = [
+    "None", // 70%
+    "Circular Cheeks", // 25%
+    "Freckles", // 5%
+]
