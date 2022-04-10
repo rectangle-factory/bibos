@@ -8,6 +8,7 @@ contract Bibos is ERC721 {
     address public owner;
     uint256 public totalSupply;
 
+    // tokenId => seed
     mapping(uint256 => bytes32) public seed;
     error InvalidTokenId();
 
