@@ -21,27 +21,27 @@ library Traits {
         // glint
         Glints.GlintType glintType = Glints.getGlintType(_seed);
         string memory glintTrait = getGlintTrait(glintType);
-        result = appendTrait(result, trait("glint", glintTrait));
+        result = string.concat(result, ",", trait("glint", glintTrait));
 
         // eyes
         Eyes.EyeType eyeType = Eyes.getEyeType(_seed);
         string memory eyeTrait = getEyeTrait(eyeType);
-        result = appendTrait(result, trait("eyes", eyeTrait));
+        result = string.concat(result, ",", trait("eyes", eyeTrait));
 
         // mouth
         Mouth.MouthType mouthType = Mouth.getMouthType(_seed);
         string memory mouthTrait = getMouthTrait(mouthType);
-        result = appendTrait(result, trait("mouth", mouthTrait));
+        result = string.concat(result, ",", trait("mouth", mouthTrait));
 
         // cheeks
         Cheeks.CheekType cheekType = Cheeks.getCheekType(_seed);
         string memory cheekTrait = getCheekTrait(cheekType);
-        result = appendTrait(result, trait("cheeks", cheekTrait));
+        result = string.concat(result, ",", trait("cheeks", cheekTrait));
 
         // mote
         uint256 moteCount = Motes.getMoteCount(_seed);
         string memory moteTrait = getMoteTrait(moteCount);
-        result = appendTrait(result, trait("motes", moteTrait));
+        result = string.concat(result, ",", trait("motes", moteTrait));
 
         return string.concat(result, "]");
     }
@@ -88,10 +88,6 @@ library Traits {
 
     function getMoteTrait(uint256 _moteCount) internal pure returns (string memory) {
         return Util.uint256ToAscii(_moteCount);
-    }
-
-    function appendTrait(string memory _result, string memory _trait) internal pure returns (string memory) {
-        return string.concat(_result, ",", _trait);
     }
 
     function trait(string memory _traitType, string memory _value) internal pure returns (string memory) {
