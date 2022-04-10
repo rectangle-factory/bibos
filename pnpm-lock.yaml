@@ -747,7 +747,10 @@ packages:
     dev: true
 
   /fast-xml-parser/4.0.7:
-    resolution: {integrity: sha512-dMtibyus3kC7nbxj1CpVtysLzO13UOAZEFAb5vpQg3T4O6qvetmSePpXKFx5KPNCHKoGwjtgjfF5DOyn7s1ylQ==}
+    resolution:
+      {
+        integrity: sha512-dMtibyus3kC7nbxj1CpVtysLzO13UOAZEFAb5vpQg3T4O6qvetmSePpXKFx5KPNCHKoGwjtgjfF5DOyn7s1ylQ==,
+      }
     hasBin: true
     dependencies:
       strnum: 1.0.5
@@ -1116,16 +1119,11 @@ packages:
     dev: true
 
   /lru-cache/7.8.0:
-<<<<<<< HEAD
-    resolution: {integrity: sha512-AmXqneQZL3KZMIgBpaPTeI6pfwh+xQ2vutMsyqOu1TBdEXFZgpG/80wuJ531w2ZN7TI0/oc8CPxzh/DKQudZqg==}
-    engines: {node: '>=12'}
-=======
     resolution:
       {
         integrity: sha512-AmXqneQZL3KZMIgBpaPTeI6pfwh+xQ2vutMsyqOu1TBdEXFZgpG/80wuJ531w2ZN7TI0/oc8CPxzh/DKQudZqg==,
       }
     engines: { node: ">=12" }
->>>>>>> main
     dev: true
 
   /merge-stream/2.0.0:
@@ -1774,7 +1772,10 @@ packages:
     dev: true
 
   /strnum/1.0.5:
-    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
+    resolution:
+      {
+        integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==,
+      }
     dev: true
 
   /supports-color/5.5.0:
