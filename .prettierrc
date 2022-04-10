@@ -10,5 +10,5 @@
       }
     }
   ],
-  "plugins": ["./node_modules/prettier-plugin-solidity"]
+  "plugins": ["prettier-plugin-solidity"]
 }

@@ -7,7 +7,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,js,css,md,sol}": "prettier --write --plugin-search-dir=.",
+    "*.{ts,js,css,md,sol}": "prettier --write",
     "*.sol": "solhint",
     "*.{js,css,md}": "prettier --write"
   },
