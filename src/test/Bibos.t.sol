@@ -21,6 +21,8 @@ contract BibosTest is DSTest {
 
     function testGetTokenURI() public {
         bibos.mint();
-        bibos.tokenURI(0);
+        string memory tokenURI = bibos.tokenURI(0);
+
+        assertGt(bytes(tokenURI).length, 0);
     }
 }
