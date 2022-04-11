@@ -12,6 +12,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "devDependencies": {
+    "fast-xml-parser": "^4.0.7",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.2",
