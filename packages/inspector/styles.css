@@ -62,15 +62,15 @@ div.panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
-  column-gap: 2rem;
+  column-gap: 1rem;
 
   padding: 1rem;
   align-self: stretch;
 }
 
 div.svg-holder {
-  width: min(400px, 96vw);
-  height: min(400px, 96vw);
+  width: min(500px, 96vw);
+  height: min(500px, 96vw);
   box-shadow: 0px 0px 4px #333333;
   border-radius: 5px;
   background-color: #000000;
