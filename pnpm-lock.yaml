@@ -24,7 +24,7 @@ importers:
       solhint: 3.3.7
       solhint-plugin-prettier: 0.0.5_81672bd23abdbeeadd07e6ce4f479f75
 
-  packages/inspection:
+  packages/inspector:
     specifiers:
       '@types/node': ^17.0.23
       '@types/react': ^18.0.3
