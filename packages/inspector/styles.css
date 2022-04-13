@@ -50,22 +50,22 @@ span.copyright {
 }
 
 div.panel {
-  /* width: min(400px, 96vw); */
-  border-style: solid;
   background-color: #001200;
-  border-color: #000000;
   color: #108b10;
-  /* grid-row: 3; */
-  column-gap: 2rem;
+  box-shadow: 0px 0px 4px #333333;
+  height: 4rem;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 5px;
+  border-width: 7px;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
-  /* flex-direction: column; */
-  border-radius: 5px;
-  border-width: 7px;
+  column-gap: 2rem;
+
   padding: 1rem;
   align-self: stretch;
-  box-shadow: 0px 0px 4px #333333;
 }
 
 div.svg-holder {
@@ -81,12 +81,6 @@ img {
   padding: 0.5rem 0.5rem;
   background-color: #000000;
 }
-
-/* img {
-  height: 500px;
-  width: 500px;
-
-} */
 
 button {
   border-radius: 5px;
@@ -121,7 +115,6 @@ section.content {
   align-items: center;
   justify-items: center;
   border-radius: 5px;
-  /* background-color: #000000; */
 }
 
 span.dots {

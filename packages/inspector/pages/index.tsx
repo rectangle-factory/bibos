@@ -16,9 +16,12 @@ type trait = {
 };
 
 const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
+  const Launching = () => <>Bibos</>;
+  const BibosLabel = (tokenId) => `Bibos #${tokenId}`;
+
   return (
     <div className="panel">
-      <span className="bibosNumber">Bibos #{tokenId}</span>
+      <span className="bibosNumber">{tokenId == -1 ? Launching() : BibosLabel(tokenId)}</span>
       <span />
 
       {attributes.map(({ trait_type, value }) => (
@@ -32,7 +35,7 @@ const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: tra
 const Main = () => {
   const [tokenURI, setTokenURI] = useState("");
   const [metadata, setMetadata] = useState({ image: "", attributes: [] });
-  const [tokenId, setTokenId] = useState(0);
+  const [tokenId, setTokenId] = useState(-1);
   const [status, setStatus] = useState(Status.UNFETCHED);
 
   const handleFetchTokenURI = async () => {
@@ -42,10 +45,10 @@ const Main = () => {
     const text = await response.text();
 
     setTokenURI(text);
-    setStatus(Status.FETCHED);
   };
 
   const handleComputeTokenId = () => {
+    if (status == Status.UNFETCHED) return setTokenId(-1);
     setTokenId(Math.floor(Math.random() * 999));
   };
 
@@ -60,6 +63,7 @@ const Main = () => {
     const metadata = JSON.parse(decodeBase64(tokenURI));
     setMetadata(metadata);
     handleComputeTokenId();
+    setStatus(Status.FETCHED);
   }, [tokenURI]);
 
   return (
