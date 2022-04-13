@@ -12,7 +12,7 @@ enum Status {
 
 const Main = () => {
   const [tokenURI, setTokenURI] = useState("");
-  const [base64SVG, setBase64SVG] = useState("");
+  const [base64SVG, setBase64SVG] = useState("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
   const [status, setStatus] = useState(Status.UNFETCHED);
 
   const handleFetchTokenURI = async (e) => {
@@ -33,7 +33,9 @@ const Main = () => {
   return (
     <>
       <section className="content">
-        <img src={base64SVG} />
+        <div className="svg-holder">
+          <img src={base64SVG} />
+          </div>
         <button disabled={status == Status.FETCHING ? true : false} onClick={handleFetchTokenURI}>
           {status == Status.FETCHING ? <span className="rendering">rendering<Dots/></span> : "render"}
         </button>
