@@ -16,7 +16,7 @@ span {
   text-align: center;
 }
 
-span.copywrite {
+span.copyright {
   display: inline-block;
   text-align: center;
   grid-row: 3;

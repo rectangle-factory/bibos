@@ -36,7 +36,7 @@ const Main = () => {
           {status == Status.FETCHING ? "rendering..." : "render"}
         </button>
       </section>
-      <span className="copywrite">© BibosCorp Research Group, 2022</span>
+      <span className="copyright">© BibosCorp Research Group, 2022</span>
     </>
   );
 };
