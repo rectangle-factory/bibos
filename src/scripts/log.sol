@@ -15,6 +15,6 @@ contract log {
 
     function run(uint8 _x) external view returns (string memory) {
         console.log(_x);
-        return "please";
+        return "test";
     }
 }
