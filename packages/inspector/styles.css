@@ -16,6 +16,10 @@ span {
   text-align: center;
 }
 
+span.rendering {
+  margin-left: 2rem;
+}
+
 span.copyright {
   display: inline-block;
   text-align: center;
@@ -33,29 +37,25 @@ img {
 
 button {
   border-radius: 5px;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem;
   background-color: #9b9b9b;
   box-shadow: 0 0;
   display: inline-block;
   border: none;
   margin: 0;
-  width: 10rem;
+  width: 12rem;
   font-family: monospace;
 }
 
-button.pending:hover {
+button:disabled {
   background-color: #9b9b9b;
 }
 
-button.pending:active {
-  background-color: #9b9b9b;
-}
-
-button:hover {
+button:hover:enabled {
   background-color: #8b8b8b;
 }
 
-button:active {
+button:active:enabled {
   background-color: #7b7b7b;
 }
 
@@ -80,4 +80,9 @@ section.content {
   row-gap: 1rem;
   flex-direction: column;
   align-items: center;
+}
+
+span.dots {
+  min-width: 2rem;
+  text-align: left;
 }

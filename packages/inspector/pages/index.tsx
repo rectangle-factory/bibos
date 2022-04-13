@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
 
+import {Dots} from '../components/Dots';
+
 enum Status {
   UNFETCHED,
   FETCHING,
@@ -33,7 +35,7 @@ const Main = () => {
       <section className="content">
         <img src={base64SVG} />
         <button disabled={status == Status.FETCHING ? true : false} onClick={handleFetchTokenURI}>
-          {status == Status.FETCHING ? "rendering..." : "render"}
+          {status == Status.FETCHING ? <span className="rendering">rendering<Dots/></span> : "render"}
         </button>
       </section>
       <span className="copyright">© BibosCorp Research Group, 2022</span>
