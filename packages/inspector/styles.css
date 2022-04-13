@@ -26,9 +26,10 @@ body {
   background-color: #555555;
 }
 
-span {
-  display: inline-block;
-  /* text-align: center; */
+div.button-panel {
+  display: flex;
+  gap: 1rem;
+  grid-row: 3;
 }
 
 span.rendering {
@@ -53,12 +54,30 @@ div.panel {
   background-color: #001200;
   color: #108b10;
   box-shadow: 0px 0px 4px #333333;
-  height: 4rem;
+
   border-style: solid;
   border-color: #000000;
   border-radius: 5px;
   border-width: 7px;
+}
 
+div.svg-panel {
+  width: min(800px, 96vw);
+  height: 60vh;
+  overflow: scroll;
+  background-color: #111111;
+  scrollbar-color: dark;
+  /* overflow-x: hidden; */
+}
+
+pre {
+  overflow-x: unset;
+  width: 100%;
+}
+
+div.rarity-panel {
+  /* width: min(500px, 96vw); */
+  min-height: 4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
@@ -118,6 +137,7 @@ section.content {
 }
 
 span.dots {
+  display: inline-block;
   min-width: 2rem;
   text-align: left;
 }
