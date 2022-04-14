@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm exec nodemon express.js"
+    "dev": "nodemon express.js"
   },
   "author": "BibosResearchGroup",
   "devDependencies": {
