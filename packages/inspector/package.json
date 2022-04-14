@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm exec next"
+    "dev": "next dev"
   },
   "author": "BibosResearchGroup",
   "dependencies": {
@@ -12,7 +12,6 @@
     "@types/react": "^18.0.3",
     "next": "^12.1.5",
     "react": "^18.0.0",
-    
     "react-dom": "^18.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "ts-node": "^10.7.0",
