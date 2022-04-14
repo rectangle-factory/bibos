@@ -63,7 +63,7 @@ div.panel {
 
 div.svg-panel {
   width: min(800px, 96vw);
-  height: 60vh;
+  height: 70vh;
   overflow: scroll;
   background-color: #111111;
   scrollbar-color: dark;
