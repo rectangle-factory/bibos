@@ -1,9 +1,11 @@
 html {
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
 main {
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -14,8 +16,6 @@ main {
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
-  height: 100%;
-  width: 100%;
 }
 
 body {
@@ -26,10 +26,63 @@ body {
   background-color: #555555;
 }
 
+section.content {
+  grid-row: 2;
+  display: flex;
+  row-gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  border-radius: 5px;
+}
+
 div.button-panel {
   display: flex;
   gap: 1rem;
   grid-row: 4;
+}
+
+div.panel {
+  background-color: #001200;
+  color: #108b10;
+  box-shadow: 0px 0px 4px #333333;
+
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 5px;
+  border-width: 7px;
+}
+
+div.image-panel {
+  width: min(500px, 96vw);
+  height: min(500px, 96vw);
+  box-shadow: 0px 0px 4px #333333;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+div.svg-panel {
+  width: min(800px, 96vw);
+  height: 70vh;
+  overflow: scroll;
+  background-color: #111111;
+}
+
+div.rarity-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content min-content min-content;
+  column-gap: 1rem;
+
+  min-height: 4rem;
+  padding: 1rem;
+  align-self: stretch;
+}
+
+/* for raw svg element */
+pre {
+  overflow-x: unset;
+  width: 100%;
 }
 
 span.rendering {
@@ -50,47 +103,10 @@ span.copyright {
   padding-bottom: 0.5rem;
 }
 
-div.panel {
-  background-color: #001200;
-  color: #108b10;
-  box-shadow: 0px 0px 4px #333333;
-
-  border-style: solid;
-  border-color: #000000;
-  border-radius: 5px;
-  border-width: 7px;
-}
-
-div.svg-holder {
-  width: min(500px, 96vw);
-  height: min(500px, 96vw);
-  box-shadow: 0px 0px 4px #333333;
-  border-radius: 5px;
-  background-color: #000000;
-}
-
-div.svg-panel {
-  width: min(800px, 96vw);
-  height: 70vh;
-  overflow: scroll;
-  background-color: #111111;
-  scrollbar-color: dark;
-}
-
-pre {
-  overflow-x: unset;
-  width: 100%;
-}
-
-div.rarity-panel {
-  min-height: 4rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content min-content min-content;
-  column-gap: 1rem;
-
-  padding: 1rem;
-  align-self: stretch;
+span.dots {
+  display: inline-block;
+  min-width: 2rem;
+  text-align: left;
 }
 
 img {
@@ -133,20 +149,4 @@ button:hover:enabled {
 
 button:active:enabled {
   background-color: #7b7b7b;
-}
-
-section.content {
-  grid-row: 2;
-  display: flex;
-  row-gap: 1rem;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  border-radius: 5px;
-}
-
-span.dots {
-  display: inline-block;
-  min-width: 2rem;
-  text-align: left;
 }

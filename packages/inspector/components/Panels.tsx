@@ -22,7 +22,7 @@ export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attribut
 };
 
 export const ImagePanel = ({ src }: { src: string }) => (
-  <div className="svg-holder">
+  <div className="image-panel">
     <img src={src} />
   </div>
 );
