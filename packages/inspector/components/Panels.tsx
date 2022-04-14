@@ -7,7 +7,7 @@ type trait = {
   value: string;
 };
 
-export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
+export const TraitsPanel = ({tokenId, attributes}: {tokenId: number; attributes: trait[]}) => {
   const Launching = () => <>Bibos</>;
   const BibosLabel = (tokenId) => `Bibos #${tokenId}`;
 
@@ -16,7 +16,7 @@ export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attribut
       <span className="bibosNumber">{tokenId == -1 ? Launching() : BibosLabel(tokenId)}</span>
       <span />
 
-      {attributes.map(({ trait_type, value }) => (
+      {attributes.map(({trait_type, value}) => (
         <span key={trait_type}>
           {trait_type}: {value}
         </span>
@@ -25,15 +25,15 @@ export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attribut
   );
 };
 
-export const SVGPanel = ({ svg }: { svg: string }) => {
+export const SVGPanel = ({svg}: {svg: string}) => {
   return (
     <div className="panel svg-panel">
       <SyntaxHighlighter
         style={syntaxStyle}
-        customStyle={{ margin: "0", overflowX: "hidden", width: "max-content" }}
+        customStyle={{margin: "0", overflowX: "hidden", width: "max-content"}}
         language="xml"
       >
-        {formatSVG(svg)}
+        {svg.length > 0 && formatSVG(svg)}
       </SyntaxHighlighter>
     </div>
   );

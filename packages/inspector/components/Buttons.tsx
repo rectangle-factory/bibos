@@ -1,14 +1,9 @@
 import { Dots } from "./Dots";
-import { MouseEventHandler } from "react";
+import { IndexView } from "../types";
+import { IoCode, IoEye } from "react-icons/io5";
 
-export const RenderButton = ({
-  fetching,
-  handleClick,
-}: {
-  fetching: boolean;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
-}) => (
-  <button disabled={fetching} onClick={handleClick}>
+export const RenderButton = ({ fetching, handleClick }) => (
+  <button className="render-button" disabled={fetching} onClick={handleClick}>
     {fetching ? (
       <span className="rendering">
         rendering
@@ -17,5 +12,11 @@ export const RenderButton = ({
     ) : (
       "render"
     )}
+  </button>
+);
+
+export const ViewButton = ({ view, handleClick }) => (
+  <button className="view-button" onClick={handleClick}>
+    {view == IndexView.IMAGE ? <IoCode /> : <IoEye />}
   </button>
 );

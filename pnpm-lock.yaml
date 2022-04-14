@@ -29,6 +29,7 @@ importers:
       next: ^12.1.5
       react: ^18.0.0
       react-dom: ^18.0.0
+      react-icons: ^4.3.1
       react-syntax-highlighter: ^15.5.0
       ts-node: ^10.7.0
       typescript: ^4.6.3
@@ -39,6 +40,7 @@ importers:
       next: 12.1.5_react-dom@18.0.0+react@18.0.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
+      react-icons: 4.3.1_react@18.0.0
       react-syntax-highlighter: 15.5.0_react@18.0.0
       ts-node: 10.7.0_ee885bc7281b682b6adbed6ae09ee090
       typescript: 4.6.3
@@ -2490,6 +2492,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.0.0
       scheduler: 0.21.0
+    dev: false
+
+  /react-icons/4.3.1_react@18.0.0:
+    resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.0.0
     dev: false
 
   /react-syntax-highlighter/15.5.0_react@18.0.0:

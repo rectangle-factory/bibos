@@ -1,23 +1,20 @@
 import { useState } from "react";
 
 import { SVGPanel, TraitsPanel } from "../components/Panels";
-import { RenderButton } from "../components/Buttons";
-import { useBibos, Status } from "../hooks/useBibos";
+import { RenderButton, ViewButton } from "../components/Buttons";
+import { BibosStatus, IndexView } from "../types";
+import { useBibos } from "../hooks/useBibos";
 
-enum View {
-  IMAGE,
-  SVG,
-}
-
-const BibosInspector = () => {
-  const [view, setView] = useState(View.IMAGE);
+const BibosInspectorIndex = () => {
+  const [view, setView] = useState(IndexView.IMAGE);
   const { status, metadata, tokenId, rawSvg, handleFetchBibo } = useBibos();
 
-  const handleClickView = () => setView((view) => (view == View.IMAGE ? View.SVG : View.IMAGE));
+  const handleToggleView = () =>
+    setView((view) => (view == IndexView.IMAGE ? IndexView.SVG : IndexView.IMAGE));
 
   return (
     <>
-      {view == View.IMAGE ? (
+      {view == IndexView.IMAGE ? (
         <section className="content">
           <div className="svg-holder">
             <img src={metadata.image} />
@@ -30,12 +27,12 @@ const BibosInspector = () => {
         </section>
       )}
       <div className="button-panel">
-        <RenderButton fetching={status == Status.FETCHING} handleClick={handleFetchBibo} />
-        <button onClick={handleClickView}>{view == View.IMAGE ? "SVG" : "image"}</button>
+        <RenderButton fetching={status == BibosStatus.FETCHING} handleClick={handleFetchBibo} />
+        <ViewButton view={view} handleClick={handleToggleView} />
       </div>
       <span className="copyright">© BibosCorp Research Group, 2022</span>
     </>
   );
 };
 
-export default BibosInspector;
+export default BibosInspectorIndex;

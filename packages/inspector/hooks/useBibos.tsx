@@ -1,29 +1,23 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
-
-export enum Status {
-  UNFETCHED,
-  FETCHING,
-  FETCHED,
-  ERROR,
-}
+import { BibosStatus } from "../types";
 
 export const useBibos = () => {
-  const [status, setStatus] = useState(Status.UNFETCHED);
+  const [status, setStatus] = useState(BibosStatus.UNFETCHED);
   const [metadata, setMetadata] = useState({ image: "", attributes: [] });
   const [tokenId, setTokenId] = useState(-1);
   const [rawSvg, setRawSvg] = useState("");
 
   const handleFetchBibo = async () => {
-    if (status == Status.FETCHING) return;
-    setStatus(Status.FETCHING);
+    if (status == BibosStatus.FETCHING) return;
+    setStatus(BibosStatus.FETCHING);
     const response = await fetch("http://localhost:3001");
     const text = await response.text();
     const metadata = JSON.parse(decodeBase64(text));
     setMetadata(metadata);
     setTokenId(Math.floor(Math.random() * 999));
     setRawSvg(decodeBase64(metadata.image));
-    setStatus(Status.FETCHED);
+    setStatus(BibosStatus.FETCHED);
   };
 
   useEffect(() => {

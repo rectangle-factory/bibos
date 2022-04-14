@@ -10,7 +10,7 @@ main {
   left: 0;
   right: 0;
   display: grid;
-  grid-template-rows: 1fr 2fr 2fr min-content;
+  grid-template-rows: 2fr 5fr 1fr 10vh min-content;
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
@@ -29,7 +29,7 @@ body {
 div.button-panel {
   display: flex;
   gap: 1rem;
-  grid-row: 3;
+  grid-row: 4;
 }
 
 span.rendering {
@@ -45,7 +45,7 @@ span.bibosNumber {
 span.copyright {
   display: inline-block;
   text-align: center;
-  grid-row: 4;
+  grid-row: 5;
   color: #ababab;
   padding-bottom: 0.5rem;
 }
@@ -109,9 +109,20 @@ button {
   display: inline-block;
   border: none;
   margin: 0;
-  width: 12rem;
   font-family: monospace;
   grid-row: 3;
+}
+
+button.render-button {
+  width: 12rem;
+}
+
+button.view-button {
+  font-size: 18px;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:disabled {
