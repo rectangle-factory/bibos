@@ -1,5 +1,5 @@
-import { Dots } from "./Dots";
 import { IndexView } from "../types";
+import { Dots } from "./Dots";
 import { IoCode, IoEye } from "react-icons/io5";
 
 export const RenderButton = ({ fetching, handleClick }) => (

@@ -16,32 +16,32 @@ library Traits {
         // refractivity
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
         string memory refractivityTrait = getRefractivityTrait(refractivity);
-        result = string.concat(result, trait("refractivity", refractivityTrait));
+        result = string.concat(result, trait("Refractivity", refractivityTrait));
 
         // glint
         Glints.GlintType glintType = Glints.getGlintType(_seed);
         string memory glintTrait = getGlintTrait(glintType);
-        result = string.concat(result, ",", trait("glint", glintTrait));
+        result = string.concat(result, ",", trait("Glint", glintTrait));
 
         // eyes
         Eyes.EyeType eyeType = Eyes.getEyeType(_seed);
         string memory eyeTrait = getEyeTrait(eyeType);
-        result = string.concat(result, ",", trait("eyes", eyeTrait));
+        result = string.concat(result, ",", trait("Eyes", eyeTrait));
 
         // mouth
         Mouth.MouthType mouthType = Mouth.getMouthType(_seed);
         string memory mouthTrait = getMouthTrait(mouthType);
-        result = string.concat(result, ",", trait("mouth", mouthTrait));
+        result = string.concat(result, ",", trait("Mouth", mouthTrait));
 
         // cheeks
         Cheeks.CheekType cheekType = Cheeks.getCheekType(_seed);
         string memory cheekTrait = getCheekTrait(cheekType);
-        result = string.concat(result, ",", trait("cheeks", cheekTrait));
+        result = string.concat(result, ",", trait("Cheeks", cheekTrait));
 
         // mote
         uint256 moteCount = Motes.getMoteCount(_seed);
         string memory moteTrait = getMoteTrait(moteCount);
-        result = string.concat(result, ",", trait("motes", moteTrait));
+        result = string.concat(result, ",", trait("Motes", moteTrait));
 
         return string.concat(result, "]");
     }
@@ -54,7 +54,7 @@ library Traits {
         if (_glintType == Glints.GlintType.FLOATING) return "Floating";
         if (_glintType == Glints.GlintType.RISING) return "Rising";
         if (_glintType == Glints.GlintType.FALLING) return "Falling";
-        return "none";
+        return "None";
     }
 
     function getEyeTrait(Eyes.EyeType _eyeType) internal pure returns (string memory) {

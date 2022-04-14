@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { SVGPanel, TraitsPanel } from "../components/Panels";
-import { RenderButton, ViewButton } from "../components/Buttons";
 import { BibosStatus, IndexView } from "../types";
+import { SVGPanel, TraitsPanel, ImagePanel } from "../components/Panels";
+import { RenderButton, ViewButton } from "../components/Buttons";
 import { useBibos } from "../hooks/useBibos";
 
 const BibosInspectorIndex = () => {
@@ -16,9 +16,7 @@ const BibosInspectorIndex = () => {
     <>
       {view == IndexView.IMAGE ? (
         <section className="content">
-          <div className="svg-holder">
-            <img src={metadata.image} />
-          </div>
+          <ImagePanel src={metadata.image} />
           <TraitsPanel tokenId={tokenId} attributes={metadata.attributes} />
         </section>
       ) : (

@@ -61,13 +61,20 @@ div.panel {
   border-width: 7px;
 }
 
+div.svg-holder {
+  width: min(500px, 96vw);
+  height: min(500px, 96vw);
+  box-shadow: 0px 0px 4px #333333;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
 div.svg-panel {
   width: min(800px, 96vw);
   height: 70vh;
   overflow: scroll;
   background-color: #111111;
   scrollbar-color: dark;
-  /* overflow-x: hidden; */
 }
 
 pre {
@@ -76,7 +83,6 @@ pre {
 }
 
 div.rarity-panel {
-  /* width: min(500px, 96vw); */
   min-height: 4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -85,14 +91,6 @@ div.rarity-panel {
 
   padding: 1rem;
   align-self: stretch;
-}
-
-div.svg-holder {
-  width: min(500px, 96vw);
-  height: min(500px, 96vw);
-  box-shadow: 0px 0px 4px #333333;
-  border-radius: 5px;
-  background-color: #000000;
 }
 
 img {

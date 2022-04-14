@@ -9,3 +9,8 @@ export enum BibosStatus {
   FETCHED,
   ERROR,
 }
+
+export type trait = {
+  trait_type: string;
+  value: string;
+};

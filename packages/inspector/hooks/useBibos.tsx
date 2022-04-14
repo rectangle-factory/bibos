@@ -1,28 +1,44 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
-import { BibosStatus } from "../types";
+import { BibosStatus, trait } from "../types";
+
+type BibosState = {
+  status: BibosStatus;
+  metadata: {
+    image: string;
+    attributes: trait[];
+  };
+  tokenId: number;
+  rawSvg: string;
+};
+
+const BibosStateDefault: BibosState = {
+  status: BibosStatus.UNFETCHED,
+  metadata: {
+    image: "",
+    attributes: [],
+  },
+  tokenId: 0,
+  rawSvg: "",
+};
 
 export const useBibos = () => {
-  const [status, setStatus] = useState(BibosStatus.UNFETCHED);
-  const [metadata, setMetadata] = useState({ image: "", attributes: [] });
-  const [tokenId, setTokenId] = useState(-1);
-  const [rawSvg, setRawSvg] = useState("");
+  const [state, setState] = useState(BibosStateDefault);
 
   const handleFetchBibo = async () => {
-    if (status == BibosStatus.FETCHING) return;
-    setStatus(BibosStatus.FETCHING);
+    if (state.status == BibosStatus.FETCHING) return;
+    setState((state) => ({ ...state, status: BibosStatus.FETCHING }));
     const response = await fetch("http://localhost:3001");
     const text = await response.text();
     const metadata = JSON.parse(decodeBase64(text));
-    setMetadata(metadata);
-    setTokenId(Math.floor(Math.random() * 999));
-    setRawSvg(decodeBase64(metadata.image));
-    setStatus(BibosStatus.FETCHED);
+    const tokenId = Math.floor(Math.random() * 999);
+    const rawSvg = decodeBase64(metadata.image);
+    setState({ status: BibosStatus.FETCHED, metadata, tokenId, rawSvg });
   };
 
   useEffect(() => {
     handleFetchBibo();
   }, []);
 
-  return { status, metadata, tokenId, rawSvg, handleFetchBibo };
+  return { ...state, handleFetchBibo };
 };
