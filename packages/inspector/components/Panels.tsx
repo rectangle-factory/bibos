@@ -1,7 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import formatSVG from "xml-formatter";
 import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark";
-import { trait } from "../types";
+import { BibosStatus, trait } from "../types";
 
 export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
   const Launching = () => <>Bibos</>;

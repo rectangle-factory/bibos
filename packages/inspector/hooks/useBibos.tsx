@@ -18,7 +18,7 @@ const BibosStateDefault: BibosState = {
     image: "",
     attributes: [],
   },
-  tokenId: 0,
+  tokenId: -1,
   rawSvg: "",
 };
 
