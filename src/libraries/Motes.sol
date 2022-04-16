@@ -19,12 +19,9 @@ library Motes {
 
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
-        string memory mixMode = "lighten";
-        string memory fill = "white";
         uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
         string memory reverseRotate = moteSeed % 2 == 0 ? "from='0 0 0' to='360 0 0'" : "from='360 0 0' to='0 0 0'";
         string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
-        string memory radius = "10";
         uint256 moteCount = getMoteCount(_seed);
         string memory durationLong = Times.long(moteSeed);
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
@@ -35,7 +32,7 @@ library Motes {
         moteSeed /= opacities.length;
 
         for (uint8 index = 0; index < moteCount; index++) {
-            result = addMote(result, radius, mixMode, fill, durationLong, reverseRotate, reverse, opacity);
+            result = addMote(result, durationLong, reverseRotate, reverse, opacity);
         }
 
         return string.concat("<g id='motes'>", result, "</g>");
@@ -43,9 +40,6 @@ library Motes {
 
     function addMote(
         string memory _result,
-        string memory _radius,
-        string memory _mixMode,
-        string memory _fill,
         string memory _durationLong,
         string memory _reverseRotate,
         string memory _reverse,
