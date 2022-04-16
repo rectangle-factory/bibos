@@ -5,6 +5,7 @@ import {Metadata} from "./Metadata.sol";
 import {Util} from "./Util.sol";
 import {Body} from "./Body.sol";
 import {Glints} from "./Glints.sol";
+import {Motes} from "./Motes.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
 
@@ -28,7 +29,7 @@ library Render {
     }
 
     function svg(bytes32 _seed) internal pure returns (string memory) {
-        string memory svgChildren = string.concat(SVG.defs(), Body.render(_seed), Glints.render(_seed));
+        string memory svgChildren = string.concat(SVG.defs(), Body.render(_seed), Glints.render(_seed), Motes.render(_seed));
         return SVG.svg(svgChildren);
     }
 }
