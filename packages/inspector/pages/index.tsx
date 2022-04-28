@@ -7,7 +7,7 @@ import { useBibos } from "../hooks/useBibos";
 
 const BibosInspectorIndex = () => {
   const [view, setView] = useState(IndexView.IMAGE);
-  const { status, metadata, tokenId, rawSvg, handleFetchBibo } = useBibos();
+  const { status, metadata, tokenId, rawSvg, handleFetchBibos } = useBibos();
 
   const handleToggleView = () =>
     setView((view) => (view == IndexView.IMAGE ? IndexView.SVG : IndexView.IMAGE));
@@ -25,7 +25,7 @@ const BibosInspectorIndex = () => {
         </section>
       )}
       <div className="button-panel">
-        <RenderButton fetching={status == BibosStatus.FETCHING} handleClick={handleFetchBibo} />
+        <RenderButton fetching={status == BibosStatus.FETCHING} handleClick={handleFetchBibos} />
         <ViewButton view={view} handleClick={handleToggleView} />
       </div>
       <span className="copyright">© BibosCorp Research Group, 2022</span>

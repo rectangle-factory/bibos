@@ -25,7 +25,7 @@ const BibosStateDefault: BibosState = {
 export const useBibos = () => {
   const [state, setState] = useState(BibosStateDefault);
 
-  const handleFetchBibo = async () => {
+  const handleFetchBibos = async () => {
     if (state.status == BibosStatus.FETCHING) return;
     setState((state) => ({ ...state, status: BibosStatus.FETCHING }));
     const response = await fetch("http://localhost:3001");
@@ -37,8 +37,8 @@ export const useBibos = () => {
   };
 
   useEffect(() => {
-    handleFetchBibo();
+    handleFetchBibos();
   }, []);
 
-  return { ...state, handleFetchBibo };
+  return { ...state, handleFetchBibos };
 };

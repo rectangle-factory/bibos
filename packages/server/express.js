@@ -8,15 +8,15 @@ const port = 3001;
 
 app.get("/", (req, res) => {
   exec("cd ../.. && ./scripts/get_token_uri.sh", (err, stdout, stderr) => {
-    if (err) {
-      console.error(`exec error: ${err}`);
+    if (stderr) {
+      console.error(`exec error: ${stderr}`);
       return;
     }
-    console.log("fetched token URI");
+    console.log("synthesis_engine: synthesized bibos");
     res.send(stdout);
   });
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`bibOS/synthesis_engine.bib listening on port ${port}`);
 });
