@@ -4,7 +4,7 @@ import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-l
 import { trait } from "../types";
 
 export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
-  const Launching = () => <>Bibos</>;
+  const Launching = () => "Bibos";
   const BibosLabel = (tokenId) => `Bibos #${tokenId}`;
 
   return (
