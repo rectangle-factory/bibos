@@ -11,7 +11,9 @@ contract get_token_uri is Test {
         Bibos bibos = new Bibos();
 
         // get current time to use as random seed
-        uint256 unixTime = time.setToUnixTime();
+        uint256 unixTime = time.getUnixTime();
+        // set block.timestamp
+        vm.warp(unixTime);
 
         // compute a random tokenId
         uint256 tokenId = unixTime % 999;

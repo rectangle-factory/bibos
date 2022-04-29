@@ -6,15 +6,12 @@ import {vm} from "./vm.sol";
 library time {
     string constant UNIX_TIME_PATH = "scripts/time.sh";
 
-    function setToUnixTime() internal returns (uint256) {
+    function getUnixTime() internal returns (uint256) {
         string[] memory unixTimeInputs = new string[](1);
 
         unixTimeInputs[0] = UNIX_TIME_PATH;
 
         uint256 unixTime = abi.decode(vm.std_cheats.ffi(unixTimeInputs), (uint256));
-
-        // set block.timestamp
-        vm.std_cheats.warp(unixTime);
 
         return unixTime;
     }
