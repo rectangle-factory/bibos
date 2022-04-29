@@ -5,7 +5,7 @@
     "test": "forge test --gas-report",
     "render": "./scripts/render.sh",
     "prepare": "husky install",
-    "dev": "pnpm --recursive --parallel dev"
+    "dev": "pnpm -C ./packages/inspector dev"
   },
   "lint-staged": {
     "*.{ts,js,css,md,sol}": "prettier --write",
