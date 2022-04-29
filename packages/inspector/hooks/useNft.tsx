@@ -47,12 +47,16 @@ export const useNft = () => {
     const metadata = JSON.parse(decodeBase64(text));
 
     // random token id
-    const tokenId = Math.floor(Math.random() * 999);
+    const tokenId = metadata.tokenId;
 
     // decode svg
     const rawSvg = decodeBase64(metadata.image);
     setState({ status: NFTStatus.FETCHED, metadata, tokenId, rawSvg });
   };
+
+  useEffect(() => {
+    console.log(state.metadata);
+  }, [state.metadata]);
 
   useEffect(() => {
     handleFetchNFT();

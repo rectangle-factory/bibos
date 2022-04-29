@@ -6,28 +6,24 @@ import {io} from "../util/io.sol";
 import {time} from "../util/time.sol";
 
 import {Bibos} from "../Bibos.sol";
-import {console} from "forge-std/console.sol";
+import {Test, console2 as console} from "forge-std/Test.sol";
 
-contract get_token_uri {
+contract get_token_uri is Test {
     string constant TOKEN_URI_OUTPUT_PATH = "./output/token_uri.base64";
 
     function run() external {
         Bibos bibos = new Bibos();
         // get current time to use as random seed
-        time.setToUnixTime();
+        uint256 unixTime = time.setToUnixTime();
+
+        // compute a random tokenId
+        uint256 tokenId = unixTime % 999;
+
+        // set the total supply
+        vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
         // mint
         bibos.mint();
-        io.write(TOKEN_URI_OUTPUT_PATH, bibos.tokenURI(0));
-    }
-
-    function run2() external {
-        Bibos bibos = new Bibos();
-        // get current time to use as random seed
-        time.setToUnixTime();
-
-        // mint
-        bibos.mint();
-        console.log(bibos.tokenURI(0));
+        console.log(bibos.tokenURI(tokenId));
     }
 }
