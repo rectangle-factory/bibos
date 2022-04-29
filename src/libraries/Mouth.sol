@@ -131,33 +131,6 @@ library Mouth {
         return string.concat("<path d='M80 120H123' stroke='", _fill, "' stroke-width='10' stroke-linecap='round'/>");
     }
 
-    function w(string memory _fill) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<path d='M78 115L91 106L101 115L111 106L124 115' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/>"
-            );
-    }
-
-    function m(string memory _fill) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<path d='M121 106L109.696 115L101 109L92.3043 115L81 106' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/>"
-            );
-    }
-
-    function v(string memory _fill) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<path d='M86 106L101 118L116 106' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/>"
-            );
-    }
-
     function smirk(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
