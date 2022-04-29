@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {DSTest} from "ds-test/test.sol";
+import {Test, console2 as console} from "forge-std/Test.sol";
 import {Bibos} from "../Bibos.sol";
 import {vm} from "../util/vm.sol";
 import {time} from "../util/time.sol";
-import {console} from "forge-std/console.sol";
 
-contract SvgValidationTest is DSTest {
+contract SvgValidationTest is Test {
     Bibos bibos;
 
     function setUp() public {
@@ -15,7 +14,9 @@ contract SvgValidationTest is DSTest {
     }
 
     function testValidateSvg() public {
-        time.setToUnixTime();
+        uint256 unixTime = time.getUnixTime();
+        vm.warp(unixTime);
+
         bibos.mint();
         string memory tokenURI = bibos.tokenURI(0);
 
@@ -24,7 +25,7 @@ contract SvgValidationTest is DSTest {
         validateInputs[1] = tokenURI;
 
         // returns 0 if success, positive integer if not
-        uint256 result = abi.decode(vm.std_cheats.ffi(validateInputs), (uint256));
+        uint256 result = abi.decode(vm.ffi(validateInputs), (uint256));
 
         assertEq(result, 0);
     }
