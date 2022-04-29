@@ -25,8 +25,8 @@ const BibosInspectorIndex = () => {
         </section>
       )}
       <div className="button-panel">
-        <RenderButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
         <ViewButton view={view} handleClick={handleToggleView} />
+        <RenderButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
       </div>
       <span className="copyright">© BibosCorp Research Group, 2022</span>
     </>
