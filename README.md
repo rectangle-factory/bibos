@@ -7,7 +7,7 @@
 ### Install
 
 Install [Foundry](https://github.com/gakonst/foundry/).
-Run `foundryup` to update to nightly builds.
+Run `[bash]foundryup` to update to nightly builds.
 
 This project uses [pnpm](https://pnpm.io/) for maximum javascript acceleration.
 
@@ -23,7 +23,7 @@ For submodules:
 forge update
 ```
 
-For the render scripts, you'll need `jq`. Install `brew install jq`.
+For some scripts, you might need `jq` JSON utility. To install run `[bash]brew install jq`.
 
 ---
 
@@ -47,8 +47,6 @@ pnpm render
 
 ## Inspector
 
-To run the inspector app, start the express server in one terminal instance
-`[bash]pnpm run start-server`
-and run the inspector app in another terminal instance
-`[bash]pnpm run start-inspector`.
-Navigate to `localhost:3000` in your browser.
+To run the inspector app,
+`[bash]pnpm run dev`, and
+navigate to `localhost:3000`.
