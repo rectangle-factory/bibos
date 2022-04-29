@@ -17,6 +17,7 @@ contract get_token_uri is Test {
         uint256 tokenId = unixTime % 999;
 
         // set the total supply
+        // (in storage slot 7)
         vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
         // mint
