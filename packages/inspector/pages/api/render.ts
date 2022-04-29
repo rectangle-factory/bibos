@@ -4,11 +4,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 const { exec } = require("child_process");
 
 export default async (request: NextApiRequest, response: NextApiResponse) =>
-  new Promise<void>((resolve, reject) =>
-    exec("cd ../.. && ./scripts/get_token_uri.sh", (err, stdout, stderr) => {
-      console.log("err: ", err);
+  new Promise<void>((resolve, _) =>
+    exec("cd ../.. && ./scripts/get_token_uri.sh", (_: any, stdout: string, stderr: string) => {
       if (stderr) {
-        console.log("err: ", err);
+        // log the error to console
         console.log("stderr: ", stderr);
         response.status(500);
         response.send(stderr);
