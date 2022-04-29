@@ -1,7 +1,8 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import formatSVG from "xml-formatter";
-import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark";
 import { trait } from "../types";
+import { useSvg } from "../hooks/useSvg";
+
+import SyntaxHighlighter from "react-syntax-highlighter";
+import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark";
 
 export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
   const Launching = () => "Bibos";
@@ -28,15 +29,20 @@ export const ImagePanel = ({ src }: { src: string }) => (
 );
 
 export const SVGPanel = ({ svg }: { svg: string }) => {
+  const { formatted, error } = useSvg(svg);
   return (
     <div className="panel svg-panel">
-      <SyntaxHighlighter
-        style={syntaxStyle}
-        customStyle={{ margin: "0", overflowX: "hidden", width: "max-content" }}
-        language="xml"
-      >
-        {svg.length > 0 && formatSVG(svg)}
-      </SyntaxHighlighter>
+      {error.length == 0 ? (
+        <SyntaxHighlighter
+          style={syntaxStyle}
+          customStyle={{ margin: "0", overflowX: "hidden", width: "max-content" }}
+          language="xml"
+        >
+          {formatted}
+        </SyntaxHighlighter>
+      ) : (
+        `Error parsing SVG: ${error}`
+      )}
     </div>
   );
 };
