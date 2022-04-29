@@ -40,9 +40,5 @@ export const useNft = () => {
     handleFetchNFT();
   }, []);
 
-  useEffect(() => {
-    console.log(state.rawSvg);
-  }, [state]);
-
   return { ...state, handleFetchNFT };
 };

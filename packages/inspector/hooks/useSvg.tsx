@@ -14,9 +14,5 @@ export const useSvg = (svg: string) => {
     }
   }, [svg]);
 
-  useEffect(() => {
-    console.log(formatted, error);
-  }, [formatted, error]);
-
   return { formatted, error };
 };
