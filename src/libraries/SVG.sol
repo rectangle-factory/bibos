@@ -23,37 +23,37 @@ library SVG {
     }
 
     function circle(
-        string memory radius,
-        string[2] memory coords,
-        string memory mixMode,
-        string memory fill,
-        string memory opacity
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity
     ) internal pure returns (string memory) {
         return
             string.concat(
                 "<circle r=",
-                Util.quote(radius),
+                Util.quote(_radius),
                 "cx=",
-                Util.quote(coords[0]),
+                Util.quote(_coords[0]),
                 "cy=",
-                Util.quote(coords[1]),
+                Util.quote(_coords[1]),
                 "style=",
-                Util.quote(string.concat("mix-blend-mode:", mixMode)),
+                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
                 'shape-rendering="optimizeSpeed" ',
                 "fill=",
-                Util.quote(fill),
+                Util.quote(_fill),
                 "opacity=",
-                Util.quote(opacity),
+                Util.quote(_opacity),
                 ">"
             );
     }
 
     function rect(
-        string memory width,
-        string memory height,
-        string memory bg
+        string memory _width,
+        string memory _height,
+        string memory _fill
     ) internal pure returns (string memory) {
-        return string.concat("<rect ", "width=", Util.quote(width), "height=", Util.quote(height), "fill=", Util.quote(bg), "/>");
+        return string.concat("<rect ", "width=", Util.quote(_width), "height=", Util.quote(_height), "fill=", Util.quote(_fill), "/>");
     }
 
     function defs() internal pure returns (string memory) {
@@ -74,28 +74,28 @@ library SVG {
     }
 
     function animateMotion(
-        string memory rev,
-        string memory dur,
-        string memory calcMode,
-        string memory mpath
+        string memory _rev,
+        string memory _dur,
+        string memory _calcMode,
+        string memory _mpath
     ) internal pure returns (string memory) {
         return
             string.concat(
                 "<animateMotion ",
-                rev,
+                _rev,
                 " ",
                 "dur=",
-                Util.quote(dur),
+                Util.quote(_dur),
                 'repeatCount="indefinite" ',
                 "calcMode=",
-                Util.quote(calcMode),
+                Util.quote(_calcMode),
                 ">",
-                mpath,
+                _mpath,
                 "</animateMotion>"
             );
     }
 
-    function animate(string memory dur) internal pure returns (string memory) {
-        return string.concat("<animate ", 'attributeName="opacity" ', 'values="0;1;0" ', "dur=", Util.quote(dur), 'repeatCount="indefinite" ', "/>");
+    function animate(string memory _dur) internal pure returns (string memory) {
+        return string.concat("<animate ", 'attributeName="opacity" ', 'values="0;1;0" ', "dur=", Util.quote(_dur), 'repeatCount="indefinite" ', "/>");
     }
 }
