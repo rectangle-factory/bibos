@@ -17,7 +17,7 @@ library Glints {
         FALLING
     }
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) external pure returns (string memory) {
         string memory result = "";
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
         string[5] memory opacities = refractivity == Palette.Refractivity.LIGHT

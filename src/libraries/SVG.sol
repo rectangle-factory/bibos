@@ -4,7 +4,7 @@ pragma solidity >=0.8.0;
 import {Util} from "./Util.sol";
 
 library SVG {
-    function svg(string memory _children) internal pure returns (string memory) {
+    function svg(string memory _children) external pure returns (string memory) {
         return
             string.concat(
                 "<svg ",
@@ -28,7 +28,7 @@ library SVG {
         string memory _mixMode,
         string memory _fill,
         string memory _opacity
-    ) internal pure returns (string memory) {
+    ) external pure returns (string memory) {
         return
             string.concat(
                 "<circle r=",

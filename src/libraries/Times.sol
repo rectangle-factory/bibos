@@ -4,7 +4,7 @@ pragma solidity >=0.8.0;
 library Times {
     uint256 constant length = 64;
 
-    function short(uint256 _index) internal pure returns (string memory) {
+    function short(uint256 _index) external pure returns (string memory) {
         string[64] memory times = [
             "8.93",
             "9.74",

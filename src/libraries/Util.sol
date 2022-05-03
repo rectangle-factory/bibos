@@ -6,7 +6,7 @@ pragma solidity >=0.8.0;
 /// @notice utility functions
 library Util {
     /// @notice wraps a string in quotes and adds a space after
-    function quote(string memory value) internal pure returns (string memory) {
+    function quote(string memory value) external pure returns (string memory) {
         return string.concat('"', value, '" ');
     }
 

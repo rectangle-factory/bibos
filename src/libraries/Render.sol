@@ -11,7 +11,7 @@ import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
 
 library Render {
-    function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
+    function tokenURI(uint256 _tokenId, bytes32 _seed) external pure returns (string memory) {
         return
             string(
                 Metadata.encodeTokenMetadata(

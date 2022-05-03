@@ -20,7 +20,7 @@ library Metadata {
         string memory _description,
         string memory _attributes,
         string memory _svg
-    ) internal pure returns (string memory) {
+    ) external pure returns (string memory) {
         string memory metadata = string.concat(
             "{",
             Util.keyValue("tokenId", Util.uint256ToAscii(_id)),
