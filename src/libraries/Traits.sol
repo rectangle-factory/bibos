@@ -10,7 +10,7 @@ import {Motes} from "./Motes.sol";
 import {Util} from "./Util.sol";
 
 library Traits {
-    function getTraits(bytes32 _seed) external pure returns (string memory) {
+    function getTraits(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
 
         // refractivity
