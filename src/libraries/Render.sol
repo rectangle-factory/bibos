@@ -3,7 +3,9 @@ pragma solidity >=0.8.0;
 
 import {Metadata} from "./Metadata.sol";
 import {Util} from "./Util.sol";
+import {Background} from "./Background.sol";
 import {Body} from "./Body.sol";
+import {Face} from "./Face.sol";
 import {Glints} from "./Glints.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
@@ -28,7 +30,7 @@ library Render {
     }
 
     function svg(bytes32 _seed) internal pure returns (string memory) {
-        string memory svgChildren = string.concat(SVG.defs(), Body.render(_seed), Glints.render(_seed));
+        string memory svgChildren = string.concat(SVG.defs(), Background.render(_seed), Body.render(_seed), Glints.render(_seed), Face.render(_seed));
         return SVG.svg(svgChildren);
     }
 }

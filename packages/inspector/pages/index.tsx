@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { BibosStatus, IndexView } from "../types";
+import { NFTStatus, IndexView } from "../types";
 import { SVGPanel, TraitsPanel, ImagePanel } from "../components/Panels";
 import { RenderButton, ViewButton } from "../components/Buttons";
-import { useBibos } from "../hooks/useBibos";
+import { useNft } from "../hooks/useNft";
 
 const BibosInspectorIndex = () => {
   const [view, setView] = useState(IndexView.IMAGE);
-  const { status, metadata, tokenId, rawSvg, handleFetchBibos } = useBibos();
+  const { status, metadata, tokenId, rawSvg, handleFetchNFT } = useNft();
 
   const handleToggleView = () =>
     setView((view) => (view == IndexView.IMAGE ? IndexView.SVG : IndexView.IMAGE));
@@ -25,8 +25,8 @@ const BibosInspectorIndex = () => {
         </section>
       )}
       <div className="button-panel">
-        <RenderButton fetching={status == BibosStatus.FETCHING} handleClick={handleFetchBibos} />
         <ViewButton view={view} handleClick={handleToggleView} />
+        <RenderButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
       </div>
       <span className="copyright">© BibosCorp Research Group, 2022</span>
     </>
