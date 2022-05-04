@@ -34,7 +34,7 @@ library Body {
             result = addBodyCircle(result, radius, coords, fill, dur, reverse);
         }
 
-        return string.concat('<g filter="url(#bibo-blur)">', result, "</g>");
+        return string.concat('<g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">', result, "</g>");
     }
 
     function addBodyCircle(

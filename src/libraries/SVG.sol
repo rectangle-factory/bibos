@@ -38,7 +38,6 @@ library SVG {
                 Util.quote(_coords[1]),
                 "style=",
                 Util.quote(string.concat("mix-blend-mode:", _mixMode)),
-                'shape-rendering="optimizeSpeed" ',
                 "fill=",
                 Util.quote(_fill),
                 "opacity=",
