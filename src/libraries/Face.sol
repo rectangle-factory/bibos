@@ -16,7 +16,7 @@ library Face {
                 '<animateMotion dur="11s" ',
                 _reverse,
                 ' calcMode="linear" repeatCount="indefinite">',
-                '<mpath href="#jitter-lg" />',
+                '<mpath href="#bibo-jitter-lg" />',
                 "</animateMotion>"
             );
     }

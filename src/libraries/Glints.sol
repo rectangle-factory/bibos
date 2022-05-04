@@ -97,7 +97,7 @@ library Glints {
             string.concat(
                 _result,
                 SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#jitter-sm"/>'),
+                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#bibo-jitter-sm"/>'),
                 "</circle>"
             );
     }

@@ -34,7 +34,7 @@ library Body {
             result = addBodyCircle(result, radius, coords, fill, dur, reverse);
         }
 
-        return string.concat('<g filter="url(#blur)">', result, "</g>");
+        return string.concat('<g filter="url(#bibo-blur)">', result, "</g>");
     }
 
     function addBodyCircle(
@@ -46,7 +46,7 @@ library Body {
         string memory _reverse
     ) internal pure returns (string memory) {
         string memory mixMode = "lighten";
-        string memory mpath = '<mpath xlink:href="#jitter-lg"/>';
+        string memory mpath = '<mpath xlink:href="#bibo-jitter-lg"/>';
         string memory calcMode = "linear";
         string memory opacity = "1";
 
