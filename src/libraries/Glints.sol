@@ -131,7 +131,6 @@ library Glints {
                 "dur=",
                 Util.quote(_dur),
                 'repeatCount="indefinite" ',
-                'calcMode="paced" ',
                 'type="translate" ',
                 'additive="sum" ',
                 'from="0 0" ',

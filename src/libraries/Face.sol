@@ -15,7 +15,7 @@ library Face {
             string.concat(
                 '<animateMotion dur="11s" ',
                 _reverse,
-                ' calcMode="linear" repeatCount="indefinite">',
+                ' repeatCount="indefinite">',
                 '<mpath href="#bibo-jitter-lg" />',
                 "</animateMotion>"
             );
