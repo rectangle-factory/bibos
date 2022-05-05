@@ -34,7 +34,7 @@ library Body {
             result = addBodyCircle(result, radius, coords, fill, dur, reverse);
         }
 
-        return string.concat('<g filter="url(#blur)">', result, "</g>");
+        return string.concat('<g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">', result, "</g>");
     }
 
     function addBodyCircle(
@@ -46,15 +46,14 @@ library Body {
         string memory _reverse
     ) internal pure returns (string memory) {
         string memory mixMode = "lighten";
-        string memory mpath = '<mpath xlink:href="#jitter-lg"/>';
-        string memory calcMode = "linear";
+        string memory mpath = '<mpath xlink:href="#bibo-jitter-lg"/>';
         string memory opacity = "1";
 
         return
             string.concat(
                 _result,
                 SVG.circle(_radius, _coords, mixMode, _fill, opacity),
-                SVG.animateMotion(_reverse, _dur, calcMode, mpath),
+                SVG.animateMotion(_reverse, _dur, "linear", mpath),
                 "</circle>"
             );
     }

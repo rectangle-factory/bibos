@@ -16,7 +16,7 @@ library Render {
             string(
                 Metadata.encodeTokenMetadata(
                     _tokenId,
-                    tokenName("Bibos #", _tokenId), // name
+                    tokenName("Bibo #", _tokenId), // name
                     "Bibos", // description
                     Traits.getTraits(_seed), // attributes
                     svg(_seed) // svg

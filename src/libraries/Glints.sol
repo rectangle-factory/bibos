@@ -97,7 +97,7 @@ library Glints {
             string.concat(
                 _result,
                 SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#jitter-sm"/>'),
+                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#bibo-jitter-sm"/>'),
                 "</circle>"
             );
     }
@@ -127,12 +127,10 @@ library Glints {
         return
             string.concat(
                 "<animateTransform ",
-                'attributeType="XML" ',
                 'attributeName="transform" ',
                 "dur=",
                 Util.quote(_dur),
                 'repeatCount="indefinite" ',
-                'calcMode="paced" ',
                 'type="translate" ',
                 'additive="sum" ',
                 'from="0 0" ',
