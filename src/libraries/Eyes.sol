@@ -21,7 +21,7 @@ library Eyes {
         STAR
     }
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) public pure returns (string memory) {
         string memory fill = Palette.getBackgroundFill(_seed);
         EyeType eyeType = getEyeType(_seed);
 
@@ -37,7 +37,7 @@ library Eyes {
         return star(fill);
     }
 
-    function getEyeType(bytes32 _seed) internal pure returns (EyeType) {
+    function getEyeType(bytes32 _seed) public pure returns (EyeType) {
         uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
 
         if (eyeSeed % 100 < 25) return EyeType.OPEN;

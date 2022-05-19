@@ -21,7 +21,7 @@ library Face {
             );
     }
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) external pure returns (string memory) {
         uint256 faceSeed = uint256(keccak256(abi.encodePacked(_seed, "face")));
 
         string memory reverse = faceSeed == 0 ? "keyPoints='1;0' keyTimes='0;1' " : "";
