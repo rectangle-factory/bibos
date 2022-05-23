@@ -8,6 +8,7 @@ import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 import {Eyes} from "./Eyes.sol";
 import {Mouth} from "./Mouth.sol";
+import {Cheeks} from "./Cheeks.sol";
 
 library Face {
     function animateMotion(string memory _reverse) internal pure returns (string memory) {
@@ -35,6 +36,7 @@ library Face {
             SVG.rect("200", "200", "#00000000"),
             Eyes.render(_seed),
             Mouth.render(_seed),
+            Cheeks.render(_seed),
             animateMotion(reverse),
             "</g>"
         );
