@@ -35,18 +35,16 @@ pnpm test
 
 ---
 
-### Render New Bibo
+### Bibos Local Deployment + Inspector
+
+1. Run `anvil` in one terminal instance.
+2. Run `pnpm run deploy` in another. This deploys all the libraries, and Bibos.
+3. Run `pnpm run dev`, for the frontend. Navigate to `localhost:3000` in your browser.
+
+<!-- ### Render New Bibo
 
 To render a new Bibo with tokenUri, metadata, traits, and svg to `output`.
 
 ```[bash]
 pnpm render
-```
-
----
-
-## Inspector
-
-To run the inspector app,
-`[bash]pnpm run dev`, and
-navigate to `localhost:3000`.
+``` -->
