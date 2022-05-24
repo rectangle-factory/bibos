@@ -4,6 +4,7 @@ import { trait } from "../types";
 
 type NFTState = {
   metadata: {
+    name: string;
     image: string;
     attributes: trait[];
   };
@@ -13,6 +14,7 @@ type NFTState = {
 
 const defaultState = {
   metadata: {
+    name: "",
     image: "",
     attributes: [],
   },
@@ -28,7 +30,6 @@ export const useNFT = (tokenURI: string) => {
     // decode and parse metadata
     const metadata = JSON.parse(decodeBase64(tokenURI));
 
-    // random token id
     const tokenId = metadata.tokenId;
 
     // decode svg

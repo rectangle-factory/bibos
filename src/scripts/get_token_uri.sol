@@ -4,11 +4,14 @@ pragma solidity >=0.8.0;
 import {Test, console2 as console} from "forge-std/Test.sol";
 
 import {Bibos} from "../Bibos.sol";
-import {time} from "../util/time.sol";
+import {deploy} from "src/scripts/deploy.sol";
+import {time} from "src/util/time.sol";
 
 contract get_token_uri is Test {
     function run() external {
-        // Bibos bibos = new Bibos();
+        new deploy();
+        // bibos needs to have all libraries linked
+        Bibos bibos = new Bibos();
 
         // get current time to use as random seed
         uint256 unixTime = time.getUnixTime();
@@ -20,10 +23,10 @@ contract get_token_uri is Test {
 
         // set the total supply
         // (in storage slot 7)
-        // vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
+        vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
-        // // mint
-        // bibos.mint();
-        // console.log(bibos.tokenURI(tokenId));
+        // mint
+        bibos.mint();
+        console.log(bibos.tokenURI(tokenId));
     }
 }

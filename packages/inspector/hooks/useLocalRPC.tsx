@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ethers, Contract } from "ethers";
 
-import { decodeBase64 } from "../util";
 import { NFTStatus, trait } from "../types";
 
 import bibosABI from "../../../out/Bibos.sol/Bibos.json";

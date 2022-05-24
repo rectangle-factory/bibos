@@ -7,7 +7,7 @@ deploy_library() {
     OUTPUT=$(forge create --json --rpc-url $RPC_URL \
         --private-key $PRIVATE_KEY ${@:2} src/libraries/$LIBRARY_NAME.sol:$LIBRARY_NAME)
     ADDRESS=$(echo $OUTPUT | jq -r '.deployedTo')
-    echo $(jq '.'$LIBRARY_NAME'="'$ADDRESS'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
+    # echo $(jq '.'$LIBRARY_NAME'="'$ADDRESS'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
 }
 
 deploy_contract() {
@@ -16,7 +16,8 @@ deploy_contract() {
     OUTPUT=$(forge create --json --rpc-url $RPC_URL \
         --private-key $PRIVATE_KEY ${@:3} $CONTRACT_PATH:$CONTRACT_NAME)
     ADDRESS=$(echo $OUTPUT | jq -r '.deployedTo')
-    echo $(jq '.'$CONTRACT_NAME'="'$ADDRESS'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
+    # echo $OUTPUT | jq '.'
+    # echo $(jq '.'$CONTRACT_NAME'="'$ADDRESS'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
 }
 
 get_libraries() {
@@ -30,22 +31,5 @@ get_libraries() {
 }
 
 
-
-echo "{}" > $DEPLOYMENTS_PATH
-deploy_library SVG
-echo "deployed SVG"
-deploy_library Eyes
-echo "deployed Eyes"
-deploy_library Mouth
-echo "deployed Mouth"
-deploy_library Cheeks
-echo "deployed Cheeks"
-deploy_library Face "$(get_libraries Eyes Mouth Cheeks)"
-echo "deployed Face"
-deploy_library Body
-echo "deployed Body"
-deploy_library Glints
-echo "deployed Glints"
-
+deploy_contract deploy ./src/scripts/deploy.sol $(get_libraries Eyes Mouth Cheeks)
 deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth Cheeks)
-echo "deployed Bibos"

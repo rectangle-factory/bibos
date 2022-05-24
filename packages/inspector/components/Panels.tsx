@@ -4,13 +4,21 @@ import { useSvg } from "../hooks/useSvg";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark";
 
-export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
-  const Launching = () => "Bibos";
-  const BibosLabel = (tokenId) => `Bibos #${tokenId}`;
-
+export const TraitsPanel = ({
+  name,
+  loading,
+  tokenId,
+  attributes,
+}: {
+  name: string;
+  loading: boolean;
+  tokenId: number;
+  attributes: trait[];
+}) => {
+  const Loading = () => "loading";
   return (
     <div className="panel rarity-panel">
-      <span className="bibosNumber">{tokenId == -1 ? Launching() : BibosLabel(tokenId)}</span>
+      <span className="bibosNumber">{name}</span>
       <span />
 
       {attributes.map(({ trait_type, value }) => (

@@ -22,6 +22,7 @@ export const useLocalRender = () => {
     }
 
     const tokenURI = await response.text();
+    console.log("tokenURI", tokenURI);
     setTokenURI(tokenURI);
     setStatus(NFTStatus.FETCHED);
   };
