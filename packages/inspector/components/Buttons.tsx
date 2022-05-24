@@ -15,6 +15,19 @@ export const RenderButton = ({ fetching, handleClick }) => (
   </button>
 );
 
+export const MintButton = ({ fetching, handleClick }) => (
+  <button className="render-button" disabled={fetching} onClick={handleClick}>
+    {fetching ? (
+      <span className="rendering">
+        minting
+        <Dots />
+      </span>
+    ) : (
+      "mint"
+    )}
+  </button>
+);
+
 export const ViewButton = ({ view, handleClick }) => (
   <button className="view-button" onClick={handleClick}>
     {view == IndexView.IMAGE ? <IoCode /> : <IoEye />}

@@ -4,8 +4,8 @@ import { NFTStatus, trait } from "../types";
 // returns the entire tokenURI
 const RENDER_ENDPOINT = "/api/render";
 
-export const useLocalScript = () => {
-  const [tokenURI, setTokenURI] = useState<String>(null);
+export const useLocalRender = () => {
+  const [tokenURI, setTokenURI] = useState<string>(null);
   const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
 
   const handleFetchNFT = async () => {
@@ -30,5 +30,5 @@ export const useLocalScript = () => {
     handleFetchNFT();
   }, []);
 
-  return { tokenURI, handleFetchNFT };
+  return { tokenURI, status, handleFetchNFT };
 };

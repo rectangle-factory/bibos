@@ -8,13 +8,23 @@ type NFTState = {
     attributes: trait[];
   };
   tokenId: number;
-  rawSvg: string;
+  rawSVG: string;
 };
 
-export const useNft = (tokenURI: string) => {
-  const [state, setState] = useState<NFTState>(null);
+const defaultState = {
+  metadata: {
+    image: "",
+    attributes: [],
+  },
+  tokenId: null,
+  rawSVG: null,
+};
+
+export const useNFT = (tokenURI: string) => {
+  const [state, setState] = useState<NFTState>(defaultState);
 
   useEffect(() => {
+    if (tokenURI == null) return;
     // decode and parse metadata
     const metadata = JSON.parse(decodeBase64(tokenURI));
 
@@ -22,8 +32,8 @@ export const useNft = (tokenURI: string) => {
     const tokenId = metadata.tokenId;
 
     // decode svg
-    const rawSvg = decodeBase64(metadata.image);
-    setState({ metadata, tokenId, rawSvg });
+    const rawSVG = decodeBase64(metadata.image);
+    setState({ metadata, tokenId, rawSVG });
   }, [tokenURI]);
 
   return { ...state };

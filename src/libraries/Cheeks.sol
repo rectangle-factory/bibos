@@ -14,7 +14,7 @@ library Cheeks {
         FRECKLES
     }
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) public pure returns (string memory) {
         CheekType cheekType = getCheekType(_seed);
 
         if (cheekType == CheekType.CIRCULAR) return circular();
@@ -23,7 +23,7 @@ library Cheeks {
         return "";
     }
 
-    function getCheekType(bytes32 _seed) internal pure returns (CheekType) {
+    function getCheekType(bytes32 _seed) public pure returns (CheekType) {
         uint256 cheeksSeed = uint256(keccak256(abi.encodePacked(_seed, "cheeks"))) % 100;
 
         if (cheeksSeed % 100 < 70) return CheekType.NONE;

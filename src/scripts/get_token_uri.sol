@@ -8,7 +8,7 @@ import {time} from "../util/time.sol";
 
 contract get_token_uri is Test {
     function run() external {
-        Bibos bibos = new Bibos();
+        // Bibos bibos = new Bibos();
 
         // get current time to use as random seed
         uint256 unixTime = time.getUnixTime();
@@ -20,10 +20,10 @@ contract get_token_uri is Test {
 
         // set the total supply
         // (in storage slot 7)
-        vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
+        // vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
-        // mint
-        bibos.mint();
-        console.log(bibos.tokenURI(tokenId));
+        // // mint
+        // bibos.mint();
+        // console.log(bibos.tokenURI(tokenId));
     }
 }

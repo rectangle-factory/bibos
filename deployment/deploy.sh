@@ -38,12 +38,14 @@ deploy_library Eyes
 echo "deployed Eyes"
 deploy_library Mouth
 echo "deployed Mouth"
-deploy_library Face "$(get_libraries Eyes Mouth)"
+deploy_library Cheeks
+echo "deployed Cheeks"
+deploy_library Face "$(get_libraries Eyes Mouth Cheeks)"
 echo "deployed Face"
 deploy_library Body
 echo "deployed Body"
 deploy_library Glints
 echo "deployed Glints"
 
-deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth)
+deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth Cheeks)
 echo "deployed Bibos"

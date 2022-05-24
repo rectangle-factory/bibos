@@ -5,7 +5,6 @@ import {vm} from "../util/vm.sol";
 import {io} from "../util/io.sol";
 import {time} from "../util/time.sol";
 
-import {Bibos} from "../Bibos.sol";
 import {console} from "forge-std/console.sol";
 
 contract log {

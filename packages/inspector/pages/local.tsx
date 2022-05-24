@@ -2,12 +2,14 @@ import { useState } from "react";
 
 import { NFTStatus, IndexView } from "../types";
 import { SVGPanel, TraitsPanel, ImagePanel } from "../components/Panels";
-import { RenderButton, ViewButton } from "../components/Buttons";
-import { useLocalNft } from "../hooks/useLocalNft";
+import { MintButton, ViewButton } from "../components/Buttons";
+import { useLocalRPC } from "../hooks/useLocalRPC";
+import { useNFT } from "../hooks/useNFT";
 
 const BibosInspectorIndex = () => {
   const [view, setView] = useState(IndexView.IMAGE);
-  const { status, metadata, tokenId, rawSvg, handleFetchNFT } = useLocalNft();
+  const { tokenURI, status, handleFetchNFT } = useLocalRPC();
+  const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
 
   const handleToggleView = () =>
     setView((view) => (view == IndexView.IMAGE ? IndexView.SVG : IndexView.IMAGE));
@@ -21,12 +23,12 @@ const BibosInspectorIndex = () => {
         </section>
       ) : (
         <section className="content">
-          <SVGPanel svg={rawSvg} />
+          <SVGPanel svg={rawSVG} />
         </section>
       )}
       <div className="button-panel">
         <ViewButton view={view} handleClick={handleToggleView} />
-        <RenderButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
+        <MintButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
       </div>
       <span className="copyright">© BibosCorp Research Group, 2022</span>
     </>
