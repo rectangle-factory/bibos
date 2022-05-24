@@ -1,5 +1,0 @@
-DEPLOYMENTS_PATH=./deployments.json
-NAME="apple"
-ADDRESS="123"
-
-echo $(jq '.'$NAME'="'$ADDRESS'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
