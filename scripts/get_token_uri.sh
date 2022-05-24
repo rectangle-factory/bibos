@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Notice: run from root directory.
 
-DEPLOYMENTS_PATH=./scripts/localDeployments.json
+DEPLOYMENTS_PATH=./deployment/deployments.json
 
 get_libraries() {
     LIBRARIES=""

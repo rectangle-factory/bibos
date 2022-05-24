@@ -9,7 +9,9 @@ import {time} from "src/util/time.sol";
 
 contract get_token_uri is Test {
     function run() external {
-        new deploy();
+        vm.startPrank(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
+        address d = address(new deploy());
+
         // bibos needs to have all libraries linked
         Bibos bibos = new Bibos();
 
