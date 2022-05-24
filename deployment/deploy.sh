@@ -31,8 +31,12 @@ get_libraries() {
     echo $LIBRARIES
 }
 
-
-
 export ETH_RPC_URL=$RPC_URL
-deploy_contract deploy ./src/scripts/deploy.sol $(get_libraries Eyes Mouth Cheeks)
-deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth Cheeks)
+NONCE=$(cast nonce $PUBLIC_KEY)
+if test $NONCE -gt 0
+then
+    echo "already deployed"
+else
+    deploy_contract deploy ./src/scripts/deploy.sol $(get_libraries Eyes Mouth Cheeks)
+    deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth Cheeks)
+fi
