@@ -4,16 +4,13 @@ pragma solidity >=0.8.0;
 import {Test, console2 as console} from "forge-std/Test.sol";
 
 import {Bibos} from "../Bibos.sol";
-import {deploy} from "src/scripts/deploy.sol";
+
 import {time} from "src/util/time.sol";
 
-contract get_token_uri is Test {
-    function run() external {
+contract local_render is Test {
+    function run() external returns (string memory tokenURI) {
         vm.startPrank(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
-        // address d = address(new deploy());
 
-        // try without linking now
-        // bibos needs to have all libraries linked
         Bibos bibos = new Bibos();
 
         // get current time to use as random seed
@@ -30,6 +27,6 @@ contract get_token_uri is Test {
 
         // mint
         bibos.mint();
-        console.log(bibos.tokenURI(tokenId));
+        tokenURI = bibos.tokenURI(tokenId);
     }
 }

@@ -55,4 +55,4 @@ BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
 echo "{}" > $DEPLOYMENTS_PATH
 
 # save the bibos address in deployments.json
-write_deployment_address "bibos" $BIBOS_ADDRESS
+write_deployment_address "Bibos" $BIBOS_ADDRESS
