@@ -32,8 +32,7 @@ section.content {
   row-gap: 1rem;
   flex-direction: column;
   align-items: center;
-  justify-items: center;
-  border-radius: 5px;
+  justify-content: stretch;
 }
 
 div.button-panel {
@@ -43,20 +42,16 @@ div.button-panel {
 }
 
 div.panel {
-  background-color: #001200;
-  color: #108b10;
-  box-shadow: 0px 0px 4px #333333;
+  box-shadow: 0px 0px 2px #333333;
   border-style: solid;
   border-color: #000000;
   border-radius: 5px;
-  border-width: 7px;
+  align-self: stretch;
 }
 
 div.image-panel {
   width: min(500px, 96vw);
   height: min(500px, 96vw);
-  box-shadow: 0px 0px 4px #333333;
-  border-radius: 5px;
   background-color: #000000;
 }
 
@@ -67,7 +62,9 @@ div.svg-panel {
   background-color: #111111;
 }
 
-div.rarity-panel {
+div.traits-panel {
+  background-color: #001200;
+  color: #108b10;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: min-content min-content min-content;
@@ -76,6 +73,11 @@ div.rarity-panel {
   min-height: 4.5rem;
   padding: 1rem;
   align-self: stretch;
+}
+
+img {
+  display: block;
+  border-radius: 3px;
 }
 
 span.rendering {
@@ -100,12 +102,6 @@ span.dots {
   display: inline-block;
   min-width: 2rem;
   text-align: left;
-}
-
-img {
-  border-radius: 5px;
-  padding: 0.5rem 0.5rem;
-  background-color: #000000;
 }
 
 /* for raw svg element */

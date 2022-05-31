@@ -3,7 +3,8 @@
   "license": "MIT",
   "scripts": {
     "test": "forge test --gas-report",
-    "render": "./scripts/render.sh",
+    "render": "./scripts/local_render.sh",
+    "deploy-anvil": "./deployment/deploy.sh",
     "prepare": "husky install",
     "dev": "pnpm -C ./packages/inspector dev"
   },

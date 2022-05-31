@@ -1,16 +1,24 @@
 import { trait } from "../types";
-import { useSvg } from "../hooks/useSvg";
+import { useSvg } from "../hooks/useSVG";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import syntaxStyle from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark";
 
-export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attributes: trait[] }) => {
-  const Launching = () => "Bibos";
-  const BibosLabel = (tokenId) => `Bibos #${tokenId}`;
-
+export const TraitsPanel = ({
+  name,
+  loading,
+  tokenId,
+  attributes,
+}: {
+  name: string;
+  loading: boolean;
+  tokenId: number;
+  attributes: trait[];
+}) => {
+  const Loading = () => "loading";
   return (
-    <div className="panel rarity-panel">
-      <span className="bibosNumber">{tokenId == -1 ? Launching() : BibosLabel(tokenId)}</span>
+    <div className="panel traits-panel">
+      <span className="bibosNumber">{name}</span>
       <span />
 
       {attributes.map(({ trait_type, value }) => (
@@ -23,8 +31,10 @@ export const TraitsPanel = ({ tokenId, attributes }: { tokenId: number; attribut
 };
 
 export const ImagePanel = ({ src }: { src: string }) => (
-  <div className="image-panel">
-    <img src={src} />
+  <div className="image-panel panel">
+    <div className="frame">
+      <img src={src} />
+    </div>
   </div>
 );
 

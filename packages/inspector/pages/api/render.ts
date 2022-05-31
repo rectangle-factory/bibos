@@ -3,9 +3,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 const { exec } = require("child_process");
 
+const LOCAL_RENDER_SCRIPT_PATH = "./scripts/local_render.sh";
 export default async (request: NextApiRequest, response: NextApiResponse) =>
   new Promise<void>((resolve, _) =>
-    exec("cd ../.. && ./scripts/get_token_uri.sh", (_: any, stdout: string, stderr: string) => {
+    exec("cd ../.. && " + LOCAL_RENDER_SCRIPT_PATH, (_: any, stdout: string, stderr: string) => {
       if (stderr) {
         // log the error to console
         console.log("stderr: ", stderr);

@@ -17,7 +17,7 @@ library Glints {
         FALLING
     }
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) external pure returns (string memory) {
         string memory result = "";
         Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
         string[5] memory opacities = refractivity == Palette.Refractivity.LIGHT
@@ -53,7 +53,7 @@ library Glints {
         return string.concat("<g>", result, "</g>");
     }
 
-    function getGlintType(bytes32 _seed) internal pure returns (GlintType) {
+    function getGlintType(bytes32 _seed) public pure returns (GlintType) {
         uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
 
         if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
