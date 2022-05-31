@@ -6,7 +6,7 @@ import { MintButton, ViewButton } from "../components/Buttons";
 import { useLocalRPC } from "../hooks/useLocalRPC";
 import { useNFT } from "../hooks/useNFT";
 
-const BibosInspectorIndex = () => {
+const BibosInspectorLocal = () => {
   const [view, setView] = useState(IndexView.IMAGE);
   const { tokenURI, status, handleFetchNFT } = useLocalRPC();
   const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
@@ -40,4 +40,4 @@ const BibosInspectorIndex = () => {
   );
 };
 
-export default BibosInspectorIndex;
+export default BibosInspectorLocal;

@@ -1,7 +1,11 @@
+#!/bin/bash
+
+# anvil rpc
 RPC_URL=http://127.0.0.1:8545
-# // account 9
+# // anvil account 9
 PRIVATE_KEY=0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 PUBLIC_KEY=0xa0ee7a142d267c1f36714e4a8f75612f20a79720
+
 DEPLOYMENTS_PATH=./deployment/deployments.json
 
 deploy_library() {
@@ -21,6 +25,7 @@ deploy_contract() {
     echo "$OUTPUT" | jq '.name="'$CONTRACT_NAME'"'
 }
 
+# external library args for forge create
 get_libraries() {
     LIBRARIES=""
     for NAME in "$@"
@@ -31,12 +36,23 @@ get_libraries() {
     echo $LIBRARIES
 }
 
-export ETH_RPC_URL=$RPC_URL
-NONCE=$(cast nonce $PUBLIC_KEY)
-if test $NONCE -gt 0
-then
-    echo "already deployed"
-else
-    deploy_contract deploy ./src/scripts/deploy.sol $(get_libraries Eyes Mouth Cheeks)
-    deploy_contract Bibos "src/Bibos.sol" $(get_libraries Body Glints Face Eyes Mouth Cheeks)
-fi
+get_forge_script_return_value() {
+    echo "$3" | grep "$2: $1" | cut -d " " -f 3
+}
+
+write_deployment_address() {
+    echo $(jq '.'$1'="'$2'"' $DEPLOYMENTS_PATH) > $DEPLOYMENTS_PATH
+}
+
+
+# deploy bibos and store the script output
+SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos)"
+
+# extract the bibos address return value from SCRIPT_OUTPUT
+BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
+
+# erase deployments.json
+echo "{}" > $DEPLOYMENTS_PATH
+
+# save the bibos address in deployments.json
+write_deployment_address "bibos" $BIBOS_ADDRESS
