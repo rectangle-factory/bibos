@@ -46,6 +46,34 @@ library SVG {
             );
     }
 
+    function circleFilter(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity,
+        string memory _filter
+    ) internal pure returns (string memory) {
+        return
+            string.concat(
+                "<circle r=",
+                Util.quote(_radius),
+                "cx=",
+                Util.quote(_coords[0]),
+                "cy=",
+                Util.quote(_coords[1]),
+                "style=",
+                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
+                "fill=",
+                Util.quote(_fill),
+                "opacity=",
+                Util.quote(_opacity),
+                "filter=",
+                Util.quote(string.concat("url(#", _filter, ")")),
+                ">"
+            );
+    }
+
     function rect(
         string memory _width,
         string memory _height,
