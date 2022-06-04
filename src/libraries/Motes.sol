@@ -15,9 +15,6 @@ library Motes {
         if (moteSeed % 100 < 5) return 2;
         if (moteSeed % 100 < 35) return 1;
         return 0;
-
-        // if need to test easily, use this:
-        // return 2;
     }
 
     function render(bytes32 _seed) internal pure returns (string memory) {
