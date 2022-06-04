@@ -31,6 +31,7 @@ library Motes {
         string memory opacity = opacities[moteSeed % opacities.length];
         moteSeed /= opacities.length;
         string[2][3] memory coords = Points.motes(moteSeed);
+        moteSeed /= Points.length;
 
         for (uint8 index = 0; index < moteCount; index++) {
             string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
