@@ -46,7 +46,7 @@ library SVG {
             );
     }
 
-    function circleFilter(
+    function circle(
         string memory _radius,
         string[2] memory _coords,
         string memory _mixMode,

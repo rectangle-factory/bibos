@@ -60,7 +60,7 @@ library Motes {
                 _coords[1],
                 ') scale(1)">',
                 "<g>",
-                SVG.circleFilter("10", ["0", "0"], "lighten", "white", "1.0", "bibo-blur-sm"),
+                SVG.circle("10", ["0", "0"], "lighten", "white", "1.0", "bibo-blur-sm"),
                 "</circle>",
                 "<path fill-opacity=",
                 Util.quote(_opacity),
