@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+import {Util} from "src/libraries/Util.sol";
+
 library PointsUtil {
     uint256 constant length = 64;
 
@@ -75,8 +77,13 @@ library PointsUtil {
         return bodyPoints[_index % 64];
     }
 
-    function getAllBody() internal pure returns (bytes memory) {
+    function getAllBodyAscii() internal pure returns (bytes memory) {
         // all in format XXX
+        // numbers less than 256
+        // can actually use max but this is easier, cleaner
+
+        // need to convert ascii to integer
+        // need to convert integer to ascii (we have this)
 
         uint256 i;
         bytes memory result;
@@ -84,6 +91,24 @@ library PointsUtil {
             string[2] memory pair = body(i);
             result = abi.encodePacked(result, pair[0]);
             result = abi.encodePacked(result, pair[1]);
+            ++i;
+        }
+        return result;
+    }
+
+    function getAllBodyNumeric() internal pure returns (bytes memory) {
+        // all in format XXX
+        // numbers less than 256
+
+        // need to convert ascii to integer
+        // need to convert integer to ascii (we have this)
+        bytes memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            string[2] memory pair = body(i);
+
+            result = bytes.concat(result, bytes1(uint8(Util.asciiToUint256(pair[0]))));
+            result = bytes.concat(result, bytes1(uint8(Util.asciiToUint256(pair[1]))));
             ++i;
         }
         return result;
@@ -159,7 +184,7 @@ library PointsUtil {
         return glintPoints[_index % 64];
     }
 
-    function getAllGlints() internal pure returns (bytes memory) {
+    function getAllGlintsAscii() internal pure returns (bytes memory) {
         // all in format XXX.XX
 
         uint256 i;
@@ -168,6 +193,24 @@ library PointsUtil {
             string[2] memory pair = glint(i);
             result = abi.encodePacked(result, pair[0]);
             result = abi.encodePacked(result, pair[1]);
+            ++i;
+        }
+        return result;
+    }
+
+    function getAllGlintsNumeric() internal pure returns (bytes memory) {
+        // all in format XXX
+        // numbers less than 256
+
+        // need to convert ascii to integer
+        // need to convert integer to ascii (we have this)
+        bytes memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            string[2] memory pair = glint(i);
+
+            result = bytes.concat(result, bytes2(uint16(Util.asciiToUint256(pair[0]))));
+            result = bytes.concat(result, bytes2(uint16(Util.asciiToUint256(pair[1]))));
             ++i;
         }
         return result;
@@ -201,5 +244,41 @@ library PointsUtil {
             [["210", "150"], ["090", "150"], ["150", "090"]]
         ];
         return motePoints[_index % 24];
+    }
+
+    function getAllMotesAscii() internal pure returns (bytes memory) {
+        // all in format XXX
+
+        uint256 i;
+        bytes memory result;
+        for (; i < 64; ) {
+            string[2][3] memory pair = motes(i);
+            uint256 j;
+            for (; j < 3; ) {
+                result = abi.encodePacked(result, pair[j][0]);
+                result = abi.encodePacked(result, pair[j][1]);
+                ++j;
+            }
+            ++i;
+        }
+        return result;
+    }
+
+    function getAllMotesNumeric() internal pure returns (bytes memory) {
+        // all in format XXX
+
+        uint256 i;
+        bytes memory result;
+        for (; i < 64; ) {
+            string[2][3] memory pair = motes(i);
+            uint256 j;
+            for (; j < 3; ) {
+                result = bytes.concat(result, bytes1(uint8(Util.asciiToUint256(pair[j][0]))));
+                result = bytes.concat(result, bytes1(uint8(Util.asciiToUint256(pair[j][1]))));
+                ++j;
+            }
+            ++i;
+        }
+        return result;
     }
 }

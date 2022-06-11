@@ -6,11 +6,27 @@ import {Script, console2 as console} from "forge-std/Script.sol";
 import {PointsUtil} from "src/libraries/PointsUtil.sol";
 
 contract enocode_times is Script {
-    function runBody() public pure returns (bytes memory) {
-        return PointsUtil.getAllBody();
+    function runBodyAscii() public pure returns (bytes memory) {
+        return PointsUtil.getAllBodyAscii();
     }
 
-    function runGlint() public pure returns (bytes memory) {
-        return PointsUtil.getAllGlints();
+    function runBodyNumeric() public pure returns (bytes memory) {
+        return PointsUtil.getAllBodyNumeric();
+    }
+
+    function runGlintsAscii() public pure returns (bytes memory) {
+        return PointsUtil.getAllGlintsAscii();
+    }
+
+    function runGlintsNumeric() public pure returns (bytes memory) {
+        return PointsUtil.getAllGlintsNumeric();
+    }
+
+    function runMotesAscii() public pure returns (bytes memory) {
+        return PointsUtil.getAllMotesAscii();
+    }
+
+    function runMotesNumeric() public pure returns (bytes memory) {
+        return PointsUtil.getAllMotesNumeric();
     }
 }

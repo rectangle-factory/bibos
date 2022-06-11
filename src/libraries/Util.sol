@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity >=0.8.0;
+import {Test, console2} from "forge-std/test.sol";
 
 /// @title the bibos utility library
 /// @notice utility functions
@@ -18,7 +19,7 @@ library Util {
         return string.concat('"', _key, '":', _value);
     }
 
-    /// @notice converts a uint256 to string
+    /// @notice converts a uint256 to ascii representation, without leading zeroes
     /// @param _value, uint256, the value to convert
     /// @return result the resulting string
     function uint256ToAscii(uint256 _value) internal pure returns (string memory result) {
@@ -56,6 +57,23 @@ library Util {
             result := sub(result, 32)
             // store the length
             mstore(result, digits)
+        }
+    }
+
+    /// @notice will revert in any characters are not in [0-9]
+    function asciiToUint256(string memory _value) internal pure returns (uint256 result) {
+        // 0-9 are 48-57
+
+        bytes memory value = bytes(_value);
+        if (value.length == 0) return 0;
+        uint256 multiplier = 10**(value.length - 1);
+        uint256 i;
+        while (multiplier != 0) {
+            result += uint256((uint8(value[i]) - 48)) * multiplier;
+            unchecked {
+                multiplier /= 10;
+                ++i;
+            }
         }
     }
 }
