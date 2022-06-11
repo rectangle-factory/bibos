@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Test} from "forge-std/test.sol";
+import {Test} from "forge-std/Test.sol";
 import {TimesUtil} from "src/libraries/TimesUtil.sol";
 import {Times} from "src/libraries/Times.sol";
 import {Times2} from "src/libraries/Times2.sol";

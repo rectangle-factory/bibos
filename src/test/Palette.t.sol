@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {DSTest} from "ds-test/test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {Palette} from "../libraries/Palette.sol";
 
-contract PaletteTest is DSTest {
+contract PaletteTest is Test {
     function setUp() public {}
 
     // function testBodyLight() public {

@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {console} from "forge-std/console.sol";
-import {DSTest} from "ds-test/test.sol";
-import {vm} from "../util/vm.sol";
-
+import {Test, console} from "forge-std/Test.sol";
 import {Bibos} from "../Bibos.sol";
 
-contract BibosTest is DSTest {
+contract BibosTest is Test {
     Bibos bibos;
 
     function setUp() public {

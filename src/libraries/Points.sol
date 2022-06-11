@@ -4,7 +4,7 @@ pragma solidity >=0.8.0;
 library Points {
     uint256 constant length = 64;
 
-    function body(uint256 _index) internal pure returns (string[2] memory) {
+    function body(uint256 _index) external pure returns (string[2] memory) {
         string[2][64] memory bodyPoints = [
             ["186", "165"],
             ["170", "119"],
@@ -75,7 +75,7 @@ library Points {
         return bodyPoints[_index % 64];
     }
 
-    function glint(uint256 _index) internal pure returns (string[2] memory) {
+    function glint(uint256 _index) external pure returns (string[2] memory) {
         string[2][64] memory glintPoints = [
             ["141.97", "120.81"],
             ["166.77", "213.19"],
@@ -145,7 +145,7 @@ library Points {
         return glintPoints[_index % 64];
     }
 
-    function motes(uint256 _index) internal pure returns (string[2][3] memory) {
+    function motes(uint256 _index) external pure returns (string[2][3] memory) {
         string[2][3][24] memory motePoints = [
             [["173", "094"], ["107", "193"], ["206", "127"]],
             [["107", "193"], ["150", "210"], ["193", "193"]],

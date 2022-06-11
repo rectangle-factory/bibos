@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Test} from "forge-std/test.sol";
+import {Test} from "forge-std/Test.sol";
 import {PointsUtil} from "src/libraries/PointsUtil.sol";
 import {Points} from "src/libraries/Points.sol";
 import {Points2} from "src/libraries/Points2.sol";
