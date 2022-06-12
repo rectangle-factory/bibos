@@ -184,33 +184,25 @@ library PointsUtil {
         return glintPoints[_index % 64];
     }
 
-    function getAllGlintsAscii() internal pure returns (bytes memory) {
-        // all in format XXX.XX
-
-        uint256 i;
-        bytes memory result;
-        for (; i < 64; ) {
-            string[2] memory pair = glint(i);
-            result = abi.encodePacked(result, pair[0]);
-            result = abi.encodePacked(result, pair[1]);
-            ++i;
-        }
-        return result;
-    }
-
     function getAllGlintsNumeric() internal pure returns (bytes memory) {
-        // all in format XXX
+        // all in format XXX.XX
         // numbers less than 256
 
-        // need to convert ascii to integer
-        // need to convert integer to ascii (we have this)
         bytes memory result;
         uint256 i;
+        bytes1 integralPart;
+        bytes1 fractionalPart;
         for (; i < 64; ) {
             string[2] memory pair = glint(i);
+            uint256 x = Util.asciiToUint256(pair[0]);
+            integralPart = bytes1(uint8(x / 100));
+            fractionalPart = bytes1(uint8(x % 100));
+            result = bytes.concat(result, integralPart, fractionalPart);
 
-            result = bytes.concat(result, bytes2(uint16(Util.asciiToUint256(pair[0]))));
-            result = bytes.concat(result, bytes2(uint16(Util.asciiToUint256(pair[1]))));
+            uint256 y = Util.asciiToUint256(pair[1]);
+            integralPart = bytes1(uint8(y / 100));
+            fractionalPart = bytes1(uint8(y % 100));
+            result = bytes.concat(result, integralPart, fractionalPart);
             ++i;
         }
         return result;

@@ -5,9 +5,9 @@ import {Script, console2 as console} from "forge-std/Script.sol";
 
 import {TimesUtil} from "src/libraries/TimesUtil.sol";
 
-contract enocode_times is Script {
-    function runShort() public pure returns (bytes memory) {
-        return TimesUtil.getAllShort();
+contract encode_times is Script {
+    function runShort() public view returns (bytes memory) {
+        return TimesUtil.compressShort();
     }
 
     function runLong() public pure returns (bytes memory) {

@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
+import {Script, console2 as console} from "forge-std/Script.sol";
+import {Util} from "src/libraries/Util.sol";
 
 library TimesUtil {
     uint256 constant length = 64;
@@ -16,6 +18,7 @@ library TimesUtil {
         return string(result);
     }
 
+    // short: 10 bits
     function short(uint256 _i) internal pure returns (string memory) {
         // all in format X.XX
         string[64] memory times = [
@@ -87,18 +90,53 @@ library TimesUtil {
         return times[_i];
     }
 
-    function getAllShort() internal pure returns (bytes memory) {
-        // all in format X.XX
+    // _i counts from the left
+    function isolateByte(bytes32 _n, uint256 _i) internal view returns (bytes1) {
+        return _n[_i];
+    }
+
+    function isolateByte(uint256 _n, uint256 _i) internal view returns (bytes1) {
+        return isolateByte(bytes32(_n), _i);
+    }
+
+    function compressShort() internal view returns (bytes memory) {
+        // X.XX
 
         uint256 i;
-        bytes memory result;
+        bytes memory result = new bytes(88);
+
+        uint256 s = 11;
+        // we do 11 bits at a time
         for (; i < 64; ) {
-            result = bytes.concat(result, bytes(short(i)));
+            uint256 n = Util.asciiToUint256(short(i));
+            // console.log(n);
+
+            // first bytes to modify in result
+            uint256 j = (i * 11) / 8;
+            uint256 l = (i * 11) % 8;
+            // l + s is how long on the left, then we fill out to be a multiple of 8
+            // b = (r+l+8)/8 is how many bytes we need
+
+            uint256 r = ((8 - ((l + s) % 8)) % 8);
+            uint256 b = (l + s + r) / 8;
+            // console.logBytes32(bytes32(n));
+            // console.logBytes32(bytes32(n << r));
+            n <<= r;
+            n <<= (256 - 8 * b);
+            // console.log(j, l, b, r);
+            // console.logBytes32(bytes32(n));
+
+            uint256 k;
+            while (k < b) {
+                result[j + k] |= isolateByte(n, k);
+                ++k;
+            }
             ++i;
         }
         return result;
     }
 
+    // short: 11 bits
     function long(uint256 _index) internal pure returns (string memory) {
         string[64] memory times = [
             "1120",
