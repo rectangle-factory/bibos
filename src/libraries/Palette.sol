@@ -14,6 +14,17 @@ library Palette {
         return Refractivity.DARK;
     }
 
+    uint256 public constant opacityLength = 5;
+
+    function getOpacity(uint256 _moteSeed, bytes32 _seed) internal pure returns (string memory) {
+        return
+            (
+                getRefractivity(_seed) == Palette.Refractivity.LIGHT
+                    ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
+                    : ["0.6", "0.7", "0.8", "0.9", "1.0"]
+            )[_moteSeed % opacityLength];
+    }
+
     function getBodyFill(bytes32 _seed, uint256 _i) internal pure returns (string memory) {
         uint256 bodyFillValue = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i)));
 

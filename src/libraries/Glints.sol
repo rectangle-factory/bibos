@@ -2,8 +2,7 @@
 pragma solidity >=0.8.0;
 
 import {Palette} from "./Palette.sol";
-import {Times} from "./Times.sol";
-import {Points} from "./Points.sol";
+import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
@@ -19,10 +18,7 @@ library Glints {
 
     function render(bytes32 _seed) external pure returns (string memory) {
         string memory result = "";
-        Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
-        string[5] memory opacities = refractivity == Palette.Refractivity.LIGHT
-            ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
-            : ["0.6", "0.7", "0.8", "0.9", "1.0"];
+
         string memory mixMode = "lighten";
         string memory fill = "white";
 
@@ -32,19 +28,20 @@ library Glints {
         for (uint8 i = 0; i < GLINT_COUNT; i++) {
             uint256 glintSeed = uint256(keccak256(abi.encodePacked(_seed, "glint", i)));
 
-            string memory dur = Times.long(glintSeed);
-            glintSeed = glintSeed / Times.length;
-            string[2] memory coords = Points.glint(glintSeed);
-            glintSeed = glintSeed / Points.length;
+            string memory dur = Data.longTimes(glintSeed);
+            glintSeed = glintSeed / Data.length;
+            string[2] memory coords = Data.glintPoints(glintSeed);
+            glintSeed = glintSeed / Data.length;
             string memory radius = glintSeed % 2 == 0 ? "1" : "2";
             glintSeed = glintSeed / 2;
-            string memory opacity = opacities[glintSeed % opacities.length];
-            glintSeed /= opacities.length;
+            string memory opacity = Palette.getOpacity(glintSeed, _seed);
+            glintSeed /= Palette.opacityLength;
 
             if (glintType == GlintType.FLOATING) {
                 string memory reverse = glintSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
                 result = addFloatingGlint(result, radius, coords, mixMode, fill, opacity, dur, reverse);
-            } else if (glintType == GlintType.RISING) result = addRisingGlint(result, radius, coords, mixMode, fill, opacity, dur);
+            } else if (glintType == GlintType.RISING)
+                result = addRisingGlint(result, radius, coords, mixMode, fill, opacity, dur);
             else if (glintType == GlintType.FALLING) {
                 result = addFallingGlint(result, radius, coords, mixMode, fill, opacity, dur);
             }

@@ -87,7 +87,7 @@ library Traits {
     }
 
     function getMoteTrait(uint256 _moteCount) internal pure returns (string memory) {
-        return Util.uint256ToAscii(_moteCount);
+        return Util.uint256ToString(_moteCount);
     }
 
     function trait(string memory _traitType, string memory _value) internal pure returns (string memory) {

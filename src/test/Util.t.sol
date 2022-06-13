@@ -7,12 +7,12 @@ import {Util} from "src/libraries/Util.sol";
 contract UtilTest is Test {
     function setUp() public {}
 
-    function testAsciiToUint256() public {
-        assertEq(Util.asciiToUint256("1"), 1);
+    function testStringToUint256() public {
+        assertEq(Util.stringToUint256("1"), 1);
     }
 
-    function testUint256ToAscii(uint256 _x) public {
-        string memory str = Util.uint256ToAscii(_x);
-        assertEq(Util.asciiToUint256(str), _x);
+    function testUint256ToString(uint256 _x) public {
+        string memory str = Util.uint256ToString(_x);
+        assertEq(Util.stringToUint256(str), _x);
     }
 }

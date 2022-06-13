@@ -23,7 +23,7 @@ library Metadata {
     ) internal pure returns (string memory) {
         string memory metadata = string.concat(
             "{",
-            Util.keyValue("tokenId", Util.uint256ToAscii(_id)),
+            Util.keyValue("tokenId", Util.uint256ToString(_id)),
             ",",
             Util.keyValue("name", _name),
             ",",

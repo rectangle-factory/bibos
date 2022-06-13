@@ -27,7 +27,7 @@ library Render {
 
     /// @notice constructs the name of the token
     function tokenName(string memory _name, uint256 _tokenId) internal pure returns (string memory) {
-        return string.concat(_name, Util.uint256ToAscii(_tokenId));
+        return string.concat(_name, Util.uint256ToString(_tokenId));
     }
 
     function svg(bytes32 _seed) internal pure returns (string memory) {

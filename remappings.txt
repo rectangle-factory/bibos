@@ -2,3 +2,5 @@ solmate/=lib/solmate/src/
 forge-std/=lib/forge-std/src/
 
 util/=src/util/
+libraries/=src/libraries/
+dev/=src/dev/

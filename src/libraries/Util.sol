@@ -22,7 +22,7 @@ library Util {
     /// @notice converts a uint256 to ascii representation, without leading zeroes
     /// @param _value, uint256, the value to convert
     /// @return result the resulting string
-    function uint256ToAscii(uint256 _value) internal pure returns (string memory result) {
+    function uint256ToString(uint256 _value) internal pure returns (string memory result) {
         if (_value == 0) return "0";
 
         assembly {
@@ -60,8 +60,16 @@ library Util {
         }
     }
 
+    function bytes1ToString(bytes1 _value) internal pure returns (string memory) {
+        return uint256ToString(uint8(_value));
+    }
+
+    function uint8ToString(uint8 _value) internal pure returns (string memory) {
+        return uint256ToString(_value);
+    }
+
     /// @notice will revert in any characters are not in [0-9]
-    function asciiToUint256(string memory _value) internal pure returns (uint256 result) {
+    function stringToUint256(string memory _value) internal pure returns (uint256 result) {
         // 0-9 are 48-57
 
         bytes memory value = bytes(_value);
@@ -75,5 +83,9 @@ library Util {
                 ++i;
             }
         }
+    }
+
+    function stringToBytes1(string memory _value) internal pure returns (bytes1 result) {
+        return bytes1(uint8(stringToUint256(_value)));
     }
 }

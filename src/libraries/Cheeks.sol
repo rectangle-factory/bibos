@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Times} from "./Times.sol";
-import {Points} from "./Points.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
