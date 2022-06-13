@@ -5,24 +5,25 @@ import {Palette} from "./Palette.sol";
 import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
+import {Traits} from "./Traits.sol";
+
+enum GlintType {
+    NONE,
+    FLOATING,
+    RISING,
+    FALLING
+}
 
 library Glints {
     uint256 constant GLINT_COUNT = 16;
 
-    enum GlintType {
-        NONE,
-        FLOATING,
-        RISING,
-        FALLING
-    }
-
-    function render(bytes32 _seed) external pure returns (string memory) {
+    function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
 
         string memory mixMode = "lighten";
         string memory fill = "white";
 
-        GlintType glintType = getGlintType(_seed);
+        GlintType glintType = Traits.getGlintType(_seed);
         if (glintType == GlintType.NONE) return "";
 
         for (uint8 i = 0; i < GLINT_COUNT; i++) {
@@ -48,15 +49,6 @@ library Glints {
         }
 
         return string.concat("<g>", result, "</g>");
-    }
-
-    function getGlintType(bytes32 _seed) public pure returns (GlintType) {
-        uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
-
-        if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
-        if (glintTypeSeed % 100 < 35) return GlintType.RISING;
-        if (glintTypeSeed % 100 < 40) return GlintType.FALLING;
-        return GlintType.NONE;
     }
 
     function addRisingGlint(

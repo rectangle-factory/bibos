@@ -3,29 +3,22 @@ pragma solidity >=0.8.0;
 
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
+import {Traits} from "./Traits.sol";
+
+enum CheekType {
+    NONE,
+    CIRCULAR,
+    FRECKLES
+}
 
 library Cheeks {
-    enum CheekType {
-        NONE,
-        CIRCULAR,
-        FRECKLES
-    }
-
-    function render(bytes32 _seed) public pure returns (string memory) {
+    function render(bytes32 _seed) internal pure returns (string memory) {
         CheekType cheekType = getCheekType(_seed);
 
         if (cheekType == CheekType.CIRCULAR) return circular();
         if (cheekType == CheekType.FRECKLES) return freckles();
 
         return "";
-    }
-
-    function getCheekType(bytes32 _seed) public pure returns (CheekType) {
-        uint256 cheeksSeed = uint256(keccak256(abi.encodePacked(_seed, "cheeks"))) % 100;
-
-        if (cheeksSeed % 100 < 70) return CheekType.NONE;
-        if (cheeksSeed % 100 < 95) return CheekType.CIRCULAR;
-        return CheekType.FRECKLES;
     }
 
     function circular() internal pure returns (string memory) {

@@ -7,7 +7,7 @@ import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Body {
-    function render(bytes32 _seed) external pure returns (string memory) {
+    function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
 
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];

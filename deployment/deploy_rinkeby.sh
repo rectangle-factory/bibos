@@ -44,24 +44,19 @@ write_deployment_address() {
 }
 
 
-# # deploy bibos and store the script output
-# SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos)"
+# deploy bibos and store the script output
+SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos)"
 
-# # extract the bibos address return value from SCRIPT_OUTPUT
-# BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
+# extract the bibos address return value from SCRIPT_OUTPUT
+BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
 
-# # erase deployments.json
-# echo "{}" > $DEPLOYMENTS_PATH
+# erase deployments.json
+echo "{}" > $DEPLOYMENTS_PATH
 
-# # save the bibos address in deployments.json
-# write_deployment_address "Bibos" $BIBOS_ADDRESS
+# save the bibos address in deployments.json
+write_deployment_address "Bibos" $BIBOS_ADDRESS
 
 # forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos
 
 # cast send --private-key $PRIVATE_KEY --rpc-url $RPC_URL 0x0Fa224f8F90be835f4C1Eb4cE2f2035bA31Cc8aC "mint()"
 # forge verify-contract --chain-id 4 --compiler-version "0.8.13+commit.abaa5c0e" "0x0Fa224f8F90be835f4C1Eb4cE2f2035bA31Cc8aC" src/Bibos.sol:Bibos "WGRBABVVTP7CX4R3VAVFDSN7FZY27CQJPI"
-
-# forge verify-check --chain-id 4 "kjz4mnzrkkatttdrqsa3brabb4jwmfbdaxta5mfppvzmhxnk9j" "WGRBABVVTP7CX4R3VAVFDSN7FZY27CQJPI"
-
-# forge verify-contract --chain-id 4 --compiler-version "0.8.13+commit.abaa5c0e" "0x2a6b74cb76a64C055C97bC7285a5E654ec87584C" "src/libraries/Points.sol:Points" "WGRBABVVTP7CX4R3VAVFDSN7FZY27CQJPI"
-forge verify-check --chain-id 4 "beqh2iw9syjkgd6cjabm1ecmyudfzun3nrzhhslndinapdkfqt" "WGRBABVVTP7CX4R3VAVFDSN7FZY27CQJPI"

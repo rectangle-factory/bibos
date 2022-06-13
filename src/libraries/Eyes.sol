@@ -1,27 +1,28 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Util} from "./Util.sol";
-import {SVG} from "./SVG.sol";
+import {Palette} from "libraries/Palette.sol";
+import {Util} from "libraries/Util.sol";
+import {SVG} from "libraries/SVG.sol";
+import {Traits} from "libraries/Traits.sol";
+
+enum EyeType {
+    OPEN,
+    SMILEY,
+    WINK,
+    SLEEPY,
+    CLOVER,
+    DIZZY,
+    HEART,
+    WINCE,
+    CYCLOPS,
+    STAR
+}
 
 library Eyes {
-    enum EyeType {
-        OPEN,
-        SMILEY,
-        WINK,
-        SLEEPY,
-        CLOVER,
-        DIZZY,
-        HEART,
-        WINCE,
-        CYCLOPS,
-        STAR
-    }
-
-    function render(bytes32 _seed) public pure returns (string memory) {
+    function render(bytes32 _seed) internal pure returns (string memory) {
         string memory fill = Palette.getBackgroundFill(_seed);
-        EyeType eyeType = getEyeType(_seed);
+        EyeType eyeType = Traits.getEyeType(_seed);
 
         if (eyeType == EyeType.OPEN) return open(fill);
         if (eyeType == EyeType.SMILEY) return smiley(fill);
@@ -33,21 +34,6 @@ library Eyes {
         if (eyeType == EyeType.WINCE) return wince(fill);
         if (eyeType == EyeType.CYCLOPS) return cyclops(fill);
         return star(fill);
-    }
-
-    function getEyeType(bytes32 _seed) public pure returns (EyeType) {
-        uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
-
-        if (eyeSeed % 100 < 25) return EyeType.OPEN;
-        if (eyeSeed % 100 < 50) return EyeType.SMILEY;
-        if (eyeSeed % 100 < 65) return EyeType.WINK;
-        if (eyeSeed % 100 < 75) return EyeType.SLEEPY;
-        if (eyeSeed % 100 < 83) return EyeType.CLOVER;
-        if (eyeSeed % 100 < 89) return EyeType.DIZZY;
-        if (eyeSeed % 100 < 94) return EyeType.HEART;
-        if (eyeSeed % 100 < 97) return EyeType.WINCE;
-        if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
-        return EyeType.STAR;
     }
 
     function open(string memory _fill) internal pure returns (string memory) {

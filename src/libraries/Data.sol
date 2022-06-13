@@ -23,6 +23,7 @@ library Data {
     /*//////////////////////////////////////////////////////////////
                                  POINTS
     //////////////////////////////////////////////////////////////*/
+
     function bodyPoints(uint256 _i) external pure returns (string[2] memory) {
         uint256 pos = (_i % length) * 2;
         string memory x = Util.bytes1ToString(bodyPointsBytes[pos]);
