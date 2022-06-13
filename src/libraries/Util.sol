@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity >=0.8.0;
-import {Test, console2} from "forge-std/test.sol";
+import {Test, console2} from "forge-std/Test.sol";
 
 /// @title the bibos utility library
 /// @notice utility functions
