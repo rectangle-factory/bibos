@@ -13,7 +13,7 @@ enum CheekType {
 
 library Cheeks {
     function render(bytes32 _seed) internal pure returns (string memory) {
-        CheekType cheekType = getCheekType(_seed);
+        CheekType cheekType = Traits.getCheekType(_seed);
 
         if (cheekType == CheekType.CIRCULAR) return circular();
         if (cheekType == CheekType.FRECKLES) return freckles();

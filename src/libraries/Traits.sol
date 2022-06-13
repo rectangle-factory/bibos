@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Glints, GlintType} from "./Glints.sol";
-import {Eyes, EyeType} from "./Eyes.sol";
-import {Cheeks, CheekType} from "./Cheeks.sol";
-import {Mouth, MouthType} from "./Mouth.sol";
+import {RefractivityType} from "./Palette.sol";
+import {GlintType} from "./Glints.sol";
+import {EyeType} from "./Eyes.sol";
+import {CheekType} from "./Cheeks.sol";
+import {MouthType} from "./Mouth.sol";
 import {Motes} from "./Motes.sol";
 import {Util} from "./Util.sol";
 
@@ -17,35 +17,12 @@ library Traits {
     function getTraits(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
 
-        // refractivity
-        Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
-        string memory refractivityTrait = getRefractivityTrait(refractivity);
-        result = string.concat(result, trait("Refractivity", refractivityTrait));
-
-        // glints
-        GlintType glintType = getGlintType(_seed);
-        string memory glintTrait = getGlintTrait(glintType);
-        result = string.concat(result, ",", trait("Glint", glintTrait));
-
-        // eyes
-        EyeType eyeType = getEyeType(_seed);
-        string memory eyeTrait = getEyeTrait(eyeType);
-        result = string.concat(result, ",", trait("Eyes", eyeTrait));
-
-        // mouth
-        MouthType mouthType = getMouthType(_seed);
-        string memory mouthTrait = getMouthTrait(mouthType);
-        result = string.concat(result, ",", trait("Mouth", mouthTrait));
-
-        // cheeks
-        CheekType cheekType = getCheekType(_seed);
-        string memory cheekTrait = getCheekTrait(cheekType);
-        result = string.concat(result, ",", trait("Cheeks", cheekTrait));
-
-        // motes
-        uint256 moteCount = Motes.getMoteCount(_seed);
-        string memory moteTrait = getMoteTrait(moteCount);
-        result = string.concat(result, ",", trait("Motes", moteTrait));
+        result = string.concat(result, trait("Refractivity", getRefractivityTrait(_seed)));
+        result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
+        result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
+        result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
+        result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
+        result = string.concat(result, ",", trait("Motes", getMoteTrait(_seed)));
 
         return string.concat(result, "]");
     }
@@ -54,18 +31,27 @@ library Traits {
                               REFRACTIVITY
     //////////////////////////////////////////////////////////////*/
 
-    function getRefractivityTrait(Palette.Refractivity _refractivity) internal pure returns (string memory) {
-        return _refractivity == Palette.Refractivity.LIGHT ? "Light" : "Dark";
+    function getRefractivityTrait(bytes32 _seed) internal pure returns (string memory) {
+        RefractivityType refractivityType = getRefractivityType(_seed);
+        return refractivityType == RefractivityType.LIGHT ? "Light" : "Dark";
+    }
+
+    function getRefractivityType(bytes32 _seed) internal pure returns (RefractivityType) {
+        uint256 refractivitySeed = uint256(keccak256(abi.encodePacked(_seed, "refractivity"))) % 100;
+
+        if (refractivitySeed < 80) return RefractivityType.LIGHT;
+        return RefractivityType.DARK;
     }
 
     /*//////////////////////////////////////////////////////////////
                                   GLINT
     //////////////////////////////////////////////////////////////*/
 
-    function getGlintTrait(GlintType _glintType) internal pure returns (string memory) {
-        if (_glintType == GlintType.FLOATING) return "Floating";
-        if (_glintType == GlintType.RISING) return "Rising";
-        if (_glintType == GlintType.FALLING) return "Falling";
+    function getGlintTrait(bytes32 _seed) internal pure returns (string memory) {
+        GlintType glintType = getGlintType(_seed);
+        if (glintType == GlintType.FLOATING) return "Floating";
+        if (glintType == GlintType.RISING) return "Rising";
+        if (glintType == GlintType.FALLING) return "Falling";
         return "None";
     }
 
@@ -82,16 +68,17 @@ library Traits {
                                    EYE
     //////////////////////////////////////////////////////////////*/
 
-    function getEyeTrait(EyeType _eyeType) internal pure returns (string memory) {
-        if (_eyeType == EyeType.OPEN) return "Open";
-        if (_eyeType == EyeType.SMILEY) return "Smiley";
-        if (_eyeType == EyeType.WINK) return "Wink";
-        if (_eyeType == EyeType.SLEEPY) return "Sleepy";
-        if (_eyeType == EyeType.CLOVER) return "Clover";
-        if (_eyeType == EyeType.DIZZY) return "Dizzy";
-        if (_eyeType == EyeType.HEART) return "Heart";
-        if (_eyeType == EyeType.WINCE) return "Wince";
-        if (_eyeType == EyeType.CYCLOPS) return "Cyclops";
+    function getEyeTrait(bytes32 _seed) internal pure returns (string memory) {
+        EyeType eyeType = getEyeType(_seed);
+        if (eyeType == EyeType.OPEN) return "Open";
+        if (eyeType == EyeType.SMILEY) return "Smiley";
+        if (eyeType == EyeType.WINK) return "Wink";
+        if (eyeType == EyeType.SLEEPY) return "Sleepy";
+        if (eyeType == EyeType.CLOVER) return "Clover";
+        if (eyeType == EyeType.DIZZY) return "Dizzy";
+        if (eyeType == EyeType.HEART) return "Heart";
+        if (eyeType == EyeType.WINCE) return "Wince";
+        if (eyeType == EyeType.CYCLOPS) return "Cyclops";
         return "Star";
     }
 
@@ -114,13 +101,14 @@ library Traits {
                                   MOUTH
     //////////////////////////////////////////////////////////////*/
 
-    function getMouthTrait(MouthType _mouthType) internal pure returns (string memory) {
-        if (_mouthType == MouthType.SMILE) return "Smile";
-        if (_mouthType == MouthType.MEDIUM_SMILE) return "Medium Smile";
-        if (_mouthType == MouthType.SMALL_SMILE) return "Small Smile";
-        if (_mouthType == MouthType.FLAT) return "Flat";
-        if (_mouthType == MouthType.FROWN) return "Frown";
-        if (_mouthType == MouthType.GRIN) return "Grin";
+    function getMouthTrait(bytes32 _seed) internal pure returns (string memory) {
+        MouthType mouthType = getMouthType(_seed);
+        if (mouthType == MouthType.SMILE) return "Smile";
+        if (mouthType == MouthType.MEDIUM_SMILE) return "Medium Smile";
+        if (mouthType == MouthType.SMALL_SMILE) return "Small Smile";
+        if (mouthType == MouthType.FLAT) return "Flat";
+        if (mouthType == MouthType.FROWN) return "Frown";
+        if (mouthType == MouthType.GRIN) return "Grin";
         return "Smooch";
     }
 
@@ -141,9 +129,10 @@ library Traits {
                                  CHEEKS
     //////////////////////////////////////////////////////////////*/
 
-    function getCheekTrait(CheekType _cheekType) internal pure returns (string memory) {
-        if (_cheekType == CheekType.NONE) return "None";
-        if (_cheekType == CheekType.CIRCULAR) return "Circular";
+    function getCheekTrait(bytes32 _seed) internal pure returns (string memory) {
+        CheekType cheekType = getCheekType(_seed);
+        if (cheekType == CheekType.NONE) return "None";
+        if (cheekType == CheekType.CIRCULAR) return "Circular";
         return "Freckles";
     }
 
@@ -159,8 +148,18 @@ library Traits {
                                   MOTES
     //////////////////////////////////////////////////////////////*/
 
-    function getMoteTrait(uint256 _moteCount) internal pure returns (string memory) {
-        return Util.uint256ToString(_moteCount);
+    function getMoteTrait(bytes32 _seed) internal pure returns (string memory) {
+        uint256 moteCount = getMoteCount(_seed);
+        return Util.uint256ToString(moteCount);
+    }
+
+    function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
+        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
+
+        if (moteSeed % 100 < 1) return 3;
+        if (moteSeed % 100 < 5) return 2;
+        if (moteSeed % 100 < 35) return 1;
+        return 0;
     }
 
     /*//////////////////////////////////////////////////////////////

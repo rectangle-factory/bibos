@@ -1,27 +1,19 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+import {Traits} from "libraries/Traits.sol";
 import {Palette} from "./Palette.sol";
 import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Motes {
-    function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
-
-        if (moteSeed % 100 < 1) return 3;
-        if (moteSeed % 100 < 5) return 2;
-        if (moteSeed % 100 < 35) return 1;
-        return 0;
-    }
-
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
         uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
         string memory reverseRotate = moteSeed % 2 == 0 ? "from='0 0 0' to='360 0 0'" : "from='360 0 0' to='0 0 0'";
 
-        uint256 moteCount = getMoteCount(_seed);
+        uint256 moteCount = Traits.getMoteCount(_seed);
 
         string memory opacity = Palette.getOpacity(moteSeed, _seed);
         moteSeed /= Palette.opacityLength;

@@ -100,8 +100,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Nervous":`
     function nervous(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -122,8 +120,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Angry":`
     function angry(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -144,8 +140,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Hexagon": `
     function hexagon(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -160,8 +154,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Heart":`
     function heart(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -176,8 +168,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Smiley": `
     function smiley(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -190,8 +180,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Sleepy": `
     function sleepy(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -204,8 +192,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Star": `
     function star(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
@@ -220,8 +206,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Wink":`
     function wink(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
