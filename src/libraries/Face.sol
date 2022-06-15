@@ -1,25 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 import {Eyes} from "./Eyes.sol";
 import {Mouth} from "./Mouth.sol";
 import {Cheeks} from "./Cheeks.sol";
 
 library Face {
-    function animateMotion(string memory _reverse) internal pure returns (string memory) {
-        return
-            string.concat(
-                '<animateMotion dur="11s" ',
-                _reverse,
-                ' repeatCount="indefinite">',
-                '<mpath href="#bibo-jitter-lg" />',
-                "</animateMotion>"
-            );
-    }
-
     function render(bytes32 _seed) internal pure returns (string memory) {
         uint256 faceSeed = uint256(keccak256(abi.encodePacked(_seed, "face")));
 
@@ -40,5 +27,16 @@ library Face {
         );
 
         return result;
+    }
+
+    function animateMotion(string memory _reverse) internal pure returns (string memory) {
+        return
+            string.concat(
+                '<animateMotion dur="11s" ',
+                _reverse,
+                ' repeatCount="indefinite">',
+                '<mpath href="#bibo-jitter-lg" />',
+                "</animateMotion>"
+            );
     }
 }

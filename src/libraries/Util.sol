@@ -85,6 +85,24 @@ library Util {
         }
     }
 
+    function bytes1ToHex(bytes1 _value) internal pure returns (string memory) {
+        bytes memory result = new bytes(2);
+        uint8 x = uint8(_value);
+
+        result[0] = getHexChar(x >> 4);
+        result[1] = getHexChar(x % 16);
+
+        return string(result);
+    }
+
+    function getHexChar(uint8 _value) internal pure returns (bytes1) {
+        if (_value < 10) {
+            return bytes1(_value + 48);
+        }
+        _value -= 10;
+        return bytes1(_value + 97);
+    }
+
     function stringToBytes1(string memory _value) internal pure returns (bytes1 result) {
         return bytes1(uint8(stringToUint256(_value)));
     }

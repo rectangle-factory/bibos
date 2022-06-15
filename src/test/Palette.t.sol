@@ -1,29 +1,36 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
+import {PointsUtil} from "dev/PointsUtil.sol";
+import {Data} from "libraries/Data.sol";
+import {PointsUncompressed} from "dev/PointsUncompressed.sol";
 import {Palette} from "../libraries/Palette.sol";
 
 contract PaletteTest is Test {
     function setUp() public {}
 
-    // function testBodyLight() public {
-    //     assertEq(Color.bodyLight(0), "#d5a8bf");
-    //     assertEq(Color.bodyLight(BYTES_1_SIXTY_THREE), "#cc8880");
-    // }
+    function testLightestPalette(uint8 _i) public {
+        vm.assume(_i < 64);
+        string memory palette1 = Palette.lightestPalette(_i);
+        string memory palette2 = Data.lightestPalette(_i);
 
-    // function testBodyDark() public {
-    //     assertEq(Color.bodyDark(0), "#5b301c");
-    //     assertEq(Color.bodyDark(BYTES_1_SIXTY_THREE), "#9d4910");
-    // }
+        assertEq(palette1, palette2);
+    }
 
-    // function testBgLight() public {
-    //     assertEq(Color.bgLight(0), "#020406");
-    //     assertEq(Color.bgLight(BYTES_1_SIXTY_THREE), "#100126");
-    // }
+    function testLightPalette(uint8 _i) public {
+        vm.assume(_i < 64);
+        string memory palette1 = Palette.lightPalette(_i);
+        string memory palette2 = Data.lightPalette(_i);
 
-    // function testBgDark() public {
-    //     assertEq(Color.bgDark(0), "#f1f0fe");
-    //     assertEq(Color.bgDark(BYTES_1_SIXTY_THREE), "#e4e5fd");
-    // }
+        assertEq(palette1, palette2);
+    }
+
+    function testDarkestPalette(uint8 _i) public {
+        vm.assume(_i < 64);
+        string memory palette1 = Palette.darkestPalette(_i);
+        string memory palette2 = Data.darkestPalette(_i);
+
+        assertEq(palette1, palette2);
+    }
 }

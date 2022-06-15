@@ -23,8 +23,11 @@ library Traits {
         result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
         result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
         result = string.concat(result, ",", trait("Motes", getMoteTrait(_seed)));
-
         return string.concat(result, "]");
+    }
+
+    function trait(string memory _traitType, string memory _value) internal pure returns (string memory) {
+        return string.concat("{", Util.keyValue("trait_type", _traitType), ",", Util.keyValue("value", _value), "}");
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -160,13 +163,5 @@ library Traits {
         if (moteSeed % 100 < 5) return 2;
         if (moteSeed % 100 < 35) return 1;
         return 0;
-    }
-
-    /*//////////////////////////////////////////////////////////////
-                                INTERNAL
-    //////////////////////////////////////////////////////////////*/
-
-    function trait(string memory _traitType, string memory _value) internal pure returns (string memory) {
-        return string.concat("{", Util.keyValue("trait_type", _traitType), ",", Util.keyValue("value", _value), "}");
     }
 }

@@ -18,7 +18,7 @@ library Glints {
     uint256 constant GLINT_COUNT = 16;
 
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory result = "";
+        string memory result;
 
         string memory mixMode = "lighten";
         string memory fill = "white";

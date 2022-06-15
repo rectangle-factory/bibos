@@ -10,6 +10,7 @@ import {Glints} from "./Glints.sol";
 import {Motes} from "./Motes.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
+import {Data} from "./Data.sol";
 
 library Render {
     function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
@@ -32,7 +33,7 @@ library Render {
 
     function svg(bytes32 _seed) internal pure returns (string memory) {
         string memory svgChildren = string.concat(
-            SVG.defs(),
+            Data.defs(),
             Background.render(_seed),
             Body.render(_seed),
             Glints.render(_seed),
