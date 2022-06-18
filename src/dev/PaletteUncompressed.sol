@@ -2,8 +2,8 @@
 pragma solidity >=0.8.0;
 
 library PaletteUncompressed {
-    function lightestPalette(uint256 _value) internal pure returns (string memory) {
-        string[64] memory lightestPaletteValues = [
+    function lightest(uint256 _value) internal pure returns (string memory) {
+        string[64] memory lightestValues = [
             "#ffb3b3",
             "#ffbab3",
             "#ffc1b3",
@@ -69,11 +69,11 @@ library PaletteUncompressed {
             "#ffb3c7",
             "#ffb3c0"
         ];
-        return lightestPaletteValues[_value % 64];
+        return lightestValues[_value % 64];
     }
 
-    function lightPalette(uint256 _value) internal pure returns (string memory) {
-        string[64] memory lightPaletteValues = [
+    function light(uint256 _value) internal pure returns (string memory) {
+        string[64] memory lightValues = [
             "#ff3333",
             "#ff4633",
             "#ff5933",
@@ -139,11 +139,11 @@ library PaletteUncompressed {
             "#ff336a",
             "#ff3357"
         ];
-        return lightPaletteValues[_value % 64];
+        return lightValues[_value % 64];
     }
 
-    function darkestPalette(uint256 _value) internal pure returns (string memory) {
-        string[64] memory darkestPaletteValues = [
+    function darkest(uint256 _value) internal pure returns (string memory) {
+        string[64] memory darkestValues = [
             "#060a06",
             "#060d07",
             "#061007",
@@ -209,6 +209,6 @@ library PaletteUncompressed {
             "#230415",
             "#280217"
         ];
-        return darkestPaletteValues[_value % 64];
+        return darkestValues[_value % 64];
     }
 }

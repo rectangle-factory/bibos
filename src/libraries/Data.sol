@@ -79,7 +79,7 @@ library Data {
                                   DEFS
     //////////////////////////////////////////////////////////////*/
 
-    function defs() internal pure returns (string memory) {
+    function defs() external pure returns (string memory) {
         return
             string.concat(
                 "<defs>",
