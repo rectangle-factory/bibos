@@ -3,6 +3,7 @@ pragma solidity >=0.8.0;
 
 import {Test} from "forge-std/Test.sol";
 import {Util} from "src/libraries/Util.sol";
+import {Util as DevUtil} from "src/dev/Util.sol";
 import {PaletteUtil} from "src/dev/PaletteUtil.sol";
 
 contract UtilTest is Test {
@@ -19,14 +20,14 @@ contract UtilTest is Test {
 
     function testHexStringToUint256() public {
         string memory str = "01";
-        assertEq(Util.hexStringToUint256(str), 1);
+        assertEq(DevUtil.hexStringToUint256(str), 1);
         str = "10";
-        assertEq(Util.hexStringToUint256(str), 16);
+        assertEq(DevUtil.hexStringToUint256(str), 16);
     }
 
     function testHexStringToBytes() public {
         bytes memory result = hex"aa";
-        assertEq(Util.hexStringToBytes("aa"), result);
+        assertEq(DevUtil.hexStringToBytes("aa"), result);
     }
 
     function testSlice7CharColor() public {
