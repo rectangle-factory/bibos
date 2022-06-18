@@ -46,13 +46,13 @@ write_deployment_address() {
 
 
 # deploy bibos and store the script output
-# SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos)"
-forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos
+SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos)"
+# forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos
 # # extract the bibos address return value from SCRIPT_OUTPUT
-# BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
+BIBOS_ADDRESS="$(get_forge_script_return_value address bibos "$SCRIPT_OUTPUT")"
 
 # # erase deployments.json
-# echo "{}" > $DEPLOYMENTS_PATH
+echo "{}" > $DEPLOYMENTS_PATH
 
 # # save the bibos address in deployments.json
-# write_deployment_address "Bibos" $BIBOS_ADDRESS
+write_deployment_address "Bibos" $BIBOS_ADDRESS

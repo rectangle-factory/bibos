@@ -4,7 +4,7 @@
   "scripts": {
     "test": "forge test --gas-report",
     "render": "./scripts/local_render.sh",
-    "deploy-anvil": "./deployment/deploy.sh",
+    "deploy-anvil": "./deployment/deploy_anvil.sh",
     "prepare": "husky install",
     "dev": "pnpm -C ./packages/inspector dev"
   },
