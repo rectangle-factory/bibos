@@ -14,19 +14,19 @@ library Traits {
                                  TRAITS
     //////////////////////////////////////////////////////////////*/
 
-    function getTraits(bytes32 _seed) internal pure returns (string memory) {
+    function attributes(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
 
-        result = string.concat(result, trait("Refractivity", getRefractivityTrait(_seed)));
-        result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
-        result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
-        result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
-        result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
-        result = string.concat(result, ",", trait("Motes", getMoteTrait(_seed)));
+        result = string.concat(result, _attribute("Refractivity", refractivityTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Glint", glintTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Eyes", mouthTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Cheeks", cheekTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Motes", moteTrait(_seed)));
         return string.concat(result, "]");
     }
 
-    function trait(string memory _traitType, string memory _value) internal pure returns (string memory) {
+    function _attribute(string memory _traitType, string memory _value) internal pure returns (string memory) {
         return string.concat("{", Util.keyValue("trait_type", _traitType), ",", Util.keyValue("value", _value), "}");
     }
 
@@ -34,12 +34,12 @@ library Traits {
                               REFRACTIVITY
     //////////////////////////////////////////////////////////////*/
 
-    function getRefractivityTrait(bytes32 _seed) internal pure returns (string memory) {
-        RefractivityType refractivityType = getRefractivityType(_seed);
-        return refractivityType == RefractivityType.LIGHT ? "Light" : "Dark";
+    function refractivityTrait(bytes32 _seed) internal pure returns (string memory) {
+        RefractivityType type_ = refractivityType(_seed);
+        return type_ == RefractivityType.LIGHT ? "Light" : "Dark";
     }
 
-    function getRefractivityType(bytes32 _seed) internal pure returns (RefractivityType) {
+    function refractivityType(bytes32 _seed) internal pure returns (RefractivityType) {
         uint256 refractivitySeed = uint256(keccak256(abi.encodePacked(_seed, "refractivity"))) % 100;
 
         if (refractivitySeed < 80) return RefractivityType.LIGHT;
@@ -50,15 +50,15 @@ library Traits {
                                   GLINT
     //////////////////////////////////////////////////////////////*/
 
-    function getGlintTrait(bytes32 _seed) internal pure returns (string memory) {
-        GlintType glintType = getGlintType(_seed);
-        if (glintType == GlintType.FLOATING) return "Floating";
-        if (glintType == GlintType.RISING) return "Rising";
-        if (glintType == GlintType.FALLING) return "Falling";
+    function glintTrait(bytes32 _seed) internal pure returns (string memory) {
+        GlintType type_ = glintType(_seed);
+        if (type_ == GlintType.FLOATING) return "Floating";
+        if (type_ == GlintType.RISING) return "Rising";
+        if (type_ == GlintType.FALLING) return "Falling";
         return "None";
     }
 
-    function getGlintType(bytes32 _seed) internal pure returns (GlintType) {
+    function glintType(bytes32 _seed) internal pure returns (GlintType) {
         uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
 
         if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
@@ -71,21 +71,21 @@ library Traits {
                                    EYE
     //////////////////////////////////////////////////////////////*/
 
-    function getEyeTrait(bytes32 _seed) internal pure returns (string memory) {
-        EyeType eyeType = getEyeType(_seed);
-        if (eyeType == EyeType.OPEN) return "Open";
-        if (eyeType == EyeType.SMILEY) return "Smiley";
-        if (eyeType == EyeType.WINK) return "Wink";
-        if (eyeType == EyeType.SLEEPY) return "Sleepy";
-        if (eyeType == EyeType.CLOVER) return "Clover";
-        if (eyeType == EyeType.DIZZY) return "Dizzy";
-        if (eyeType == EyeType.HEART) return "Heart";
-        if (eyeType == EyeType.WINCE) return "Wince";
-        if (eyeType == EyeType.CYCLOPS) return "Cyclops";
+    function eyeTrait(bytes32 _seed) internal pure returns (string memory) {
+        EyeType type_ = eyeType(_seed);
+        if (type_ == EyeType.OPEN) return "Open";
+        if (type_ == EyeType.SMILEY) return "Smiley";
+        if (type_ == EyeType.WINK) return "Wink";
+        if (type_ == EyeType.SLEEPY) return "Sleepy";
+        if (type_ == EyeType.CLOVER) return "Clover";
+        if (type_ == EyeType.DIZZY) return "Dizzy";
+        if (type_ == EyeType.HEART) return "Heart";
+        if (type_ == EyeType.WINCE) return "Wince";
+        if (type_ == EyeType.CYCLOPS) return "Cyclops";
         return "Star";
     }
 
-    function getEyeType(bytes32 _seed) internal pure returns (EyeType) {
+    function eyeType(bytes32 _seed) internal pure returns (EyeType) {
         uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
 
         if (eyeSeed % 100 < 25) return EyeType.OPEN;
@@ -104,18 +104,18 @@ library Traits {
                                   MOUTH
     //////////////////////////////////////////////////////////////*/
 
-    function getMouthTrait(bytes32 _seed) internal pure returns (string memory) {
-        MouthType mouthType = getMouthType(_seed);
-        if (mouthType == MouthType.SMILE) return "Smile";
-        if (mouthType == MouthType.MEDIUM_SMILE) return "Medium Smile";
-        if (mouthType == MouthType.SMALL_SMILE) return "Small Smile";
-        if (mouthType == MouthType.FLAT) return "Flat";
-        if (mouthType == MouthType.FROWN) return "Frown";
-        if (mouthType == MouthType.GRIN) return "Grin";
+    function mouthTrait(bytes32 _seed) internal pure returns (string memory) {
+        MouthType type_ = mouthType(_seed);
+        if (type_ == MouthType.SMILE) return "Smile";
+        if (type_ == MouthType.MEDIUM_SMILE) return "Medium Smile";
+        if (type_ == MouthType.SMALL_SMILE) return "Small Smile";
+        if (type_ == MouthType.FLAT) return "Flat";
+        if (type_ == MouthType.FROWN) return "Frown";
+        if (type_ == MouthType.GRIN) return "Grin";
         return "Smooch";
     }
 
-    function getMouthType(bytes32 _seed) internal pure returns (MouthType) {
+    function mouthType(bytes32 _seed) internal pure returns (MouthType) {
         uint256 mouthTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "mouthType"))) % 100;
 
         if (mouthTypeSeed % 100 < 30) return MouthType.SMILE;
@@ -132,14 +132,14 @@ library Traits {
                                  CHEEKS
     //////////////////////////////////////////////////////////////*/
 
-    function getCheekTrait(bytes32 _seed) internal pure returns (string memory) {
-        CheekType cheekType = getCheekType(_seed);
-        if (cheekType == CheekType.NONE) return "None";
-        if (cheekType == CheekType.CIRCULAR) return "Circular";
+    function cheekTrait(bytes32 _seed) internal pure returns (string memory) {
+        CheekType type_ = cheekType(_seed);
+        if (type_ == CheekType.NONE) return "None";
+        if (type_ == CheekType.CIRCULAR) return "Circular";
         return "Freckles";
     }
 
-    function getCheekType(bytes32 _seed) internal pure returns (CheekType) {
+    function cheekType(bytes32 _seed) internal pure returns (CheekType) {
         uint256 cheeksSeed = uint256(keccak256(abi.encodePacked(_seed, "cheeks"))) % 100;
 
         if (cheeksSeed % 100 < 70) return CheekType.NONE;
@@ -151,12 +151,12 @@ library Traits {
                                   MOTES
     //////////////////////////////////////////////////////////////*/
 
-    function getMoteTrait(bytes32 _seed) internal pure returns (string memory) {
-        uint256 moteCount = getMoteCount(_seed);
-        return Util.uint256ToString(moteCount);
+    function moteTrait(bytes32 _seed) internal pure returns (string memory) {
+        uint256 count_ = moteCount(_seed);
+        return Util.uint256ToString(count_);
     }
 
-    function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
+    function moteCount(bytes32 _seed) internal pure returns (uint256) {
         uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
 
         if (moteSeed % 100 < 1) return 3;

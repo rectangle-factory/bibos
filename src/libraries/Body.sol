@@ -14,12 +14,12 @@ library Body {
 
         uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body")));
 
-        string memory backgroundFill = Palette.getBackgroundFill(_seed);
-        result = addBodyBackground(result, backgroundFill);
+        string memory backgroundFill = Palette.background(_seed);
+        result = _addBodyBackground(result, backgroundFill);
         uint256 length = Data.length;
         for (uint8 i = 0; i < 7; i++) {
             string memory radius = radii[i];
-            string memory fill = Palette.getBodyFill(_seed, i);
+            string memory fill = Palette.body(_seed, i);
 
             string memory dur = Data.shortTimes(bodySeed);
             bodySeed /= length;
@@ -30,13 +30,13 @@ library Body {
             string memory reverse = bodySeed % 2 == 0 ? 'keyPoints="1;0" keyTimes="0;1" ' : "";
             bodySeed /= 2;
 
-            result = addBodyCircle(result, radius, coords, fill, dur, reverse);
+            result = _addBodyCircle(result, radius, coords, fill, dur, reverse);
         }
 
         return string.concat('<g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">', result, "</g>");
     }
 
-    function addBodyCircle(
+    function _addBodyCircle(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -51,13 +51,13 @@ library Body {
         return
             string.concat(
                 _result,
-                SVG.circle(_radius, _coords, mixMode, _fill, opacity),
+                SVG.openCircle(_radius, _coords, mixMode, _fill, opacity),
                 SVG.animateMotion(_reverse, _dur, "linear", mpath),
                 "</circle>"
             );
     }
 
-    function addBodyBackground(string memory _result, string memory _fill) internal pure returns (string memory) {
+    function _addBodyBackground(string memory _result, string memory _fill) internal pure returns (string memory) {
         return string.concat(_result, SVG.rect("100%", "100%", _fill));
     }
 }

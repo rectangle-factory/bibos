@@ -6,7 +6,7 @@ import {SVG} from "./SVG.sol";
 
 library Background {
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = Palette.getBackgroundFill(_seed);
+        string memory fill = Palette.background(_seed);
         return SVG.rect("100%", "100%", fill);
     }
 }

@@ -12,7 +12,7 @@ contract PaletteTest is Test {
 
     function testLightestPalette(uint8 _i) public {
         vm.assume(_i < 64);
-        string memory palette1 = Palette.lightestPalette(_i);
+        string memory palette1 = Palette._lightest(_i);
         string memory palette2 = Data.lightestPalette(_i);
 
         assertEq(palette1, palette2);
@@ -20,7 +20,7 @@ contract PaletteTest is Test {
 
     function testLightPalette(uint8 _i) public {
         vm.assume(_i < 64);
-        string memory palette1 = Palette.lightPalette(_i);
+        string memory palette1 = Palette._light(_i);
         string memory palette2 = Data.lightPalette(_i);
 
         assertEq(palette1, palette2);
@@ -28,7 +28,7 @@ contract PaletteTest is Test {
 
     function testDarkestPalette(uint8 _i) public {
         vm.assume(_i < 64);
-        string memory palette1 = Palette.darkestPalette(_i);
+        string memory palette1 = Palette._darkest(_i);
         string memory palette2 = Data.darkestPalette(_i);
 
         assertEq(palette1, palette2);

@@ -23,7 +23,7 @@ library Glints {
         string memory mixMode = "lighten";
         string memory fill = "white";
 
-        GlintType glintType = Traits.getGlintType(_seed);
+        GlintType glintType = Traits.glintType(_seed);
         if (glintType == GlintType.NONE) return "";
 
         for (uint8 i = 0; i < GLINT_COUNT; i++) {
@@ -35,23 +35,23 @@ library Glints {
             glintSeed = glintSeed / Data.length;
             string memory radius = glintSeed % 2 == 0 ? "1" : "2";
             glintSeed = glintSeed / 2;
-            string memory opacity = Palette.getOpacity(glintSeed, _seed);
+            string memory opacity = Palette.opacity(glintSeed);
             glintSeed /= Palette.opacityLength;
 
             if (glintType == GlintType.FLOATING) {
                 string memory reverse = glintSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
-                result = addFloatingGlint(result, radius, coords, mixMode, fill, opacity, dur, reverse);
+                result = _addFloatingGlint(result, radius, coords, mixMode, fill, opacity, dur, reverse);
             } else if (glintType == GlintType.RISING)
-                result = addRisingGlint(result, radius, coords, mixMode, fill, opacity, dur);
+                result = _addRisingGlint(result, radius, coords, mixMode, fill, opacity, dur);
             else if (glintType == GlintType.FALLING) {
-                result = addFallingGlint(result, radius, coords, mixMode, fill, opacity, dur);
+                result = _addFallingGlint(result, radius, coords, mixMode, fill, opacity, dur);
             }
         }
 
         return string.concat("<g>", result, "</g>");
     }
 
-    function addRisingGlint(
+    function _addRisingGlint(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -64,15 +64,15 @@ library Glints {
             string.concat(
                 _result,
                 '<g transform="translate(0,25)">',
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                animateTransform(_dur, "-100"),
-                SVG.animate(_dur),
-                "</circle>",
+                SVG.openCircle(_radius, _coords, _mixMode, _fill, _opacity),
+                _animateTransform(_dur, "-100"),
+                _animate(_dur),
+                SVG.closeCircle(),
                 "</g>"
             );
     }
 
-    function addFloatingGlint(
+    function _addFloatingGlint(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -85,13 +85,13 @@ library Glints {
         return
             string.concat(
                 _result,
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
+                SVG.openCircle(_radius, _coords, _mixMode, _fill, _opacity),
                 SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#bibo-jitter-sm"/>'),
-                "</circle>"
+                SVG.closeCircle()
             );
     }
 
-    function addFallingGlint(
+    function _addFallingGlint(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -104,15 +104,28 @@ library Glints {
             string.concat(
                 _result,
                 '<g transform="translate(0,-25)">',
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                animateTransform(_dur, "100"),
-                SVG.animate(_dur),
-                "</circle>",
+                SVG.openCircle(_radius, _coords, _mixMode, _fill, _opacity),
+                _animateTransform(_dur, "100"),
+                _animate(_dur),
+                SVG.closeCircle(),
                 "</g>"
             );
     }
 
-    function animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
+    function _animate(string memory _dur) internal pure returns (string memory) {
+        return
+            string.concat(
+                "<animate ",
+                'attributeName="opacity" ',
+                'values="0;1;0" ',
+                "dur=",
+                Util.quote(_dur),
+                'repeatCount="indefinite" ',
+                "/>"
+            );
+    }
+
+    function _animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
         return
             string.concat(
                 "<animateTransform ",

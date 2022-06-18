@@ -8,40 +8,41 @@ enum RefractivityType {
 }
 
 library Palette {
-    uint256 public constant opacityLength = 5;
+    uint256 constant length = 256;
+    uint256 constant opacityLength = 5;
 
-    function getOpacity(uint256 _moteSeed, bytes32 _seed) internal pure returns (string memory) {
+    function opacity(uint256 _seed) internal pure returns (string memory) {
         return
             (
-                Traits.getRefractivityType(_seed) == RefractivityType.LIGHT
+                Traits.refractivityType(bytes32(_seed)) == RefractivityType.LIGHT
                     ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
                     : ["0.6", "0.7", "0.8", "0.9", "1.0"]
-            )[_moteSeed % opacityLength];
+            )[_seed % opacityLength];
     }
 
-    function getBodyFill(bytes32 _seed, uint256 _i) internal pure returns (string memory) {
-        uint256 bodyFillValue = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i)));
+    function body(bytes32 _seed, uint256 _i) internal pure returns (string memory) {
+        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i))) % length;
 
-        if (Traits.getRefractivityType(_seed) == RefractivityType.LIGHT) return lightPalette(bodyFillValue);
-        else return lightestPalette(bodyFillValue);
+        if (Traits.refractivityType(_seed) == RefractivityType.LIGHT) return _light(i);
+        else return _lightest(i);
     }
 
-    function getBackgroundFill(bytes32 _seed) internal pure returns (string memory) {
-        uint256 backgroundFillValue = uint256(keccak256(abi.encodePacked(_seed, "backgroundFill")));
+    function background(bytes32 _seed) internal pure returns (string memory) {
+        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "backgroundFill"))) % length;
 
-        if (Traits.getRefractivityType(_seed) == RefractivityType.LIGHT) return darkestPalette(backgroundFillValue);
-        else return darkestPalette(backgroundFillValue);
+        if (Traits.refractivityType(_seed) == RefractivityType.LIGHT) return _light(i);
+        else return _darkest(i);
     }
 
-    function lightestPalette(uint256 _value) internal pure returns (string memory) {
-        return Data.lightestPalette(_value);
+    function _lightest(uint256 _i) internal pure returns (string memory) {
+        return Data.lightestPalette(_i % length);
     }
 
-    function lightPalette(uint256 _value) internal pure returns (string memory) {
-        return Data.lightPalette(_value);
+    function _light(uint256 _i) internal pure returns (string memory) {
+        return Data.lightPalette(_i % length);
     }
 
-    function darkestPalette(uint256 _value) internal pure returns (string memory) {
-        return Data.darkestPalette(_value);
+    function _darkest(uint256 _i) internal pure returns (string memory) {
+        return Data.darkestPalette(_i % length);
     }
 }

@@ -22,14 +22,14 @@ library Face {
             Eyes.render(_seed),
             Mouth.render(_seed),
             Cheeks.render(_seed),
-            animateMotion(reverse),
+            _animateMotion(reverse),
             "</g>"
         );
 
         return result;
     }
 
-    function animateMotion(string memory _reverse) internal pure returns (string memory) {
+    function _animateMotion(string memory _reverse) internal pure returns (string memory) {
         return
             string.concat(
                 '<animateMotion dur="11s" ',

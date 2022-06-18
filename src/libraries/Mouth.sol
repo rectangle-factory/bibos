@@ -16,20 +16,20 @@ enum MouthType {
 
 library Mouth {
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = Palette.getBackgroundFill(_seed);
-        MouthType mouthType = Traits.getMouthType(_seed);
+        string memory fill = Palette.background(_seed);
+        MouthType mouthType = Traits.mouthType(_seed);
 
-        if (mouthType == MouthType.SMILE) return smile(fill);
-        if (mouthType == MouthType.MEDIUM_SMILE) return mediumSmile(fill);
-        if (mouthType == MouthType.SMALL_SMILE) return smallSmile(fill);
-        if (mouthType == MouthType.FLAT) return flat(fill);
-        if (mouthType == MouthType.FROWN) return frown(fill);
-        if (mouthType == MouthType.GRIN) return grin(fill);
-        if (mouthType == MouthType.SMOOCH) return smooch(fill);
-        return smirk(fill);
+        if (mouthType == MouthType.SMILE) return _smile(fill);
+        if (mouthType == MouthType.MEDIUM_SMILE) return _mediumSmile(fill);
+        if (mouthType == MouthType.SMALL_SMILE) return _smallSmile(fill);
+        if (mouthType == MouthType.FLAT) return _flat(fill);
+        if (mouthType == MouthType.FROWN) return _frown(fill);
+        if (mouthType == MouthType.GRIN) return _grin(fill);
+        if (mouthType == MouthType.SMOOCH) return _smooch(fill);
+        return _smirk(fill);
     }
 
-    function smile(string memory _fill) internal pure returns (string memory) {
+    function _smile(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M72 116.208C84.2665 140.324 117.641 139.602 130 116' stroke='",
@@ -38,7 +38,7 @@ library Mouth {
             );
     }
 
-    function mediumSmile(string memory _fill) internal pure returns (string memory) {
+    function _mediumSmile(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M81 116.139C89.4596 132.216 112.476 131.735 121 116' stroke='",
@@ -47,7 +47,7 @@ library Mouth {
             );
     }
 
-    function smallSmile(string memory _fill) internal pure returns (string memory) {
+    function _smallSmile(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M91 111.081C95.2298 120.459 106.738 120.179 111 111' stroke='",
@@ -56,7 +56,7 @@ library Mouth {
             );
     }
 
-    function frown(string memory _fill) internal pure returns (string memory) {
+    function _frown(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M109 122.5C109 127.747 105.418 130 101 130C96.5817 130 93 127.747 93 122.5C93 117.253 96.5817 113 101 113C105.418 113 109 117.253 109 122.5Z' fill='",
@@ -65,7 +65,7 @@ library Mouth {
             );
     }
 
-    function smooch(string memory _fill) internal pure returns (string memory) {
+    function _smooch(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M98 101C119 97 123 117 104.993 120C123 122 120 141.5 99 139' stroke='",
@@ -77,7 +77,7 @@ library Mouth {
             );
     }
 
-    function grin(string memory _fill) internal pure returns (string memory) {
+    function _grin(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M80 120C91.8621 123.983 111.138 124.017 123 120' stroke='",
@@ -86,7 +86,7 @@ library Mouth {
             );
     }
 
-    function toothy(string memory _fill) internal pure returns (string memory) {
+    function _toothy(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M72 115L80.1589 126L90.3296 120L100.488 130L110.659 120L120.83 126L129 115' stroke='",
@@ -95,7 +95,7 @@ library Mouth {
             );
     }
 
-    function tongue(string memory _fill) internal pure returns (string memory) {
+    function _tongue(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M72 116.069C84.2665 124.108 117.641 123.867 130 116' stroke='",
@@ -110,11 +110,11 @@ library Mouth {
             );
     }
 
-    function flat(string memory _fill) internal pure returns (string memory) {
+    function _flat(string memory _fill) internal pure returns (string memory) {
         return string.concat("<path d='M80 120H123' stroke='", _fill, "' stroke-width='10' stroke-linecap='round'/>");
     }
 
-    function smirk(string memory _fill) internal pure returns (string memory) {
+    function _smirk(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M130 116C121.699 131.851 103.919 137.383 89.4211 132' stroke='",

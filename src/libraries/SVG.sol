@@ -4,7 +4,7 @@ pragma solidity >=0.8.0;
 import {Util} from "./Util.sol";
 
 library SVG {
-    function svg(string memory _children) internal pure returns (string memory) {
+    function wrap(string memory _children) internal pure returns (string memory) {
         return
             string.concat(
                 "<svg ",
@@ -21,7 +21,63 @@ library SVG {
             );
     }
 
-    function circle(
+    function closedCircle(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity
+    ) internal pure returns (string memory) {
+        return _circle(_radius, _coords, _mixMode, _fill, _opacity, "/>");
+    }
+
+    function closedCircle(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity,
+        string memory _params
+    ) internal pure returns (string memory) {
+        return _circle(_radius, _coords, _mixMode, _fill, _opacity, string.concat(_params, "/>"));
+    }
+
+    function openCircle(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity
+    ) internal pure returns (string memory) {
+        return _circle(_radius, _coords, _mixMode, _fill, _opacity, ">");
+    }
+
+    function openCircle(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity,
+        string memory _params
+    ) internal pure returns (string memory) {
+        return _circle(_radius, _coords, _mixMode, _fill, _opacity, string.concat(_params, ">"));
+    }
+
+    function closeCircle() internal pure returns (string memory) {
+        return "</circle>";
+    }
+
+    function _circle(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity
+    ) internal pure returns (string memory) {
+        return _circle(_radius, _coords, _mixMode, _fill, _opacity, "");
+    }
+
+    function _circle(
         string memory _radius,
         string[2] memory _coords,
         string memory _mixMode,
@@ -44,37 +100,7 @@ library SVG {
                 "opacity=",
                 Util.quote(_opacity),
                 " ",
-                _params,
-                ">"
-            );
-    }
-
-    function circle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity
-    ) internal pure returns (string memory) {
-        return circle(_radius, _coords, _mixMode, _fill, _opacity, "");
-    }
-
-    function circleFilter(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity,
-        string memory _filter
-    ) internal pure returns (string memory) {
-        return
-            circle(
-                _radius,
-                _coords,
-                _mixMode,
-                _fill,
-                _opacity,
-                string.concat("filter=", Util.quote(string.concat("url(#", _filter, ")")))
+                _params
             );
     }
 
@@ -115,19 +141,6 @@ library SVG {
                 ">",
                 _mpath,
                 "</animateMotion>"
-            );
-    }
-
-    function animate(string memory _dur) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<animate ",
-                'attributeName="opacity" ',
-                'values="0;1;0" ',
-                "dur=",
-                Util.quote(_dur),
-                'repeatCount="indefinite" ',
-                "/>"
             );
     }
 }
