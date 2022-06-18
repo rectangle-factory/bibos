@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # anvil rpc
-RPC_URL=http://127.0.0.1:8545
+RPC_URL=https://eth-rinkeby.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC
 # // anvil account 9
-PRIVATE_KEY=0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
-PUBLIC_KEY=0xa0ee7a142d267c1f36714e4a8f75612f20a79720
-
+PRIVATE_KEY=0x3992f6bfb796e40beb6814fdb5b87b94000dd0bcc40d44652337f517f5257847
+PUBLIC_KEY=0x8fA3ce35E7c74de9b76230D95E1DE6EC4c165824
 DEPLOYMENTS_PATH=./deployment/deployments.json
 
 deploy_library() {
@@ -56,3 +55,8 @@ echo "{}" > $DEPLOYMENTS_PATH
 
 # save the bibos address in deployments.json
 write_deployment_address "Bibos" $BIBOS_ADDRESS
+
+# forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast src/scripts/deploy_bibos.sol:deploy_bibos
+
+# cast send --private-key $PRIVATE_KEY --rpc-url $RPC_URL 0x0Fa224f8F90be835f4C1Eb4cE2f2035bA31Cc8aC "mint()"
+# forge verify-contract --chain-id 4 --compiler-version "0.8.13+commit.abaa5c0e" "0x0Fa224f8F90be835f4C1Eb4cE2f2035bA31Cc8aC" src/Bibos.sol:Bibos "WGRBABVVTP7CX4R3VAVFDSN7FZY27CQJPI"

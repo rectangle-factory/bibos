@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-library Points {
+library PointsUncompressed {
     uint256 constant length = 64;
 
-    function body(uint256 _index) internal pure returns (string[2] memory) {
+    function body(uint256 _index) external pure returns (string[2] memory) {
         string[2][64] memory bodyPoints = [
             ["117", "114"],
             ["122", "143"],
@@ -75,7 +75,7 @@ library Points {
         return bodyPoints[_index % 64];
     }
 
-    function glint(uint256 _index) internal pure returns (string[2] memory) {
+    function glint(uint256 _index) external pure returns (string[2] memory) {
         string[2][64] memory glintPoints = [
             ["241", "131"],
             ["238", "108"],
@@ -145,7 +145,7 @@ library Points {
         return glintPoints[_index % 64];
     }
 
-    function motes(uint256 _index) internal pure returns (string[2][3] memory) {
+    function motes(uint256 _index) external pure returns (string[2][3] memory) {
         string[2][3][24] memory motePoints = [
             [["173", "94"], ["107", "193"], ["206", "127"]],
             [["107", "193"], ["150", "210"], ["193", "193"]],

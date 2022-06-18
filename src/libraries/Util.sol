@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity >=0.8.0;
+import {Test, console2} from "forge-std/Test.sol";
 
 /// @title the bibos utility library
 /// @notice utility functions
@@ -18,10 +19,10 @@ library Util {
         return string.concat('"', _key, '":', _value);
     }
 
-    /// @notice converts a uint256 to string
+    /// @notice converts a uint256 to ascii representation, without leading zeroes
     /// @param _value, uint256, the value to convert
     /// @return result the resulting string
-    function uint256ToAscii(uint256 _value) internal pure returns (string memory result) {
+    function uint256ToString(uint256 _value) internal pure returns (string memory result) {
         if (_value == 0) return "0";
 
         assembly {
@@ -57,5 +58,52 @@ library Util {
             // store the length
             mstore(result, digits)
         }
+    }
+
+    function bytes1ToString(bytes1 _value) internal pure returns (string memory) {
+        return uint256ToString(uint8(_value));
+    }
+
+    function uint8ToString(uint8 _value) internal pure returns (string memory) {
+        return uint256ToString(_value);
+    }
+
+    /// @notice will revert in any characters are not in [0-9]
+    function stringToUint256(string memory _value) internal pure returns (uint256 result) {
+        // 0-9 are 48-57
+
+        bytes memory value = bytes(_value);
+        if (value.length == 0) return 0;
+        uint256 multiplier = 10**(value.length - 1);
+        uint256 i;
+        while (multiplier != 0) {
+            result += uint256((uint8(value[i]) - 48)) * multiplier;
+            unchecked {
+                multiplier /= 10;
+                ++i;
+            }
+        }
+    }
+
+    function bytes1ToHex(bytes1 _value) internal pure returns (string memory) {
+        bytes memory result = new bytes(2);
+        uint8 x = uint8(_value);
+
+        result[0] = getHexChar(x >> 4);
+        result[1] = getHexChar(x % 16);
+
+        return string(result);
+    }
+
+    function getHexChar(uint8 _value) internal pure returns (bytes1) {
+        if (_value < 10) {
+            return bytes1(_value + 48);
+        }
+        _value -= 10;
+        return bytes1(_value + 97);
+    }
+
+    function stringToBytes1(string memory _value) internal pure returns (bytes1 result) {
+        return bytes1(uint8(stringToUint256(_value)));
     }
 }

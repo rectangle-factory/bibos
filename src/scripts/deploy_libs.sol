@@ -2,7 +2,6 @@
 pragma solidity >=0.8.0;
 
 import {Test, console2 as console} from "forge-std/Test.sol";
-
 import {Mouth} from "src/libraries/Mouth.sol";
 import {Eyes} from "src/libraries/Eyes.sol";
 import {Cheeks} from "src/libraries/Cheeks.sol";

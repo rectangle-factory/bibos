@@ -2,7 +2,6 @@
 pragma solidity >=0.8.0;
 
 import {Script, console2 as console} from "forge-std/Script.sol";
-
 import {Bibos} from "src/Bibos.sol";
 
 contract deploy_bibos is Script {

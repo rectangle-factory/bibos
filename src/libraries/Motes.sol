@@ -1,42 +1,37 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+import {Traits} from "libraries/Traits.sol";
 import {Palette} from "./Palette.sol";
-import {Times} from "./Times.sol";
-import {Points} from "./Points.sol";
+import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Motes {
-    function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
-
-        if (moteSeed % 100 < 1) return 3;
-        if (moteSeed % 100 < 5) return 2;
-        if (moteSeed % 100 < 35) return 1;
-        return 0;
-    }
-
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
         uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
         string memory reverseRotate = moteSeed % 2 == 0 ? "from='0 0 0' to='360 0 0'" : "from='360 0 0' to='0 0 0'";
 
-        uint256 moteCount = getMoteCount(_seed);
+        uint256 moteCount = Traits.getMoteCount(_seed);
 
-        Palette.Refractivity refractivity = Palette.getRefractivity(_seed);
-        string[5] memory opacities = refractivity == Palette.Refractivity.LIGHT
-            ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
-            : ["0.6", "0.7", "0.8", "0.9", "1.0"];
-        string memory opacity = opacities[moteSeed % opacities.length];
-        moteSeed /= opacities.length;
-        string[2][3] memory coords = Points.motes(moteSeed);
-        moteSeed /= Points.length;
+        string memory opacity = Palette.getOpacity(moteSeed, _seed);
+        moteSeed /= Palette.opacityLength;
+        string[2][3] memory coords = Data.motePoints(moteSeed);
+        moteSeed /= Data.length;
 
         for (uint8 index = 0; index < moteCount; index++) {
             string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
 
-            result = addMote(result, Times.long(moteSeed), Times.short(moteSeed), coords[index], reverseRotate, reverse, opacity);
+            result = addMote(
+                result,
+                Data.longTimes(moteSeed),
+                Data.shortTimes(moteSeed),
+                coords[index],
+                reverseRotate,
+                reverse,
+                opacity
+            );
         }
 
         return string.concat("<g id='motes'>", result, "</g>");
@@ -60,7 +55,7 @@ library Motes {
                 _coords[1],
                 ') scale(1)">',
                 "<g>",
-                SVG.circle("10", ["0", "0"], "lighten", "white", "1.0", "bibo-blur-sm"),
+                SVG.circleFilter("10", ["0", "0"], "lighten", "white", "1.0", "bibo-blur-sm"),
                 "</circle>",
                 "<path fill-opacity=",
                 Util.quote(_opacity),

@@ -2,13 +2,12 @@
 pragma solidity >=0.8.0;
 
 import {Palette} from "./Palette.sol";
-import {Times} from "./Times.sol";
-import {Points} from "./Points.sol";
+import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Body {
-    function render(bytes32 _seed) external pure returns (string memory) {
+    function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
 
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];
@@ -17,16 +16,16 @@ library Body {
 
         string memory backgroundFill = Palette.getBackgroundFill(_seed);
         result = addBodyBackground(result, backgroundFill);
-
+        uint256 length = Data.length;
         for (uint8 i = 0; i < 7; i++) {
             string memory radius = radii[i];
             string memory fill = Palette.getBodyFill(_seed, i);
 
-            string memory dur = Times.short(bodySeed);
-            bodySeed /= Times.length;
+            string memory dur = Data.shortTimes(bodySeed);
+            bodySeed /= length;
 
-            string[2] memory coords = (i == 0) ? ["150", "150"] : Points.body(bodySeed);
-            bodySeed /= Points.length;
+            string[2] memory coords = (i == 0) ? ["150", "150"] : Data.bodyPoints(bodySeed);
+            bodySeed /= length;
 
             string memory reverse = bodySeed % 2 == 0 ? 'keyPoints="1;0" keyTimes="0;1" ' : "";
             bodySeed /= 2;
