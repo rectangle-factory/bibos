@@ -21,13 +21,13 @@ library Palette {
     }
 
     function body(bytes32 _seed, uint256 _i) internal pure returns (string memory) {
-        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i))) % length;
+        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "paletteBody", _i))) % length;
         if (Traits.refractivityType(_seed) == RefractivityType.LIGHT) return _light(i);
         else return _lightest(i);
     }
 
     function background(bytes32 _seed) internal pure returns (string memory) {
-        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "backgroundFill"))) % length;
+        uint256 i = uint256(keccak256(abi.encodePacked(_seed, "paletteBackground"))) % length;
         return _darkest(i);
     }
 

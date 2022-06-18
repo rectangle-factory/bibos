@@ -9,13 +9,12 @@ import {SVG} from "./SVG.sol";
 library Body {
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
-
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];
-
         uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body")));
 
-        string memory backgroundFill = Palette.background(_seed);
-        result = _addBodyBackground(result, backgroundFill);
+        string memory background = Palette.background(_seed);
+        result = _addBodyBackground(result, background);
+
         uint256 length = Data.length;
         for (uint8 i = 0; i < 7; i++) {
             string memory radius = radii[i];
