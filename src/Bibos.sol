@@ -22,16 +22,16 @@ contract Bibos is ERC721 {
         _;
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
     uint256 constant price = 0;
     uint256 constant maxSupply = 999;
     string constant description = "Bibos";
     address immutable owner;
     uint256 public totalSupply;
-
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
 
     // tokenId => seed
     mapping(uint256 => bytes32) public seeds;
@@ -44,15 +44,13 @@ contract Bibos is ERC721 {
         if (_tokenId >= totalSupply) revert InvalidTokenId();
         bytes32 seed = seeds[_tokenId];
         return
-            string(
-                Metadata.encodeMetadata(
-                    _tokenId,
-                    _tokenName(_tokenId), // name
-                    description, // description
-                    Traits.attributes(seed), // attributes
-                    Render.bibo(seed) // svg
-                )
-            );
+            Metadata.encodeMetadata({
+                _id: _tokenId,
+                _name: _tokenName(_tokenId),
+                _description: description,
+                _attributes: Traits.attributes(seed),
+                _svg: Render.bibo(seed)
+            });
     }
 
     function getSeed(uint256 _tokenId) public view returns (bytes32) {
