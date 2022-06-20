@@ -49,7 +49,7 @@ contract Bibos is ERC721, Owned {
         _;
     }
 
-    modifier OnlyPositive(uint256 _amount) {
+    modifier OnlyPositiveMintAmount(uint256 _amount) {
         if (_amount == 0) revert ZeroMintAmount();
         _;
     }
@@ -58,9 +58,7 @@ contract Bibos is ERC721, Owned {
                                CONSTRUCTOR
     //////////////////////////////////////////////////////////////*/
 
-    constructor() ERC721("Bibos", "BBO") Owned(msg.sender) {
-        owner = msg.sender;
-    }
+    constructor() ERC721("Bibos", "BBO") Owned(msg.sender) {}
 
     /*//////////////////////////////////////////////////////////////
                                 TOKENURI
@@ -92,7 +90,7 @@ contract Bibos is ERC721, Owned {
         payable
         OnlyIfNotMintedOut
         OnlyIfYouPayEnough(_amount)
-        OnlyPositive(_amount)
+        OnlyPositiveMintAmount(_amount)
         OnlyIfFewerThanMaxMintAmount(_amount)
     {
         for (; _amount > 0; ) {
