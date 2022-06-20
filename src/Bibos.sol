@@ -13,7 +13,7 @@ contract Bibos is ERC721, Owned {
                                   STATE
     //////////////////////////////////////////////////////////////*/
 
-    uint256 public constant price = 0;
+    uint256 public constant price = (999 * 1 ether) / 10_000;
     uint256 public constant maxMintAmount = 10;
     uint256 public constant maxSupply = 999;
     string public constant description = "Bibos";
@@ -24,8 +24,9 @@ contract Bibos is ERC721, Owned {
                                  ERRORS
     //////////////////////////////////////////////////////////////*/
 
-    error BibosCostsMoreThanThat();
+    error InsufficentValue();
     error MintedOut();
+    error ZeroMintAmount();
     error TooManyBibos();
     error InvalidTokenId();
 
@@ -34,7 +35,7 @@ contract Bibos is ERC721, Owned {
     //////////////////////////////////////////////////////////////*/
 
     modifier OnlyIfYouPayEnough(uint256 _amount) {
-        if (msg.value < _amount * price) revert BibosCostsMoreThanThat();
+        if (msg.value < _amount * price) revert InsufficentValue();
         _;
     }
 
@@ -49,7 +50,7 @@ contract Bibos is ERC721, Owned {
     }
 
     modifier OnlyPositive(uint256 _amount) {
-        if (_amount > maxMintAmount) revert TooManyBibos();
+        if (_amount == 0) revert ZeroMintAmount();
         _;
     }
 
@@ -91,6 +92,7 @@ contract Bibos is ERC721, Owned {
         payable
         OnlyIfNotMintedOut
         OnlyIfYouPayEnough(_amount)
+        OnlyPositive(_amount)
         OnlyIfFewerThanMaxMintAmount(_amount)
     {
         for (; _amount > 0; ) {

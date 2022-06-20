@@ -17,7 +17,7 @@ contract SvgValidationTest is Test {
         uint256 unixTime = time.getUnixTime();
         vm.warp(unixTime);
 
-        bibos.mint();
+        bibos.mint{value: bibos.price()}();
         string memory tokenURI = bibos.tokenURI(0);
 
         string[] memory validateInputs = new string[](3);
