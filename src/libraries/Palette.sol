@@ -8,7 +8,7 @@ enum RefractivityType {
 }
 
 library Palette {
-    uint256 constant length = 256;
+    uint256 constant length = 64;
     uint256 constant opacityLength = 5;
 
     function opacity(uint256 _seed) internal pure returns (string memory) {

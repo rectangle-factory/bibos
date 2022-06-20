@@ -49,6 +49,6 @@ library Metadata {
     /// @param _svg, stringified json
     /// @return string, bytes64 encoded svg with prefix
     function _encodeSVG(string memory _svg) internal pure returns (string memory) {
-        return string.concat("data:image/svg+xml;base64,", Base64.encode(bytes(_svg)));
+        return string.concat(SVG_XML_BASE64_HEADER, Base64.encode(bytes(_svg)));
     }
 }

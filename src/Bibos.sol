@@ -2,43 +2,68 @@
 pragma solidity 0.8.13;
 
 import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Owned} from "solmate/auth/Owned.sol";
 import {Render} from "libraries/Render.sol";
 import {Util} from "libraries/Util.sol";
 import {Metadata} from "libraries/Metadata.sol";
 import {Traits} from "libraries/Traits.sol";
 
-contract Bibos is ERC721 {
+contract Bibos is ERC721, Owned {
+    /*//////////////////////////////////////////////////////////////
+                                  STATE
+    //////////////////////////////////////////////////////////////*/
+
+    uint256 public constant price = 0;
+    uint256 public constant maxMintAmount = 10;
+    uint256 public constant maxSupply = 999;
+    string public constant description = "Bibos";
+    uint256 public totalSupply;
+    mapping(uint256 => bytes32) public seeds; // (tokenId => seed)
+
+    /*//////////////////////////////////////////////////////////////
+                                 ERRORS
+    //////////////////////////////////////////////////////////////*/
+
     error BibosCostsMoreThanThat();
-    error BibosIsMintedOut();
+    error MintedOut();
+    error TooManyBibos();
     error InvalidTokenId();
 
-    modifier OnlyIfYouPayEnough() {
-        if (msg.value < price) revert BibosCostsMoreThanThat();
+    /*//////////////////////////////////////////////////////////////
+                                MODIFIERS
+    //////////////////////////////////////////////////////////////*/
+
+    modifier OnlyIfYouPayEnough(uint256 _amount) {
+        if (msg.value < _amount * price) revert BibosCostsMoreThanThat();
         _;
     }
 
-    modifier OnlyIfBibosIsNotMintedOut() {
-        if (totalSupply >= maxSupply) revert BibosIsMintedOut();
+    modifier OnlyIfNotMintedOut() {
+        if (totalSupply >= maxSupply) revert MintedOut();
         _;
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == owner);
+    modifier OnlyIfFewerThanMaxMintAmount(uint256 _amount) {
+        if (_amount > maxMintAmount) revert TooManyBibos();
         _;
     }
 
-    uint256 constant price = 0;
-    uint256 constant maxSupply = 999;
-    string constant description = "Bibos";
-    address immutable owner;
-    uint256 public totalSupply;
+    modifier OnlyPositive(uint256 _amount) {
+        if (_amount > maxMintAmount) revert TooManyBibos();
+        _;
+    }
 
-    // tokenId => seed
-    mapping(uint256 => bytes32) public seeds;
+    /*//////////////////////////////////////////////////////////////
+                               CONSTRUCTOR
+    //////////////////////////////////////////////////////////////*/
 
-    constructor() ERC721("Bibos", "BBO") {
+    constructor() ERC721("Bibos", "BBO") Owned(msg.sender) {
         owner = msg.sender;
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                TOKENURI
+    //////////////////////////////////////////////////////////////*/
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         if (_tokenId >= totalSupply) revert InvalidTokenId();
@@ -53,18 +78,43 @@ contract Bibos is ERC721 {
             });
     }
 
-    function getSeed(uint256 _tokenId) public view returns (bytes32) {
-        return seeds[_tokenId];
+    /*//////////////////////////////////////////////////////////////
+                                 MINTING
+    //////////////////////////////////////////////////////////////*/
+
+    function mint() public payable OnlyIfNotMintedOut OnlyIfYouPayEnough(1) {
+        _mint(msg.sender);
     }
 
-    function mint() external payable OnlyIfBibosIsNotMintedOut OnlyIfYouPayEnough {
-        uint256 id = totalSupply++;
-        seeds[id] = keccak256(abi.encodePacked(msg.sender, block.timestamp));
-        _mint(msg.sender, id);
+    function mint(uint256 _amount)
+        public
+        payable
+        OnlyIfNotMintedOut
+        OnlyIfYouPayEnough(_amount)
+        OnlyIfFewerThanMaxMintAmount(_amount)
+    {
+        for (; _amount > 0; ) {
+            _mint(msg.sender);
+            _amount--;
+        }
     }
 
-    function withdraw(address payable _to) external onlyOwner {
+    /*//////////////////////////////////////////////////////////////
+                                WITHDRAW
+    //////////////////////////////////////////////////////////////*/
+
+    function withdraw(address payable _to) public onlyOwner {
         _to.transfer(address(this).balance);
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
+    function _mint(address _to) internal {
+        uint256 id = totalSupply++;
+        seeds[id] = keccak256(abi.encodePacked(msg.sender, block.timestamp, id));
+        ERC721._mint(_to, id);
     }
 
     function _tokenName(uint256 _tokenId) internal pure returns (string memory) {

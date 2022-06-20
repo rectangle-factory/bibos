@@ -16,6 +16,12 @@ contract BibosTest is Test {
         assertEq(bibos.totalSupply(), 1);
     }
 
+    function testMintMultiple(uint8 _amount) public {
+        vm.assume(_amount <= 10);
+        bibos.mint(_amount);
+        assertEq(bibos.totalSupply(), _amount);
+    }
+
     function testGetTokenURI() public {
         bibos.mint();
         string memory tokenURI = bibos.tokenURI(0);
