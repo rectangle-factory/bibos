@@ -3,7 +3,6 @@ pragma solidity >=0.8.0;
 
 import {Test, console2 as console} from "forge-std/Test.sol";
 import {Bibos} from "../Bibos.sol";
-import {vm} from "../util/vm.sol";
 import {time} from "../util/time.sol";
 
 contract SvgValidationTest is Test {
