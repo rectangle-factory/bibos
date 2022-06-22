@@ -12,6 +12,10 @@ enum CheekType {
 }
 
 library Cheeks {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         CheekType cheekType = Traits.cheekType(_seed);
 
@@ -19,6 +23,10 @@ library Cheeks {
         if (cheekType == CheekType.FRECKLES) return _freckles();
         return "";
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _circular() internal pure returns (string memory) {
         return

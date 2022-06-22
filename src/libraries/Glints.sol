@@ -17,6 +17,10 @@ enum GlintType {
 library Glints {
     uint256 constant GLINT_COUNT = 16;
 
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result;
 
@@ -40,18 +44,22 @@ library Glints {
 
             if (glintType == GlintType.FLOATING) {
                 string memory reverse = glintSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
-                result = _addFloatingGlint(result, radius, coords, mixMode, fill, opacity, dur, reverse);
+                result = _addFloating(result, radius, coords, mixMode, fill, opacity, dur, reverse);
             } else if (glintType == GlintType.RISING)
-                result = _addRisingGlint(result, radius, coords, mixMode, fill, opacity, dur);
+                result = _addRising(result, radius, coords, mixMode, fill, opacity, dur);
             else if (glintType == GlintType.FALLING) {
-                result = _addFallingGlint(result, radius, coords, mixMode, fill, opacity, dur);
+                result = _addFalling(result, radius, coords, mixMode, fill, opacity, dur);
             }
         }
 
         return string.concat("<g>", result, "</g>");
     }
 
-    function _addRisingGlint(
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
+    function _addRising(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -72,7 +80,7 @@ library Glints {
             );
     }
 
-    function _addFloatingGlint(
+    function _addFloating(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,
@@ -91,7 +99,7 @@ library Glints {
             );
     }
 
-    function _addFallingGlint(
+    function _addFalling(
         string memory _result,
         string memory _radius,
         string[2] memory _coords,

@@ -16,7 +16,6 @@ library Traits {
 
     function attributes(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
-
         result = string.concat(result, _attribute("Refractivity", refractivityTrait(_seed)));
         result = string.concat(result, ",", _attribute("Glint", glintTrait(_seed)));
         result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
@@ -47,7 +46,7 @@ library Traits {
     }
 
     /*//////////////////////////////////////////////////////////////
-                                  GLINT
+                                  GLINTS
     //////////////////////////////////////////////////////////////*/
 
     function glintTrait(bytes32 _seed) internal pure returns (string memory) {
@@ -59,11 +58,11 @@ library Traits {
     }
 
     function glintType(bytes32 _seed) internal pure returns (GlintType) {
-        uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
+        uint256 seed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
 
-        if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
-        if (glintTypeSeed % 100 < 35) return GlintType.RISING;
-        if (glintTypeSeed % 100 < 40) return GlintType.FALLING;
+        if (seed < 20) return GlintType.FLOATING;
+        if (seed < 35) return GlintType.RISING;
+        if (seed < 40) return GlintType.FALLING;
         return GlintType.NONE;
     }
 
@@ -86,17 +85,17 @@ library Traits {
     }
 
     function eyeType(bytes32 _seed) internal pure returns (EyeType) {
-        uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
+        uint256 seed = uint256(keccak256(abi.encodePacked(_seed, "eyeType"))) % 100;
 
-        if (eyeSeed % 100 < 25) return EyeType.OPEN;
-        if (eyeSeed % 100 < 50) return EyeType.SMILEY;
-        if (eyeSeed % 100 < 65) return EyeType.WINK;
-        if (eyeSeed % 100 < 75) return EyeType.SLEEPY;
-        if (eyeSeed % 100 < 83) return EyeType.CLOVER;
-        if (eyeSeed % 100 < 89) return EyeType.DIZZY;
-        if (eyeSeed % 100 < 94) return EyeType.HEART;
-        if (eyeSeed % 100 < 97) return EyeType.WINCE;
-        if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
+        if (seed % 100 < 25) return EyeType.OPEN;
+        if (seed % 100 < 50) return EyeType.SMILEY;
+        if (seed % 100 < 65) return EyeType.WINK;
+        if (seed % 100 < 75) return EyeType.SLEEPY;
+        if (seed % 100 < 83) return EyeType.CLOVER;
+        if (seed % 100 < 89) return EyeType.DIZZY;
+        if (seed % 100 < 94) return EyeType.HEART;
+        if (seed % 100 < 97) return EyeType.WINCE;
+        if (seed % 100 < 99) return EyeType.CYCLOPS;
         return EyeType.STAR;
     }
 
@@ -116,15 +115,15 @@ library Traits {
     }
 
     function mouthType(bytes32 _seed) internal pure returns (MouthType) {
-        uint256 mouthTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "mouthType"))) % 100;
+        uint256 seed = uint256(keccak256(abi.encodePacked(_seed, "mouthType"))) % 100;
 
-        if (mouthTypeSeed % 100 < 30) return MouthType.SMILE;
-        if (mouthTypeSeed % 100 < 60) return MouthType.MEDIUM_SMILE;
-        if (mouthTypeSeed % 100 < 80) return MouthType.SMALL_SMILE;
-        if (mouthTypeSeed % 100 < 90) return MouthType.FLAT;
-        if (mouthTypeSeed % 100 < 94) return MouthType.FROWN;
-        if (mouthTypeSeed % 100 < 97) return MouthType.GRIN;
-        if (mouthTypeSeed % 100 < 99) return MouthType.SMOOCH;
+        if (seed < 30) return MouthType.SMILE;
+        if (seed < 60) return MouthType.MEDIUM_SMILE;
+        if (seed < 80) return MouthType.SMALL_SMILE;
+        if (seed < 90) return MouthType.FLAT;
+        if (seed < 94) return MouthType.FROWN;
+        if (seed < 97) return MouthType.GRIN;
+        if (seed < 99) return MouthType.SMOOCH;
         return MouthType.SMIRK;
     }
 
@@ -140,10 +139,10 @@ library Traits {
     }
 
     function cheekType(bytes32 _seed) internal pure returns (CheekType) {
-        uint256 cheeksSeed = uint256(keccak256(abi.encodePacked(_seed, "cheeks"))) % 100;
+        uint256 seed = uint256(keccak256(abi.encodePacked(_seed, "cheekType"))) % 100;
 
-        if (cheeksSeed % 100 < 70) return CheekType.NONE;
-        if (cheeksSeed % 100 < 95) return CheekType.CIRCULAR;
+        if (seed < 70) return CheekType.NONE;
+        if (seed < 95) return CheekType.CIRCULAR;
         return CheekType.FRECKLES;
     }
 
@@ -152,16 +151,16 @@ library Traits {
     //////////////////////////////////////////////////////////////*/
 
     function moteTrait(bytes32 _seed) internal pure returns (string memory) {
-        uint256 count_ = moteCount(_seed);
-        return Util.uint256ToString(count_);
+        uint256 count = moteCount(_seed);
+        return Util.uint256ToString(count);
     }
 
     function moteCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
+        uint256 seed = uint256(keccak256(abi.encodePacked(_seed, "moteCount"))) % 100;
 
-        if (moteSeed % 100 < 1) return 3;
-        if (moteSeed % 100 < 5) return 2;
-        if (moteSeed % 100 < 35) return 1;
+        if (seed < 1) return 3;
+        if (seed < 5) return 2;
+        if (seed < 35) return 1;
         return 0;
     }
 }

@@ -20,6 +20,10 @@ enum EyeType {
 }
 
 library Eyes {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory fill = Palette.background(_seed);
         EyeType eyeType = Traits.eyeType(_seed);
@@ -35,6 +39,10 @@ library Eyes {
         if (eyeType == EyeType.CYCLOPS) return _cyclops(fill);
         return _star(fill);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _open(string memory _fill) internal pure returns (string memory) {
         return

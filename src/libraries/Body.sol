@@ -7,6 +7,10 @@ import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Body {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "";
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];
@@ -34,6 +38,10 @@ library Body {
 
         return string.concat('<g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">', result, "</g>");
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _addBodyCircle(
         string memory _result,

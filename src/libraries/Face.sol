@@ -7,6 +7,10 @@ import {Mouth} from "./Mouth.sol";
 import {Cheeks} from "./Cheeks.sol";
 
 library Face {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         uint256 faceSeed = uint256(keccak256(abi.encodePacked(_seed, "face")));
 
@@ -28,6 +32,10 @@ library Face {
 
         return result;
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _animateMotion(string memory _reverse) internal pure returns (string memory) {
         return
