@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap");
+
 @import "./debug.css";
 @import "./syntaxTheme.css";
 
@@ -43,6 +45,10 @@ html {
 
 .inner-shadow-border {
   box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.125);
+}
+
+.inner-shadow-border-debug {
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 100, 200, 1);
 }
 
 .shadow-glow {

@@ -14,7 +14,7 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
         className={`rounded-3xl h-full w-auto overflow-hidden transition-opacity duration-300 ${props.isLoading ? 'opacity-0' : 'opacity-100'} ${props.debug ? "debug-svg" : ""}`}
         dangerouslySetInnerHTML={{ __html: props.rawSVG }}
       />
-      <div className="rounded-3xl z-90 absolute content-none top-0 left-0 right-0 bottom-0 inner-shadow-border" />
+      <div className={`rounded-3xl z-90 absolute content-none top-0 left-0 right-0 bottom-0 ${props.debug ? 'inner-shadow-border-debug':"inner-shadow-border"}`} />
     </div>
   );
 }
