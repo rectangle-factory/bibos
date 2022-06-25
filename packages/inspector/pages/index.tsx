@@ -93,29 +93,4 @@ export default function Index() {
       </Pane>
     </Container>
   );
-
-  // return (
-  //   <>
-  //     {view == IndexView.IMAGE ? (
-  //       <section className="content">
-  //         <ImagePanel src={metadata.image} />
-  //         <TraitsPanel
-  //           loading={status == NFTStatus.UNFETCHED}
-  //           tokenId={tokenId}
-  //           name={metadata.name}
-  //           attributes={metadata.attributes}
-  //         />
-  //       </section>
-  //     ) : (
-  //       <section className="content">
-  //         <SVGPanel svg={rawSVG} />
-  //       </section>
-  //     )}
-  //     <div className="button-panel">
-  //       <ViewButton view={view} handleClick={handleToggleView} />
-  //       <RenderButton fetching={status == NFTStatus.FETCHING} handleClick={handleFetchNFT} />
-  //     </div>
-  //     <span className="copyright">© BibosCorp Research Group, 2022</span>
-  //   </>
-  // );
 }
