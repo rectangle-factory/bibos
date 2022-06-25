@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
+import babelParser from 'prettier/parser-babel'
+import prettier from 'prettier/standalone'
 
-import formatSVG from "xml-formatter";
+function formatSVG(code: string) {
+  return prettier.format(code, { parser: 'babel', plugins: [babelParser] })
+}
+
 
 export const useSvg = (svg: string) => {
   const [formatted, setFormatted] = useState("");

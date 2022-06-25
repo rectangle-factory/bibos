@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../styles/global.css";
 
 type AppProps = {
   Component: React.FC;
