@@ -19,13 +19,16 @@ export default function Index() {
   const { tokenURI, status, handleFetchNFT } = useLocalRender();
   const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
-
   const { formatted, error } = useSvg(rawSVG);
+
+  const loc = formatted.split(/\r\n|\r|\n/).length;
+  const kb = ((new TextEncoder().encode(rawSVG)).length * 0.001).toFixed(3)
 
   return (
     <Container>
       <Pane>
         <div className="flex h-full overflow-y-scroll">
+          
           <SyntaxHighlighter
             wrapLongLines={true}
             // wrapLines={true}
@@ -37,11 +40,30 @@ export default function Index() {
             {formatted}
           </SyntaxHighlighter>
         </div>
+        {
+          error.length === 0 ? (
+            null
+          ) :
+          <>
+          <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-white">
+          <div className="w-full text-sm font-bold text-red-500">
+            Error parsing SVG
+            </div>
+            <div className="w-full text-sm">{error}</div>
+          </div>
+          </>
+        }
         <HorizontalRule />
-        <Toolbar>
-          <div className="text-white flex gap-x-2 items-center">
-            <div className="text-xl w-8 h-8 bg-black/40 flex items-center justify-center rounded-lg border border-black/50">🔬</div>
-            <div>Inspector</div>
+        <Toolbar className="justify-between">
+          <div className="text-white flex gap-x-1 items-center">
+            <div className="text-2xl">🔬</div>
+            <div className="opacity-70">Inspector</div>
+          </div>
+
+          <div className="flex gap-x-2 items-center">
+            <div className="text-white text-sm"><div className="inline mr-1">{loc}</div><div className="inline opacity-50">LOC</div></div>
+            <div className="text-white text-sm"><div className="inline mr-1">{kb}</div><div className="inline opacity-50">kb</div></div>
+
           </div>
         </Toolbar>
       </Pane>
@@ -52,7 +74,7 @@ export default function Index() {
         <div className="flex w-full h-full items-center justify-center p-8">
           <RawSVGViewer rawSVG={rawSVG} debug={debug} isLoading={status == NFTStatus.FETCHING}/>
         </div>
-        <HorizontalRule />
+
         <TraitsTable
           loading={status == NFTStatus.UNFETCHED}
           tokenId={tokenId}

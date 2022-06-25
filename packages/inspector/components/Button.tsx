@@ -11,7 +11,7 @@ export function Button(props: ButtonProps) {
   return (
     <button
       type="button"
-      className={`transition-opacity px-2 py-0.5 border border-white/10 text-white rounded-lg ${cns} ${props.className}`}
+      className={`transition-opacity user-select-none px-2 py-0.5 border border-white/10 text-white rounded-lg ${cns} ${props.className}`}
       onClick={props.onClick}
     >
       {props.children}

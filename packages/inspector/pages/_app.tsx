@@ -8,7 +8,7 @@ type AppProps = {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main>
-      <Component {...pageProps} />{" "}
+      <Component {...pageProps} />
     </main>
   );
 }
