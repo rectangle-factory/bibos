@@ -23,7 +23,7 @@ module.exports = {
       colors: {
         background: "#27282B",
         surface: "rgba(255,255,255,0.10)",
-        primary: "#5076FF",
+        primary: "#3D8EFF",
       },
     },
   },

@@ -26,6 +26,7 @@ importers:
       '@types/react': ^18.0.3
       '@typescript-eslint/parser': ^5.19.0
       autoprefixer: ^10.4.7
+      classnames: ^2.3.1
       eslint: ^8.13.0
       ethers: ^5.6.6
       next: ^12.1.5
@@ -43,6 +44,7 @@ importers:
     dependencies:
       '@types/node': 17.0.23
       '@types/react': 18.0.3
+      classnames: 2.3.1
       ethers: 5.6.6
       next: 12.1.5_react-dom@18.0.0+react@18.0.0
       prettier: 2.6.2
@@ -1138,6 +1140,10 @@ packages:
   /ci-info/2.0.0:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
     dev: true
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
 
   /clean-stack/2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}

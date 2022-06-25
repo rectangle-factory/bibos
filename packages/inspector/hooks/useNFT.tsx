@@ -1,16 +1,6 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
-import { trait } from "../types";
-
-type NFTState = {
-  metadata: {
-    name: string;
-    image: string;
-    attributes: trait[];
-  };
-  tokenId: number;
-  rawSVG: string;
-};
+import { trait, NFTState } from "../types";
 
 const defaultState = {
   metadata: {
