@@ -20,7 +20,7 @@ library Traits {
         result = string.concat(result, trait("Refractivity", getRefractivityTrait(_seed)));
         result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
-        result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
+        result = string.concat(result, ",", trait("Mouth", getMouthTrait(_seed)));
         result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
         result = string.concat(result, ",", trait("Motes", getMoteTrait(_seed)));
         return string.concat(result, "]");
