@@ -18,27 +18,27 @@ library PointsUtil {
         return result;
     }
 
-    function getGlints() internal pure returns (bytes memory) {
+    function getMotes() internal pure returns (bytes memory) {
         // all in format XXX.XX
         // numbers less than 256
 
         bytes memory result;
         uint256 i;
         for (; i < 64; ) {
-            string[2] memory pair = PointsUncompressed.glint(i);
+            string[2] memory pair = PointsUncompressed.mote(i);
             result = _concatPair(result, pair[0], pair[1]);
             ++i;
         }
         return result;
     }
 
-    function getMotes() internal pure returns (bytes memory) {
+    function getGlints() internal pure returns (bytes memory) {
         // all in format XXX
 
         uint256 i;
         bytes memory result;
         for (; i < 64; ) {
-            string[2][3] memory pair = PointsUncompressed.motes(i);
+            string[2][3] memory pair = PointsUncompressed.glints(i);
             uint256 j;
             for (; j < 3; ) {
                 result = _concatPair(result, pair[j][0], pair[j][1]);

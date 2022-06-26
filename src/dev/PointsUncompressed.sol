@@ -75,8 +75,8 @@ library PointsUncompressed {
         return bodyPoints[_index % 64];
     }
 
-    function glint(uint256 _index) external pure returns (string[2] memory) {
-        string[2][64] memory glintPoints = [
+    function mote(uint256 _index) external pure returns (string[2] memory) {
+        string[2][64] memory motePoints = [
             ["241", "131"],
             ["238", "108"],
             ["225", "134"],
@@ -142,11 +142,11 @@ library PointsUncompressed {
             ["108", "165"],
             ["72", "160"]
         ];
-        return glintPoints[_index % 64];
+        return motePoints[_index % 64];
     }
 
-    function motes(uint256 _index) external pure returns (string[2][3] memory) {
-        string[2][3][24] memory motePoints = [
+    function glints(uint256 _index) external pure returns (string[2][3] memory) {
+        string[2][3][24] memory glintPoints = [
             [["173", "94"], ["107", "193"], ["206", "127"]],
             [["107", "193"], ["150", "210"], ["193", "193"]],
             [["173", "206"], ["94", "127"], ["150", "210"]],
@@ -172,6 +172,6 @@ library PointsUncompressed {
             [["94", "127"], ["127", "94"], ["150", "210"]],
             [["210", "150"], ["90", "150"], ["150", "90"]]
         ];
-        return motePoints[_index % 24];
+        return glintPoints[_index % 24];
     }
 }
