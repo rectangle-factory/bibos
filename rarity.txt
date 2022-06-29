@@ -2,9 +2,9 @@ strategy: derive all traits from a single bytes32 seed
 
 
 1
-export const refractivityTypes = [
-    'Light', // 80%
-    'Dark', // 20%
+export const densityTypes = [
+    'High', // 80%
+    'Low', // 20%
 ]
 
 2
