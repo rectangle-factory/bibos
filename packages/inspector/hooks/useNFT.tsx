@@ -28,6 +28,7 @@ export const useNFT = (tokenURI: string) => {
   useEffect(() => {
     if (tokenURI == null) return;
     // decode and parse metadata
+    console.log(decodeBase64(tokenURI))
     const metadata = JSON.parse(decodeBase64(tokenURI));
 
     const tokenId = metadata.tokenId;

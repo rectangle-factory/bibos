@@ -47,9 +47,9 @@ library Palette {
 
         if (Traits.getDensityType(_seed) == DensityType.HIGH) {
             if (Traits.getPolarityType(_seed) == PolarityType.POSITIVE) {
-                return lightPalette(backgroundFillValue);
+                return darkestPalette(backgroundFillValue);
             } else {
-                return invertedLightPalette(backgroundFillValue);
+                return invertedDarkestPalette(backgroundFillValue);
             }
         } else {
             if (Traits.getPolarityType(_seed) == PolarityType.POSITIVE) {

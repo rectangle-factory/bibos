@@ -17,7 +17,7 @@ library Traits {
     function getTraits(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
         result = string.concat(result, trait("Density", getDensityTrait(_seed)));
-        result = string.concat(result, trait("Polarity", getDensityTrait(_seed)));
+        result = string.concat(result, ",", trait("Polarity", getPolarityTrait(_seed)));
         result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
@@ -58,7 +58,7 @@ library Traits {
     function getPolarityType(bytes32 _seed) internal pure returns (PolarityType) {
         uint256 polaritySeed = uint256(keccak256(abi.encodePacked(_seed, "polarity"))) % 100;
 
-        if (polaritySeed < 90) return PolarityType.POSITIVE;
+        if (polaritySeed < 80) return PolarityType.POSITIVE;
         return PolarityType.NEGATIVE;
     }
 
