@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
+import {Palette, DensityType, PolarityType} from "./Palette.sol";
+import {Traits} from "./Traits.sol";
 import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
@@ -30,7 +31,11 @@ library Body {
             string memory reverse = bodySeed % 2 == 0 ? 'keyPoints="1;0" keyTimes="0;1" ' : "";
             bodySeed /= 2;
 
-            result = addBodyCircle(result, radius, coords, fill, dur, reverse);
+            string memory mixBlendMode = Traits.getPolarityType(_seed) == PolarityType.POSITIVE
+                ? "lighten"
+                : "multiply";
+
+            result = addBodyCircle(result, radius, coords, fill, dur, reverse, mixBlendMode);
         }
 
         return string.concat('<g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">', result, "</g>");
@@ -42,16 +47,16 @@ library Body {
         string[2] memory _coords,
         string memory _fill,
         string memory _dur,
-        string memory _reverse
+        string memory _reverse,
+        string memory _mixBlendMode
     ) internal pure returns (string memory) {
-        string memory mixMode = "lighten";
         string memory mpath = '<mpath xlink:href="#bibo-jitter-lg"/>';
         string memory opacity = "1";
 
         return
             string.concat(
                 _result,
-                SVG.circle(_radius, _coords, mixMode, _fill, opacity),
+                SVG.circle(_radius, _coords, _mixBlendMode, _fill, opacity),
                 SVG.animateMotion(_reverse, _dur, "linear", mpath),
                 "</circle>"
             );

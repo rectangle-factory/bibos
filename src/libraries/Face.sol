@@ -19,6 +19,7 @@ library Face {
             rotation,
             ")'>",
             SVG.rect("200", "200", "#00000000"),
+            SVG.circleFilter("80", ["100", "100"], "lighten", "white", "0.2", "bibo-blur-lg"),
             Eyes.render(_seed),
             Mouth.render(_seed),
             Cheeks.render(_seed),

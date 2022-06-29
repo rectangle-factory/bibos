@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {DensityType} from "./Palette.sol";
+import {DensityType, PolarityType} from "./Palette.sol";
 import {GlintType} from "./Glints.sol";
 import {EyeType} from "./Eyes.sol";
 import {CheekType} from "./Cheeks.sol";
@@ -16,8 +16,8 @@ library Traits {
 
     function getTraits(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
-
         result = string.concat(result, trait("Density", getDensityTrait(_seed)));
+        result = string.concat(result, trait("Polarity", getDensityTrait(_seed)));
         result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
@@ -44,6 +44,22 @@ library Traits {
 
         if (densitySeed < 80) return DensityType.HIGH;
         return DensityType.LOW;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                              POLARITY
+    //////////////////////////////////////////////////////////////*/
+
+    function getPolarityTrait(bytes32 _seed) internal pure returns (string memory) {
+        PolarityType polarityType = getPolarityType(_seed);
+        return polarityType == PolarityType.POSITIVE ? "Positive" : "Negative";
+    }
+
+    function getPolarityType(bytes32 _seed) internal pure returns (PolarityType) {
+        uint256 polaritySeed = uint256(keccak256(abi.encodePacked(_seed, "polarity"))) % 100;
+
+        if (polaritySeed < 90) return PolarityType.POSITIVE;
+        return PolarityType.NEGATIVE;
     }
 
     /*//////////////////////////////////////////////////////////////
