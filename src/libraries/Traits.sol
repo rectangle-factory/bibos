@@ -31,7 +31,7 @@ library Traits {
     }
 
     /*//////////////////////////////////////////////////////////////
-                              REFRACTIVITY
+                              DENSITY
     //////////////////////////////////////////////////////////////*/
 
     function getDensityTrait(bytes32 _seed) internal pure returns (string memory) {
