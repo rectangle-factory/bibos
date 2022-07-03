@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 const Dots = () => {
   const [state, setState] = useState(0);
@@ -14,4 +14,4 @@ const Dots = () => {
   return <span className="dots">{new Array(state).fill(".").join("").padEnd(3, " ")}</span>;
 };
 
-export {Dots};
+export { Dots };
