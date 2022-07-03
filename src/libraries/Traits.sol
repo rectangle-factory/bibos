@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {RefractivityType} from "./Palette.sol";
+import {DensityType, PolarityType} from "./Palette.sol";
 import {MoteType} from "./Motes.sol";
 import {EyeType} from "./Eyes.sol";
 import {CheekType} from "./Cheeks.sol";
@@ -16,8 +16,9 @@ library Traits {
 
     function getTraits(bytes32 _seed) internal pure returns (string memory) {
         string memory result = "[";
-
-        result = string.concat(result, trait("Refractivity", getRefractivityTrait(_seed)));
+        result = string.concat(result, trait("Density", getDensityTrait(_seed)));
+        result = string.concat(result, ",", trait("Polarity", getPolarityTrait(_seed)));
+        result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
         result = string.concat(result, ",", trait("Mote", getMoteTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
         result = string.concat(result, ",", trait("Mouth", getMouthTrait(_seed)));
@@ -31,19 +32,35 @@ library Traits {
     }
 
     /*//////////////////////////////////////////////////////////////
-                              REFRACTIVITY
+                              DENSITY
     //////////////////////////////////////////////////////////////*/
 
-    function getRefractivityTrait(bytes32 _seed) internal pure returns (string memory) {
-        RefractivityType refractivityType = getRefractivityType(_seed);
-        return refractivityType == RefractivityType.LIGHT ? "Light" : "Dark";
+    function getDensityTrait(bytes32 _seed) internal pure returns (string memory) {
+        DensityType densityType = getDensityType(_seed);
+        return densityType == DensityType.HIGH ? "High" : "Low";
     }
 
-    function getRefractivityType(bytes32 _seed) internal pure returns (RefractivityType) {
-        uint256 refractivitySeed = uint256(keccak256(abi.encodePacked(_seed, "refractivity"))) % 100;
+    function getDensityType(bytes32 _seed) internal pure returns (DensityType) {
+        uint256 densitySeed = uint256(keccak256(abi.encodePacked(_seed, "density"))) % 100;
 
-        if (refractivitySeed < 80) return RefractivityType.LIGHT;
-        return RefractivityType.DARK;
+        if (densitySeed < 80) return DensityType.HIGH;
+        return DensityType.LOW;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                              POLARITY
+    //////////////////////////////////////////////////////////////*/
+
+    function getPolarityTrait(bytes32 _seed) internal pure returns (string memory) {
+        PolarityType polarityType = getPolarityType(_seed);
+        return polarityType == PolarityType.POSITIVE ? "Positive" : "Negative";
+    }
+
+    function getPolarityType(bytes32 _seed) internal pure returns (PolarityType) {
+        uint256 polaritySeed = uint256(keccak256(abi.encodePacked(_seed, "polarity"))) % 100;
+
+        if (polaritySeed < 80) return PolarityType.POSITIVE;
+        return PolarityType.NEGATIVE;
     }
 
     /*//////////////////////////////////////////////////////////////

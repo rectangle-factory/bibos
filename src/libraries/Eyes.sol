@@ -21,7 +21,7 @@ enum EyeType {
 
 library Eyes {
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = Palette.getBackgroundFill(_seed);
+        string memory fill = "black";
         EyeType eyeType = Traits.getEyeType(_seed);
 
         if (eyeType == EyeType.OPEN) return open(fill);
