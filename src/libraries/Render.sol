@@ -6,8 +6,8 @@ import {Util} from "./Util.sol";
 import {Background} from "./Background.sol";
 import {Body} from "./Body.sol";
 import {Face} from "./Face.sol";
-import {Glints} from "./Glints.sol";
 import {Motes} from "./Motes.sol";
+import {Glints} from "./Glints.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
 import {Data} from "./Data.sol";
@@ -36,8 +36,8 @@ library Render {
             Data.defs(),
             Background.render(_seed),
             Body.render(_seed),
-            Glints.render(_seed),
             Motes.render(_seed),
+            Glints.render(_seed),
             Face.render(_seed)
         );
         return SVG.svg(svgChildren);

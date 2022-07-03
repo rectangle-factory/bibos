@@ -15,13 +15,13 @@ enum PolarityType {
 library Palette {
     uint256 public constant opacityLength = 5;
 
-    function getOpacity(uint256 _moteSeed, bytes32 _seed) internal pure returns (string memory) {
+    function getOpacity(uint256 _glintSeed, bytes32 _seed) internal pure returns (string memory) {
         return
             (
                 Traits.getDensityType(_seed) == DensityType.HIGH
                     ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
                     : ["0.6", "0.7", "0.8", "0.9", "1.0"]
-            )[_moteSeed % opacityLength];
+            )[_glintSeed % opacityLength];
     }
 
     function getBodyFill(bytes32 _seed, uint256 _i) internal pure returns (string memory) {

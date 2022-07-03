@@ -21,7 +21,7 @@ get_address "Cheeks"
 get_address "Eyes"
 get_address "Face"
 get_address "Body"
-get_address "Glints"
+get_address "Motes"
 
 COMPUTED_ADDRESS_OUTPUT=$(cast compute-address --nonce 1 $DEPLOYER)
 BIBOS_ADDRESS=${COMPUTED_ADDRESS_OUTPUT:(-42)}

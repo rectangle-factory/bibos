@@ -1,0 +1,36 @@
+.debug-svg rect {
+  stroke: #0000ff !important;
+  fill: #0000ff05 !important;
+  stroke-width: 0.15% !important;
+}
+
+.debug-svg circle {
+  stroke: #00ff00 !important;
+  fill: #00ff0010 !important;
+  stroke-width: 1px !important;
+}
+
+.debug-svg ellipse {
+  stroke: #ff0000 !important;
+  fill: #ff000010 !important;
+  stroke-width: 1px !important;
+}
+
+.debug-svg path {
+  stroke: #ff00ff !important;
+  fill: #ff00ff06 !important;
+  stroke-width: 1px !important;
+}
+
+.debug-svg polygon {
+  stroke: #00ffff !important;
+  fill: #00ffff06 !important;
+  stroke-width: 1px !important;
+}
+
+.debug-svg * {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1;
+  vector-effect: non-scaling-stroke;
+}
