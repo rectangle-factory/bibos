@@ -54,3 +54,7 @@ html {
 .shadow-glow {
   box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, 0.5);
 }
+
+.exclusion {
+  mix-blend-mode: exclusion;
+}
