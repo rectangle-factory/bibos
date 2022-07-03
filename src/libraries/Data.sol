@@ -15,20 +15,20 @@ library Data {
         return [x, y];
     }
 
-    function glintPoints(uint256 _i) external pure returns (string[2] memory) {
+    function motePoints(uint256 _i) external pure returns (string[2] memory) {
         uint256 pos = (_i % length) * 2;
-        string memory x = Util.bytes1ToString(glintsPointsBytes[pos]);
-        string memory y = Util.bytes1ToString(glintsPointsBytes[pos + 1]);
+        string memory x = Util.bytes1ToString(motesPointsBytes[pos]);
+        string memory y = Util.bytes1ToString(motesPointsBytes[pos + 1]);
         return [x, y];
     }
 
-    function motePoints(uint256 _i) external pure returns (string[2][3] memory) {
+    function glintPoints(uint256 _i) external pure returns (string[2][3] memory) {
         uint256 pos = (_i % length) * 6;
         string[2][3] memory result;
         uint256 i;
         for (; i < 3; ) {
-            string memory x = Util.bytes1ToString(motePointsBytes[pos + 2 * i]);
-            string memory y = Util.bytes1ToString(motePointsBytes[pos + 2 * i + 1]);
+            string memory x = Util.bytes1ToString(glintPointsBytes[pos + 2 * i]);
+            string memory y = Util.bytes1ToString(glintPointsBytes[pos + 2 * i + 1]);
             result[i] = [x, y];
             ++i;
         }
@@ -102,9 +102,9 @@ library Data {
     uint256 constant length = 64;
     bytes constant bodyPointsBytes =
         hex"75727a8f887c748087736b88906c8a8b7ba397906b7f7a79729488a1829766966faa92846da1a578947983849e6c79af8db891a686b48dafae95a09e9099ad8aa7a49e88a28073887a98b670b77abd84b58eae7ca391b484ad6f7e7278b78bc39ac69ebaa5b483ab85bc9da895ad95bec68eaeabb89aadbebbb1a6c19db1b2b6";
-    bytes constant glintsPointsBytes =
+    bytes constant motesPointsBytes =
         hex"f183ee6ce186db75f29ae15fdf97d28dc364c680e8add850efc3d4abc69cb54daa67b971aa84b397c753d5c4c5c1b8b2a055957ca19ee4d2cedcbed3b0c0a2b2a3448f469163878e8ea69a90b5e9a1d897c989b97c44786282547e7172967b8287e683d379b46c5069706287579aa3eb71ee73d461b75b5a5a6b507e6ca548a0";
-    bytes constant motePointsBytes =
+    bytes constant glintPointsBytes =
         hex"ad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b965aadce5a96ceadadce6b6b965a5a967f5e5e7f7f5ecead7f5ec1c1ce7f7f5e7fce96d25e7f7f5e96d2d2965a96965aad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b965aadce5a96ceadadce6b6b965a5a967f5e5e7f7f5ecead7f5ec1c1ce7f7f5e7fce96d25e7f7f5e96d2d2965a96965aad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b";
     bytes public constant shortTimesBytes =
         hex"59614460553a60493b505f3753543e3a6163343849473e333c325e53483b624d34343e48505c595562364d4f4e5d515d53384457604c5a5b4454534148586063";

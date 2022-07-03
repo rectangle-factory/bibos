@@ -2,11 +2,11 @@
 pragma solidity >=0.8.0;
 
 import {RefractivityType} from "./Palette.sol";
-import {GlintType} from "./Glints.sol";
+import {MoteType} from "./Motes.sol";
 import {EyeType} from "./Eyes.sol";
 import {CheekType} from "./Cheeks.sol";
 import {MouthType} from "./Mouth.sol";
-import {Motes} from "./Motes.sol";
+import {Glints} from "./Glints.sol";
 import {Util} from "./Util.sol";
 
 library Traits {
@@ -18,11 +18,11 @@ library Traits {
         string memory result = "[";
 
         result = string.concat(result, trait("Refractivity", getRefractivityTrait(_seed)));
-        result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
+        result = string.concat(result, ",", trait("Mote", getMoteTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
-        result = string.concat(result, ",", trait("Eyes", getMouthTrait(_seed)));
+        result = string.concat(result, ",", trait("Mouth", getMouthTrait(_seed)));
         result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
-        result = string.concat(result, ",", trait("Motes", getMoteTrait(_seed)));
+        result = string.concat(result, ",", trait("Glints", getGlintTrait(_seed)));
         return string.concat(result, "]");
     }
 
@@ -50,21 +50,21 @@ library Traits {
                                   GLINT
     //////////////////////////////////////////////////////////////*/
 
-    function getGlintTrait(bytes32 _seed) internal pure returns (string memory) {
-        GlintType glintType = getGlintType(_seed);
-        if (glintType == GlintType.FLOATING) return "Floating";
-        if (glintType == GlintType.RISING) return "Rising";
-        if (glintType == GlintType.FALLING) return "Falling";
+    function getMoteTrait(bytes32 _seed) internal pure returns (string memory) {
+        MoteType moteType = getMoteType(_seed);
+        if (moteType == MoteType.FLOATING) return "Floating";
+        if (moteType == MoteType.RISING) return "Rising";
+        if (moteType == MoteType.FALLING) return "Falling";
         return "None";
     }
 
-    function getGlintType(bytes32 _seed) internal pure returns (GlintType) {
-        uint256 glintTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "glintType"))) % 100;
+    function getMoteType(bytes32 _seed) internal pure returns (MoteType) {
+        uint256 moteTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "moteType"))) % 100;
 
-        if (glintTypeSeed % 100 < 20) return GlintType.FLOATING;
-        if (glintTypeSeed % 100 < 35) return GlintType.RISING;
-        if (glintTypeSeed % 100 < 40) return GlintType.FALLING;
-        return GlintType.NONE;
+        if (moteTypeSeed % 100 < 20) return MoteType.FLOATING;
+        if (moteTypeSeed % 100 < 35) return MoteType.RISING;
+        if (moteTypeSeed % 100 < 40) return MoteType.FALLING;
+        return MoteType.NONE;
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -151,17 +151,17 @@ library Traits {
                                   MOTES
     //////////////////////////////////////////////////////////////*/
 
-    function getMoteTrait(bytes32 _seed) internal pure returns (string memory) {
-        uint256 moteCount = getMoteCount(_seed);
-        return Util.uint256ToString(moteCount);
+    function getGlintTrait(bytes32 _seed) internal pure returns (string memory) {
+        uint256 glintCount = getGlintCount(_seed);
+        return Util.uint256ToString(glintCount);
     }
 
-    function getMoteCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
+    function getGlintCount(bytes32 _seed) internal pure returns (uint256) {
+        uint256 glintSeed = uint256(keccak256(abi.encodePacked(_seed, "glint"))) % 100;
 
-        if (moteSeed % 100 < 1) return 3;
-        if (moteSeed % 100 < 5) return 2;
-        if (moteSeed % 100 < 35) return 1;
+        if (glintSeed % 100 < 1) return 3;
+        if (glintSeed % 100 < 5) return 2;
+        if (glintSeed % 100 < 35) return 1;
         return 0;
     }
 }
