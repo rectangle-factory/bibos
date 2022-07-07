@@ -4,10 +4,10 @@ import classnames from "classnames";
 export function Button(props: ButtonProps) {
   const cns = classnames({
     "bg-primary": props.primary,
-    "bg-white/20" : !props.primary,
+    "bg-white/20": !props.primary,
     "shadow-none opacity-50 pointer-events-none": props.disabled,
     "shadow-elevation-low": !props.disabled,
-  })
+  });
   return (
     <button
       type="button"

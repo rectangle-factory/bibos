@@ -72,7 +72,7 @@ export default function Index() {
 
       <Pane className="items-center h-full">
         <div className="flex w-full h-full items-center justify-center p-8">
-          <RawSVGViewer rawSVG={rawSVG} debug={debug} isLoading={status == NFTStatus.FETCHING}/>
+          <RawSVGViewer tokenId={tokenId} rawSVG={rawSVG} debug={debug} isLoading={status == NFTStatus.FETCHING}/>
         </div>
 
         <TraitsTable
