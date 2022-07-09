@@ -11,6 +11,7 @@ import {Glints} from "./Glints.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
 import {Data} from "./Data.sol";
+import {Palette} from "./Palette.sol";
 
 library Render {
     function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
@@ -18,9 +19,10 @@ library Render {
             string(
                 Metadata.encodeTokenMetadata(
                     _tokenId,
-                    tokenName("Bibo #", _tokenId), // name
-                    "Bibos", // description
+                    tokenName("Bibo ", _tokenId), // name
+                    "Bibo bibo bibo", // description
                     Traits.getTraits(_seed), // attributes
+                    Palette.getBackgroundFill(_seed), // backgroundColor
                     svg(_seed) // svg
                 )
             );
