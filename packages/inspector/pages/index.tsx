@@ -1,5 +1,11 @@
 import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { xml } from '@codemirror/lang-xml'
+import { EditorView } from '@codemirror/view'
+import { basicSetup } from 'codemirror'
+import CodeMirror from '@uiw/react-codemirror'
+import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from '@codemirror/language'
+import { highlightDark, themeDark } from '../components/CodeMirrorTheme'
 
 import { NFTStatus, IndexView } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
@@ -28,24 +34,43 @@ export default function Index() {
     <Container>
       <Pane>
         <div className="flex h-full overflow-y-scroll">
-          
-          <SyntaxHighlighter
-            wrapLongLines={true}
-            // wrapLines={true}
-            showLineNumbers={true}
-            useInlineStyles={false}
-            customStyle={{ fontSize: "1rem", paddingTop: "1rem" }}
-            language="xml"
-          >
-            {formatted}
-          </SyntaxHighlighter>
+         <CodeMirror
+            className="w-full h-full border-none overflow-y-scroll scrollbar-none"
+            value={formatted}
+            // height={ '100%' }
+            basicSetup={{
+              foldGutter: false,
+            }}
+            editable={false}
+            theme={themeDark}
+            extensions={[
+              xml(),
+              EditorView.lineWrapping,
+              syntaxHighlighting(highlightDark),
+              codeFolding({
+                placeholderText:"􀠪",
+              }),
+              foldGutter({
+                markerDOM(open) {
+                  const el = document.createElement("span");
+                  if (open === true) {
+                    el.className = "user-select-none text-label-500";
+                    el.innerHTML = "􀁱";
+                  } else {
+                    el.className = "user-select-none text-[#ff7b72]";
+                    el.innerHTML = "􀯽";
+                  }
+                  return el
+              }}),
+            ]}
+          />
         </div>
         {
           error.length === 0 ? (
             null
           ) :
           <>
-          <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-white">
+          <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-label">
           <div className="w-full text-sm font-bold text-red-500">
             Error parsing SVG
             </div>
@@ -55,14 +80,14 @@ export default function Index() {
         }
         <HorizontalRule />
         <Toolbar className="justify-between">
-          <div className="text-white flex gap-x-1 items-center">
+          <div className="text-label flex gap-x-1 items-center">
             <div className="text-2xl">🔬</div>
             <div className="opacity-70">Inspector</div>
           </div>
 
           <div className="flex gap-x-2 items-center">
-            <div className="text-white text-sm"><div className="inline mr-1">{loc}</div><div className="inline opacity-50">LOC</div></div>
-            <div className="text-white text-sm"><div className="inline mr-1">{kb}</div><div className="inline opacity-50">kb</div></div>
+            <div className="text-label text-sm"><div className="inline mr-1">{loc}</div><div className="inline opacity-50">LOC</div></div>
+            <div className="text-label text-sm"><div className="inline mr-1">{kb}</div><div className="inline opacity-50">kb</div></div>
 
           </div>
         </Toolbar>

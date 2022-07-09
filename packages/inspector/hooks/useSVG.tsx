@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 // import babelParser from 'prettier/parser-babel'
 import htmlParser from 'prettier/parser-html'
-
 import prettier from 'prettier/standalone'
 
 const options = {
@@ -9,7 +8,8 @@ const options = {
   plugins: [htmlParser],
   tabWidth: 2,
   semi: false,
-  singleQuote: false
+  singleQuote: false,
+  bracketSameLine: true,
 }
 
 function formatSVG(code: string) {

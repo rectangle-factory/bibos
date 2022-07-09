@@ -28,7 +28,7 @@
 }
 
 html {
-  @apply bg-background;
+  @apply bg-background text-label;
 }
 
 .shadow-elevation-low {
@@ -44,7 +44,7 @@ html {
 }
 
 .inner-shadow-border {
-  box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.125);
+  box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
 }
 
 .inner-shadow-border-debug {

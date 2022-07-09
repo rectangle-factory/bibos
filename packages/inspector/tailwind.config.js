@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       sans: [
         "Inter",
+        "SF Pro Text",
         "-apple-system",
         "BlinkMacSystemFont",
         '"Segoe UI"',
@@ -22,9 +23,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        background: "#27282B",
+        label: "rgba(255,255,255, 0.90)",
+        background: "#0d1117",
+        border: "#21262d",
         surface: "rgba(255,255,255,0.10)",
-        primary: "#3D8EFF",
+        primary: "#58a6ff",
       },
     },
   },
