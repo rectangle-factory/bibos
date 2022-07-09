@@ -4,7 +4,7 @@ export function ToggleButton(props: ButtonProps & { isOn: boolean }) {
   return (
     <button
       type="button"
-      className="px-2 py-0.5 bg-white/20 border border-white/5 text-white rounded-lg flex items-center justify-center gap-x-1.5 shadow-elevation-low "
+      className="px-2 py-0.5 bg-[#21262d] font-medium border border-white/5 text-label rounded-lg flex items-center justify-center gap-x-1.5 shadow-elevation-low "
       onClick={props.onClick}
     >
       <div
