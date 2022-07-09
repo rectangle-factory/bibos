@@ -23,7 +23,6 @@ library Traits {
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
         result = string.concat(result, ",", trait("Mouth", getMouthTrait(_seed)));
         result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
-        result = string.concat(result, ",", trait("Glints", getGlintTrait(_seed)));
         return string.concat(result, "]");
     }
 
