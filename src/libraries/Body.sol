@@ -59,7 +59,7 @@ library Body {
         return
             SVG.element(
                 "circle",
-                SVG.circleAttributes(_radius, _coords, _mixBlendMode, _fill, opacity, ""),
+                SVG.circleAttributes(_radius, _coords, _fill, opacity, _mixBlendMode, ""),
                 SVG.animateMotion(_reverse, _dur, "linear", Data.mpathJitterLg())
             );
     }

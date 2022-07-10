@@ -111,7 +111,7 @@ library Data {
     }
 
     function mpathJitterLg() internal pure returns (string memory) {
-        return '<mpath href="#jitter-lg" />';
+        return '<mpath xlink:href="#bibo-jitter-lg" />';
     }
 
     function mpathJitterSm() internal pure returns (string memory) {

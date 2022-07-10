@@ -41,7 +41,7 @@ library Face {
                 faceGroupAttributes,
                 SVG.element(
                     "rect",
-                    SVG.rectAttributes({_width: "200", _height: "200", _fill: "#000000", _attributes: ""})
+                    SVG.rectAttributes({_width: "200", _height: "200", _fill: "#00000000", _attributes: ""})
                 ),
                 SVG.element("circle", circleAttributes),
                 Eyes.render(_seed),
