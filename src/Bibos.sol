@@ -128,9 +128,13 @@ contract Bibos is ERC721, Owned {
     //////////////////////////////////////////////////////////////*/
 
     function _mint(address _to) internal {
-        uint256 id = totalSupply++;
-        seeds[id] = keccak256(abi.encodePacked(msg.sender, block.timestamp, id));
-        ERC721._mint(_to, id);
+        uint256 tokenId = totalSupply++;
+        seeds[tokenId] = _computeSeed(tokenId);
+        ERC721._mint(_to, tokenId);
+    }
+
+    function _computeSeed(uint256 _tokenId) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked(msg.sender, block.timestamp, _tokenId));
     }
 
     function _tokenName(uint256 _tokenId) internal pure returns (string memory) {
