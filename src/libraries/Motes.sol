@@ -88,7 +88,7 @@ library Motes {
             SVG.element(
                 "circle",
                 SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
-                SVG.animateMotion(_reverse, _dur, "paced", Data.mpathJitterSm())
+                SVG.element("animateMotion", SVG.animateMotionAttributes(_reverse, _dur, "paced"), Data.mpathJitterSm())
             );
     }
 

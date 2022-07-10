@@ -47,7 +47,11 @@ library Face {
                 Eyes.render(_seed),
                 Mouth.render(_seed),
                 Cheeks.render(_seed),
-                SVG.animateMotion({_reverse: reverse, _dur: "11s", _calcMode: "linear", _mpath: Data.mpathJitterLg()})
+                SVG.element(
+                    "animateMotion",
+                    SVG.animateMotionAttributes(reverse, "11s", "linear"),
+                    Data.mpathJitterLg()
+                )
             );
     }
 }

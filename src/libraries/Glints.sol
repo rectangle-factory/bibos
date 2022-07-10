@@ -26,8 +26,8 @@ library Glints {
             glintsGroupChildren = string.concat(
                 glintsGroupChildren,
                 _glint(
-                    Data.longTimes(glintSeed),
                     Data.shortTimes(glintSeed),
+                    Data.longTimes(glintSeed),
                     coords[index],
                     reverseRotate,
                     reverse,
@@ -40,22 +40,13 @@ library Glints {
     }
 
     function _glint(
-        string memory _durationLong,
         string memory _durationShort,
+        string memory _durationLong,
         string[2] memory _coords,
         bool _reverseRotate,
         bool _reverse,
         string memory _opacity
     ) internal pure returns (string memory) {
-        string memory circleAttributes = SVG.circleAttributes({
-            _radius: "10",
-            _coords: ["0", "0"],
-            _fill: "white",
-            _opacity: "1.0",
-            _mixMode: "lighten",
-            _attributes: SVG.filterAttribute("bibo-blur-sm")
-        });
-
         return
             SVG.element(
                 "g",
@@ -63,7 +54,17 @@ library Glints {
                 SVG.element(
                     "g",
                     "",
-                    SVG.element("circle", circleAttributes),
+                    SVG.element(
+                        "circle",
+                        SVG.circleAttributes({
+                            _radius: "10",
+                            _coords: ["0", "0"],
+                            _fill: "white",
+                            _opacity: "1.0",
+                            _mixMode: "lighten",
+                            _attributes: SVG.filterAttribute("bibo-blur-sm")
+                        })
+                    ),
                     SVG.element(
                         "path",
                         _pathAttributes(_opacity),
@@ -71,7 +72,11 @@ library Glints {
                     ),
                     _animateTransform(_durationShort, _reverseRotate)
                 ),
-                SVG.animateMotion(_reverse, _durationLong, "linear", Data.mpathJitterLg())
+                SVG.element(
+                    "animateMotion",
+                    SVG.animateMotionAttributes(_reverse, _durationLong, "linear"),
+                    Data.mpathJitterLg()
+                )
             );
     }
 
