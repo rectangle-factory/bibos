@@ -1,91 +1,146 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Traits} from "libraries/Traits.sol";
 import {Palette} from "./Palette.sol";
 import {Data} from "./Data.sol";
 import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
+import {Traits} from "./Traits.sol";
+
+enum MoteType {
+    NONE,
+    FLOATING,
+    RISING,
+    FALLING
+}
 
 library Motes {
+    uint256 constant GLINT_COUNT = 16;
+
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory result = "";
-        uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote"))) % 100;
-        string memory reverseRotate = moteSeed % 2 == 0 ? "from='0 0 0' to='360 0 0'" : "from='360 0 0' to='0 0 0'";
+        string memory motesChildren;
 
-        uint256 moteCount = Traits.moteCount(_seed);
+        string memory mixMode = "lighten";
+        string memory fill = "white";
 
-        string memory opacity = Palette.opacity(moteSeed);
-        moteSeed /= Palette.opacityLength;
-        string[2][3] memory coords = Data.motePoints(moteSeed);
-        moteSeed /= Data.length;
+        MoteType moteType = Traits.moteType(_seed);
+        if (moteType == MoteType.NONE) return "";
 
-        for (uint8 index = 0; index < moteCount; index++) {
-            string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
+        for (uint8 i = 0; i < GLINT_COUNT; i++) {
+            uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote", i)));
 
-            result = _addMote(
-                result,
-                Data.longTimes(moteSeed),
-                Data.shortTimes(moteSeed),
-                coords[index],
-                reverseRotate,
-                reverse,
-                opacity
-            );
+            string memory dur = Data.longTimes(moteSeed);
+            moteSeed = moteSeed / Data.length;
+            string[2] memory coords = Data.motePoints(moteSeed);
+            moteSeed = moteSeed / Data.length;
+            string memory radius = moteSeed % 2 == 0 ? "1" : "2";
+            moteSeed = moteSeed / 2;
+            string memory opacity = Palette.opacity(moteSeed, _seed);
+            moteSeed /= Palette.opacityLength;
+
+            if (moteType == MoteType.FLOATING) {
+                bool reverse = moteSeed % 2 == 0;
+                motesChildren = string.concat(
+                    motesChildren,
+                    _floatingMote(radius, coords, fill, opacity, mixMode, dur, reverse)
+                );
+            } else if (moteType == MoteType.RISING)
+                motesChildren = string.concat(motesChildren, _risingMote(radius, coords, fill, opacity, mixMode, dur));
+            else if (moteType == MoteType.FALLING) {
+                motesChildren = string.concat(motesChildren, _fallingMote(radius, coords, fill, opacity, mixMode, dur));
+            }
         }
 
-        return string.concat("<g id='motes'>", result, "</g>");
+        return SVG.element({_type: "g", _attributes: "", _children: motesChildren});
     }
 
-    function _addMote(
-        string memory _result,
-        string memory _durationLong,
-        string memory _durationShort,
+    function _risingMote(
+        string memory _radius,
         string[2] memory _coords,
-        string memory _reverseRotate,
-        string memory _reverse,
-        string memory _opacity
+        string memory _fill,
+        string memory _opacity,
+        string memory _mixMode,
+        string memory _dur
     ) internal pure returns (string memory) {
         return
-            string.concat(
-                _result,
-                '<g transform="translate(',
-                _coords[0],
-                ",",
-                _coords[1],
-                ') scale(1)">',
-                "<g>",
-                SVG.closedCircle(
-                    "10",
-                    ["0", "0"],
-                    "lighten",
-                    "white",
-                    "1.0",
-                    string.concat("filter=", Util.quote("url(#bibo-blur-sm)"))
-                ),
-                "<path fill-opacity=",
-                Util.quote(_opacity),
-                'fill="white" style="mix-blend-mode:normal" fill-rule="evenodd" clip-rule="evenodd" d="M2.60676 11.4891C2.49095 12.4964 1.95054 13 0.985526 13C0.580218 13 0.223162 12.8644 -0.0856447 12.5932C-0.39445 12.322 -0.577804 11.9831 -0.635705 11.5763C-0.86731 9.71671 -1.10856 8.28329 -1.35947 7.27603C-1.59107 6.2494 -1.97708 5.47458 -2.51749 4.95157C-3.0386 4.42857 -3.85887 4.02179 -4.97829 3.73123C-6.07841 3.42131 -7.62244 3.05327 -9.61037 2.62712C-10.5368 2.43341 -11 1.89104 -11 0.999999C-11 0.593219 -10.8649 0.234868 -10.5947 -0.0750589C-10.3245 -0.384987 -9.98673 -0.569006 -9.58142 -0.627117C-7.61279 -0.878934 -6.07841 -1.13075 -4.97829 -1.38257C-3.87817 -1.63438 -3.0579 -2.03147 -2.51749 -2.57385C-1.97708 -3.11622 -1.59107 -3.92978 -1.35947 -5.01453C-1.10856 -6.09927 -0.86731 -7.60048 -0.635705 -9.51816C-0.500603 -10.5061 0.0398083 -11 0.985526 -11C1.95054 -11 2.49095 -10.4964 2.60676 -9.4891C2.83836 -7.64891 3.06997 -6.2155 3.30157 -5.18886C3.53317 -4.1816 3.91918 -3.42615 4.45959 -2.92252C5 -2.41889 5.82992 -2.0121 6.94934 -1.70218C8.06876 -1.41162 9.61279 -1.05327 11.5814 -0.627117C12.5271 -0.414042 13 0.128328 13 0.999999C13 1.92978 12.4692 2.47215 11.4077 2.62712C9.47768 2.91767 7.97226 3.19855 6.89144 3.46973C5.81062 3.74092 5 4.1477 4.45959 4.69007C3.91918 5.23244 3.53317 6.03632 3.30157 7.10169C3.06997 8.16707 2.83836 9.62954 2.60676 11.4891Z">',
-                '<animateTransform attributeName="transform" attributeType="XML" type="scale" additive="sum" beg="0s" dur="1s" values="0.85; 1.25; 0.85" repeatCount="indefinite" />',
-                "</path>",
-                _animateTransform(_durationShort, _reverseRotate),
-                "</g>",
-                SVG.animateMotion(_reverse, _durationLong, "linear", '<mpath href="#jitter-lg" />'),
-                "</g>"
+            SVG.element({
+                _type: "g",
+                _attributes: 'transform="translate(0,25)"',
+                _children: SVG.element(
+                    "circle",
+                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    _animateTransform(_dur, "-100"),
+                    _animate(_dur)
+                )
+            });
+    }
+
+    function _floatingMote(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _fill,
+        string memory _opacity,
+        string memory _mixMode,
+        string memory _dur,
+        bool _reverse
+    ) internal pure returns (string memory) {
+        return
+            SVG.element(
+                "circle",
+                SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                SVG.animateMotion(_reverse, _dur, "paced", Data.mpathJitterSm())
             );
     }
 
-    function _animateTransform(string memory _dur, string memory _reverseRotate) internal pure returns (string memory) {
+    function _fallingMote(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity,
+        string memory _dur
+    ) internal pure returns (string memory) {
         return
-            string.concat(
-                "<animateTransform ",
-                'attributeName="transform" ',
-                "dur=",
-                Util.quote(_dur),
-                'repeatCount="indefinite" ',
-                'type="rotate" ',
-                _reverseRotate,
-                "/>"
+            SVG.element(
+                "g",
+                'transform="translate(0,-25)">',
+                SVG.element(
+                    "circle",
+                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    _animateTransform(_dur, "100"),
+                    _animate(_dur)
+                )
+            );
+    }
+
+    function _animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
+        string memory attributes = string.concat(
+            'attributeName="transform" ',
+            "dur=",
+            Util.quote(_dur),
+            'repeatCount="indefinite" ',
+            'type="translate" ',
+            'additive="sum" ',
+            'from="0 0" ',
+            'to="0 ',
+            _to,
+            '"'
+        );
+
+        return SVG.element("animateTransform", attributes);
+    }
+
+    function _animate(string memory _dur) internal pure returns (string memory) {
+        return
+            SVG.element(
+                "animate",
+                string.concat(
+                    'attributeName="opacity" ',
+                    'values="0;1;0" ',
+                    "dur=",
+                    Util.quote(_dur),
+                    'repeatCount="indefinite" '
+                )
             );
     }
 }

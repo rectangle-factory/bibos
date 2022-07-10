@@ -1,4 +1,4 @@
-import "../styles.css";
+import "../styles/global.css";
 
 type AppProps = {
   Component: React.FC;
@@ -8,7 +8,7 @@ type AppProps = {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main>
-      <Component {...pageProps} />{" "}
+      <Component {...pageProps} />
     </main>
   );
 }

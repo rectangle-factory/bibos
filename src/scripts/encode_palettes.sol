@@ -12,9 +12,19 @@ contract encode_palettes is Script {
         returns (
             string memory light,
             string memory lightest,
-            string memory darkest
+            string memory darkest,
+            string memory invertedLight,
+            string memory invertedLightest,
+            string memory invertedDarkest
         )
     {
-        return (PaletteUtil.getLight(), PaletteUtil.getLightest(), PaletteUtil.getDarkest());
+        return (
+            PaletteUtil.getLight(),
+            PaletteUtil.getLightest(),
+            PaletteUtil.getDarkest(),
+            PaletteUtil.getInvertedLight(),
+            PaletteUtil.getInvertedLightest(),
+            PaletteUtil.getInvertedDarkest()
+        );
     }
 }

@@ -1,6 +1,22 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.13;
 
+/* solhint-disable */
+// -╖╖╖╖╖╖╖╖╖╖╖»─  ─┬╖╖╖╖─~  -╖╖╖╖╖╖╖╖╖╖╖»─    -╖╖╖╖╖╖╖╖╖╖»─   ~─╖╖╖╖╖╖╖╖╖╖╖~
+//    ███   `███      ███▌      ███   `███      ┌▓██^ █ ╙██╗     á███^   ╔██
+//    █B█     ███▌    █I█Γ      █B█     ███▌    █O█   █   ███▄   █S█▌    ███
+//    ███    ╒███     ███Γ      ███    ╒███    ███    █    ███   ▀██▓    ██
+//    ███   á██▀      ███Γ      ███   #██╜    ╞███    █    ███    `███▄  '█╕
+//    ███▄▓██▄        ███Γ      ███▄▓██▄      ╞██▌    █    ███       ╙██╗  `
+//    ███    "██▌     ███Γ      ███    "██▌   '██▌    █'   ███   ,╗█"   ▀██w
+//   ▓███      ▓██    ████     ▓███      ███   ███    █   ┌██   ██        ███▓
+//    ███      ▐███  ^╙███     └███      ╞███   ██╕   ╫   ██▌  ██          ███
+//    █B█      â██▌    I▐█      █B█      ║██▌    █O┐  ║   █▀   ██          █S█
+//    ███     #██`     ╓▓█      ███     #██`      └█▌ ║ ╣█     ║█ε        ╒███
+//   ╔██▓╗╗@▀╝^        "╙██┐   á██▓╗╗@▀╨^           `▀██        '█╗     ,Æ██`
+//                         "▀≥»-                      ╞            ^╙▀▀╜"
+/* solhint-enable */
+
 import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 import {Render} from "libraries/Render.sol";
@@ -13,7 +29,7 @@ contract Bibos is ERC721, Owned {
                                   STATE
     //////////////////////////////////////////////////////////////*/
 
-    uint256 public constant price = (999 * 1 ether) / 10_000;
+    uint256 public constant price = .111 ether;
     uint256 public constant maxMintAmount = 10;
     uint256 public constant maxSupply = 999;
     string public constant description = "Bibos";
