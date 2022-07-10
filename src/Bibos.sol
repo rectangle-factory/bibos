@@ -51,7 +51,7 @@ contract Bibos is ERC721, Owned {
     //////////////////////////////////////////////////////////////*/
 
     modifier OnlyIfYouPayEnough(uint256 _amount) {
-        if (msg.value < _amount * price) revert InsufficentValue();
+        if (msg.value != _amount * price) revert InsufficentValue();
         _;
     }
 
