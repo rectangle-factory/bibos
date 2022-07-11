@@ -11,10 +11,10 @@ contract encode_points is Script {
         pure
         returns (
             bytes memory body,
-            bytes memory glints,
-            bytes memory motes
+            bytes memory motes,
+            bytes memory glints
         )
     {
-        return (PointsUtil.getBody(), PointsUtil.getGlints(), PointsUtil.getMotes());
+        return (PointsUtil.getBody(), PointsUtil.getMotes(), PointsUtil.getGlints());
     }
 }

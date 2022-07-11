@@ -7,7 +7,7 @@ import {Eyes} from "src/libraries/Eyes.sol";
 import {Cheeks} from "src/libraries/Cheeks.sol";
 import {Face} from "src/libraries/Face.sol";
 import {Body} from "src/libraries/Body.sol";
-import {Glints} from "src/libraries/Glints.sol";
+import {Motes} from "src/libraries/Motes.sol";
 
 import {CREATE3} from "solmate/utils/CREATE3.sol";
 import {time} from "src/util/time.sol";
@@ -32,6 +32,6 @@ contract deploy {
         // link Mouth, Eyes, Cheeks for Face
         _deploy("Face", type(Face).creationCode);
         _deploy("Body", type(Body).creationCode);
-        _deploy("Glints", type(Glints).creationCode);
+        _deploy("Motes", type(Motes).creationCode);
     }
 }

@@ -56,3 +56,5 @@ echo "{}" > $DEPLOYMENTS_PATH
 
 # # save the bibos address in deployments.json
 write_deployment_address "Bibos" $BIBOS_ADDRESS
+
+echo "$SCRIPT_OUTPUT"

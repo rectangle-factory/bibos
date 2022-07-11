@@ -16,7 +16,7 @@ enum MouthType {
 
 library Mouth {
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = Palette.background(_seed);
+        string memory fill = "black";
         MouthType mouthType = Traits.mouthType(_seed);
 
         if (mouthType == MouthType.SMILE) return _smile(fill);

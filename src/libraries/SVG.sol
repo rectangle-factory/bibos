@@ -4,10 +4,9 @@ pragma solidity >=0.8.0;
 import {Util} from "./Util.sol";
 
 library SVG {
-    function wrap(string memory _children) internal pure returns (string memory) {
+    function svgAttributes() internal pure returns (string memory) {
         return
             string.concat(
-                "<svg ",
                 'xmlns="http://www.w3.org/2000/svg" '
                 'xmlns:xlink="http://www.w3.org/1999/xlink" '
                 'width="100%" '
@@ -15,132 +14,144 @@ library SVG {
                 'viewBox="0 0 300 300" ',
                 'preserveAspectRatio="xMidYMid meet" ',
                 'fill="none" '
-                ">",
-                _children,
-                "</svg>"
             );
     }
 
-    function closedCircle(
+    function circleAttributes(
         string memory _radius,
         string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity
-    ) internal pure returns (string memory) {
-        return _circle(_radius, _coords, _mixMode, _fill, _opacity, "/>");
-    }
-
-    function closedCircle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
         string memory _fill,
         string memory _opacity,
-        string memory _params
-    ) internal pure returns (string memory) {
-        return _circle(_radius, _coords, _mixMode, _fill, _opacity, string.concat(_params, "/>"));
-    }
-
-    function openCircle(
-        string memory _radius,
-        string[2] memory _coords,
         string memory _mixMode,
-        string memory _fill,
-        string memory _opacity
-    ) internal pure returns (string memory) {
-        return _circle(_radius, _coords, _mixMode, _fill, _opacity, ">");
-    }
-
-    function openCircle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity,
-        string memory _params
-    ) internal pure returns (string memory) {
-        return _circle(_radius, _coords, _mixMode, _fill, _opacity, string.concat(_params, ">"));
-    }
-
-    function closeCircle() internal pure returns (string memory) {
-        return "</circle>";
-    }
-
-    function _circle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity
-    ) internal pure returns (string memory) {
-        return _circle(_radius, _coords, _mixMode, _fill, _opacity, "");
-    }
-
-    function _circle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
-        string memory _opacity,
-        string memory _params
+        string memory _attributes
     ) internal pure returns (string memory) {
         return
             string.concat(
-                "<circle r=",
+                "r=",
                 Util.quote(_radius),
                 "cx=",
                 Util.quote(_coords[0]),
                 "cy=",
                 Util.quote(_coords[1]),
-                "style=",
-                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
                 "fill=",
                 Util.quote(_fill),
                 "opacity=",
                 Util.quote(_opacity),
+                "style=",
+                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
                 " ",
-                _params
+                _attributes,
+                " "
             );
     }
 
-    function rect(
+    function rectAttributes(
         string memory _width,
         string memory _height,
-        string memory _fill
+        string memory _fill,
+        string memory _attributes
     ) internal pure returns (string memory) {
         return
             string.concat(
-                "<rect ",
                 "width=",
                 Util.quote(_width),
                 "height=",
                 Util.quote(_height),
                 "fill=",
                 Util.quote(_fill),
-                "/>"
+                " ",
+                _attributes,
+                " "
             );
     }
 
-    function animateMotion(
-        string memory _rev,
-        string memory _dur,
-        string memory _calcMode,
-        string memory _mpath
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _children
     ) internal pure returns (string memory) {
+        return string.concat("<", _type, " ", _attributes, ">", _children, "</", _type, ">");
+    }
+
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2
+    ) internal pure returns (string memory) {
+        return element(_type, _attributes, string.concat(_child1, _child2));
+    }
+
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2,
+        string memory _child3
+    ) internal pure returns (string memory) {
+        return element(_type, _attributes, string.concat(_child1, _child2, _child3));
+    }
+
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2,
+        string memory _child3,
+        string memory _child4
+    ) internal pure returns (string memory) {
+        return element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4));
+    }
+
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2,
+        string memory _child3,
+        string memory _child4,
+        string memory _child5
+    ) internal pure returns (string memory) {
+        return element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4, _child5));
+    }
+
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2,
+        string memory _child3,
+        string memory _child4,
+        string memory _child5,
+        string memory _child6
+    ) internal pure returns (string memory) {
+        return element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4, _child5, _child6));
+    }
+
+    function element(string memory _type, string memory _attributes) internal pure returns (string memory) {
+        return string.concat("<", _type, " ", _attributes, "/>");
+    }
+
+    function animateMotionAttributes(
+        bool _reverse,
+        string memory _dur,
+        string memory _calcMode
+    ) internal pure returns (string memory) {
+        string memory reverse = _reverse ? "keyPoints='1;0' keyTimes='0;1'" : "";
+
         return
             string.concat(
-                "<animateMotion ",
-                _rev,
+                reverse,
                 " ",
                 "dur=",
                 Util.quote(_dur),
                 'repeatCount="indefinite" ',
                 "calcMode=",
-                Util.quote(_calcMode),
-                ">",
-                _mpath,
-                "</animateMotion>"
+                Util.quote(_calcMode)
             );
+    }
+
+    function filterAttribute(string memory _id) internal pure returns (string memory) {
+        return string.concat("filter=", '"', "url(#", _id, ")", '" ');
     }
 }

@@ -1,6 +1,21 @@
 import { useState, useEffect } from "react";
+// import babelParser from 'prettier/parser-babel'
+import htmlParser from 'prettier/parser-html'
+import prettier from 'prettier/standalone'
 
-import formatSVG from "xml-formatter";
+const options = {
+  parser: 'html', 
+  plugins: [htmlParser],
+  tabWidth: 2,
+  semi: false,
+  singleQuote: false,
+  bracketSameLine: true,
+}
+
+function formatSVG(code: string) {
+  return prettier.format(code, options)
+}
+
 
 export const useSvg = (svg: string) => {
   const [formatted, setFormatted] = useState("");
@@ -8,7 +23,11 @@ export const useSvg = (svg: string) => {
 
   useEffect(() => {
     try {
-      setFormatted(formatSVG(svg));
+      if (svg === null) {
+        setFormatted("");
+      } else {
+        setFormatted(formatSVG(svg));
+      }
     } catch (e) {
       setError(e.message);
     }

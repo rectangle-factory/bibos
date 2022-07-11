@@ -40,6 +40,39 @@ library PaletteUtil {
         return result;
     }
 
+    function getInvertedLightest() internal pure returns (string memory) {
+        string memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            string memory strHex = slice7CharColor(PaletteUncompressed.invertedLightestPalette(i));
+            result = string.concat(result, strHex);
+            ++i;
+        }
+        return result;
+    }
+
+    function getInvertedLight() internal pure returns (string memory) {
+        string memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            string memory strHex = slice7CharColor(PaletteUncompressed.invertedLightPalette(i));
+            result = string.concat(result, strHex);
+            ++i;
+        }
+        return result;
+    }
+
+    function getInvertedDarkest() internal pure returns (string memory) {
+        string memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            string memory strHex = slice7CharColor(PaletteUncompressed.invertedDarkestPalette(i));
+            result = string.concat(result, strHex);
+            ++i;
+        }
+        return result;
+    }
+
     function slice7CharColor(string memory _rgb) internal pure returns (string memory result) {
         assembly {
             result := add(_rgb, 1)

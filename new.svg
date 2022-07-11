@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" fill="none">
+    <defs>
+        <filter id="bibo-blur" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="15" result="out" />
+        </filter>
+        <filter id="bibo-blur-sm" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="5" result="out" />
+        </filter>
+        <filter id="bibo-blur-lg" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="32" result="out" />
+        </filter>
+        <path id="bibo-jitter-sm" d="M10.4485 2.98177C14.4091 4.48135 20 6.52342 20 2.98176C20 -0.548164 14.617 1.40118 10.4485 2.98177ZM10.4485 2.98177C10.4347 2.98703 10.4208 2.99226 10.4069 2.99751C6.23277 4.58084 1 6.5628 1 3.02114C1 -0.520506 6.48798 1.4822 10.4485 2.98177Z" />
+        <path id="bibo-jitter-lg" d="M11.4431 4.92852C15.8206 9.82815 22 10.2396 22 4.92847C22 -0.382675 16.0504 -0.235806 11.4431 4.92852ZM11.4431 4.92852C11.4278 4.94569 11.4124 4.9628 11.3972 4.97994C6.78359 10.1532 1 10.4969 1 5.05714C1 -0.382663 7.06566 0.0289037 11.4431 4.92852Z" />
+    </defs>
+    <rect width="100%" height="100%" fill="#14060e" />
+    <g filter="url(#bibo-blur)" shape-rendering="optimizeSpeed">
+        <rect width="100%" height="100%" fill="#14060e" />
+        <circle r="64" cx="150" cy="150" fill="#ff33ee" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion keyPoints="1;0" keyTimes="0;1" dur="7.6" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="64" cx="139" cy="195" fill="#ffdd33" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion keyPoints="1;0" keyTimes="0;1" dur="7.2" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="64" cx="116" cy="128" fill="#fff033" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion dur="5.2" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="56" cx="117" cy="114" fill="#e9ff33" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion dur="8.0" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="48" cx="131" cy="171" fill="#4133ff" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion keyPoints="1;0" keyTimes="0;1" dur="5.9" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="32" cx="122" cy="143" fill="#ff9133" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion keyPoints="1;0" keyTimes="0;1" dur="5.4" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+        <circle r="24" cx="180" cy="132" fill="#ffca33" opacity="1" style="mix-blend-mode:lighten">
+            <animateMotion dur="7.1" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </circle>
+    </g>
+    <g id="glints">
+        <g transform="translate(206,173) scale(1)">
+            <g>
+                <circle r="10" cx="0" cy="0" fill="white" opacity="1.0" style="mix-blend-mode:lighten" filter="url(#bibo-blur-sm)" />
+                <path fill-opacity="0.6" fill="white" style="mix-blend-mode:normal" fill-rule="evenodd" clip-rule="evenodd" d="M2.60676 11.4891C2.49095 12.4964 1.95054 13 0.985526 13C0.580218 13 0.223162 12.8644 -0.0856447 12.5932C-0.39445 12.322 -0.577804 11.9831 -0.635705 11.5763C-0.86731 9.71671 -1.10856 8.28329 -1.35947 7.27603C-1.59107 6.2494 -1.97708 5.47458 -2.51749 4.95157C-3.0386 4.42857 -3.85887 4.02179 -4.97829 3.73123C-6.07841 3.42131 -7.62244 3.05327 -9.61037 2.62712C-10.5368 2.43341 -11 1.89104 -11 0.999999C-11 0.593219 -10.8649 0.234868 -10.5947 -0.0750589C-10.3245 -0.384987 -9.98673 -0.569006 -9.58142 -0.627117C-7.61279 -0.878934 -6.07841 -1.13075 -4.97829 -1.38257C-3.87817 -1.63438 -3.0579 -2.03147 -2.51749 -2.57385C-1.97708 -3.11622 -1.59107 -3.92978 -1.35947 -5.01453C-1.10856 -6.09927 -0.86731 -7.60048 -0.635705 -9.51816C-0.500603 -10.5061 0.0398083 -11 0.985526 -11C1.95054 -11 2.49095 -10.4964 2.60676 -9.4891C2.83836 -7.64891 3.06997 -6.2155 3.30157 -5.18886C3.53317 -4.1816 3.91918 -3.42615 4.45959 -2.92252C5 -2.41889 5.82992 -2.0121 6.94934 -1.70218C8.06876 -1.41162 9.61279 -1.05327 11.5814 -0.627117C12.5271 -0.414042 13 0.128328 13 0.999999C13 1.92978 12.4692 2.47215 11.4077 2.62712C9.47768 2.91767 7.97226 3.19855 6.89144 3.46973C5.81062 3.74092 5 4.1477 4.45959 4.69007C3.91918 5.23244 3.53317 6.03632 3.30157 7.10169C3.06997 8.16707 2.83836 9.62954 2.60676 11.4891Z">
+                    <animateTransform attributeName="transform" attributeType="XML" type="scale" additive="sum" beg="0s" dur="1s" values="0.85; 1.25; 0.85" repeatCount="indefinite" />
+                </path>
+                <animateTransform attributeName="transform" dur="5.2" repeatCount="indefinite" type="rotate" from="0 0 0" to="360 0 0" />
+            </g>
+            <animateMotion dur="7.9" repeatCount="indefinite" calcMode="linear">
+                <mpath xlink:href="#bibo-jitter-lg" />
+            </animateMotion>
+        </g>
+    </g>
+    <g transform="translate(100,100) scale(0.5) rotate(-4)">
+        <rect width="200" height="200" fill="#000000" />
+        <circle r="80" cx="100" cy="100" fill="white" opacity="0.2" style="mix-blend-mode:lighten" filter="url(#bibo-blur-lg)" />
+        <path d="M41 78.5C47 72.8333 62.6 65.6 77 82" stroke="black" stroke-width="10" stroke-linecap="round" />
+        <path d="M161 78.5C155 72.8333 139.4 65.6 125 82" stroke="black" stroke-width="10" stroke-linecap="round" />
+        <path d="M72 116.208C84.2665 140.324 117.641 139.602 130 116" stroke="black" stroke-width="10" stroke-linecap="round" />
+        <animateMotion dur="11s" repeatCount="indefinite" calcMode="linear">
+            <mpath xlink:href="#bibo-jitter-lg" />
+        </animateMotion>
+    </g>
+</svg>

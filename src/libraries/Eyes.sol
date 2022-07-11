@@ -25,7 +25,7 @@ library Eyes {
     //////////////////////////////////////////////////////////////*/
 
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = Palette.background(_seed);
+        string memory fill = "black";
         EyeType eyeType = Traits.eyeType(_seed);
 
         if (eyeType == EyeType.OPEN) return _open(fill);
@@ -227,8 +227,6 @@ library Eyes {
             );
     }
 
-    //   `,
-    //   "Wince": `
     function _wince(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(

@@ -1,6 +1,22 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.13;
 
+/* solhint-disable */
+// -╖╖╖╖╖╖╖╖╖╖╖»─  ─┬╖╖╖╖─~  -╖╖╖╖╖╖╖╖╖╖╖»─    -╖╖╖╖╖╖╖╖╖╖»─   ~─╖╖╖╖╖╖╖╖╖╖╖~
+//    ███   `███      ███▌      ███   `███      ┌▓██^ █ ╙██╗     á███^   ╔██
+//    █B█     ███▌    █I█Γ      █B█     ███▌    █O█   █   ███▄   █S█▌    ███
+//    ███    ╒███     ███Γ      ███    ╒███    ███    █    ███   ▀██▓    ██
+//    ███   á██▀      ███Γ      ███   #██╜    ╞███    █    ███    `███▄  '█╕
+//    ███▄▓██▄        ███Γ      ███▄▓██▄      ╞██▌    █    ███       ╙██╗  `
+//    ███    "██▌     ███Γ      ███    "██▌   '██▌    █'   ███   ,╗█"   ▀██w
+//   ▓███      ▓██    ████     ▓███      ███   ███    █   ┌██   ██        ███▓
+//    ███      ▐███  ^╙███     └███      ╞███   ██╕   ╫   ██▌  ██          ███
+//    █B█      â██▌    I▐█      █B█      ║██▌    █O┐  ║   █▀   ██          █S█
+//    ███     #██`     ╓▓█      ███     #██`      └█▌ ║ ╣█     ║█ε        ╒███
+//   ╔██▓╗╗@▀╝^        "╙██┐   á██▓╗╗@▀╨^           `▀██        '█╗     ,Æ██`
+//                         "▀≥»-                      ╞            ^╙▀▀╜"
+/* solhint-enable */
+
 import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 import {Render} from "libraries/Render.sol";
@@ -13,7 +29,7 @@ contract Bibos is ERC721, Owned {
                                   STATE
     //////////////////////////////////////////////////////////////*/
 
-    uint256 public constant price = (999 * 1 ether) / 10_000;
+    uint256 public constant price = .111 ether;
     uint256 public constant maxMintAmount = 10;
     uint256 public constant maxSupply = 999;
     string public constant description = "Bibos";
@@ -35,7 +51,7 @@ contract Bibos is ERC721, Owned {
     //////////////////////////////////////////////////////////////*/
 
     modifier OnlyIfYouPayEnough(uint256 _amount) {
-        if (msg.value < _amount * price) revert InsufficentValue();
+        if (msg.value != _amount * price) revert InsufficentValue();
         _;
     }
 
@@ -112,9 +128,13 @@ contract Bibos is ERC721, Owned {
     //////////////////////////////////////////////////////////////*/
 
     function _mint(address _to) internal {
-        uint256 id = totalSupply++;
-        seeds[id] = keccak256(abi.encodePacked(msg.sender, block.timestamp, id));
-        ERC721._mint(_to, id);
+        uint256 tokenId = totalSupply++;
+        seeds[tokenId] = _computeSeed(tokenId);
+        ERC721._mint(_to, tokenId);
+    }
+
+    function _computeSeed(uint256 _tokenId) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked(msg.sender, block.timestamp, _tokenId));
     }
 
     function _tokenName(uint256 _tokenId) internal pure returns (string memory) {

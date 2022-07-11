@@ -18,22 +18,22 @@ contract PointsTest is Test {
         assertEq(body1[1], body2[1]);
     }
 
-    function testPointsGlints(uint8 _i) public {
+    function testPointsMotes(uint8 _i) public {
         vm.assume(_i < 64);
-        string[2] memory glint1 = Data.glintPoints(_i);
-        string[2] memory glint2 = PointsUncompressed.glint(_i);
+        string[2] memory mote1 = Data.motePoints(_i);
+        string[2] memory mote2 = PointsUncompressed.mote(_i);
 
-        assertEq(glint1[0], glint2[0]);
-        assertEq(glint1[1], glint2[1]);
+        assertEq(mote1[0], mote2[0]);
+        assertEq(mote1[1], mote2[1]);
     }
 
-    function testPointsMotes(uint8 _i, uint8 _j) public {
+    function testPointsGlints(uint8 _i, uint8 _j) public {
         vm.assume(_i < 64);
         uint256 j = _j % 3;
-        string[2][3] memory mote1 = Data.motePoints(_i);
-        string[2][3] memory mote2 = PointsUncompressed.motes(_i);
+        string[2][3] memory glint1 = Data.glintPoints(_i);
+        string[2][3] memory glint2 = PointsUncompressed.glints(_i);
 
-        assertEq(mote1[j][0], mote2[j][0]);
-        assertEq(mote1[j][1], mote2[j][1]);
+        assertEq(glint1[j][0], glint2[j][0]);
+        assertEq(glint1[j][1], glint2[j][1]);
     }
 }
