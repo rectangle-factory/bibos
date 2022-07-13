@@ -19,6 +19,7 @@ library Metadata {
         string memory _name,
         string memory _description,
         string memory _attributes,
+        string memory _backgroundColor,
         string memory _svg
     ) internal pure returns (string memory) {
         string memory metadata = string.concat(
@@ -30,6 +31,8 @@ library Metadata {
             Util.keyValue("description", _description),
             ",",
             Util.keyValueNoQuotes("attributes", _attributes),
+            ",",
+            Util.keyValue("backgroundColor", _backgroundColor),
             ",",
             Util.keyValue("image", encodeSvg(_svg)),
             "}"

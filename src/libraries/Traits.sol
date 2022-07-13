@@ -18,12 +18,11 @@ library Traits {
         string memory result = "[";
         result = string.concat(result, trait("Density", getDensityTrait(_seed)));
         result = string.concat(result, ",", trait("Polarity", getPolarityTrait(_seed)));
-        result = string.concat(result, ",", trait("Glint", getGlintTrait(_seed)));
+        result = string.concat(result, ",", trait("Glints", getGlintTrait(_seed)));
         result = string.concat(result, ",", trait("Mote", getMoteTrait(_seed)));
         result = string.concat(result, ",", trait("Eyes", getEyeTrait(_seed)));
         result = string.concat(result, ",", trait("Mouth", getMouthTrait(_seed)));
         result = string.concat(result, ",", trait("Cheeks", getCheekTrait(_seed)));
-        result = string.concat(result, ",", trait("Glints", getGlintTrait(_seed)));
         return string.concat(result, "]");
     }
 
