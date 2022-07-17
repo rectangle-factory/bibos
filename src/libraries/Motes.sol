@@ -18,12 +18,12 @@ library Motes {
     uint256 constant GLINT_COUNT = 16;
 
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory result;
+        string memory motesChildren;
 
         string memory mixMode = "lighten";
         string memory fill = "white";
 
-        MoteType moteType = Traits.getMoteType(_seed);
+        MoteType moteType = Traits.moteType(_seed);
         if (moteType == MoteType.NONE) return "";
 
         for (uint8 i = 0; i < GLINT_COUNT; i++) {
@@ -35,64 +35,64 @@ library Motes {
             moteSeed = moteSeed / Data.length;
             string memory radius = moteSeed % 2 == 0 ? "1" : "2";
             moteSeed = moteSeed / 2;
-            string memory opacity = Palette.getOpacity(moteSeed, _seed);
+            string memory opacity = Palette.opacity(moteSeed, _seed);
             moteSeed /= Palette.opacityLength;
 
             if (moteType == MoteType.FLOATING) {
-                string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
-                result = addFloatingMote(result, radius, coords, mixMode, fill, opacity, dur, reverse);
+                bool reverse = moteSeed % 2 == 0;
+                motesChildren = string.concat(
+                    motesChildren,
+                    _floatingMote(radius, coords, fill, opacity, mixMode, dur, reverse)
+                );
             } else if (moteType == MoteType.RISING)
-                result = addRisingMote(result, radius, coords, mixMode, fill, opacity, dur);
+                motesChildren = string.concat(motesChildren, _risingMote(radius, coords, fill, opacity, mixMode, dur));
             else if (moteType == MoteType.FALLING) {
-                result = addFallingMote(result, radius, coords, mixMode, fill, opacity, dur);
+                motesChildren = string.concat(motesChildren, _fallingMote(radius, coords, fill, opacity, mixMode, dur));
             }
         }
 
-        return string.concat("<g>", result, "</g>");
+        return SVG.element({_type: "g", _attributes: "", _children: motesChildren});
     }
 
-    function addRisingMote(
-        string memory _result,
+    function _risingMote(
         string memory _radius,
         string[2] memory _coords,
-        string memory _mixMode,
         string memory _fill,
         string memory _opacity,
+        string memory _mixMode,
         string memory _dur
     ) internal pure returns (string memory) {
         return
-            string.concat(
-                _result,
-                '<g transform="translate(0,25)">',
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                animateTransform(_dur, "-100"),
-                SVG.animate(_dur),
-                "</circle>",
-                "</g>"
-            );
+            SVG.element({
+                _type: "g",
+                _attributes: 'transform="translate(0,25)"',
+                _children: SVG.element(
+                    "circle",
+                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    _animateTransform(_dur, "-100"),
+                    _animate(_dur)
+                )
+            });
     }
 
-    function addFloatingMote(
-        string memory _result,
+    function _floatingMote(
         string memory _radius,
         string[2] memory _coords,
-        string memory _mixMode,
         string memory _fill,
         string memory _opacity,
+        string memory _mixMode,
         string memory _dur,
-        string memory _reverse
+        bool _reverse
     ) internal pure returns (string memory) {
         return
-            string.concat(
-                _result,
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#bibo-jitter-sm"/>'),
-                "</circle>"
+            SVG.element(
+                "circle",
+                SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                SVG.element("animateMotion", SVG.animateMotionAttributes(_reverse, _dur, "paced"), Data.mpathJitterSm())
             );
     }
 
-    function addFallingMote(
-        string memory _result,
+    function _fallingMote(
         string memory _radius,
         string[2] memory _coords,
         string memory _mixMode,
@@ -101,32 +101,46 @@ library Motes {
         string memory _dur
     ) internal pure returns (string memory) {
         return
-            string.concat(
-                _result,
-                '<g transform="translate(0,-25)">',
-                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
-                animateTransform(_dur, "100"),
-                SVG.animate(_dur),
-                "</circle>",
-                "</g>"
+            SVG.element(
+                "g",
+                'transform="translate(0,-25)">',
+                SVG.element(
+                    "circle",
+                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    _animateTransform(_dur, "100"),
+                    _animate(_dur)
+                )
             );
     }
 
-    function animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
+    function _animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
+        string memory attributes = string.concat(
+            'attributeName="transform" ',
+            "dur=",
+            Util.quote(_dur),
+            'repeatCount="indefinite" ',
+            'type="translate" ',
+            'additive="sum" ',
+            'from="0 0" ',
+            'to="0 ',
+            _to,
+            '"'
+        );
+
+        return SVG.element("animateTransform", attributes);
+    }
+
+    function _animate(string memory _dur) internal pure returns (string memory) {
         return
-            string.concat(
-                "<animateTransform ",
-                'attributeName="transform" ',
-                "dur=",
-                Util.quote(_dur),
-                'repeatCount="indefinite" ',
-                'type="translate" ',
-                'additive="sum" ',
-                'from="0 0" ',
-                'to="0 ',
-                _to,
-                '" ',
-                "/>"
+            SVG.element(
+                "animate",
+                string.concat(
+                    'attributeName="opacity" ',
+                    'values="0;1;0" ',
+                    "dur=",
+                    Util.quote(_dur),
+                    'repeatCount="indefinite" '
+                )
             );
     }
 }

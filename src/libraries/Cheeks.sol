@@ -12,16 +12,23 @@ enum CheekType {
 }
 
 library Cheeks {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
-        CheekType cheekType = Traits.getCheekType(_seed);
+        CheekType cheekType = Traits.cheekType(_seed);
 
-        if (cheekType == CheekType.CIRCULAR) return circular();
-        if (cheekType == CheekType.FRECKLES) return freckles();
-
+        if (cheekType == CheekType.CIRCULAR) return _circular();
+        if (cheekType == CheekType.FRECKLES) return _freckles();
         return "";
     }
 
-    function circular() internal pure returns (string memory) {
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
+    function _circular() internal pure returns (string memory) {
         return
             string.concat(
                 "<circle cx='149' cy='113' r='6' fill='white' fill-opacity='0.6'/>",
@@ -29,7 +36,7 @@ library Cheeks {
             );
     }
 
-    function freckles() internal pure returns (string memory) {
+    function _freckles() internal pure returns (string memory) {
         return
             string.concat(
                 "<circle cx='144.5' cy='110.5' r='3.5' fill='white' fill-opacity='0.6'/>",

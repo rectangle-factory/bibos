@@ -12,12 +12,19 @@ contract BibosTest is Test {
     }
 
     function testMint() public {
-        bibos.mint();
+        bibos.mint{value: bibos.price()}();
         assertEq(bibos.totalSupply(), 1);
     }
 
+    function testMintMultiple(uint8 _amount) public {
+        vm.assume(_amount > 0);
+        vm.assume(_amount <= 10);
+        bibos.mint{value: _amount * bibos.price()}(_amount);
+        assertEq(bibos.totalSupply(), _amount);
+    }
+
     function testGetTokenURI() public {
-        bibos.mint();
+        bibos.mint{value: bibos.price()}();
         string memory tokenURI = bibos.tokenURI(0);
 
         assertGt(bytes(tokenURI).length, 0);
