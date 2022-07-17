@@ -126,7 +126,7 @@ library Traits {
         if (mouthType == MouthType.MEDIUM_SMILE) return "Medium Smile";
         if (mouthType == MouthType.SMALL_SMILE) return "Small Smile";
         if (mouthType == MouthType.FLAT) return "Flat";
-        if (mouthType == MouthType.FROWN) return "Frown";
+        if (mouthType == MouthType.OOO) return "Ooo";
         if (mouthType == MouthType.GRIN) return "Grin";
         return "Smooch";
     }
@@ -138,7 +138,7 @@ library Traits {
         if (mouthTypeSeed % 100 < 60) return MouthType.MEDIUM_SMILE;
         if (mouthTypeSeed % 100 < 80) return MouthType.SMALL_SMILE;
         if (mouthTypeSeed % 100 < 90) return MouthType.FLAT;
-        if (mouthTypeSeed % 100 < 94) return MouthType.FROWN;
+        if (mouthTypeSeed % 100 < 94) return MouthType.OOO;
         if (mouthTypeSeed % 100 < 97) return MouthType.GRIN;
         if (mouthTypeSeed % 100 < 99) return MouthType.SMOOCH;
         return MouthType.SMIRK;
@@ -152,6 +152,7 @@ library Traits {
         CheekType cheekType = getCheekType(_seed);
         if (cheekType == CheekType.NONE) return "None";
         if (cheekType == CheekType.CIRCULAR) return "Circular";
+        if (cheekType == CheekType.BIG) return "Big";
         return "Freckles";
     }
 
@@ -159,7 +160,8 @@ library Traits {
         uint256 cheeksSeed = uint256(keccak256(abi.encodePacked(_seed, "cheeks"))) % 100;
 
         if (cheeksSeed % 100 < 70) return CheekType.NONE;
-        if (cheeksSeed % 100 < 95) return CheekType.CIRCULAR;
+        if (cheeksSeed % 100 < 85) return CheekType.CIRCULAR;
+        if (cheeksSeed % 100 < 95) return CheekType.BIG;
         return CheekType.FRECKLES;
     }
 

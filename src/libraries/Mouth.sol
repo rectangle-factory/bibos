@@ -8,7 +8,7 @@ enum MouthType {
     MEDIUM_SMILE,
     SMALL_SMILE,
     FLAT,
-    FROWN,
+    OOO,
     GRIN,
     SMOOCH,
     SMIRK
@@ -23,7 +23,7 @@ library Mouth {
         if (mouthType == MouthType.MEDIUM_SMILE) return mediumSmile(fill);
         if (mouthType == MouthType.SMALL_SMILE) return smallSmile(fill);
         if (mouthType == MouthType.FLAT) return flat(fill);
-        if (mouthType == MouthType.FROWN) return frown(fill);
+        if (mouthType == MouthType.OOO) return ooo(fill);
         if (mouthType == MouthType.GRIN) return grin(fill);
         if (mouthType == MouthType.SMOOCH) return smooch(fill);
         return smirk(fill);
@@ -56,7 +56,7 @@ library Mouth {
             );
     }
 
-    function frown(string memory _fill) internal pure returns (string memory) {
+    function ooo(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M109 122.5C109 127.747 105.418 130 101 130C96.5817 130 93 127.747 93 122.5C93 117.253 96.5817 113 101 113C105.418 113 109 117.253 109 122.5Z' fill='",
