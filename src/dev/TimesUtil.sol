@@ -7,6 +7,21 @@ import {TimesUncompressed} from "dev/TimesUncompressed.sol";
 library TimesUtil {
     uint256 constant length = 64;
 
+    function getShorter() internal pure returns (bytes memory) {
+        bytes memory result;
+        uint256 i;
+        for (; i < 64; ) {
+            bytes memory str = bytes(TimesUncompressed.shorter(i));
+            bytes1 a = str[0];
+            bytes1 b = str[2];
+            string memory x = string(bytes.concat(a, b));
+            bytes1 v = Util.stringToBytes1(x);
+            result = bytes.concat(result, v);
+            ++i;
+        }
+        return result;
+    }
+
     function getShort() internal pure returns (bytes memory) {
         // all in format XXX.XX
         // numbers less than 256

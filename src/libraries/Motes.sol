@@ -11,7 +11,8 @@ enum MoteType {
     NONE,
     FLOATING,
     RISING,
-    FALLING
+    FALLING,
+    GLISTENING
 }
 
 library Motes {
@@ -31,21 +32,24 @@ library Motes {
 
             string memory dur = Data.longTimes(moteSeed);
             moteSeed = moteSeed / Data.length;
+            string memory delay = Data.shorterTimes(moteSeed);
+            moteSeed = moteSeed / Data.length;
             string[2] memory coords = Data.motePoints(moteSeed);
             moteSeed = moteSeed / Data.length;
             string memory radius = moteSeed % 2 == 0 ? "1" : "2";
             moteSeed = moteSeed / 2;
             string memory opacity = Palette.getOpacity(moteSeed, _seed);
             moteSeed /= Palette.opacityLength;
+            string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
 
             if (moteType == MoteType.FLOATING) {
-                string memory reverse = moteSeed % 2 == 0 ? "keyPoints='1;0' keyTimes='0;1'" : "";
                 result = addFloatingMote(result, radius, coords, mixMode, fill, opacity, dur, reverse);
             } else if (moteType == MoteType.RISING)
                 result = addRisingMote(result, radius, coords, mixMode, fill, opacity, dur);
-            else if (moteType == MoteType.FALLING) {
+            else if (moteType == MoteType.FALLING)
                 result = addFallingMote(result, radius, coords, mixMode, fill, opacity, dur);
-            }
+            else if (moteType == MoteType.GLISTENING)
+                result = addGlisteningMote(result, radius, coords, mixMode, fill, opacity, dur, reverse, delay);
         }
 
         return string.concat("<g>", result, "</g>");
@@ -107,6 +111,31 @@ library Motes {
                 SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
                 animateTransform(_dur, "100"),
                 SVG.animate(_dur),
+                "</circle>",
+                "</g>"
+            );
+    }
+
+    function addGlisteningMote(
+        string memory _result,
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _mixMode,
+        string memory _fill,
+        string memory _opacity,
+        string memory _dur,
+        string memory _reverse,
+        string memory _delay
+    ) internal pure returns (string memory) {
+        return
+            string.concat(
+                _result,
+                '<g opacity="0">',
+                '<animate calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.4 1; 0.4 0 0.4 1" attributeName="opacity" values="0;1;0" dur="1.5s" begin="',
+                _delay,
+                '" repeatCount="indefinite" />',
+                SVG.circle(_radius, _coords, _mixMode, _fill, _opacity),
+                SVG.animateMotion(_reverse, _dur, "paced", '<mpath xlink:href="#bibo-jitter-sm"/>'),
                 "</circle>",
                 "</g>"
             );

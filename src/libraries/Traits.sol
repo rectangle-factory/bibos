@@ -71,15 +71,16 @@ library Traits {
         if (moteType == MoteType.FLOATING) return "Floating";
         if (moteType == MoteType.RISING) return "Rising";
         if (moteType == MoteType.FALLING) return "Falling";
+        if (moteType == MoteType.GLISTENING) return "Glistening";
         return "None";
     }
 
     function getMoteType(bytes32 _seed) internal pure returns (MoteType) {
         uint256 moteTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "moteType"))) % 100;
-
-        if (moteTypeSeed % 100 < 20) return MoteType.FLOATING;
-        if (moteTypeSeed % 100 < 35) return MoteType.RISING;
-        if (moteTypeSeed % 100 < 40) return MoteType.FALLING;
+        if (moteTypeSeed % 100 < 20) return MoteType.GLISTENING;
+        if (moteTypeSeed % 100 < 35) return MoteType.GLISTENING;
+        if (moteTypeSeed % 100 < 40) return MoteType.GLISTENING;
+        if (moteTypeSeed % 100 < 50) return MoteType.GLISTENING;
         return MoteType.NONE;
     }
 
@@ -100,7 +101,7 @@ library Traits {
         if (eyeType == EyeType.HEART) return "Heart";
         if (eyeType == EyeType.HAHA) return "Haha";
         if (eyeType == EyeType.CYCLOPS) return "Cyclops";
-        return "OPAL";
+        return "Opal";
     }
 
     function getEyeType(bytes32 _seed) internal pure returns (EyeType) {

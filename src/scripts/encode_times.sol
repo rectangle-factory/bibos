@@ -6,6 +6,10 @@ import {Script, console2 as console} from "forge-std/Script.sol";
 import {TimesUtil} from "dev/TimesUtil.sol";
 
 contract encode_times is Script {
+    function getShorter() public pure returns (bytes memory) {
+        return TimesUtil.getShorter();
+    }
+
     function getShort() public pure returns (bytes memory) {
         return TimesUtil.getShort();
     }
