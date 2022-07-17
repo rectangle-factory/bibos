@@ -34,8 +34,8 @@ library Cheeks {
     function big() internal pure returns (string memory) {
         return
             string.concat(
-                "<circle cx='149' cy='113' r='11' fill='white' fill-opacity='0.4'/>",
-                "<circle cx='54' cy='113' r='11' fill='white' fill-opacity='0.4'/>"
+                "<circle cx='149' cy='113' r='11' fill='white' fill-opacity='0.3'/>",
+                "<circle cx='54' cy='113' r='11' fill='white' fill-opacity='0.3'/>"
             );
     }
 

@@ -127,11 +127,13 @@ library Traits {
     function getMouthTrait(bytes32 _seed) internal pure returns (string memory) {
         MouthType mouthType = getMouthType(_seed);
         if (mouthType == MouthType.SMILE) return "Smile";
+        if (mouthType == MouthType.SMIRK) return "Smirk";
         if (mouthType == MouthType.MEDIUM_SMILE) return "Medium Smile";
         if (mouthType == MouthType.SMALL_SMILE) return "Small Smile";
         if (mouthType == MouthType.FLAT) return "Flat";
         if (mouthType == MouthType.OOO) return "Ooo";
         if (mouthType == MouthType.TOOTHY) return "Toothy";
+        if (mouthType == MouthType.VEE) return "Vee";
         if (mouthType == MouthType.GRIN) return "Grin";
         return "Smooch";
     }
@@ -140,14 +142,16 @@ library Traits {
         uint256 mouthTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "mouthType"))) % 100;
 
         if (mouthTypeSeed % 100 < 30) return MouthType.SMILE;
-        if (mouthTypeSeed % 100 < 60) return MouthType.MEDIUM_SMILE;
+        if (mouthTypeSeed % 100 < 50) return MouthType.MEDIUM_SMILE;
+        if (mouthTypeSeed % 100 < 60) return MouthType.SMIRK;
         if (mouthTypeSeed % 100 < 80) return MouthType.SMALL_SMILE;
-        if (mouthTypeSeed % 100 < 90) return MouthType.FLAT;
+        if (mouthTypeSeed % 100 < 90) return MouthType.GRIN;
+        if (mouthTypeSeed % 100 < 92) return MouthType.VEE;
         if (mouthTypeSeed % 100 < 94) return MouthType.OOO;
-        if (mouthTypeSeed % 100 < 97) return MouthType.GRIN;
+        if (mouthTypeSeed % 100 < 97) return MouthType.FLAT;
         if (mouthTypeSeed % 100 < 98) return MouthType.TOOTHY;
         if (mouthTypeSeed % 100 < 99) return MouthType.SMOOCH;
-        return MouthType.SMIRK;
+        return MouthType.CAT;
     }
 
     /*//////////////////////////////////////////////////////////////
