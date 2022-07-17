@@ -77,9 +77,9 @@ library Traits {
 
     function getMoteType(bytes32 _seed) internal pure returns (MoteType) {
         uint256 moteTypeSeed = uint256(keccak256(abi.encodePacked(_seed, "moteType"))) % 100;
-        if (moteTypeSeed % 100 < 20) return MoteType.GLISTENING;
-        if (moteTypeSeed % 100 < 35) return MoteType.GLISTENING;
-        if (moteTypeSeed % 100 < 40) return MoteType.GLISTENING;
+        if (moteTypeSeed % 100 < 20) return MoteType.FLOATING;
+        if (moteTypeSeed % 100 < 35) return MoteType.RISING;
+        if (moteTypeSeed % 100 < 40) return MoteType.FALLING;
         if (moteTypeSeed % 100 < 50) return MoteType.GLISTENING;
         return MoteType.NONE;
     }
