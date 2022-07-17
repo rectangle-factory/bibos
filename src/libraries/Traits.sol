@@ -92,13 +92,15 @@ library Traits {
         if (eyeType == EyeType.OPEN) return "Open";
         if (eyeType == EyeType.SMILEY) return "Smiley";
         if (eyeType == EyeType.WINK) return "Wink";
+        if (eyeType == EyeType.ROUND) return "Round";
         if (eyeType == EyeType.SLEEPY) return "Sleepy";
         if (eyeType == EyeType.CLOVER) return "Clover";
+        if (eyeType == EyeType.STAR) return "Star";
         if (eyeType == EyeType.DIZZY) return "Dizzy";
         if (eyeType == EyeType.HEART) return "Heart";
-        if (eyeType == EyeType.WINCE) return "Wince";
+        if (eyeType == EyeType.HAHA) return "Haha";
         if (eyeType == EyeType.CYCLOPS) return "Cyclops";
-        return "Star";
+        return "OPAL";
     }
 
     function getEyeType(bytes32 _seed) internal pure returns (EyeType) {
@@ -107,13 +109,15 @@ library Traits {
         if (eyeSeed % 100 < 25) return EyeType.OPEN;
         if (eyeSeed % 100 < 50) return EyeType.SMILEY;
         if (eyeSeed % 100 < 65) return EyeType.WINK;
+        if (eyeSeed % 100 < 70) return EyeType.ROUND;
         if (eyeSeed % 100 < 75) return EyeType.SLEEPY;
         if (eyeSeed % 100 < 83) return EyeType.CLOVER;
+        if (eyeSeed % 100 < 85) return EyeType.STAR;
         if (eyeSeed % 100 < 89) return EyeType.DIZZY;
         if (eyeSeed % 100 < 94) return EyeType.HEART;
-        if (eyeSeed % 100 < 97) return EyeType.WINCE;
+        if (eyeSeed % 100 < 97) return EyeType.HAHA;
         if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
-        return EyeType.STAR;
+        return EyeType.OPAL;
     }
 
     /*//////////////////////////////////////////////////////////////

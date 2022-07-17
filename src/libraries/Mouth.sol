@@ -86,29 +86,29 @@ library Mouth {
             );
     }
 
-    function toothy(string memory _fill) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<path d='M72 115L80.1589 126L90.3296 120L100.488 130L110.659 120L120.83 126L129 115' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-miterlimit='10' stroke-linecap='round'/>"
-            );
-    }
+    // function toothy(string memory _fill) internal pure returns (string memory) {
+    //     return
+    //         string.concat(
+    //             "<path d='M72 115L80.1589 126L90.3296 120L100.488 130L110.659 120L120.83 126L129 115' stroke='",
+    //             _fill,
+    //             "' stroke-width='10' stroke-miterlimit='10' stroke-linecap='round'/>"
+    //         );
+    // }
 
-    function tongue(string memory _fill) internal pure returns (string memory) {
-        return
-            string.concat(
-                "<path d='M72 116.069C84.2665 124.108 117.641 123.867 130 116' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-linecap='round'/>",
-                "<path d='M97.2169 125.829C95.7132 150.357 133.515 146.477 127.034 122.514' stroke='",
-                _fill,
-                "' stroke-width='10' stroke-linecap='round'/>",
-                "<path d='M112.011 122.05L114 142' stroke='",
-                _fill,
-                "' stroke-width='4' stroke-linecap='round'/>"
-            );
-    }
+    // function tongue(string memory _fill) internal pure returns (string memory) {
+    //     return
+    //         string.concat(
+    //             "<path d='M72 116.069C84.2665 124.108 117.641 123.867 130 116' stroke='",
+    //             _fill,
+    //             "' stroke-width='10' stroke-linecap='round'/>",
+    //             "<path d='M97.2169 125.829C95.7132 150.357 133.515 146.477 127.034 122.514' stroke='",
+    //             _fill,
+    //             "' stroke-width='10' stroke-linecap='round'/>",
+    //             "<path d='M112.011 122.05L114 142' stroke='",
+    //             _fill,
+    //             "' stroke-width='4' stroke-linecap='round'/>"
+    //         );
+    // }
 
     function flat(string memory _fill) internal pure returns (string memory) {
         return string.concat("<path d='M80 120H123' stroke='", _fill, "' stroke-width='10' stroke-linecap='round'/>");
