@@ -20,9 +20,6 @@ pragma solidity 0.8.13;
 import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 import {Render} from "libraries/Render.sol";
-import {Util} from "libraries/Util.sol";
-import {Metadata} from "libraries/Metadata.sol";
-import {Traits} from "libraries/Traits.sol";
 
 contract Bibos is ERC721, Owned {
     /*//////////////////////////////////////////////////////////////
@@ -32,7 +29,7 @@ contract Bibos is ERC721, Owned {
     uint256 public constant price = .111 ether;
     uint256 public constant maxMintAmount = 10;
     uint256 public constant maxSupply = 999;
-    string public constant description = "Bibos";
+
     uint256 public totalSupply;
     mapping(uint256 => bytes32) public seeds; // (tokenId => seed)
 
@@ -83,14 +80,8 @@ contract Bibos is ERC721, Owned {
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         if (_tokenId >= totalSupply) revert InvalidTokenId();
         bytes32 seed = seeds[_tokenId];
-        return
-            Metadata.encodeMetadata({
-                _id: _tokenId,
-                _name: _tokenName(_tokenId),
-                _description: description,
-                _attributes: Traits.attributes(seed),
-                _svg: Render.bibo(seed)
-            });
+
+        return Render.tokenURI(_tokenId, seed);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -135,9 +126,5 @@ contract Bibos is ERC721, Owned {
 
     function _computeSeed(uint256 _tokenId) internal view returns (bytes32) {
         return keccak256(abi.encodePacked(msg.sender, block.timestamp, _tokenId));
-    }
-
-    function _tokenName(uint256 _tokenId) internal pure returns (string memory) {
-        return string.concat("Bibo #", Util.uint256ToString(_tokenId));
     }
 }

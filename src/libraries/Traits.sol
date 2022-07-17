@@ -18,7 +18,7 @@ library Traits {
         string memory result = "[";
         result = string.concat(result, _attribute("Density", densityTrait(_seed)));
         result = string.concat(result, ",", _attribute("Polarity", polarityTrait(_seed)));
-        result = string.concat(result, ",", _attribute("Glint", glintTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Glints", glintTrait(_seed)));
         result = string.concat(result, ",", _attribute("Mote", moteTrait(_seed)));
         result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
         result = string.concat(result, ",", _attribute("Mouth", mouthTrait(_seed)));
