@@ -131,6 +131,7 @@ library Traits {
         if (mouthType == MouthType.SMALL_SMILE) return "Small Smile";
         if (mouthType == MouthType.FLAT) return "Flat";
         if (mouthType == MouthType.OOO) return "Ooo";
+        if (mouthType == MouthType.TOOTHY) return "Toothy";
         if (mouthType == MouthType.GRIN) return "Grin";
         return "Smooch";
     }
@@ -144,6 +145,7 @@ library Traits {
         if (mouthTypeSeed % 100 < 90) return MouthType.FLAT;
         if (mouthTypeSeed % 100 < 94) return MouthType.OOO;
         if (mouthTypeSeed % 100 < 97) return MouthType.GRIN;
+        if (mouthTypeSeed % 100 < 98) return MouthType.TOOTHY;
         if (mouthTypeSeed % 100 < 99) return MouthType.SMOOCH;
         return MouthType.SMIRK;
     }
