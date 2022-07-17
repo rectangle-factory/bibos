@@ -10,9 +10,10 @@ export default async (request: NextApiRequest, response: NextApiResponse) =>
       if (stderr) {
         // log the error to console
         console.log("stderr: ", stderr);
-        response.status(500);
-        response.send(stderr);
-        return resolve();
+        // ignore errors until solmate updates their foundry.toml
+        // response.status(500);
+        // response.send(stderr);
+        // return resolve();
       }
       console.log("synthesis_engine: synthesized bibos");
       response.send(stdout);
