@@ -17,8 +17,6 @@ library Glints {
         glintSeed /= 2;
         bool reverse = glintSeed % 2 == 0;
         glintSeed /= 2;
-        // string memory opacity = Palette.opacity(glintSeed, _seed);
-        // glintSeed /= Palette.opacityLength;
         string[2][3] memory coords = Data.glintPoints(glintSeed);
         glintSeed /= Data.length;
 

@@ -141,7 +141,6 @@ library Motes {
             );
     }
 
-    // function animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
     function _animateTransform(string memory _dur, string memory _to) internal pure returns (string memory) {
         string memory attributes = string.concat(
             'attributeName="transform" ',
