@@ -22,25 +22,34 @@ enum EyeType {
 }
 
 library Eyes {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory fill = "black";
-        EyeType eyeType = Traits.getEyeType(_seed);
 
-        if (eyeType == EyeType.OPEN) return open(fill);
-        if (eyeType == EyeType.SMILEY) return smiley(fill);
-        if (eyeType == EyeType.WINK) return wink(fill);
-        if (eyeType == EyeType.ROUND) return round(fill);
-        if (eyeType == EyeType.SLEEPY) return sleepy(fill);
-        if (eyeType == EyeType.CLOVER) return clover(fill);
-        if (eyeType == EyeType.DIZZY) return dizzy(fill);
-        if (eyeType == EyeType.STAR) return star(fill);
-        if (eyeType == EyeType.HEART) return heart(fill);
-        if (eyeType == EyeType.HAHA) return haha(fill);
-        if (eyeType == EyeType.CYCLOPS) return cyclops(fill);
-        return opal(fill);
+        EyeType eyeType = Traits.eyeType(_seed);
+
+        if (eyeType == EyeType.OPEN) return _open(fill);
+        if (eyeType == EyeType.SMILEY) return _smiley(fill);
+        if (eyeType == EyeType.WINK) return _wink(fill);
+        if (eyeType == EyeType.ROUND) return _round(fill);
+        if (eyeType == EyeType.SLEEPY) return _sleepy(fill);
+        if (eyeType == EyeType.CLOVER) return _clover(fill);
+        if (eyeType == EyeType.DIZZY) return _dizzy(fill);
+        if (eyeType == EyeType.STAR) return _star(fill);
+        if (eyeType == EyeType.HEART) return _heart(fill);
+        if (eyeType == EyeType.HAHA) return _haha(fill);
+        if (eyeType == EyeType.CYCLOPS) return _cyclops(fill);
+        return _opal(fill);
     }
 
-    function open(string memory _fill) internal pure returns (string memory) {
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
+    function _open(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<ellipse cx="59" cy="80" rx="18" ry="20" fill="',
@@ -54,7 +63,7 @@ library Eyes {
             );
     }
 
-    function clover(string memory _fill) internal pure returns (string memory) {
+    function _clover(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M51 70L67 86M51 86L67 70" stroke="',
@@ -68,7 +77,7 @@ library Eyes {
             );
     }
 
-    function dizzy(string memory _fill) internal pure returns (string memory) {
+    function _dizzy(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M60.6645 75.0529C62.0054 73.9366 60.3272 70.9131 57.2074 71.5958C54.2108 71.9583 51.279 76.8268 53.9588 81.7586C56.2103 86.6761 64.4411 89.7892 71.0358 85.4242C77.7252 81.5755 80.5444 70.1782 74.0767 61.6407C68.2313 52.9471 53.4557 49.7063 43.3791 57.7675C33.004 65.0877 30.2918 83.0505 40.5466 95.1708" stroke="',
@@ -80,7 +89,7 @@ library Eyes {
             );
     }
 
-    function cyclops(string memory _fill) internal pure returns (string memory) {
+    function _cyclops(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<ellipse cx="101" cy="70" rx="18" ry="20" fill="',
@@ -90,7 +99,7 @@ library Eyes {
             );
     }
 
-    function heart(string memory _fill) internal pure returns (string memory) {
+    function _heart(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M59.0103 100C59.3112 100 59.66 99.8972 60.0567 99.6915C60.467 99.4995 60.8569 99.2801 61.2262 99.0332C65.0288 96.5649 68.3322 93.9731 71.1363 91.2579C73.9541 88.529 76.1358 85.7247 77.6815 82.8449C79.2272 79.9515 80 77.0374 80 74.1028C80 72.1556 79.6854 70.3797 79.0562 68.7753C78.427 67.1709 77.5652 65.7859 76.4709 64.6203C75.3767 63.4546 74.1045 62.5633 72.6546 61.9462C71.2047 61.3154 69.6522 61 67.9971 61C65.9453 61 64.1602 61.5211 62.6419 62.5633C61.1236 63.5918 59.913 64.9494 59.0103 66.6361C58.0938 64.9631 56.8764 63.6055 55.3581 62.5633C53.8534 61.5211 52.0684 61 50.0029 61C48.3478 61 46.7953 61.3154 45.3454 61.9462C43.9091 62.5633 42.637 63.4546 41.5291 64.6203C40.4211 65.7859 39.5525 67.1709 38.9233 68.7753C38.3078 70.3797 38 72.1556 38 74.1028C38 77.0374 38.7728 79.9515 40.3185 82.8449C41.8642 85.7247 44.0459 88.529 46.8637 91.2579C49.6815 93.9731 52.9849 96.5649 56.7738 99.0332C57.1568 99.2801 57.5467 99.4995 57.9433 99.6915C58.3537 99.8972 58.7093 100 59.0103 100Z" fill="',
@@ -104,7 +113,7 @@ library Eyes {
             );
     }
 
-    function smiley(string memory _fill) internal pure returns (string memory) {
+    function _smiley(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M41 78.5C47 72.8333 62.6 65.6 77 82" stroke="',
@@ -116,7 +125,7 @@ library Eyes {
             );
     }
 
-    function sleepy(string memory _fill) internal pure returns (string memory) {
+    function _sleepy(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M75.9877 70.8113C71.6588 77.8378 58.4625 88.8622 40.3086 76.748" stroke="',
@@ -128,7 +137,7 @@ library Eyes {
             );
     }
 
-    function star(string memory _fill) internal pure returns (string memory) {
+    function _star(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M126.162 84.0869C126.502 85.5275 127.637 86.8486 129.907 89.4908L130.109 89.7264C129.84 92.7584 129.737 94.3509 130.27 95.6376C130.768 96.8434 131.645 97.8641 132.774 98.5533C133.979 99.2887 135.603 99.4663 138.706 99.7339L138.909 99.9695C141.179 102.612 142.314 103.933 143.707 104.51C144.933 105.019 146.292 105.135 147.589 104.842C149.064 104.51 150.416 103.401 153.122 101.184L153.363 100.986C156.467 101.249 158.097 101.35 159.415 100.83C160.649 100.343 161.694 99.4862 162.4 98.3833C163.153 97.2064 163.335 95.6206 163.609 92.589L163.85 92.3913C166.555 90.1743 167.907 89.0658 168.499 87.7048C169.019 86.5076 169.138 85.1803 168.838 83.9131C168.498 82.4725 167.363 81.1514 165.093 78.5092L164.891 78.2737C165.16 75.2417 165.263 73.6491 164.731 72.3624C164.232 71.1566 163.355 70.1359 162.226 69.4467C161.021 68.7113 159.397 68.5337 156.294 68.2661L156.091 68.0305C153.821 65.3884 152.686 64.0673 151.293 63.4896C150.067 62.9814 148.708 62.8653 147.411 63.1578C145.936 63.4904 144.584 64.599 141.878 66.816L141.637 67.0137C138.533 66.7508 136.903 66.6503 135.585 67.1702C134.351 67.6574 133.306 68.5138 132.6 69.6167C131.847 70.7936 131.666 72.3794 131.392 75.4109L131.15 75.6087C128.445 77.8257 127.093 78.9342 126.501 80.2952C125.981 81.4924 125.862 82.8197 126.162 84.0869Z" fill="',
@@ -142,7 +151,7 @@ library Eyes {
             );
     }
 
-    function wink(string memory _fill) internal pure returns (string memory) {
+    function _wink(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M161 78.5C155 72.8333 139.4 65.6 125 82" stroke="',
@@ -155,7 +164,7 @@ library Eyes {
             );
     }
 
-    function haha(string memory _fill) internal pure returns (string memory) {
+    function _haha(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<path d="M75 81.5L45 78.5833M75 81.5L58.8571 62M75 81.5L53.8571 95" stroke="',
@@ -167,7 +176,7 @@ library Eyes {
             );
     }
 
-    function round(string memory _fill) internal pure returns (string memory) {
+    function _round(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<circle cx="63" cy="84" r="19" fill="',
@@ -181,7 +190,7 @@ library Eyes {
             );
     }
 
-    function opal(string memory _fill) internal pure returns (string memory) {
+    function _opal(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 string.concat(

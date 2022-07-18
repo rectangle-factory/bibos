@@ -11,7 +11,7 @@ library PaletteUtil {
         string memory result;
         uint256 i;
         for (; i < 64; ) {
-            string memory strHex = slice7CharColor(PaletteUncompressed.lightestPalette(i));
+            string memory strHex = slice7CharColor(PaletteUncompressed.lightest(i));
             result = string.concat(result, strHex);
             ++i;
         }
@@ -22,7 +22,7 @@ library PaletteUtil {
         string memory result;
         uint256 i;
         for (; i < 64; ) {
-            string memory strHex = slice7CharColor(PaletteUncompressed.lightPalette(i));
+            string memory strHex = slice7CharColor(PaletteUncompressed.light(i));
             result = string.concat(result, strHex);
             ++i;
         }
@@ -33,7 +33,7 @@ library PaletteUtil {
         string memory result;
         uint256 i;
         for (; i < 64; ) {
-            string memory strHex = slice7CharColor(PaletteUncompressed.darkestPalette(i));
+            string memory strHex = slice7CharColor(PaletteUncompressed.darkest(i));
             result = string.concat(result, strHex);
             ++i;
         }

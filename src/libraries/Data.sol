@@ -96,7 +96,7 @@ library Data {
                                   DEFS
     //////////////////////////////////////////////////////////////*/
 
-    function defs() internal pure returns (string memory) {
+    function defs() external pure returns (string memory) {
         return
             string.concat(
                 "<defs>",
@@ -113,6 +113,14 @@ library Data {
                 '<path id="bibo-jitter-lg" d="M11.4431 4.92852C15.8206 9.82815 22 10.2396 22 4.92847C22 -0.382675 16.0504 -0.235806 11.4431 4.92852ZM11.4431 4.92852C11.4278 4.94569 11.4124 4.9628 11.3972 4.97994C6.78359 10.1532 1 10.4969 1 5.05714C1 -0.382663 7.06566 0.0289037 11.4431 4.92852Z" />',
                 "</defs>"
             );
+    }
+
+    function mpathJitterLg() internal pure returns (string memory) {
+        return '<mpath xlink:href="#bibo-jitter-lg" />';
+    }
+
+    function mpathJitterSm() internal pure returns (string memory) {
+        return '<mpath xlink:href="#bibo-jitter-sm"/>';
     }
 
     /*//////////////////////////////////////////////////////////////

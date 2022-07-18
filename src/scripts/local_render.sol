@@ -9,7 +9,7 @@ import {time} from "src/util/time.sol";
 
 contract local_render is Test {
     function run() external returns (string memory tokenURI) {
-        vm.startPrank(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
+        // vm.startPrank(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
 
         Bibos bibos = new Bibos();
 
@@ -26,7 +26,8 @@ contract local_render is Test {
         vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
         // mint
-        bibos.mint();
+        vm.deal(address(this), .111 ether);
+        bibos.mint{value: .111 ether}();
         tokenURI = bibos.tokenURI(tokenId);
     }
 }
