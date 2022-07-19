@@ -24,7 +24,6 @@ import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
   const { tokenURI, status, handleFetchNFT } = useLocalRender();
-  const { tokenURIs } = useMultiRender(5);
   const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
   const { formatted, error } = useSvg(rawSVG);
