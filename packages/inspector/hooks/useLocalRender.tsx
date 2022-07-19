@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
-import { NFTStatus, trait } from "../types";
+import { NFTStatus, Token } from "../types";
+import { decodeTokenURI } from "../util";
 
 // returns the entire tokenURI
 const RENDER_ENDPOINT = "/api/render";
 
+const defaultState = {
+  name: "",
+  image: "",
+  attributes: [],
+
+  tokenId: null,
+  svg: null,
+};
+
 export const useLocalRender = () => {
-  const [tokenURI, setTokenURI] = useState<string>(null);
+  const [token, setToken] = useState<Token>(defaultState);
   const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
 
-  const handleFetchNFT = async () => {
+  const handleLocalRender = async () => {
     if (status == NFTStatus.FETCHING) return;
 
     setStatus(NFTStatus.FETCHING);
@@ -23,13 +33,14 @@ export const useLocalRender = () => {
 
     const tokenURI = await response.text();
     console.log("tokenURI", tokenURI);
-    setTokenURI(tokenURI);
+
+    setToken(decodeTokenURI(tokenURI));
     setStatus(NFTStatus.FETCHED);
   };
 
   useEffect(() => {
-    handleFetchNFT();
+    handleLocalRender();
   }, []);
 
-  return { tokenURI, status, handleFetchNFT };
+  return { token, status, handleLocalRender };
 };
