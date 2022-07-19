@@ -26,8 +26,6 @@ export const useMultiRender = (quantity: number) => {
       return setStatus(NFTStatus.UNFETCHED);
     }
 
-    // const text = await response.text();
-    // console.log("tokentext multirender text", text);
     const json = await response.json();
 
     setTokenURIs(json);
