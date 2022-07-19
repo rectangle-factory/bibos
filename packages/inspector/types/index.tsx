@@ -10,7 +10,7 @@ export enum NFTStatus {
   ERROR,
 }
 
-export type trait = {
+export type Trait = {
   trait_type: string;
   value: string;
 };
@@ -19,10 +19,18 @@ export type NFTState = {
   metadata: {
     name: string;
     image: string;
-    attributes: trait[];
+    attributes: Trait[];
   };
   tokenId: number;
   svg: string;
+};
+
+export type Token = {
+  name: string;
+  tokenId: number;
+  image: string;
+  svg: string;
+  attributes: Trait[];
 };
 
 export type GenericComponentProps = {

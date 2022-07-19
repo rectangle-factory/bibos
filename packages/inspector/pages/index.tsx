@@ -24,10 +24,11 @@ import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
   const { tokenURI, status, handleFetchNFT } = useLocalRender();
+  useMultiRender(5);
   const { metadata, tokenId, svg } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
   const { formattedSvg, error } = useFormattedSvg(svg);
-  
+
   const loc = formattedSvg.split(/\r\n|\r|\n/).length;
   const kb = (new TextEncoder().encode(svg).length * 0.001).toFixed(3);
 

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { NFTStatus } from "../types";
+import { NFTStatus, Token } from "../types";
+import { decodeTokenURI } from "../util";
 
 const MULTI_RENDER_ENDPOINT = "/api/multirender";
 
 export const useMultiRender = (quantity: number) => {
-  const [tokenURIs, setTokenURIs] = useState<string[]>(null);
+  const [tokens, setTokens] = useState<Token[]>(null);
   const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
 
-  const handleFetchNFT = async () => {
+  const handleMultiRender = async () => {
     if (status == NFTStatus.FETCHING) return;
 
     setStatus(NFTStatus.FETCHING);
@@ -26,15 +27,19 @@ export const useMultiRender = (quantity: number) => {
       return setStatus(NFTStatus.UNFETCHED);
     }
 
-    const json = await response.json();
-
-    setTokenURIs(json);
+    const tokenURIs = await response.json();
+    console.log(tokenURIs);
+    setTokens(tokenURIs.map((tokenURI) => decodeTokenURI(tokenURI)));
     setStatus(NFTStatus.FETCHED);
   };
 
   useEffect(() => {
-    handleFetchNFT();
+    handleMultiRender();
   }, []);
 
-  return { tokenURIs, status, handleFetchNFT };
+  useEffect(() => {
+    console.log(tokens);
+  }, [tokens]);
+
+  return { tokens, status, handleMultiRender };
 };
