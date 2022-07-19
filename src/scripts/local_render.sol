@@ -30,4 +30,23 @@ contract local_render is Test {
         bibos.mint{value: .111 ether}();
         tokenURI = bibos.tokenURI(tokenId);
     }
+
+    function run(uint256 _amount) external returns (string[] memory tokenURIs) {
+        Bibos bibos = new Bibos();
+
+        // get current time to use as random seed
+        uint256 unixTime = time.getUnixTime();
+        // set block.timestamp
+        vm.warp(unixTime);
+
+        tokenURIs = new string[](_amount);
+
+        vm.deal(address(this), _amount * .111 ether);
+        uint256 i;
+        for (; i < _amount; ++i) {
+            // mint
+            bibos.mint{value: .111 ether}();
+            tokenURIs[i] = bibos.tokenURI(i);
+        }
+    }
 }

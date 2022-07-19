@@ -9,6 +9,7 @@ import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
 import { NFTStatus, IndexView } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
+import { useMultiRender } from "../hooks/useMultiRender";
 import { useNFT } from "../hooks/useNFT";
 import { useFormattedSvg } from "../hooks/useFormattedSVG";
 import { Container } from "../components/Container";
@@ -26,7 +27,7 @@ export default function Index() {
   const { metadata, tokenId, svg } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
   const { formattedSvg, error } = useFormattedSvg(svg);
-
+  
   const loc = formattedSvg.split(/\r\n|\r|\n/).length;
   const kb = (new TextEncoder().encode(svg).length * 0.001).toFixed(3);
 
