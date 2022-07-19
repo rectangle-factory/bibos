@@ -35,7 +35,7 @@ export default function Index() {
       <Pane>
         <div className="flex h-full overflow-y-scroll">
          <CodeMirror
-            className="w-full h-full border-none overflow-y-scroll scrollbar-none"
+            className="w-full h-full border-none scrollbar-none"
             value={formatted}
             // height={ '100%' }
             basicSetup={{
