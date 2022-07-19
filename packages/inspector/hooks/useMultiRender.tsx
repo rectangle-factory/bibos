@@ -37,9 +37,5 @@ export const useMultiRender = (quantity: number) => {
     handleMultiRender();
   }, []);
 
-  useEffect(() => {
-    console.log(tokens);
-  }, [tokens]);
-
   return { tokens, status, handleMultiRender };
 };
