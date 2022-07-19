@@ -1,14 +1,15 @@
 import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { xml } from '@codemirror/lang-xml'
-import { EditorView } from '@codemirror/view'
-import { basicSetup } from 'codemirror'
-import CodeMirror from '@uiw/react-codemirror'
-import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from '@codemirror/language'
-import { highlightDark, themeDark } from '../components/CodeMirrorTheme'
+import { xml } from "@codemirror/lang-xml";
+import { EditorView } from "@codemirror/view";
+import { basicSetup } from "codemirror";
+import CodeMirror from "@uiw/react-codemirror";
+import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from "@codemirror/language";
+import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
 import { NFTStatus, IndexView } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
+import { useMultiRender } from "../hooks/useMultiRender";
 import { useNFT } from "../hooks/useNFT";
 import { useSvg } from "../hooks/useSVG";
 import { Container } from "../components/Container";
@@ -23,18 +24,19 @@ import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
   const { tokenURI, status, handleFetchNFT } = useLocalRender();
+  const { tokenURIs } = useMultiRender(5);
   const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
   const { formatted, error } = useSvg(rawSVG);
 
   const loc = formatted.split(/\r\n|\r|\n/).length;
-  const kb = ((new TextEncoder().encode(rawSVG)).length * 0.001).toFixed(3)
+  const kb = (new TextEncoder().encode(rawSVG).length * 0.001).toFixed(3);
 
   return (
     <Container>
       <Pane>
         <div className="flex h-full overflow-y-scroll">
-         <CodeMirror
+          <CodeMirror
             className="w-full h-full border-none overflow-y-scroll scrollbar-none"
             value={formatted}
             // height={ '100%' }
@@ -48,7 +50,7 @@ export default function Index() {
               EditorView.lineWrapping,
               syntaxHighlighting(highlightDark),
               codeFolding({
-                placeholderText:"􀠪",
+                placeholderText: "􀠪",
               }),
               foldGutter({
                 markerDOM(open) {
@@ -60,24 +62,20 @@ export default function Index() {
                     el.className = "user-select-none text-[#ff7b72]";
                     el.innerHTML = "􀯽";
                   }
-                  return el
-              }}),
+                  return el;
+                },
+              }),
             ]}
           />
         </div>
-        {
-          error.length === 0 ? (
-            null
-          ) :
+        {error.length === 0 ? null : (
           <>
-          <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-label">
-          <div className="w-full text-sm font-bold text-red-500">
-            Error parsing SVG
+            <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-label">
+              <div className="w-full text-sm font-bold text-red-500">Error parsing SVG</div>
+              <div className="w-full text-sm">{error}</div>
             </div>
-            <div className="w-full text-sm">{error}</div>
-          </div>
           </>
-        }
+        )}
         <HorizontalRule />
         <Toolbar className="justify-between">
           <div className="text-label flex gap-x-1 items-center">
@@ -86,9 +84,14 @@ export default function Index() {
           </div>
 
           <div className="flex gap-x-2 items-center">
-            <div className="text-label text-sm"><div className="inline mr-1">{loc}</div><div className="inline opacity-50">LOC</div></div>
-            <div className="text-label text-sm"><div className="inline mr-1">{kb}</div><div className="inline opacity-50">kb</div></div>
-
+            <div className="text-label text-sm">
+              <div className="inline mr-1">{loc}</div>
+              <div className="inline opacity-50">LOC</div>
+            </div>
+            <div className="text-label text-sm">
+              <div className="inline mr-1">{kb}</div>
+              <div className="inline opacity-50">kb</div>
+            </div>
           </div>
         </Toolbar>
       </Pane>
@@ -97,7 +100,12 @@ export default function Index() {
 
       <Pane className="items-center h-full">
         <div className="flex w-full h-full items-center justify-center p-8">
-          <RawSVGViewer tokenId={tokenId} rawSVG={rawSVG} debug={debug} isLoading={status == NFTStatus.FETCHING}/>
+          <RawSVGViewer
+            tokenId={tokenId}
+            rawSVG={rawSVG}
+            debug={debug}
+            isLoading={status == NFTStatus.FETCHING}
+          />
         </div>
 
         <TraitsTable

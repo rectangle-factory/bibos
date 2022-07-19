@@ -7,6 +7,7 @@ const SCRIPT_PATH = "./scripts/multi_render.sh";
 export default async (request: NextApiRequest, response: NextApiResponse) =>
   new Promise<void>((resolve, _) => {
     const quantity = request.body.quantity;
+
     const command = "cd ../.. && " + SCRIPT_PATH + ` ${quantity}`;
     exec(command, (_: any, stdout: string, stderr: string) => {
       if (stderr) {
@@ -18,6 +19,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) =>
         // return resolve();
       }
       //   console.log("synthesis_engine: synthesized bibos");
+      //   console.log(stdout);
       response.send(stdout);
       resolve();
     });
