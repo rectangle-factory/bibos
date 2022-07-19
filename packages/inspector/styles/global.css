@@ -58,3 +58,8 @@ html {
 .exclusion {
   mix-blend-mode: exclusion;
 }
+
+.freeze-all-smil animateMotion {
+  animation: none !important;
+  fill: freeze;
+}
