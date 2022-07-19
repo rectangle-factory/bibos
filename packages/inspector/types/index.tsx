@@ -3,7 +3,7 @@ export enum IndexView {
   SVG,
 }
 
-export enum NFTStatus {
+export enum FetchStatus {
   UNFETCHED,
   FETCHING,
   FETCHED,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NFTStatus, Token } from "../types";
+import { FetchStatus, Token } from "../types";
 import { decodeTokenURI } from "../util";
 
 // returns the entire tokenURI
@@ -16,26 +16,25 @@ const defaultState = {
 
 export const useLocalRender = () => {
   const [token, setToken] = useState<Token>(defaultState);
-  const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
+  const [status, setStatus] = useState<FetchStatus>(FetchStatus.UNFETCHED);
 
   const handleLocalRender = async () => {
-    if (status == NFTStatus.FETCHING) return;
+    if (status == FetchStatus.FETCHING) return;
 
-    setStatus(NFTStatus.FETCHING);
+    setStatus(FetchStatus.FETCHING);
 
     const response = await fetch(RENDER_ENDPOINT);
 
     // handle fetch error
     if (response.status != 200) {
       console.log("fetch error: ", response.status);
-      return setStatus(NFTStatus.UNFETCHED);
+      return setStatus(FetchStatus.UNFETCHED);
     }
 
-    const tokenURI = await response.text();
-    console.log("tokenURI", tokenURI);
+    const tokenURI = await response.json();
 
     setToken(decodeTokenURI(tokenURI));
-    setStatus(NFTStatus.FETCHED);
+    setStatus(FetchStatus.FETCHED);
   };
 
   useEffect(() => {

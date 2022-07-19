@@ -15,8 +15,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) =>
         // response.send(stderr);
         // return resolve();
       }
-      console.log("synthesis_engine: synthesized bibos");
-      response.send(stdout);
+
+      response.json(JSON.parse(stdout));
       resolve();
     })
   );

@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import { ethers, Contract } from "ethers";
 
-import { NFTStatus, trait } from "../types";
+import { FetchStatus, Trait } from "../types";
 
 import bibosABI from "../../../out/Bibos.sol/Bibos.json";
 import deployments from "../../../deployment/deployments.json";
 
 type NFTState = {
-  status: NFTStatus;
+  status: FetchStatus;
   metadata: {
     image: string;
-    attributes: trait[];
+    attributes: Trait[];
   };
   tokenId: number;
   rawSvg: string;
 };
 
 const nftStateDefault: NFTState = {
-  status: NFTStatus.UNFETCHED,
+  status: FetchStatus.UNFETCHED,
   metadata: {
     image: "",
     attributes: [],
@@ -30,7 +30,7 @@ const LOCAL_RPC_URI = "http://localhost:8545";
 export const useLocalRPC = () => {
   const [bibosContract, setBibosContract] = useState<Contract>(null);
   const [tokenURI, setTokenURI] = useState<string>(null);
-  const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
+  const [status, setStatus] = useState<FetchStatus>(FetchStatus.UNFETCHED);
 
   useEffect(() => {
     const provider = new ethers.providers.JsonRpcProvider(LOCAL_RPC_URI);
@@ -47,9 +47,9 @@ export const useLocalRPC = () => {
 
   const handleFetchNFT = async () => {
     if (bibosContract == null) return;
-    if (status == NFTStatus.FETCHING) return;
+    if (status == FetchStatus.FETCHING) return;
 
-    setStatus(NFTStatus.FETCHING);
+    setStatus(FetchStatus.FETCHING);
 
     const tx = await bibosContract.mint();
     tx.wait();
@@ -58,7 +58,7 @@ export const useLocalRPC = () => {
     const tokenURI = await bibosContract.tokenURI(totalSupply - 1);
 
     setTokenURI(tokenURI);
-    setStatus(NFTStatus.FETCHED);
+    setStatus(FetchStatus.FETCHED);
   };
 
   return { tokenURI, status, handleFetchNFT };

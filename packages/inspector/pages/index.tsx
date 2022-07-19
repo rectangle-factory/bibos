@@ -7,10 +7,9 @@ import CodeMirror from "@uiw/react-codemirror";
 import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from "@codemirror/language";
 import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
-import { NFTStatus, IndexView } from "../types";
+import { FetchStatus } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
-import { useMultiRender } from "../hooks/useMultiRender";
-import { useNFT } from "../hooks/useNFT";
+
 import { useFormattedSvg } from "../hooks/useFormattedSVG";
 import { Container } from "../components/Container";
 import { Pane } from "../components/Pane";
@@ -24,7 +23,7 @@ import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
   const { token, status, handleLocalRender } = useLocalRender();
-  useMultiRender(5);
+
   const [debug, setDebug] = useState(false);
   const { formattedSvg, error } = useFormattedSvg(token.svg);
 
@@ -103,12 +102,12 @@ export default function Index() {
             tokenId={token.tokenId}
             svg={token.svg}
             debug={debug}
-            isLoading={status == NFTStatus.FETCHING}
+            isLoading={status == FetchStatus.FETCHING}
           />
         </div>
 
         <TraitsTable
-          loading={status == NFTStatus.UNFETCHED}
+          loading={status == FetchStatus.UNFETCHED}
           tokenId={token.tokenId}
           name={token.name}
           attributes={token.attributes}
@@ -116,7 +115,7 @@ export default function Index() {
         <HorizontalRule />
         <Toolbar>
           <Button
-            disabled={status == NFTStatus.FETCHING}
+            disabled={status == FetchStatus.FETCHING}
             primary
             onClick={() => handleLocalRender()}
           >

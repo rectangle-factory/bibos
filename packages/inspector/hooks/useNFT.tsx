@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
-import { NFTState } from "../types";
+import { FetchStatus } from "../types";
 
 const defaultState = {
   metadata: {
@@ -13,7 +13,7 @@ const defaultState = {
 };
 
 export const useNFT = (tokenURI: string) => {
-  const [state, setState] = useState<NFTState>(defaultState);
+  const [state, setState] = useState<FetchStatus>(defaultState);
 
   useEffect(() => {
     if (tokenURI == null) return;
