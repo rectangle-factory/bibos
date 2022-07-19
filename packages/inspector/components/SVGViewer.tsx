@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import { downloadSVG, downloadPNG, scaleCanvas } from "../util/index";
 
-type RawSVGViewerProps = {
+type SVGViewerProps = {
   debug?: boolean;
   className?: string;
-  rawSVG: string;
+  svg: string;
   isLoading?: boolean;
   tokenId: number;
 };
@@ -12,7 +12,7 @@ type RawSVGViewerProps = {
 const WIDTH = 1200;
 const HEIGHT = 1200;
 
-export function RawSVGViewer(props: RawSVGViewerProps) {
+export function SVGViewer(props: SVGViewerProps) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
 
   return (
     <div
-      className={`rounded-3xl shadow-elevation-medium relative h-full max-h-[54rem] w-auto bg-white/5 ${props.className}`}
+      className={`rounded-3xl shadow-elevation-medium relative h-full max-h-[600px] max-w-[600px] w-auto bg-white/5 ${props.className}`}
     >
       <canvas
         ref={canvasRef}
@@ -34,7 +34,7 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
         className={`rounded-3xl h-full w-auto overflow-hidden transition-opacity duration-300 ${
           props.isLoading ? "opacity-0" : "opacity-100"
         } ${props.debug ? "debug-svg" : ""}`}
-        dangerouslySetInnerHTML={{ __html: props.rawSVG }}
+        dangerouslySetInnerHTML={{ __html: props.svg }}
       />
       <div
         className={`rounded-3xl z-90 absolute content-none top-0 left-0 right-0 bottom-0 ${
@@ -45,14 +45,14 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
         <div className="absolute right-0 bottom-0 p-4 flex gap-x-2">
           <button
             className="text-sm exclusion bg-white/10 border border-white/10 rounded-lg px-2 py-0.5 text-label"
-            onClick={() => downloadSVG(props.rawSVG, 'bibo' + props.tokenId)}
+            onClick={() => downloadSVG(props.svg, "bibo" + props.tokenId)}
           >
             ↓ SVG
           </button>
 
           <button
             className="text-sm exclusion bg-white/10 border border-white/10 rounded-lg px-2 py-0.5 text-label"
-            onClick={() => downloadPNG(canvasRef, props.rawSVG, 'bibo' + props.tokenId, WIDTH, HEIGHT)}
+            onClick={() => downloadPNG(canvasRef, props.svg, "bibo" + props.tokenId, WIDTH, HEIGHT)}
           >
             ↓ PNG
           </button>
@@ -62,7 +62,7 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
   );
 }
 
-RawSVGViewer.defaultProps = {
+SVGViewer.defaultProps = {
   debug: false,
   className: "",
 };
