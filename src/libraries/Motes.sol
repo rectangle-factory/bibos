@@ -124,7 +124,7 @@ library Motes {
                     string.concat(
                         'calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.4 1; 0.4 0 0.4 1" attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="',
                         _delay,
-                        "/>"
+                        '"/>'
                     )
                 ),
                 SVG.element(
@@ -135,9 +135,7 @@ library Motes {
                         SVG.animateMotionAttributes(_reverse, _dur, "paced"),
                         Data.mpathJitterSm()
                     )
-                ),
-                "</circle>",
-                "</g>"
+                )
             );
     }
 

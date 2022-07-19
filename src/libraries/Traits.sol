@@ -72,6 +72,7 @@ library Traits {
 
     function moteTrait(bytes32 _seed) internal pure returns (string memory) {
         MoteType type_ = moteType(_seed);
+
         if (type_ == MoteType.FLOATING) return "Floating";
         if (type_ == MoteType.RISING) return "Rising";
         if (type_ == MoteType.FALLING) return "Falling";
