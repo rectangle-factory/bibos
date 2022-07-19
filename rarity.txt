@@ -47,7 +47,7 @@ export const mouthTypes = [
     'Medium Smile', // 30%
     'Small Smile', // 20%
     'Flat', // 10%
-    'Frown', // 4%
+    'OOO', // 4%
     'Grin', // 3%
     'Smooch', // 2%
     'Smirk', // 1%

@@ -11,17 +11,15 @@ enum MoteType {
     NONE,
     FLOATING,
     RISING,
-    FALLING
+    FALLING,
+    GLISTENING
 }
 
 library Motes {
-    uint256 constant GLINT_COUNT = 16;
+    uint256 constant GLINT_COUNT = 20;
 
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory motesChildren;
-
-        string memory mixMode = "lighten";
-        string memory fill = "white";
 
         MoteType moteType = Traits.moteType(_seed);
         if (moteType == MoteType.NONE) return "";
@@ -31,24 +29,26 @@ library Motes {
 
             string memory dur = Data.longTimes(moteSeed);
             moteSeed = moteSeed / Data.length;
+            string memory delay = Data.shorterTimes(moteSeed);
+            moteSeed = moteSeed / Data.length;
             string[2] memory coords = Data.motePoints(moteSeed);
             moteSeed = moteSeed / Data.length;
             string memory radius = moteSeed % 2 == 0 ? "1" : "2";
             moteSeed = moteSeed / 2;
             string memory opacity = Palette.opacity(moteSeed, _seed);
             moteSeed /= Palette.opacityLength;
-
-            if (moteType == MoteType.FLOATING) {
-                bool reverse = moteSeed % 2 == 0;
+            bool reverse = moteSeed % 2 == 0;
+            if (moteType == MoteType.FLOATING)
+                motesChildren = string.concat(motesChildren, _floatingMote(radius, coords, opacity, dur, reverse));
+            else if (moteType == MoteType.RISING)
+                motesChildren = string.concat(motesChildren, _risingMote(radius, coords, opacity, dur));
+            else if (moteType == MoteType.FALLING)
+                motesChildren = string.concat(motesChildren, _fallingMote(radius, coords, opacity, dur));
+            else if (moteType == MoteType.GLISTENING)
                 motesChildren = string.concat(
                     motesChildren,
-                    _floatingMote(radius, coords, fill, opacity, mixMode, dur, reverse)
+                    _glisteningMote(radius, coords, opacity, dur, reverse, delay)
                 );
-            } else if (moteType == MoteType.RISING)
-                motesChildren = string.concat(motesChildren, _risingMote(radius, coords, fill, opacity, mixMode, dur));
-            else if (moteType == MoteType.FALLING) {
-                motesChildren = string.concat(motesChildren, _fallingMote(radius, coords, fill, opacity, mixMode, dur));
-            }
         }
 
         return SVG.element({_type: "g", _attributes: "", _children: motesChildren});
@@ -57,9 +57,7 @@ library Motes {
     function _risingMote(
         string memory _radius,
         string[2] memory _coords,
-        string memory _fill,
         string memory _opacity,
-        string memory _mixMode,
         string memory _dur
     ) internal pure returns (string memory) {
         return
@@ -68,7 +66,7 @@ library Motes {
                 _attributes: 'transform="translate(0,25)"',
                 _children: SVG.element(
                     "circle",
-                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    SVG.circleAttributes(_radius, _coords, "white", _opacity, "lighten", ""),
                     _animateTransform(_dur, "-100"),
                     _animate(_dur)
                 )
@@ -78,16 +76,14 @@ library Motes {
     function _floatingMote(
         string memory _radius,
         string[2] memory _coords,
-        string memory _fill,
         string memory _opacity,
-        string memory _mixMode,
         string memory _dur,
         bool _reverse
     ) internal pure returns (string memory) {
         return
             SVG.element(
                 "circle",
-                SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                SVG.circleAttributes(_radius, _coords, "white", _opacity, "lighten", ""),
                 SVG.element("animateMotion", SVG.animateMotionAttributes(_reverse, _dur, "paced"), Data.mpathJitterSm())
             );
     }
@@ -95,8 +91,6 @@ library Motes {
     function _fallingMote(
         string memory _radius,
         string[2] memory _coords,
-        string memory _mixMode,
-        string memory _fill,
         string memory _opacity,
         string memory _dur
     ) internal pure returns (string memory) {
@@ -106,9 +100,41 @@ library Motes {
                 'transform="translate(0,-25)">',
                 SVG.element(
                     "circle",
-                    SVG.circleAttributes(_radius, _coords, _fill, _opacity, _mixMode, ""),
+                    SVG.circleAttributes(_radius, _coords, "white", _opacity, "lighten", ""),
                     _animateTransform(_dur, "100"),
                     _animate(_dur)
+                )
+            );
+    }
+
+    function _glisteningMote(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _opacity,
+        string memory _dur,
+        bool _reverse,
+        string memory _delay
+    ) internal pure returns (string memory) {
+        return
+            SVG.element(
+                "g",
+                'opacity="0"',
+                SVG.element(
+                    "animate",
+                    string.concat(
+                        'calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.4 1; 0.4 0 0.4 1" attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="',
+                        _delay,
+                        '"/>'
+                    )
+                ),
+                SVG.element(
+                    "circle",
+                    SVG.circleAttributes(_radius, _coords, "white", _opacity, "lighten", ""),
+                    SVG.element(
+                        "animateMotion",
+                        SVG.animateMotionAttributes(_reverse, _dur, "paced"),
+                        Data.mpathJitterSm()
+                    )
                 )
             );
     }

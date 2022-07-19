@@ -8,7 +8,8 @@ import {Traits} from "./Traits.sol";
 enum CheekType {
     NONE,
     CIRCULAR,
-    FRECKLES
+    FRECKLES,
+    BIG
 }
 
 library Cheeks {
@@ -18,9 +19,9 @@ library Cheeks {
 
     function render(bytes32 _seed) internal pure returns (string memory) {
         CheekType cheekType = Traits.cheekType(_seed);
-
         if (cheekType == CheekType.CIRCULAR) return _circular();
         if (cheekType == CheekType.FRECKLES) return _freckles();
+        if (cheekType == CheekType.BIG) return _big();
         return "";
     }
 
@@ -33,6 +34,14 @@ library Cheeks {
             string.concat(
                 "<circle cx='149' cy='113' r='6' fill='white' fill-opacity='0.6'/>",
                 "<circle cx='54' cy='113' r='6' fill='white' fill-opacity='0.6'/>"
+            );
+    }
+
+    function _big() internal pure returns (string memory) {
+        return
+            string.concat(
+                "<circle cx='149' cy='113' r='11' fill='white' fill-opacity='0.3'/>",
+                "<circle cx='54' cy='113' r='11' fill='white' fill-opacity='0.3'/>"
             );
     }
 

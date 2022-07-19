@@ -39,6 +39,11 @@ library Data {
                                   TIMES
     //////////////////////////////////////////////////////////////*/
 
+    function shorterTimes(uint256 _i) external pure returns (string memory) {
+        uint256 val = uint256(uint8(shorterTimesBytes[_i % length]));
+        return string.concat(Util.uint256ToString(val / 10), ".", Util.uint256ToString(val % 10));
+    }
+
     function shortTimes(uint256 _i) external pure returns (string memory) {
         uint256 val = uint256(uint8(shortTimesBytes[_i % length]));
         return string.concat(Util.uint256ToString(val / 10), ".", Util.uint256ToString(val % 10));
@@ -129,6 +134,8 @@ library Data {
         hex"f183ee6ce186db75f29ae15fdf97d28dc364c680e8add850efc3d4abc69cb54daa67b971aa84b397c753d5c4c5c1b8b2a055957ca19ee4d2cedcbed3b0c0a2b2a3448f469163878e8ea69a90b5e9a1d897c989b97c44786282547e7172967b8287e683d379b46c5069706287579aa3eb71ee73d461b75b5a5a6b507e6ca548a0";
     bytes constant glintPointsBytes =
         hex"ad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b965aadce5a96ceadadce6b6b965a5a967f5e5e7f7f5ecead7f5ec1c1ce7f7f5e7fce96d25e7f7f5e96d2d2965a96965aad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b965aadce5a96ceadadce6b6b965a5a967f5e5e7f7f5ecead7f5ec1c1ce7f7f5e7fce96d25e7f7f5e96d2d2965a96965aad5e6bc1ce7f6bc196d2c1c1adce5e7f96d25e7fc16b6b6b965ac1c16bc16bc15ead5a96ce7fcead96d2965a5e7fce7fc16b5a9696d2ad5e6b6bc1c17f5e5ead7fcece7f5eadd296d296c1c17f5e6b6b5ead7f5eadcecead5a965a9696d26b6b";
+    bytes public constant shorterTimesBytes =
+        hex"13121013120f13110f12130f1212100f13130f0f1111100f100f1308070509070505060708090808090507070709080908050008090700090008000600080900";
     bytes public constant shortTimesBytes =
         hex"59614460553a60493b505f3753543e3a6163343849473e333c325e53483b624d34343e48505c595562364d4f4e5d515d53384457604c5a5b4454534148586063";
     bytes public constant longTimesBytes =

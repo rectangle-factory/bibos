@@ -8,10 +8,13 @@ enum MouthType {
     MEDIUM_SMILE,
     SMALL_SMILE,
     FLAT,
-    FROWN,
+    OOO,
     GRIN,
     SMOOCH,
-    SMIRK
+    TOOTHY,
+    SMIRK,
+    VEE,
+    CAT
 }
 
 library Mouth {
@@ -23,9 +26,12 @@ library Mouth {
         if (mouthType == MouthType.MEDIUM_SMILE) return _mediumSmile(fill);
         if (mouthType == MouthType.SMALL_SMILE) return _smallSmile(fill);
         if (mouthType == MouthType.FLAT) return _flat(fill);
-        if (mouthType == MouthType.FROWN) return _frown(fill);
+        if (mouthType == MouthType.OOO) return _ooo(fill);
         if (mouthType == MouthType.GRIN) return _grin(fill);
         if (mouthType == MouthType.SMOOCH) return _smooch(fill);
+        if (mouthType == MouthType.TOOTHY) return _toothy(fill);
+        if (mouthType == MouthType.CAT) return _cat(fill);
+        if (mouthType == MouthType.VEE) return _vee(fill);
         return _smirk(fill);
     }
 
@@ -56,7 +62,7 @@ library Mouth {
             );
     }
 
-    function _frown(string memory _fill) internal pure returns (string memory) {
+    function _ooo(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M109 122.5C109 127.747 105.418 130 101 130C96.5817 130 93 127.747 93 122.5C93 117.253 96.5817 113 101 113C105.418 113 109 117.253 109 122.5Z' fill='",
@@ -89,24 +95,27 @@ library Mouth {
     function _toothy(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
-                "<path d='M72 115L80.1589 126L90.3296 120L100.488 130L110.659 120L120.83 126L129 115' stroke='",
+                "<path d='M78 116L81.7008 120.022C82.6943 121.102 83.1911 121.641 83.7943 121.962C84.3276 122.246 84.9183 122.405 85.5219 122.427C86.2046 122.453 86.9053 122.236 88.3066 121.801L89.2251 121.516C90.4224 121.145 91.021 120.959 91.6155 120.955C92.1419 120.952 92.6636 121.053 93.1509 121.252C93.7013 121.477 94.1875 121.873 95.16 122.664L96.4568 123.719C97.8947 124.888 98.6137 125.473 99.4132 125.697C100.118 125.895 100.864 125.896 101.57 125.699C102.369 125.475 103.089 124.891 104.528 123.723L105.84 122.659C106.813 121.869 107.299 121.475 107.849 121.251C108.336 121.052 108.857 120.952 109.383 120.955C109.977 120.959 110.575 121.145 111.771 121.516L112.686 121.8C114.087 122.235 114.787 122.453 115.47 122.427C116.073 122.405 116.664 122.246 117.197 121.963C117.8 121.643 118.297 121.104 119.291 120.025L123 116' stroke='",
                 _fill,
                 "' stroke-width='10' stroke-miterlimit='10' stroke-linecap='round'/>"
             );
     }
 
-    function _tongue(string memory _fill) internal pure returns (string memory) {
+    function _cat(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
-                "<path d='M72 116.069C84.2665 124.108 117.641 123.867 130 116' stroke='",
+                "<path d='M78 113.5C78 120.404 83.5964 126 90.5 126C94.9023 126 98.773 123.724 101 120.285C103.227 123.724 107.098 126 111.5 126C118.404 126 124 120.404 124 113.5' stroke='",
                 _fill,
-                "' stroke-width='10' stroke-linecap='round'/>",
-                "<path d='M97.2169 125.829C95.7132 150.357 133.515 146.477 127.034 122.514' stroke='",
+                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' stroke-linecap='round'/>"
+            );
+    }
+
+    function _vee(string memory _fill) internal pure returns (string memory) {
+        return
+            string.concat(
+                "<path d='M85 112L95.7711 117.027C98.4516 118.277 101.548 118.277 104.229 117.027L115 112' stroke='",
                 _fill,
-                "' stroke-width='10' stroke-linecap='round'/>",
-                "<path d='M112.011 122.05L114 142' stroke='",
-                _fill,
-                "' stroke-width='4' stroke-linecap='round'/>"
+                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' stroke-linecap='round'/>"
             );
     }
 
