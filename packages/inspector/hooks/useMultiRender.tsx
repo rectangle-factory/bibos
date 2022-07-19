@@ -28,7 +28,6 @@ export const useMultiRender = (quantity: number) => {
     }
 
     const tokenURIs = await response.json();
-    console.log(tokenURIs);
     setTokens(tokenURIs.map((tokenURI) => decodeTokenURI(tokenURI)));
     setStatus(NFTStatus.FETCHED);
   };
