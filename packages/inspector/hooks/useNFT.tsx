@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { decodeBase64 } from "../util";
-import { trait, NFTState } from "../types";
+import { NFTState } from "../types";
 
 const defaultState = {
   metadata: {
@@ -9,7 +9,7 @@ const defaultState = {
     attributes: [],
   },
   tokenId: null,
-  rawSVG: null,
+  svg: null,
 };
 
 export const useNFT = (tokenURI: string) => {
@@ -18,14 +18,14 @@ export const useNFT = (tokenURI: string) => {
   useEffect(() => {
     if (tokenURI == null) return;
     // decode and parse metadata
-    console.log(decodeBase64(tokenURI))
+    console.log(decodeBase64(tokenURI));
     const metadata = JSON.parse(decodeBase64(tokenURI));
 
     const tokenId = metadata.tokenId;
 
     // decode svg
-    const rawSVG = decodeBase64(metadata.image);
-    setState({ metadata, tokenId, rawSVG });
+    const svg = decodeBase64(metadata.image);
+    setState({ metadata, tokenId, svg });
   }, [tokenURI]);
 
   return { ...state };
