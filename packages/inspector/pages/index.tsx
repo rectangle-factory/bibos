@@ -10,25 +10,25 @@ import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 import { NFTStatus, IndexView } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
 import { useNFT } from "../hooks/useNFT";
-import { useSvg } from "../hooks/useSVG";
+import { useFormattedSvg } from "../hooks/useFormattedSVG";
 import { Container } from "../components/Container";
 import { Pane } from "../components/Pane";
 import { HorizontalRule } from "../components/HorizontalRule";
 import { Toolbar } from "../components/Toolbar";
 import { VerticalRule } from "../components/VerticalRule";
 import { Button } from "../components/Button";
-import { RawSVGViewer } from "../components/RawSVGViewer";
+import { SVGViewer } from "../components/SVGViewer";
 import { ToggleButton } from "../components/ToggleButton";
 import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
   const { tokenURI, status, handleFetchNFT } = useLocalRender();
-  const { metadata, tokenId, rawSVG } = useNFT(tokenURI);
+  const { metadata, tokenId, svg } = useNFT(tokenURI);
   const [debug, setDebug] = useState(false);
-  const { formatted, error } = useSvg(rawSVG);
+  const { formattedSvg, error } = useFormattedSvg(svg);
 
-  const loc = formatted.split(/\r\n|\r|\n/).length;
-  const kb = (new TextEncoder().encode(rawSVG).length * 0.001).toFixed(3);
+  const loc = formattedSvg.split(/\r\n|\r|\n/).length;
+  const kb = (new TextEncoder().encode(svg).length * 0.001).toFixed(3);
 
   return (
     <Container>
@@ -36,7 +36,7 @@ export default function Index() {
         <div className="flex h-full overflow-y-scroll">
           <CodeMirror
             className="w-full h-full border-none overflow-y-scroll scrollbar-none"
-            value={formatted}
+            value={formattedSvg}
             // height={ '100%' }
             basicSetup={{
               foldGutter: false,
@@ -98,9 +98,9 @@ export default function Index() {
 
       <Pane className="items-center h-full">
         <div className="flex w-full h-full items-center justify-center p-8">
-          <RawSVGViewer
+          <SVGViewer
             tokenId={tokenId}
-            rawSVG={rawSVG}
+            svg={svg}
             debug={debug}
             isLoading={status == NFTStatus.FETCHING}
           />

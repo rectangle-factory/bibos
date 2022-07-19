@@ -22,7 +22,7 @@ export type NFTState = {
     attributes: trait[];
   };
   tokenId: number;
-  rawSVG: string;
+  svg: string;
 };
 
 export type GenericComponentProps = {
