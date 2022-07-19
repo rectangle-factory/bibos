@@ -21,7 +21,7 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
 
   return (
     <div
-      className={`rounded-3xl shadow-elevation-medium relative h-full max-h-[54rem] w-auto bg-white/5 ${props.className}`}
+      className={`rounded-3xl shadow-elevation-medium relative h-full max-h-[600px] max-w-[600px] w-auto bg-white/5 ${props.className}`}
     >
       <canvas
         ref={canvasRef}
@@ -45,14 +45,16 @@ export function RawSVGViewer(props: RawSVGViewerProps) {
         <div className="absolute right-0 bottom-0 p-4 flex gap-x-2">
           <button
             className="text-sm exclusion bg-white/10 border border-white/10 rounded-lg px-2 py-0.5 text-label"
-            onClick={() => downloadSVG(props.rawSVG, 'bibo' + props.tokenId)}
+            onClick={() => downloadSVG(props.rawSVG, "bibo" + props.tokenId)}
           >
             ↓ SVG
           </button>
 
           <button
             className="text-sm exclusion bg-white/10 border border-white/10 rounded-lg px-2 py-0.5 text-label"
-            onClick={() => downloadPNG(canvasRef, props.rawSVG, 'bibo' + props.tokenId, WIDTH, HEIGHT)}
+            onClick={() =>
+              downloadPNG(canvasRef, props.rawSVG, "bibo" + props.tokenId, WIDTH, HEIGHT)
+            }
           >
             ↓ PNG
           </button>
