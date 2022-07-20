@@ -11,16 +11,14 @@ export default async (request: NextApiRequest, response: NextApiResponse) =>
     const command = "cd ../.. && " + SCRIPT_PATH + ` ${quantity}`;
     exec(command, (_: any, stdout: string, stderr: string) => {
       if (stderr) {
-        // log the error to console
         console.log("stderr: ", stderr);
-        // ignore errors until solmate updates their foundry.toml
-        // response.status(500);
-        // response.send(stderr);
-        // return resolve();
+
+        response.status(500);
+        response.send(stderr);
+        return resolve();
       }
-      //   console.log("synthesis_engine: synthesized bibos");
-      //   console.log(stdout);
-      response.send(stdout);
+
+      response.json(JSON.parse(stdout));
       resolve();
     });
   });

@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
-import { NFTStatus } from "../types";
+import { FetchStatus, Token } from "../types";
+import { decodeTokenURI } from "../util";
 
 const MULTI_RENDER_ENDPOINT = "/api/multirender";
 
 export const useMultiRender = (quantity: number) => {
-  const [tokenURIs, setTokenURIs] = useState<string[]>(null);
-  const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
+  const [tokens, setTokens] = useState<Token[]>(null);
+  const [status, setStatus] = useState<FetchStatus>(FetchStatus.UNFETCHED);
 
-  const handleFetchNFT = async () => {
-    if (status == NFTStatus.FETCHING) return;
+  const handleMultiRender = async () => {
+    if (status == FetchStatus.FETCHING) return;
 
-    setStatus(NFTStatus.FETCHING);
+    setStatus(FetchStatus.FETCHING);
 
     const response = await fetch(MULTI_RENDER_ENDPOINT, {
       method: "POST",
@@ -23,18 +24,17 @@ export const useMultiRender = (quantity: number) => {
     // handle fetch error
     if (response.status != 200) {
       console.log("fetch error: ", response.status);
-      return setStatus(NFTStatus.UNFETCHED);
+      return setStatus(FetchStatus.UNFETCHED);
     }
 
-    const json = await response.json();
-
-    setTokenURIs(json);
-    setStatus(NFTStatus.FETCHED);
+    const tokenURIs = await response.json();
+    setTokens(tokenURIs.map((tokenURI) => decodeTokenURI(tokenURI)));
+    setStatus(FetchStatus.FETCHED);
   };
 
   useEffect(() => {
-    handleFetchNFT();
+    handleMultiRender();
   }, []);
 
-  return { tokenURIs, status, handleFetchNFT };
+  return { tokens, status, handleMultiRender };
 };

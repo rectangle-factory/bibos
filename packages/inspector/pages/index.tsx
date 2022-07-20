@@ -7,10 +7,9 @@ import CodeMirror from "@uiw/react-codemirror";
 import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from "@codemirror/language";
 import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
-import { NFTStatus, IndexView } from "../types";
+import { FetchStatus } from "../types";
 import { useLocalRender } from "../hooks/useLocalRender";
-import { useMultiRender } from "../hooks/useMultiRender";
-import { useNFT } from "../hooks/useNFT";
+
 import { useFormattedSvg } from "../hooks/useFormattedSVG";
 import { Container } from "../components/Container";
 import { Pane } from "../components/Pane";
@@ -23,13 +22,13 @@ import { ToggleButton } from "../components/ToggleButton";
 import { TraitsTable } from "../components/TraitsTable";
 
 export default function Index() {
-  const { tokenURI, status, handleFetchNFT } = useLocalRender();
-  const { metadata, tokenId, svg } = useNFT(tokenURI);
+  const { token, status, handleLocalRender } = useLocalRender();
+
   const [debug, setDebug] = useState(false);
-  const { formattedSvg, error } = useFormattedSvg(svg);
-  
+  const { formattedSvg, error } = useFormattedSvg(token.svg);
+
   const loc = formattedSvg.split(/\r\n|\r|\n/).length;
-  const kb = (new TextEncoder().encode(svg).length * 0.001).toFixed(3);
+  const kb = (new TextEncoder().encode(token.svg).length * 0.001).toFixed(3);
 
   return (
     <Container>
@@ -100,22 +99,26 @@ export default function Index() {
       <Pane className="items-center h-full">
         <div className="flex w-full h-full items-center justify-center p-8">
           <SVGViewer
-            tokenId={tokenId}
-            svg={svg}
+            tokenId={token.tokenId}
+            svg={token.svg}
             debug={debug}
-            isLoading={status == NFTStatus.FETCHING}
+            isLoading={status == FetchStatus.FETCHING}
           />
         </div>
 
         <TraitsTable
-          loading={status == NFTStatus.UNFETCHED}
-          tokenId={tokenId}
-          name={metadata.name}
-          attributes={metadata.attributes}
+          loading={status == FetchStatus.UNFETCHED}
+          tokenId={token.tokenId}
+          name={token.name}
+          attributes={token.attributes}
         />
         <HorizontalRule />
         <Toolbar>
-          <Button disabled={status == NFTStatus.FETCHING} primary onClick={() => handleFetchNFT()}>
+          <Button
+            disabled={status == FetchStatus.FETCHING}
+            primary
+            onClick={() => handleLocalRender()}
+          >
             Render
           </Button>
           <ToggleButton isOn={debug} onClick={() => setDebug(!debug)}>

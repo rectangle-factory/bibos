@@ -1,35 +1,45 @@
 import { useState, useEffect } from "react";
-import { NFTStatus, trait } from "../types";
+import { FetchStatus, Token } from "../types";
+import { decodeTokenURI } from "../util";
 
 // returns the entire tokenURI
 const RENDER_ENDPOINT = "/api/render";
 
+const defaultState = {
+  name: "",
+  image: "",
+  attributes: [],
+
+  tokenId: null,
+  svg: null,
+};
+
 export const useLocalRender = () => {
-  const [tokenURI, setTokenURI] = useState<string>(null);
-  const [status, setStatus] = useState<NFTStatus>(NFTStatus.UNFETCHED);
+  const [token, setToken] = useState<Token>(defaultState);
+  const [status, setStatus] = useState<FetchStatus>(FetchStatus.UNFETCHED);
 
-  const handleFetchNFT = async () => {
-    if (status == NFTStatus.FETCHING) return;
+  const handleLocalRender = async () => {
+    if (status == FetchStatus.FETCHING) return;
 
-    setStatus(NFTStatus.FETCHING);
+    setStatus(FetchStatus.FETCHING);
 
     const response = await fetch(RENDER_ENDPOINT);
 
     // handle fetch error
     if (response.status != 200) {
       console.log("fetch error: ", response.status);
-      return setStatus(NFTStatus.UNFETCHED);
+      return setStatus(FetchStatus.UNFETCHED);
     }
 
-    const tokenURI = await response.text();
-    console.log("tokenURI", tokenURI);
-    setTokenURI(tokenURI);
-    setStatus(NFTStatus.FETCHED);
+    const tokenURI = await response.json();
+
+    setToken(decodeTokenURI(tokenURI));
+    setStatus(FetchStatus.FETCHED);
   };
 
   useEffect(() => {
-    handleFetchNFT();
+    handleLocalRender();
   }, []);
 
-  return { tokenURI, status, handleFetchNFT };
+  return { token, status, handleLocalRender };
 };

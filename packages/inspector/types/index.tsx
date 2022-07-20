@@ -3,14 +3,14 @@ export enum IndexView {
   SVG,
 }
 
-export enum NFTStatus {
+export enum FetchStatus {
   UNFETCHED,
   FETCHING,
   FETCHED,
   ERROR,
 }
 
-export type trait = {
+export type Trait = {
   trait_type: string;
   value: string;
 };
@@ -19,10 +19,18 @@ export type NFTState = {
   metadata: {
     name: string;
     image: string;
-    attributes: trait[];
+    attributes: Trait[];
   };
   tokenId: number;
   svg: string;
+};
+
+export type Token = {
+  name: string;
+  tokenId: number;
+  image: string;
+  svg: string;
+  attributes: Trait[];
 };
 
 export type GenericComponentProps = {
