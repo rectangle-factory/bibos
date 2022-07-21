@@ -68,8 +68,8 @@ export default function Index() {
         </div>
         {error.length === 0 ? null : (
           <>
-            <div className="border-t border-t-red-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-label">
-              <div className="w-full text-sm font-bold text-red-500">Error parsing SVG</div>
+            <div className="border-t border-t-orange-500/50 flex flex-col w-full px-4 py-2 bg-red-500/10 text-label">
+              <div className="w-full text-sm font-bold text-orange-500">Error parsing SVG</div>
               <div className="w-full text-sm">{error}</div>
             </div>
           </>
