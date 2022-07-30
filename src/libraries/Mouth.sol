@@ -56,7 +56,7 @@ library Mouth {
     function _smallSmile(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
-                "<path d='M91 111.081C95.2298 120.459 106.738 120.179 111 111' stroke='",
+                "<path d='M90 110.081C94.2298 119.459 105.738 119.179 110 110' stroke='",
                 _fill,
                 "' stroke-width='10' stroke-linecap='round'/>"
             );

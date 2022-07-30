@@ -179,14 +179,14 @@ library Eyes {
     function _round(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
-                '<circle cx="63" cy="84" r="19" fill="',
+                '<circle cx="142" cy="79" r="19" fill="',
                 _fill,
                 '"/>',
-                '<circle cx="147" cy="84" r="19" fill="',
+                '<circle cx="58" cy="79" r="19" fill="',
                 _fill,
                 '"/>',
-                '<circle cx="70" cy="80" r="6" fill="white"/>',
-                '<circle cx="154" cy="80" r="6" fill="white"/>'
+                '<circle cx="65" cy="75" r="6" fill="white"/>',
+                '<circle cx="149" cy="75" r="6" fill="white"/>'
             );
     }
 
