@@ -123,9 +123,9 @@ library Traits {
         if (eyeSeed % 100 < 80) return EyeType.HAHA;
         if (eyeSeed % 100 < 84) return EyeType.CLOVER;
         if (eyeSeed % 100 < 88) return EyeType.STAR;
-        if (eyeSeed % 100 < 90) return EyeType.DIZZY;
-        if (eyeSeed % 100 < 95) return EyeType.HEART;
-        if (eyeSeed % 100 < 98) return EyeType.CYCLOPS;
+        if (eyeSeed % 100 < 92) return EyeType.DIZZY;
+        if (eyeSeed % 100 < 96) return EyeType.HEART;
+        if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
         return EyeType.OPAL;
     }
 
