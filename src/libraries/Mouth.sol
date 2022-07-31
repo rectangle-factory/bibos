@@ -106,7 +106,7 @@ library Mouth {
             string.concat(
                 "<path d='M77 112.5C77 119.404 82.5964 125 89.5 125C93.9023 125 97.773 122.724 100 119.285C102.227 122.724 106.098 125 110.5 125C117.404 125 123 119.404 123 112.5' stroke='",
                 _fill,
-                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' stroke-linecap='round'/>"
+                "' stroke-width='10' stroke-linejoin='round' stroke-linecap='round'/>"
             );
     }
 
@@ -115,7 +115,7 @@ library Mouth {
             string.concat(
                 "<path d='M85 112L95.7711 117.027C98.4516 118.277 101.548 118.277 104.229 117.027L115 112' stroke='",
                 _fill,
-                "' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' stroke-linecap='round'/>"
+                "' stroke-width='10' stroke-linejoin='round' stroke-linecap='round'/>"
             );
     }
 
