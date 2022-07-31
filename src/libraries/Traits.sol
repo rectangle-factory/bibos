@@ -23,6 +23,7 @@ library Traits {
         result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
         result = string.concat(result, ",", _attribute("Mouth", mouthTrait(_seed)));
         result = string.concat(result, ",", _attribute("Cheeks", cheekTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Virtue", virtueTrait(_seed)));
         return string.concat(result, "]");
     }
 
@@ -199,5 +200,31 @@ library Traits {
         if (glintSeed < 5) return 2;
         if (glintSeed < 35) return 1;
         return 0;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                                  VIRTUE
+    //////////////////////////////////////////////////////////////*/
+
+    function virtueTrait(bytes32 _seed) internal pure returns (string memory) {
+        return virtueType(_seed);
+    }
+
+    function virtueType(bytes32 _seed) internal pure returns (string memory) {
+        uint256 virtueSeed = _computeSeed(_seed, "virtue");
+
+        if (virtueSeed < 10) return "Gentleness";
+        if (virtueSeed < 20) return "Bravery";
+        if (virtueSeed < 30) return "Modesty";
+        if (virtueSeed < 40) return "Temperance";
+        if (virtueSeed < 50) return "Rightous Indignation";
+        if (virtueSeed < 60) return "Justice";
+        if (virtueSeed < 70) return "Sincerity";
+        if (virtueSeed < 75) return "Friendliness";
+        if (virtueSeed < 80) return "Dignity";
+        if (virtueSeed < 85) return "Endurance";
+        if (virtueSeed < 90) return "Greatness of Spirit";
+        if (virtueSeed < 95) return "Magnificence";
+        return "Wisdom";
     }
 }

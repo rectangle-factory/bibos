@@ -238,8 +238,7 @@ library Eyes {
                         '<circle cx="129" cy="78" r="2" fill="white" fill-opacity="0.9"/>',
                         '<ellipse cx="137.5" cy="90" rx="1.5" ry="1" fill="white" fill-opacity="0.9"/>',
                         '<ellipse cx="151.5" cy="90" rx="1.5" ry="2" fill="white" fill-opacity="0.9"/>',
-                        '<circle cx="65" cy="75" r="6" fill="white"/>',
-                        '<rect x="2.5" y="2.5" width="195" height="195" stroke="#7B61FF" stroke-width="5"/>'
+                        '<circle cx="65" cy="75" r="6" fill="white"/>'
                     )
                 )
             );
