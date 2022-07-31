@@ -9,7 +9,7 @@ export function ToggleButton(props: ButtonProps & { isOn: boolean }) {
     >
       <div
         className={`transition-all user-select-none w-2 h-2 rounded-full ${
-          props.isOn ? "bg-white shadow-glow" : "bg-white/20 shadow-none"
+          props.isOn ? "bg-primary shadow-glow" : "bg-white/20 shadow-none"
         }`}
       />
       {props.children}

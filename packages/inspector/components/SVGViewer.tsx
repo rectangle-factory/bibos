@@ -21,7 +21,7 @@ export function SVGViewer(props: SVGViewerProps) {
 
   return (
     <div
-      className={`rounded-3xl shadow-elevation-medium relative h-full max-h-[600px] max-w-[600px] w-auto bg-white/5 ${props.className}`}
+      className={` shadow-elevation-medium relative h-full max-h-[600px] max-w-[600px] w-auto bg-white/5 ${props.className}`}
     >
       <canvas
         ref={canvasRef}
@@ -31,13 +31,13 @@ export function SVGViewer(props: SVGViewerProps) {
       />
 
       <div
-        className={`rounded-3xl h-full w-auto overflow-hidden transition-opacity duration-300 ${
+        className={` h-full w-auto overflow-hidden transition-opacity duration-300 ${
           props.isLoading ? "opacity-0" : "opacity-100"
         } ${props.debug ? "debug-svg" : ""}`}
         dangerouslySetInnerHTML={{ __html: props.svg }}
       />
       <div
-        className={`rounded-3xl z-90 absolute content-none top-0 left-0 right-0 bottom-0 ${
+        className={` z-90 absolute content-none top-0 left-0 right-0 bottom-0 ${
           props.debug ? "inner-shadow-border-debug" : "inner-shadow-border"
         }`}
       />
