@@ -26,9 +26,8 @@ contract Bibos is ERC721, Owned {
                                   STATE
     //////////////////////////////////////////////////////////////*/
 
-    uint256 public constant price = .111 ether;
-    uint256 public constant maxMintAmount = 10;
-    uint256 public constant maxSupply = 999;
+    uint256 public constant price = .1 ether;
+    uint256 public constant maxSupply = 1111;
 
     uint256 public totalSupply;
     mapping(uint256 => bytes32) public seeds; // (tokenId => seed)
@@ -57,11 +56,6 @@ contract Bibos is ERC721, Owned {
         _;
     }
 
-    modifier OnlyIfFewerThanMaxMintAmount(uint256 _amount) {
-        if (_amount > maxMintAmount) revert TooManyBibos();
-        _;
-    }
-
     modifier OnlyPositiveMintAmount(uint256 _amount) {
         if (_amount == 0) revert ZeroMintAmount();
         _;
@@ -71,7 +65,7 @@ contract Bibos is ERC721, Owned {
                                CONSTRUCTOR
     //////////////////////////////////////////////////////////////*/
 
-    constructor() ERC721("Bibos", "BBO") Owned(msg.sender) {}
+    constructor() ERC721("Bibos", "BIBO") Owned(msg.sender) {}
 
     /*//////////////////////////////////////////////////////////////
                                 TOKENURI
@@ -98,7 +92,6 @@ contract Bibos is ERC721, Owned {
         OnlyIfNotMintedOut
         OnlyIfYouPayEnough(_amount)
         OnlyPositiveMintAmount(_amount)
-        OnlyIfFewerThanMaxMintAmount(_amount)
     {
         for (; _amount > 0; ) {
             _mint(msg.sender);
