@@ -42,7 +42,7 @@ library Cheeks {
     function _big() internal pure returns (string memory) {
         return
             string.concat(
-                "<g style='mix-blend-mode:luminosity' opacity='0.5'>",
+                "<g style='mix-blend-mode:luminosity' opacity='0.35'>",
                 "<ellipse cx='148' cy='112' rx='11' ry='10' fill='red'/>",
                 "<ellipse cx='52' cy='112' rx='11' ry='10' fill='red'/>",
                 "</g>"
