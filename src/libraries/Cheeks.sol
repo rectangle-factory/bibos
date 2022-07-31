@@ -40,8 +40,8 @@ library Cheeks {
     function _big() internal pure returns (string memory) {
         return
             string.concat(
-                "<ellipse cx='149' cy='113' rx='11' ry='9' fill='white' fill-opacity='0.3'/>",
-                "<ellipse cx='54' cy='113' rx='11' ry='9' fill='white' fill-opacity='0.3'/>"
+                "<ellipse cx='151' cy='113' rx='11' ry='9' fill='white' fill-opacity='0.3'/>",
+                "<ellipse cx='52' cy='113' rx='11' ry='9' fill='white' fill-opacity='0.3'/>"
             );
     }
 

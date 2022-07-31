@@ -19,7 +19,7 @@ library Traits {
         result = string.concat(result, _attribute("Density", densityTrait(_seed)));
         result = string.concat(result, ",", _attribute("Polarity", polarityTrait(_seed)));
         result = string.concat(result, ",", _attribute("Glints", glintTrait(_seed)));
-        result = string.concat(result, ",", _attribute("Mote", moteTrait(_seed)));
+        result = string.concat(result, ",", _attribute("Motes", moteTrait(_seed)));
         result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
         result = string.concat(result, ",", _attribute("Mouth", mouthTrait(_seed)));
         result = string.concat(result, ",", _attribute("Cheeks", cheekTrait(_seed)));
