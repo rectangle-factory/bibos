@@ -128,6 +128,21 @@ library SVG {
         return element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4, _child5, _child6));
     }
 
+    function element(
+        string memory _type,
+        string memory _attributes,
+        string memory _child1,
+        string memory _child2,
+        string memory _child3,
+        string memory _child4,
+        string memory _child5,
+        string memory _child6,
+        string memory _child7
+    ) internal pure returns (string memory) {
+        return
+            element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4, _child5, _child6, _child7));
+    }
+
     function element(string memory _type, string memory _attributes) internal pure returns (string memory) {
         return string.concat("<", _type, " ", _attributes, "/>");
     }
