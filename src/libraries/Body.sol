@@ -12,11 +12,11 @@ library Body {
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         string memory bodyGroupChildren;
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];
 
-        string memory backgroundFill = Palette.backgroundFill(_seed);
+        string memory backgroundFill = Palette.backgroundFill(_seed, _tokenId);
         string memory mixBlendMode = Traits.polarityType(_seed) == PolarityType.POSITIVE ? "lighten" : "multiply";
 
         bodyGroupChildren = string.concat(bodyGroupChildren, _bodyBackground(backgroundFill));
@@ -26,7 +26,13 @@ library Body {
 
         for (uint8 i = 0; i < 7; i++) {
             uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body", i)));
-            string memory bodyFill = Palette.bodyFill(_seed, i);
+            string memory bodyFill = Palette.bodyFill(_seed, i, _tokenId);
+            string memory bodyFill2 = Palette.bodyFill(
+                _seed & 0xFFFFFFFF000000000000000000000000FFFFFFFF000000000000000000000000,
+                i,
+                _tokenId
+            );
+
             string memory radius = radii[i];
 
             string memory dur = Data.shortTimes(bodySeed);
@@ -38,9 +44,37 @@ library Body {
             bool reverse = bodySeed % 2 == 0;
             bodySeed /= 2;
 
+            string memory maybeGenesis = _tokenId == 0
+                ? string.concat(
+                    '<animate attributeName="fill" repeatCount="indefinite" values="',
+                    bodyFill,
+                    ";",
+                    bodyFill2,
+                    ";",
+                    bodyFill,
+                    '" dur="',
+                    dur,
+                    '"/>'
+                )
+                : "";
+
             bodyGroupChildren = string.concat(
                 bodyGroupChildren,
-                _bodyCircle(radius, coords, bodyFill, dur, reverse, mixBlendMode)
+                '<circle fill="',
+                bodyFill,
+                '" r="',
+                radius,
+                '" cx="',
+                coords[0],
+                '" cy="',
+                coords[1],
+                '" style="mix-blend-mode: ',
+                mixBlendMode,
+                '">',
+                SVG.element("animateMotion", SVG.animateMotionAttributes(reverse, dur, "linear"), Data.mpathJitterLg()),
+                maybeGenesis,
+                "</circle>"
+                // _bodyCircle(radius, coords, bodyFill, bodyFill2, dur, reverse, mixBlendMode)
             );
         }
         return
@@ -48,27 +82,6 @@ library Body {
                 "g",
                 string.concat(SVG.filterAttribute("bibo-blur"), 'shape-rendering="optimizeSpeed"'),
                 bodyGroupChildren
-            );
-    }
-
-    function _bodyCircle(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _fill,
-        string memory _dur,
-        bool _reverse,
-        string memory _mixBlendMode
-    ) internal pure returns (string memory) {
-        string memory opacity = "1";
-        return
-            SVG.element(
-                "circle",
-                SVG.circleAttributes(_radius, _coords, _fill, opacity, _mixBlendMode, ""),
-                SVG.element(
-                    "animateMotion",
-                    SVG.animateMotionAttributes(_reverse, _dur, "linear"),
-                    Data.mpathJitterLg()
-                )
             );
     }
 

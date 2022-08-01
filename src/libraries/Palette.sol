@@ -26,8 +26,16 @@ library Palette {
             )[_glintSeed % opacityLength];
     }
 
-    function bodyFill(bytes32 _seed, uint256 _i) internal pure returns (string memory) {
+    function bodyFill(
+        bytes32 _seed,
+        uint256 _i,
+        uint256 _tokenId
+    ) internal pure returns (string memory) {
         uint256 bodyFillValue = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i)));
+
+        if (_tokenId == 0) {
+            return _light(bodyFillValue);
+        }
 
         if (Traits.densityType(_seed) == DensityType.HIGH) {
             if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
@@ -44,8 +52,12 @@ library Palette {
         }
     }
 
-    function backgroundFill(bytes32 _seed) internal pure returns (string memory) {
+    function backgroundFill(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         uint256 backgroundFillValue = uint256(keccak256(abi.encodePacked(_seed, "backgroundFill")));
+
+        if (_tokenId == 0) {
+            return _darkest(backgroundFillValue);
+        }
 
         if (Traits.densityType(_seed) == DensityType.HIGH) {
             if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
