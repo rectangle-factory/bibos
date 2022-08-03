@@ -13,7 +13,6 @@ import {Motes} from "./Motes.sol";
 import {Glints} from "./Glints.sol";
 import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
-import {Misc} from "./Misc.sol";
 
 library Render {
     string public constant description = "Bibos";
@@ -25,7 +24,7 @@ library Render {
                 _name: _name(_tokenId),
                 _description: description,
                 _attributes: Traits.attributes(_seed),
-                _backgroundColor: Palette.backgroundFill(_seed),
+                _backgroundColor: Palette.backgroundFill(_seed, _tokenId),
                 _svg: _svg(_seed, _tokenId)
             });
     }
@@ -36,12 +35,11 @@ library Render {
                 "svg",
                 SVG.svgAttributes(),
                 Data.defs(),
-                Background.render(_seed),
-                Body.render(_seed),
+                Background.render(_seed, _tokenId),
+                Body.render(_seed, _tokenId),
                 Motes.render(_seed),
                 Glints.render(_seed),
-                Face.render(_seed),
-                Misc.render(_tokenId)
+                Face.render(_seed)
             );
     }
 

@@ -5,14 +5,14 @@ import {Palette} from "./Palette.sol";
 import {SVG} from "./SVG.sol";
 
 library Background {
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         return
             SVG.element(
                 "rect",
                 SVG.rectAttributes({
                     _width: "100%",
                     _height: "100%",
-                    _fill: Palette.backgroundFill(_seed),
+                    _fill: Palette.backgroundFill(_seed, _tokenId),
                     _attributes: ""
                 })
             );
