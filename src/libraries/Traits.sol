@@ -189,8 +189,8 @@ library Traits {
     //////////////////////////////////////////////////////////////*/
 
     function glintTrait(bytes32 _seed) internal pure returns (string memory) {
-        uint256 count_ = glintCount(_seed);
-        return Util.uint256ToString(count_);
+        uint256 count = glintCount(_seed);
+        return Util.uint256ToString(count);
     }
 
     function glintCount(bytes32 _seed) internal pure returns (uint256) {
