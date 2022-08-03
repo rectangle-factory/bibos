@@ -36,17 +36,11 @@ library Palette {
         if (_tokenId == 0) return _light(bodyFillValue);
 
         if (Traits.densityType(_seed) == DensityType.HIGH) {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
-                return _light(bodyFillValue);
-            } else {
-                return _invertedLight(bodyFillValue);
-            }
+            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _light(bodyFillValue);
+            else return _invertedLight(bodyFillValue);
         } else {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
-                return _lightest(bodyFillValue);
-            } else {
-                return _invertedLightest(bodyFillValue);
-            }
+            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _lightest(bodyFillValue);
+            else return _invertedLightest(bodyFillValue);
         }
     }
 
@@ -56,17 +50,11 @@ library Palette {
         if (_tokenId == 0) return _darkest(backgroundFillValue);
 
         if (Traits.densityType(_seed) == DensityType.HIGH) {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
-                return _darkest(backgroundFillValue);
-            } else {
-                return _invertedDarkest(backgroundFillValue);
-            }
+            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
+            else return _invertedDarkest(backgroundFillValue);
         } else {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) {
-                return _darkest(backgroundFillValue);
-            } else {
-                return _invertedDarkest(backgroundFillValue);
-            }
+            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
+            else return _invertedDarkest(backgroundFillValue);
         }
     }
 

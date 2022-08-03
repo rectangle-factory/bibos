@@ -20,7 +20,7 @@ library Render {
     function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
         return
             Metadata.encodeMetadata({
-                _id: _tokenId,
+                _tokenId: _tokenId,
                 _name: _name(_tokenId),
                 _description: description,
                 _attributes: Traits.attributes(_seed),
