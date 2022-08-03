@@ -27,11 +27,7 @@ library Body {
         for (uint8 i = 0; i < 7; i++) {
             uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body", i)));
             string memory bodyFill = Palette.bodyFill(_seed, i, _tokenId);
-            string memory bodyFill2 = Palette.bodyFill(
-                _seed,
-                i + 7,
-                _tokenId
-            );
+            string memory bodyFill2 = Palette.bodyFill(_seed, i + 7, _tokenId);
 
             string memory radius = radii[i];
 

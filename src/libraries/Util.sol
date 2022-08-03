@@ -6,6 +6,8 @@ import {Test, console2} from "forge-std/Test.sol";
 /// @title the bibos utility library
 /// @notice utility functions
 library Util {
+    error NumberHasTooManyDigits();
+
     /// @notice wraps a string in quotes and adds a space after
     function quote(string memory value) internal pure returns (string memory) {
         return string.concat('"', value, '" ');
@@ -17,6 +19,24 @@ library Util {
 
     function keyValueNoQuotes(string memory _key, string memory _value) internal pure returns (string memory) {
         return string.concat('"', _key, '":', _value);
+    }
+
+    /// @notice converts a tokenId to string and pads to _digits digits
+    /// @dev tokenId must be less than 10**_digits
+    /// @param _tokenId, uint256, the tokenId
+    /// @param _digits, uint8, the number of digits to pad to
+    /// @return result the resulting string
+    function uint256ToString(uint256 _tokenId, uint8 _digits) internal pure returns (string memory result) {
+        uint256 max = 10**_digits;
+        if (_tokenId >= max) revert NumberHasTooManyDigits();
+        // add leading zeroes
+        result = uint256ToString(_tokenId + max);
+        assembly {
+            // cut off one character
+            result := add(result, 1)
+            // store new length = _digits
+            mstore(result, _digits)
+        }
     }
 
     /// @notice converts a uint256 to ascii representation, without leading zeroes

@@ -38,9 +38,8 @@ contract Bibos is ERC721, Owned {
 
     error InsufficentValue();
     error MintedOut();
-    error ZeroMintAmount();
-    error TooManyBibos();
     error InvalidTokenId();
+    error AmountNotAvailable();
 
     /*//////////////////////////////////////////////////////////////
                                 MODIFIERS
@@ -56,8 +55,8 @@ contract Bibos is ERC721, Owned {
         _;
     }
 
-    modifier OnlyPositiveMintAmount(uint256 _amount) {
-        if (_amount == 0) revert ZeroMintAmount();
+    modifier OnlyIfAvailableSupply(uint256 _amount) {
+        if (_amount + totalSupply > maxSupply) revert AmountNotAvailable();
         _;
     }
 
@@ -90,8 +89,8 @@ contract Bibos is ERC721, Owned {
         public
         payable
         OnlyIfNotMintedOut
+        OnlyIfAvailableSupply(_amount)
         OnlyIfYouPayEnough(_amount)
-        OnlyPositiveMintAmount(_amount)
     {
         for (; _amount > 0; ) {
             _mint(msg.sender);
@@ -113,11 +112,11 @@ contract Bibos is ERC721, Owned {
 
     function _mint(address _to) internal {
         uint256 tokenId = totalSupply++;
-        seeds[tokenId] = _computeSeed(tokenId);
+        seeds[tokenId] = _seed(tokenId);
         ERC721._mint(_to, tokenId);
     }
 
-    function _computeSeed(uint256 _tokenId) internal view returns (bytes32) {
+    function _seed(uint256 _tokenId) internal view returns (bytes32) {
         return keccak256(abi.encodePacked(msg.sender, block.timestamp, _tokenId));
     }
 }
