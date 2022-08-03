@@ -9,9 +9,9 @@ import {time} from "src/util/time.sol";
 
 contract local_render is Test {
     function run() external returns (string memory tokenURI) {
-        // vm.startPrank(0xa0Ee7A142d267C1f36714E4a8F75612F20a79720);
-
         Bibos bibos = new Bibos();
+        uint256 price = bibos.price();
+        uint256 totalSupply = bibos.maxSupply();
 
         // get current time to use as random seed
         uint256 unixTime = time.getUnixTime();
@@ -19,20 +19,21 @@ contract local_render is Test {
         vm.warp(unixTime);
 
         // compute a random tokenId
-        uint256 tokenId = unixTime % 999;
+        uint256 tokenId = uint256(keccak256(abi.encode(unixTime))) % totalSupply;
 
         // set the total supply
         // (in storage slot 7)
         vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
         // mint
-        vm.deal(address(this), .111 ether);
-        bibos.mint{value: .111 ether}();
+        vm.deal(address(this), price);
+        bibos.mint{value: price}();
         tokenURI = bibos.tokenURI(tokenId);
     }
 
     function run(uint256 _amount) external returns (string[] memory tokenURIs) {
         Bibos bibos = new Bibos();
+        uint256 price = bibos.price();
 
         // get current time to use as random seed
         uint256 unixTime = time.getUnixTime();
@@ -41,11 +42,11 @@ contract local_render is Test {
 
         tokenURIs = new string[](_amount);
 
-        vm.deal(address(this), _amount * .111 ether);
+        vm.deal(address(this), _amount * price);
         uint256 i;
         for (; i < _amount; ++i) {
             // mint
-            bibos.mint{value: .111 ether}();
+            bibos.mint{value: price}();
             tokenURIs[i] = bibos.tokenURI(i);
         }
     }

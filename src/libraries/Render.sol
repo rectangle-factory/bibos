@@ -46,6 +46,6 @@ library Render {
     }
 
     function _name(uint256 _tokenId) internal pure returns (string memory) {
-        return string.concat("Bibo #", Util.uint256ToString(_tokenId));
+        return string.concat("Bibo ", Util.uint256ToString(_tokenId, 4));
     }
 }
