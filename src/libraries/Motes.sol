@@ -18,6 +18,10 @@ enum MoteType {
 library Motes {
     uint256 constant GLINT_COUNT = 20;
 
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory motesChildren;
 
@@ -29,7 +33,7 @@ library Motes {
 
             string memory dur = Data.longTimes(moteSeed /= Data.length);
             string memory delay = Data.shorterTimes(moteSeed /= Data.length);
-            string[2] memory coords = Data.motePoints(moteSeed / Data.length);
+            string[2] memory coords = Data.motePoints(moteSeed /= Data.length);
             string memory radius = (moteSeed /= 2) % 2 == 0 ? "1" : "2";
             string memory opacity = Palette.opacity(moteSeed /= Palette.opacityLength, _seed);
             bool reverse = moteSeed % 2 == 0;
@@ -49,6 +53,10 @@ library Motes {
 
         return SVG.element({_type: "g", _attributes: "", _children: motesChildren});
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _risingMote(
         string memory _radius,

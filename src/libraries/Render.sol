@@ -17,6 +17,10 @@ import {SVG} from "./SVG.sol";
 library Render {
     string public constant description = "Bibos";
 
+    /*//////////////////////////////////////////////////////////////
+                                TOKENURI
+    //////////////////////////////////////////////////////////////*/
+
     function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
         return
             Metadata.encodeMetadata({
@@ -28,6 +32,10 @@ library Render {
                 _svg: _svg(_seed, _tokenId)
             });
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _svg(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         return

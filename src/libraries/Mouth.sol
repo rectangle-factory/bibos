@@ -21,6 +21,10 @@ enum MouthType {
 library Mouth {
     string constant fill = "black";
 
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         MouthType mouthType = Traits.mouthType(_seed);
 
@@ -36,6 +40,10 @@ library Mouth {
         if (mouthType == MouthType.VEE) return _vee(fill);
         return _smirk(fill);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _smile(string memory _fill) internal pure returns (string memory) {
         return

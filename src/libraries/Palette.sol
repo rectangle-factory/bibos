@@ -17,14 +17,9 @@ library Palette {
     uint256 constant length = 64;
     uint256 constant opacityLength = 5;
 
-    function opacity(uint256 _glintSeed, bytes32 _seed) internal pure returns (string memory) {
-        return
-            (
-                Traits.densityType(_seed) == DensityType.HIGH
-                    ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
-                    : ["0.6", "0.7", "0.8", "0.9", "1.0"]
-            )[_glintSeed % opacityLength];
-    }
+    /*//////////////////////////////////////////////////////////////
+                                  FILL
+    //////////////////////////////////////////////////////////////*/
 
     function bodyFill(
         bytes32 _seed,
@@ -57,6 +52,23 @@ library Palette {
             else return _invertedDarkest(backgroundFillValue);
         }
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                 OPACITY
+    //////////////////////////////////////////////////////////////*/
+
+    function opacity(uint256 _glintSeed, bytes32 _seed) internal pure returns (string memory) {
+        return
+            (
+                Traits.densityType(_seed) == DensityType.HIGH
+                    ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
+                    : ["0.6", "0.7", "0.8", "0.9", "1.0"]
+            )[_glintSeed % opacityLength];
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _lightest(uint256 _i) internal pure returns (string memory) {
         return Data.lightestPalette(_i % length);

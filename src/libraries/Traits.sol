@@ -27,6 +27,10 @@ library Traits {
         return string.concat(result, "]");
     }
 
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
     function _attribute(string memory _traitType, string memory _value) internal pure returns (string memory) {
         return string.concat("{", Util.keyValue("trait_type", _traitType), ",", Util.keyValue("value", _value), "}");
     }
