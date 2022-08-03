@@ -27,8 +27,8 @@ library Util {
     /// @param _digits, uint8, the number of digits to pad to
     /// @return result the resulting string
     function uint256ToString(uint256 _tokenId, uint8 _digits) internal pure returns (string memory result) {
-        uint256 max = 10**_digits - 1;
-        if (_tokenId > max) revert NumberHasTooManyDigits();
+        uint256 max = 10**_digits;
+        if (_tokenId >= max) revert NumberHasTooManyDigits();
         // add leading zeroes
         result = uint256ToString(_tokenId + max);
         assembly {
