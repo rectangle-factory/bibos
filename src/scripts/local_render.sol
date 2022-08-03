@@ -19,15 +19,15 @@ contract local_render is Test {
         vm.warp(unixTime);
 
         // compute a random tokenId
-        uint256 tokenId = unixTime % 999;
+        uint256 tokenId = unixTime % 1111;
 
         // set the total supply
         // (in storage slot 7)
         vm.store(address(bibos), bytes32(uint256(7)), bytes32(tokenId));
 
         // mint
-        vm.deal(address(this), .111 ether);
-        bibos.mint{value: .111 ether}();
+        vm.deal(address(this), .1 ether);
+        bibos.mint{value: .1 ether}();
         tokenURI = bibos.tokenURI(tokenId);
     }
 
@@ -41,11 +41,11 @@ contract local_render is Test {
 
         tokenURIs = new string[](_amount);
 
-        vm.deal(address(this), _amount * .111 ether);
+        vm.deal(address(this), _amount * .1 ether);
         uint256 i;
         for (; i < _amount; ++i) {
             // mint
-            bibos.mint{value: .111 ether}();
+            bibos.mint{value: .1 ether}();
             tokenURIs[i] = bibos.tokenURI(i);
         }
     }
