@@ -28,8 +28,8 @@ library Body {
             uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body", i)));
             string memory bodyFill = Palette.bodyFill(_seed, i, _tokenId);
             string memory bodyFill2 = Palette.bodyFill(
-                _seed & 0xFFFFFFFF000000000000000000000000FFFFFFFF000000000000000000000000,
-                i,
+                _seed,
+                i + 7,
                 _tokenId
             );
 
