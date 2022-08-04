@@ -7,7 +7,7 @@ import {SVG} from "libraries/SVG.sol";
 import {Traits} from "libraries/Traits.sol";
 
 enum EyeType {
-    OPEN,
+    OVAL,
     SMILEY,
     WINK,
     ROUND,
@@ -18,7 +18,7 @@ enum EyeType {
     HEART,
     HAHA,
     CYCLOPS,
-    OPAL
+    OPALINE
 }
 
 library Eyes {
@@ -31,7 +31,7 @@ library Eyes {
     function render(bytes32 _seed) internal pure returns (string memory) {
         EyeType eyeType = Traits.eyeType(_seed);
 
-        if (eyeType == EyeType.OPEN) return _open(fill);
+        if (eyeType == EyeType.OVAL) return _oval(fill);
         if (eyeType == EyeType.SMILEY) return _smiley(fill);
         if (eyeType == EyeType.WINK) return _wink(fill);
         if (eyeType == EyeType.ROUND) return _round(fill);
@@ -42,14 +42,14 @@ library Eyes {
         if (eyeType == EyeType.HEART) return _heart(fill);
         if (eyeType == EyeType.HAHA) return _haha(fill);
         if (eyeType == EyeType.CYCLOPS) return _cyclops(fill);
-        return _opal(fill);
+        return _opaline(fill);
     }
 
     /*//////////////////////////////////////////////////////////////
                                 INTERNAL
     //////////////////////////////////////////////////////////////*/
 
-    function _open(string memory _fill) internal pure returns (string memory) {
+    function _oval(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<ellipse cx="58" cy="79" rx="18" ry="20" fill="',
@@ -190,7 +190,7 @@ library Eyes {
             );
     }
 
-    function _opal(string memory _fill) internal pure returns (string memory) {
+    function _opaline(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 '<circle cx="58" cy="79" r="22" fill="',

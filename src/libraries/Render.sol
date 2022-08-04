@@ -15,7 +15,8 @@ import {Traits} from "./Traits.sol";
 import {SVG} from "./SVG.sol";
 
 library Render {
-    string public constant description = "Bibos";
+    string public constant description =
+        "Floating. Hypnotizing. Divine? Bibos are 1111 friendly spirits for your wallet. Join the billions of people who love and adore bibos today.";
 
     /*//////////////////////////////////////////////////////////////
                                 TOKENURI

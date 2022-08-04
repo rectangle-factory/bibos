@@ -6,16 +6,17 @@ import {Traits} from "./Traits.sol";
 
 enum MouthType {
     SMILE,
-    MEDIUM_SMILE,
-    SMALL_SMILE,
-    FLAT,
+    GRATIFIED,
+    POLITE,
+    HMM,
     OOO,
     GRIN,
     SMOOCH,
     TOOTHY,
     SMIRK,
     VEE,
-    CAT
+    CAT,
+    BLEP
 }
 
 library Mouth {
@@ -29,15 +30,16 @@ library Mouth {
         MouthType mouthType = Traits.mouthType(_seed);
 
         if (mouthType == MouthType.SMILE) return _smile(fill);
-        if (mouthType == MouthType.MEDIUM_SMILE) return _mediumSmile(fill);
-        if (mouthType == MouthType.SMALL_SMILE) return _smallSmile(fill);
-        if (mouthType == MouthType.FLAT) return _flat(fill);
+        if (mouthType == MouthType.GRATIFIED) return _gratified(fill);
+        if (mouthType == MouthType.POLITE) return _polite(fill);
+        if (mouthType == MouthType.HMM) return _hmm(fill);
         if (mouthType == MouthType.OOO) return _ooo(fill);
         if (mouthType == MouthType.GRIN) return _grin(fill);
         if (mouthType == MouthType.SMOOCH) return _smooch(fill);
         if (mouthType == MouthType.TOOTHY) return _toothy(fill);
         if (mouthType == MouthType.CAT) return _cat(fill);
         if (mouthType == MouthType.VEE) return _vee(fill);
+        if (mouthType == MouthType.BLEP) return _blep(fill);
         return _smirk(fill);
     }
 
@@ -54,7 +56,7 @@ library Mouth {
             );
     }
 
-    function _mediumSmile(string memory _fill) internal pure returns (string memory) {
+    function _gratified(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M80 115.139C88.4596 131.216 111.476 130.735 120 115' stroke='",
@@ -63,7 +65,7 @@ library Mouth {
             );
     }
 
-    function _smallSmile(string memory _fill) internal pure returns (string memory) {
+    function _polite(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M90 110.081C94.2298 119.459 105.738 119.179 110 110' stroke='",
@@ -129,7 +131,7 @@ library Mouth {
             );
     }
 
-    function _flat(string memory _fill) internal pure returns (string memory) {
+    function _hmm(string memory _fill) internal pure returns (string memory) {
         return string.concat("<path d='M83 119H118' stroke='", _fill, "' stroke-width='10' stroke-linecap='round'/>");
     }
 
@@ -139,6 +141,21 @@ library Mouth {
                 "<path d='M129 115C120.699 130.851 102.919 136.383 88.4211 131' stroke='",
                 _fill,
                 "' stroke-width='10' stroke-linecap='round'/>"
+            );
+    }
+
+    function _blep(string memory _fill) internal pure returns (string memory) {
+        return
+            string.concat(
+                '<path d="M70 115C86.5517 120.557 113.448 120.606 130 115" stroke-width="10" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>',
+                '<path d="M96.2169 124.829C94.7132 149.357 132.515 145.477 126.034 121.514" stroke-width="8" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>',
+                '<path d="M111.011 121.05L113 141" stroke-width="4" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>'
             );
     }
 }
