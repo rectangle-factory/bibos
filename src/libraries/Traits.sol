@@ -14,10 +14,10 @@ library Traits {
                                  TRAITS
     //////////////////////////////////////////////////////////////*/
 
-    function attributes(bytes32 _seed) internal pure returns (string memory) {
+    function attributes(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         string memory result = "[";
-        result = string.concat(result, _attribute("Density", densityTrait(_seed)));
-        result = string.concat(result, ",", _attribute("Polarity", polarityTrait(_seed)));
+        result = string.concat(result, _attribute("Density", densityTrait(_seed, _tokenId)));
+        result = string.concat(result, ",", _attribute("Polarity", polarityTrait(_seed, _tokenId)));
         result = string.concat(result, ",", _attribute("Glints", glintTrait(_seed)));
         result = string.concat(result, ",", _attribute("Motes", moteTrait(_seed)));
         result = string.concat(result, ",", _attribute("Eyes", eyeTrait(_seed)));
@@ -43,14 +43,15 @@ library Traits {
                                  DENSITY
     //////////////////////////////////////////////////////////////*/
 
-    function densityTrait(bytes32 _seed) internal pure returns (string memory) {
-        DensityType type_ = densityType(_seed);
+    function densityTrait(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
+        DensityType type_ = densityType(_seed, _tokenId);
         return type_ == DensityType.HIGH ? "High" : "Low";
     }
 
-    function densityType(bytes32 _seed) internal pure returns (DensityType) {
+    function densityType(bytes32 _seed, uint256 _tokenId) internal pure returns (DensityType) {
         uint256 densityRarity = _rarity(_seed, "density");
 
+        if (_tokenId == 0) return DensityType.HIGH;
         if (densityRarity < 80) return DensityType.HIGH;
         return DensityType.LOW;
     }
@@ -59,14 +60,15 @@ library Traits {
                                 POLARITY
     //////////////////////////////////////////////////////////////*/
 
-    function polarityTrait(bytes32 _seed) internal pure returns (string memory) {
-        PolarityType type_ = polarityType(_seed);
+    function polarityTrait(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
+        PolarityType type_ = polarityType(_seed, _tokenId);
         return type_ == PolarityType.POSITIVE ? "Positive" : "Negative";
     }
 
-    function polarityType(bytes32 _seed) internal pure returns (PolarityType) {
+    function polarityType(bytes32 _seed, uint256 _tokenId) internal pure returns (PolarityType) {
         uint256 polarityRarity = _rarity(_seed, "polarity");
 
+        if (_tokenId == 0) return PolarityType.POSITIVE;
         if (polarityRarity < 80) return PolarityType.POSITIVE;
         return PolarityType.NEGATIVE;
     }

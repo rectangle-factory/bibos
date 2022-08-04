@@ -28,13 +28,11 @@ library Palette {
     ) internal pure returns (string memory) {
         uint256 bodyFillValue = uint256(keccak256(abi.encodePacked(_seed, "bodyFill", _i)));
 
-        if (_tokenId == 0) return _light(bodyFillValue);
-
-        if (Traits.densityType(_seed) == DensityType.HIGH) {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _light(bodyFillValue);
+        if (Traits.densityType(_seed, _tokenId) == DensityType.HIGH) {
+            if (Traits.polarityType(_seed, _tokenId) == PolarityType.POSITIVE) return _light(bodyFillValue);
             else return _invertedLight(bodyFillValue);
         } else {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _lightest(bodyFillValue);
+            if (Traits.polarityType(_seed, _tokenId) == PolarityType.POSITIVE) return _lightest(bodyFillValue);
             else return _invertedLightest(bodyFillValue);
         }
     }
@@ -42,13 +40,11 @@ library Palette {
     function backgroundFill(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         uint256 backgroundFillValue = uint256(keccak256(abi.encodePacked(_seed, "backgroundFill")));
 
-        if (_tokenId == 0) return _darkest(backgroundFillValue);
-
-        if (Traits.densityType(_seed) == DensityType.HIGH) {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
+        if (Traits.densityType(_seed, _tokenId) == DensityType.HIGH) {
+            if (Traits.polarityType(_seed, _tokenId) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
             else return _invertedDarkest(backgroundFillValue);
         } else {
-            if (Traits.polarityType(_seed) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
+            if (Traits.polarityType(_seed, _tokenId) == PolarityType.POSITIVE) return _darkest(backgroundFillValue);
             else return _invertedDarkest(backgroundFillValue);
         }
     }
@@ -57,10 +53,14 @@ library Palette {
                                  OPACITY
     //////////////////////////////////////////////////////////////*/
 
-    function opacity(uint256 _glintSeed, bytes32 _seed) internal pure returns (string memory) {
+    function opacity(
+        uint256 _glintSeed,
+        bytes32 _seed,
+        uint256 _tokenId
+    ) internal pure returns (string memory) {
         return
             (
-                Traits.densityType(_seed) == DensityType.HIGH
+                Traits.densityType(_seed, _tokenId) == DensityType.HIGH
                     ? ["0.3", "0.4", "0.5", "0.6", "0.7"]
                     : ["0.6", "0.7", "0.8", "0.9", "1.0"]
             )[_glintSeed % opacityLength];

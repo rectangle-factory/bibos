@@ -22,7 +22,7 @@ library Motes {
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         string memory motesChildren;
 
         MoteType moteType = Traits.moteType(_seed);
@@ -35,7 +35,7 @@ library Motes {
             string memory delay = Data.shorterTimes(moteSeed /= Data.length);
             string[2] memory coords = Data.motePoints(moteSeed /= Data.length);
             string memory radius = (moteSeed /= 2) % 2 == 0 ? "1" : "2";
-            string memory opacity = Palette.opacity(moteSeed /= Palette.opacityLength, _seed);
+            string memory opacity = Palette.opacity(moteSeed /= Palette.opacityLength, _seed, _tokenId);
             bool reverse = moteSeed % 2 == 0;
 
             if (moteType == MoteType.FLOATING)

@@ -18,7 +18,9 @@ library Body {
         string[7] memory radii = ["64", "64", "64", "56", "48", "32", "24"];
 
         string memory backgroundFill = Palette.backgroundFill(_seed, _tokenId);
-        string memory mixBlendMode = Traits.polarityType(_seed) == PolarityType.POSITIVE ? "lighten" : "multiply";
+        string memory mixBlendMode = Traits.polarityType(_seed, _tokenId) == PolarityType.POSITIVE
+            ? "lighten"
+            : "multiply";
 
         string memory bodyGroupChildren = _bodyBackground(backgroundFill);
 
