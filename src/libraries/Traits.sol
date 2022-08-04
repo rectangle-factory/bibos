@@ -144,7 +144,8 @@ library Traits {
         if (type_ == MouthType.TOOTHY) return "Toothy";
         if (type_ == MouthType.VEE) return "Vee";
         if (type_ == MouthType.GRIN) return "Grin";
-        return "Smooch";
+        if (type_ == MouthType.SMOOCH) return "Smooch";
+        return "Cat";
     }
 
     function mouthType(bytes32 _seed) internal pure returns (MouthType) {
