@@ -65,7 +65,7 @@ library Body {
                     _mixMode: _mixMode,
                     _attributes: ""
                 }),
-                SVG.element("animateMotion", SVG.animateMotionAttributes(reverse, dur, ""), Data.mpathJitterLg()),
+                SVG.element("animateMotion", SVG.animateMotionAttributes(reverse, dur, "linear"), Data.mpathJitterLg()),
                 (_tokenId == 0) ? _genesis(bodyFill1, bodyFill2, dur) : ""
             );
     }
