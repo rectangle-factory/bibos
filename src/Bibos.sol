@@ -21,6 +21,11 @@ import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
 import {Render} from "libraries/Render.sol";
 
+error InsufficentValue();
+error MintedOut();
+error InvalidTokenId();
+error AmountNotAvailable();
+
 contract Bibos is ERC721, Owned {
     /*//////////////////////////////////////////////////////////////
                                   STATE
@@ -31,15 +36,6 @@ contract Bibos is ERC721, Owned {
 
     uint256 public totalSupply;
     mapping(uint256 => bytes32) public seeds; // (tokenId => seed)
-
-    /*//////////////////////////////////////////////////////////////
-                                 ERRORS
-    //////////////////////////////////////////////////////////////*/
-
-    error InsufficentValue();
-    error MintedOut();
-    error InvalidTokenId();
-    error AmountNotAvailable();
 
     /*//////////////////////////////////////////////////////////////
                                 MODIFIERS
@@ -78,7 +74,7 @@ contract Bibos is ERC721, Owned {
     }
 
     /*//////////////////////////////////////////////////////////////
-                                 MINTING
+                                  MINT
     //////////////////////////////////////////////////////////////*/
 
     function mint() public payable OnlyIfNotMintedOut OnlyIfYouPayEnough(1) {
@@ -94,7 +90,7 @@ contract Bibos is ERC721, Owned {
     {
         for (; _amount > 0; ) {
             _mint(msg.sender);
-            _amount--;
+            --_amount;
         }
     }
 

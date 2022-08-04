@@ -8,14 +8,8 @@ library Metadata {
     string constant JSON_BASE64_HEADER = "data:application/json;base64,";
     string constant SVG_XML_BASE64_HEADER = "data:image/svg+xml;base64,";
 
-    /// @notice base64 encode json metadata for the token
-    /// @param _id, the tokenId
-    /// @param _name, the name of the token
-    /// @param _description, the description of the token
-    /// @param _svg, the svg image
-    /// @return string, the name of the color
     function encodeMetadata(
-        uint256 _id,
+        uint256 _tokenId,
         string memory _name,
         string memory _description,
         string memory _attributes,
@@ -24,7 +18,7 @@ library Metadata {
     ) internal pure returns (string memory) {
         string memory metadata = string.concat(
             "{",
-            Util.keyValue("tokenId", Util.uint256ToString(_id)),
+            Util.keyValue("tokenId", Util.uint256ToString(_tokenId)),
             ",",
             Util.keyValue("name", _name),
             ",",

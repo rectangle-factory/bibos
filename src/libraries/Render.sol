@@ -18,10 +18,14 @@ library Render {
     string public constant description =
         "Floating. Hypnotizing. Divine? Bibos are 1111 friendly spirits for your wallet. Join the billions of people who love and adore bibos today.";
 
+    /*//////////////////////////////////////////////////////////////
+                                TOKENURI
+    //////////////////////////////////////////////////////////////*/
+
     function tokenURI(uint256 _tokenId, bytes32 _seed) internal pure returns (string memory) {
         return
             Metadata.encodeMetadata({
-                _id: _tokenId,
+                _tokenId: _tokenId,
                 _name: _name(_tokenId),
                 _description: description,
                 _attributes: Traits.attributes(_seed),
@@ -29,6 +33,10 @@ library Render {
                 _svg: _svg(_seed, _tokenId)
             });
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _svg(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         return

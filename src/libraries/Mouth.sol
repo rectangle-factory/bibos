@@ -3,6 +3,7 @@ pragma solidity >=0.8.0;
 
 import {Palette} from "./Palette.sol";
 import {Traits} from "./Traits.sol";
+
 enum MouthType {
     SMILE,
     GRATIFIED,
@@ -19,8 +20,13 @@ enum MouthType {
 }
 
 library Mouth {
+    string constant fill = "black";
+
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = "black";
         MouthType mouthType = Traits.mouthType(_seed);
 
         if (mouthType == MouthType.SMILE) return _smile(fill);
@@ -36,6 +42,10 @@ library Mouth {
         if (mouthType == MouthType.BLEP) return _blep(fill);
         return _smirk(fill);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _smile(string memory _fill) internal pure returns (string memory) {
         return

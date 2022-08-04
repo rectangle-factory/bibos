@@ -22,13 +22,13 @@ enum EyeType {
 }
 
 library Eyes {
+    string constant fill = "black";
+
     /*//////////////////////////////////////////////////////////////
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
     function render(bytes32 _seed) internal pure returns (string memory) {
-        string memory fill = "black";
-
         EyeType eyeType = Traits.eyeType(_seed);
 
         if (eyeType == EyeType.OVAL) return _oval(fill);
