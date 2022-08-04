@@ -14,7 +14,8 @@ enum MouthType {
     TOOTHY,
     SMIRK,
     VEE,
-    CAT
+    CAT,
+    BLEP
 }
 
 library Mouth {
@@ -32,6 +33,7 @@ library Mouth {
         if (mouthType == MouthType.TOOTHY) return _toothy(fill);
         if (mouthType == MouthType.CAT) return _cat(fill);
         if (mouthType == MouthType.VEE) return _vee(fill);
+        if (mouthType == MouthType.BLEP) return _blep(fill);
         return _smirk(fill);
     }
 
@@ -129,6 +131,21 @@ library Mouth {
                 "<path d='M129 115C120.699 130.851 102.919 136.383 88.4211 131' stroke='",
                 _fill,
                 "' stroke-width='10' stroke-linecap='round'/>"
+            );
+    }
+
+    function _blep(string memory _fill) internal pure returns (string memory) {
+        return
+            string.concat(
+                '<path d="M70 115C86.5517 120.557 113.448 120.606 130 115" stroke-width="10" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>',
+                '<path d="M96.2169 124.829C94.7132 149.357 132.515 145.477 126.034 121.514" stroke-width="8" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>',
+                '<path d="M111.011 121.05L113 141" stroke-width="4" stroke-linecap="round" stroke="',
+                _fill,
+                '"/>'
             );
     }
 }

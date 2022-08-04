@@ -144,6 +144,7 @@ library Traits {
         if (type_ == MouthType.TOOTHY) return "Toothy";
         if (type_ == MouthType.VEE) return "Vee";
         if (type_ == MouthType.GRIN) return "Grin";
+        if (type_ == MouthType.BLEP) return "Blep";
         return "Smooch";
     }
 
@@ -158,7 +159,8 @@ library Traits {
         if (mouthSeed % 100 < 89) return MouthType.VEE;
         if (mouthSeed % 100 < 92) return MouthType.OOO;
         if (mouthSeed % 100 < 94) return MouthType.HMM;
-        if (mouthSeed % 100 < 96) return MouthType.TOOTHY;
+        if (mouthSeed % 100 < 95) return MouthType.TOOTHY;
+        if (mouthSeed % 100 < 97) return MouthType.BLEP;
         if (mouthSeed % 100 < 98) return MouthType.SMOOCH;
         return MouthType.CAT;
     }
