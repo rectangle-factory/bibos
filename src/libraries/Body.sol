@@ -37,7 +37,7 @@ library Body {
             string[2] memory coords = (i == 0) ? ["150", "150"] : Data.bodyPoints(bodySeed);
             bodySeed /= length;
 
-            bool reverse = bodySeed % 2 == 0;
+            bool reverse = false;
             bodySeed /= 2;
 
             string memory maybeGenesis = _tokenId == 0
@@ -67,10 +67,9 @@ library Body {
                 '" style="mix-blend-mode: ',
                 mixBlendMode,
                 '">',
-                SVG.element("animateMotion", SVG.animateMotionAttributes(reverse, dur, "linear"), Data.mpathJitterLg()),
+                SVG.element("animateMotion", SVG.animateMotionAttributes(reverse, dur, ""), Data.mpathJitterLg()),
                 maybeGenesis,
                 "</circle>"
-                // _bodyCircle(radius, coords, bodyFill, bodyFill2, dur, reverse, mixBlendMode)
             );
         }
         return
