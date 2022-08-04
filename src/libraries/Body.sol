@@ -37,7 +37,7 @@ library Body {
             string[2] memory coords = (i == 0) ? ["150", "150"] : Data.bodyPoints(bodySeed);
             bodySeed /= length;
 
-            bool reverse = false;
+            bool reverse = bodySeed % 2 == 0;
             bodySeed /= 2;
 
             string memory maybeGenesis = _tokenId == 0
