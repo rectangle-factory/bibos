@@ -84,7 +84,7 @@ library Glints {
                 ),
                 SVG.element(
                     "animateMotion",
-                    SVG.animateMotionAttributes(_reverse, _durationLong, ""),
+                    SVG.animateMotionAttributes(_reverse, _durationLong, "linear"),
                     Data.mpathJitterLg()
                 )
             );
