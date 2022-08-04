@@ -162,16 +162,12 @@ library SVG {
     ) internal pure returns (string memory) {
         string memory reverse = _reverse ? "keyPoints='1;0' keyTimes='0;1'" : "";
 
-        return
-            string.concat(
-                reverse,
-                " ",
-                "dur=",
-                Util.quote(_dur),
-                'repeatCount="indefinite" ',
-                "calcMode=",
-                Util.quote(_calcMode)
-            );
+        // Firefox has issues with calcMode="linear", even thought it is the default.
+        string memory calcModeStr = bytes(_calcMode).length == 0
+            ? ""
+            : string.concat("calcMode=", Util.quote(_calcMode));
+
+        return string.concat(reverse, " ", "dur=", Util.quote(_dur), 'repeatCount="indefinite" ', calcModeStr);
     }
 
     function filterAttribute(string memory _id) internal pure returns (string memory) {
