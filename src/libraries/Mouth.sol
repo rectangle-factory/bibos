@@ -5,9 +5,9 @@ import {Palette} from "./Palette.sol";
 import {Traits} from "./Traits.sol";
 enum MouthType {
     SMILE,
-    MEDIUM_SMILE,
-    SMALL_SMILE,
-    FLAT,
+    GRATIFIED,
+    POLITE,
+    HMM,
     OOO,
     GRIN,
     SMOOCH,
@@ -23,9 +23,9 @@ library Mouth {
         MouthType mouthType = Traits.mouthType(_seed);
 
         if (mouthType == MouthType.SMILE) return _smile(fill);
-        if (mouthType == MouthType.MEDIUM_SMILE) return _mediumSmile(fill);
-        if (mouthType == MouthType.SMALL_SMILE) return _smallSmile(fill);
-        if (mouthType == MouthType.FLAT) return _flat(fill);
+        if (mouthType == MouthType.GRATIFIED) return _gratified(fill);
+        if (mouthType == MouthType.POLITE) return _polite(fill);
+        if (mouthType == MouthType.HMM) return _hmm(fill);
         if (mouthType == MouthType.OOO) return _ooo(fill);
         if (mouthType == MouthType.GRIN) return _grin(fill);
         if (mouthType == MouthType.SMOOCH) return _smooch(fill);
@@ -44,7 +44,7 @@ library Mouth {
             );
     }
 
-    function _mediumSmile(string memory _fill) internal pure returns (string memory) {
+    function _gratified(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M80 115.139C88.4596 131.216 111.476 130.735 120 115' stroke='",
@@ -53,7 +53,7 @@ library Mouth {
             );
     }
 
-    function _smallSmile(string memory _fill) internal pure returns (string memory) {
+    function _polite(string memory _fill) internal pure returns (string memory) {
         return
             string.concat(
                 "<path d='M90 110.081C94.2298 119.459 105.738 119.179 110 110' stroke='",
@@ -119,7 +119,7 @@ library Mouth {
             );
     }
 
-    function _flat(string memory _fill) internal pure returns (string memory) {
+    function _hmm(string memory _fill) internal pure returns (string memory) {
         return string.concat("<path d='M83 119H118' stroke='", _fill, "' stroke-width='10' stroke-linecap='round'/>");
     }
 
