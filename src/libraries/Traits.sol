@@ -113,19 +113,19 @@ library Traits {
     }
 
     function eyeType(bytes32 _seed) internal pure returns (EyeType) {
-        uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
+        uint256 eyeSeed = _computeSeed(_seed, "eye");
 
-        if (eyeSeed % 100 < 20) return EyeType.OVAL;
-        if (eyeSeed % 100 < 40) return EyeType.ROUND;
-        if (eyeSeed % 100 < 50) return EyeType.SMILEY;
-        if (eyeSeed % 100 < 60) return EyeType.SLEEPY;
-        if (eyeSeed % 100 < 70) return EyeType.WINK;
-        if (eyeSeed % 100 < 80) return EyeType.HAHA;
-        if (eyeSeed % 100 < 84) return EyeType.CLOVER;
-        if (eyeSeed % 100 < 88) return EyeType.STAR;
-        if (eyeSeed % 100 < 92) return EyeType.DIZZY;
-        if (eyeSeed % 100 < 96) return EyeType.HEART;
-        if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
+        if (eyeSeed < 20) return EyeType.OVAL;
+        if (eyeSeed < 40) return EyeType.ROUND;
+        if (eyeSeed < 50) return EyeType.SMILEY;
+        if (eyeSeed < 60) return EyeType.SLEEPY;
+        if (eyeSeed < 70) return EyeType.WINK;
+        if (eyeSeed < 80) return EyeType.HAHA;
+        if (eyeSeed < 84) return EyeType.CLOVER;
+        if (eyeSeed < 88) return EyeType.STAR;
+        if (eyeSeed < 92) return EyeType.DIZZY;
+        if (eyeSeed < 96) return EyeType.HEART;
+        if (eyeSeed < 99) return EyeType.CYCLOPS;
         return EyeType.OPALINE;
     }
 
@@ -151,17 +151,17 @@ library Traits {
     function mouthType(bytes32 _seed) internal pure returns (MouthType) {
         uint256 mouthSeed = _computeSeed(_seed, "mouth");
 
-        if (mouthSeed % 100 < 20) return MouthType.SMILE;
-        if (mouthSeed % 100 < 40) return MouthType.GRATIFIED;
-        if (mouthSeed % 100 < 60) return MouthType.POLITE;
-        if (mouthSeed % 100 < 70) return MouthType.GRIN;
-        if (mouthSeed % 100 < 80) return MouthType.SMIRK;
-        if (mouthSeed % 100 < 89) return MouthType.VEE;
-        if (mouthSeed % 100 < 92) return MouthType.OOO;
-        if (mouthSeed % 100 < 94) return MouthType.HMM;
-        if (mouthSeed % 100 < 95) return MouthType.TOOTHY;
-        if (mouthSeed % 100 < 97) return MouthType.BLEP;
-        if (mouthSeed % 100 < 98) return MouthType.SMOOCH;
+        if (mouthSeed < 20) return MouthType.SMILE;
+        if (mouthSeed < 40) return MouthType.GRATIFIED;
+        if (mouthSeed < 60) return MouthType.POLITE;
+        if (mouthSeed < 70) return MouthType.GRIN;
+        if (mouthSeed < 80) return MouthType.SMIRK;
+        if (mouthSeed < 89) return MouthType.VEE;
+        if (mouthSeed < 92) return MouthType.OOO;
+        if (mouthSeed < 94) return MouthType.HMM;
+        if (mouthSeed < 95) return MouthType.TOOTHY;
+        if (mouthSeed < 97) return MouthType.BLEP;
+        if (mouthSeed < 98) return MouthType.SMOOCH;
         return MouthType.CAT;
     }
 
@@ -180,9 +180,9 @@ library Traits {
     function cheekType(bytes32 _seed) internal pure returns (CheekType) {
         uint256 cheeksSeed = _computeSeed(_seed, "cheeks");
 
-        if (cheeksSeed % 100 < 50) return CheekType.NONE;
-        if (cheeksSeed % 100 < 75) return CheekType.CIRCULAR;
-        if (cheeksSeed % 100 < 85) return CheekType.BIG;
+        if (cheeksSeed < 50) return CheekType.NONE;
+        if (cheeksSeed < 75) return CheekType.CIRCULAR;
+        if (cheeksSeed < 85) return CheekType.BIG;
         return CheekType.FRECKLES;
     }
 
