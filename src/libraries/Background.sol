@@ -5,6 +5,10 @@ import {Palette} from "./Palette.sol";
 import {SVG} from "./SVG.sol";
 
 library Background {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
         return
             SVG.element(

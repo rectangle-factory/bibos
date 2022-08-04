@@ -4,65 +4,12 @@ pragma solidity >=0.8.0;
 import {Util} from "./Util.sol";
 
 library SVG {
-    function svgAttributes() internal pure returns (string memory) {
-        return
-            string.concat(
-                'xmlns="http://www.w3.org/2000/svg" '
-                'xmlns:xlink="http://www.w3.org/1999/xlink" '
-                'width="100%" '
-                'height="100%" '
-                'viewBox="0 0 300 300" ',
-                'preserveAspectRatio="xMidYMid meet" ',
-                'fill="none" '
-            );
-    }
+    /*//////////////////////////////////////////////////////////////
+                                 ELEMENT
+    //////////////////////////////////////////////////////////////*/
 
-    function circleAttributes(
-        string memory _radius,
-        string[2] memory _coords,
-        string memory _fill,
-        string memory _opacity,
-        string memory _mixMode,
-        string memory _attributes
-    ) internal pure returns (string memory) {
-        return
-            string.concat(
-                "r=",
-                Util.quote(_radius),
-                "cx=",
-                Util.quote(_coords[0]),
-                "cy=",
-                Util.quote(_coords[1]),
-                "fill=",
-                Util.quote(_fill),
-                "opacity=",
-                Util.quote(_opacity),
-                "style=",
-                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
-                " ",
-                _attributes,
-                " "
-            );
-    }
-
-    function rectAttributes(
-        string memory _width,
-        string memory _height,
-        string memory _fill,
-        string memory _attributes
-    ) internal pure returns (string memory) {
-        return
-            string.concat(
-                "width=",
-                Util.quote(_width),
-                "height=",
-                Util.quote(_height),
-                "fill=",
-                Util.quote(_fill),
-                " ",
-                _attributes,
-                " "
-            );
+    function element(string memory _type, string memory _attributes) internal pure returns (string memory) {
+        return string.concat("<", _type, " ", _attributes, "/>");
     }
 
     function element(
@@ -143,8 +90,69 @@ library SVG {
             element(_type, _attributes, string.concat(_child1, _child2, _child3, _child4, _child5, _child6, _child7));
     }
 
-    function element(string memory _type, string memory _attributes) internal pure returns (string memory) {
-        return string.concat("<", _type, " ", _attributes, "/>");
+    /*//////////////////////////////////////////////////////////////
+                               ATTRIBUTES
+    //////////////////////////////////////////////////////////////*/
+
+    function svgAttributes() internal pure returns (string memory) {
+        return
+            string.concat(
+                'xmlns="http://www.w3.org/2000/svg" '
+                'xmlns:xlink="http://www.w3.org/1999/xlink" '
+                'width="100%" '
+                'height="100%" '
+                'viewBox="0 0 300 300" ',
+                'preserveAspectRatio="xMidYMid meet" ',
+                'fill="none" '
+            );
+    }
+
+    function circleAttributes(
+        string memory _radius,
+        string[2] memory _coords,
+        string memory _fill,
+        string memory _opacity,
+        string memory _mixMode,
+        string memory _attributes
+    ) internal pure returns (string memory) {
+        return
+            string.concat(
+                "r=",
+                Util.quote(_radius),
+                "cx=",
+                Util.quote(_coords[0]),
+                "cy=",
+                Util.quote(_coords[1]),
+                "fill=",
+                Util.quote(_fill),
+                "opacity=",
+                Util.quote(_opacity),
+                "style=",
+                Util.quote(string.concat("mix-blend-mode:", _mixMode)),
+                " ",
+                _attributes,
+                " "
+            );
+    }
+
+    function rectAttributes(
+        string memory _width,
+        string memory _height,
+        string memory _fill,
+        string memory _attributes
+    ) internal pure returns (string memory) {
+        return
+            string.concat(
+                "width=",
+                Util.quote(_width),
+                "height=",
+                Util.quote(_height),
+                "fill=",
+                Util.quote(_fill),
+                " ",
+                _attributes,
+                " "
+            );
     }
 
     function animateMotionAttributes(

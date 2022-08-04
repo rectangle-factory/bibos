@@ -18,6 +18,10 @@ enum MoteType {
 library Motes {
     uint256 constant GLINT_COUNT = 20;
 
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory motesChildren;
 
@@ -27,17 +31,13 @@ library Motes {
         for (uint8 i = 0; i < GLINT_COUNT; i++) {
             uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote", i)));
 
-            string memory dur = Data.longTimes(moteSeed);
-            moteSeed = moteSeed / Data.length;
-            string memory delay = Data.shorterTimes(moteSeed);
-            moteSeed = moteSeed / Data.length;
-            string[2] memory coords = Data.motePoints(moteSeed);
-            moteSeed = moteSeed / Data.length;
-            string memory radius = moteSeed % 2 == 0 ? "1" : "2";
-            moteSeed = moteSeed / 2;
-            string memory opacity = Palette.opacity(moteSeed, _seed);
-            moteSeed /= Palette.opacityLength;
+            string memory dur = Data.longTimes(moteSeed /= Data.length);
+            string memory delay = Data.shorterTimes(moteSeed /= Data.length);
+            string[2] memory coords = Data.motePoints(moteSeed /= Data.length);
+            string memory radius = (moteSeed /= 2) % 2 == 0 ? "1" : "2";
+            string memory opacity = Palette.opacity(moteSeed /= Palette.opacityLength, _seed);
             bool reverse = moteSeed % 2 == 0;
+
             if (moteType == MoteType.FLOATING)
                 motesChildren = string.concat(motesChildren, _floatingMote(radius, coords, opacity, dur, reverse));
             else if (moteType == MoteType.RISING)
@@ -53,6 +53,10 @@ library Motes {
 
         return SVG.element({_type: "g", _attributes: "", _children: motesChildren});
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _risingMote(
         string memory _radius,
