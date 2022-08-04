@@ -28,7 +28,7 @@ library Render {
                 _tokenId: _tokenId,
                 _name: _name(_tokenId),
                 _description: description,
-                _attributes: Traits.attributes(_seed),
+                _attributes: Traits.attributes(_seed, _tokenId),
                 _backgroundColor: Palette.backgroundFill(_seed, _tokenId),
                 _svg: _svg(_seed, _tokenId)
             });
@@ -46,7 +46,7 @@ library Render {
                 Data.defs(),
                 Background.render(_seed, _tokenId),
                 Body.render(_seed, _tokenId),
-                Motes.render(_seed),
+                Motes.render(_seed, _tokenId),
                 Glints.render(_seed),
                 Face.render(_seed)
             );
