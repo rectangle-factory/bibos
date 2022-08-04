@@ -27,16 +27,20 @@ library Traits {
         return string.concat(result, "]");
     }
 
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
+
     function _attribute(string memory _traitType, string memory _value) internal pure returns (string memory) {
         return string.concat("{", Util.keyValue("trait_type", _traitType), ",", Util.keyValue("value", _value), "}");
     }
 
-    function _computeSeed(bytes32 _seed, string memory _salt) internal pure returns (uint256) {
+    function _rarity(bytes32 _seed, string memory _salt) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(_seed, _salt))) % 100;
     }
 
     /*//////////////////////////////////////////////////////////////
-                              DENSITY
+                                 DENSITY
     //////////////////////////////////////////////////////////////*/
 
     function densityTrait(bytes32 _seed) internal pure returns (string memory) {
@@ -45,25 +49,25 @@ library Traits {
     }
 
     function densityType(bytes32 _seed) internal pure returns (DensityType) {
-        uint256 densitySeed = _computeSeed(_seed, "density");
+        uint256 densityRarity = _rarity(_seed, "density");
 
-        if (densitySeed < 80) return DensityType.HIGH;
+        if (densityRarity < 80) return DensityType.HIGH;
         return DensityType.LOW;
     }
 
     /*//////////////////////////////////////////////////////////////
-                              POLARITY
+                                POLARITY
     //////////////////////////////////////////////////////////////*/
 
     function polarityTrait(bytes32 _seed) internal pure returns (string memory) {
-        PolarityType polarityType_ = polarityType(_seed);
-        return polarityType_ == PolarityType.POSITIVE ? "Positive" : "Negative";
+        PolarityType type_ = polarityType(_seed);
+        return type_ == PolarityType.POSITIVE ? "Positive" : "Negative";
     }
 
     function polarityType(bytes32 _seed) internal pure returns (PolarityType) {
-        uint256 polaritySeed = _computeSeed(_seed, "polarity");
+        uint256 polarityRarity = _rarity(_seed, "polarity");
 
-        if (polaritySeed < 80) return PolarityType.POSITIVE;
+        if (polarityRarity < 80) return PolarityType.POSITIVE;
         return PolarityType.NEGATIVE;
     }
 
@@ -82,12 +86,12 @@ library Traits {
     }
 
     function moteType(bytes32 _seed) internal pure returns (MoteType) {
-        uint256 moteSeed = _computeSeed(_seed, "mote");
+        uint256 moteRarity = _rarity(_seed, "mote");
 
-        if (moteSeed < 20) return MoteType.FLOATING;
-        if (moteSeed < 35) return MoteType.RISING;
-        if (moteSeed < 50) return MoteType.FALLING;
-        if (moteSeed < 59) return MoteType.GLISTENING;
+        if (moteRarity < 20) return MoteType.FLOATING;
+        if (moteRarity < 35) return MoteType.RISING;
+        if (moteRarity < 50) return MoteType.FALLING;
+        if (moteRarity < 59) return MoteType.GLISTENING;
         return MoteType.NONE;
     }
 
@@ -113,19 +117,19 @@ library Traits {
     }
 
     function eyeType(bytes32 _seed) internal pure returns (EyeType) {
-        uint256 eyeSeed = uint256(keccak256(abi.encodePacked(_seed, "eye"))) % 100;
+        uint256 eyeRarity = _rarity(_seed, "eye");
 
-        if (eyeSeed % 100 < 20) return EyeType.OPEN;
-        if (eyeSeed % 100 < 40) return EyeType.ROUND;
-        if (eyeSeed % 100 < 50) return EyeType.SMILEY;
-        if (eyeSeed % 100 < 60) return EyeType.SLEEPY;
-        if (eyeSeed % 100 < 70) return EyeType.WINK;
-        if (eyeSeed % 100 < 80) return EyeType.HAHA;
-        if (eyeSeed % 100 < 84) return EyeType.CLOVER;
-        if (eyeSeed % 100 < 88) return EyeType.STAR;
-        if (eyeSeed % 100 < 92) return EyeType.DIZZY;
-        if (eyeSeed % 100 < 96) return EyeType.HEART;
-        if (eyeSeed % 100 < 99) return EyeType.CYCLOPS;
+        if (eyeRarity < 20) return EyeType.OPEN;
+        if (eyeRarity < 40) return EyeType.ROUND;
+        if (eyeRarity < 50) return EyeType.SMILEY;
+        if (eyeRarity < 60) return EyeType.SLEEPY;
+        if (eyeRarity < 70) return EyeType.WINK;
+        if (eyeRarity < 80) return EyeType.HAHA;
+        if (eyeRarity < 84) return EyeType.CLOVER;
+        if (eyeRarity < 88) return EyeType.STAR;
+        if (eyeRarity < 92) return EyeType.DIZZY;
+        if (eyeRarity < 96) return EyeType.HEART;
+        if (eyeRarity < 99) return EyeType.CYCLOPS;
         return EyeType.OPAL;
     }
 
@@ -148,18 +152,18 @@ library Traits {
     }
 
     function mouthType(bytes32 _seed) internal pure returns (MouthType) {
-        uint256 mouthSeed = _computeSeed(_seed, "mouth");
+        uint256 mouthRarity = _rarity(_seed, "mouth");
 
-        if (mouthSeed % 100 < 20) return MouthType.SMILE;
-        if (mouthSeed % 100 < 40) return MouthType.MEDIUM_SMILE;
-        if (mouthSeed % 100 < 60) return MouthType.SMALL_SMILE;
-        if (mouthSeed % 100 < 70) return MouthType.GRIN;
-        if (mouthSeed % 100 < 80) return MouthType.SMIRK;
-        if (mouthSeed % 100 < 89) return MouthType.VEE;
-        if (mouthSeed % 100 < 92) return MouthType.OOO;
-        if (mouthSeed % 100 < 94) return MouthType.FLAT;
-        if (mouthSeed % 100 < 96) return MouthType.TOOTHY;
-        if (mouthSeed % 100 < 98) return MouthType.SMOOCH;
+        if (mouthRarity < 20) return MouthType.SMILE;
+        if (mouthRarity < 40) return MouthType.MEDIUM_SMILE;
+        if (mouthRarity < 60) return MouthType.SMALL_SMILE;
+        if (mouthRarity < 70) return MouthType.GRIN;
+        if (mouthRarity < 80) return MouthType.SMIRK;
+        if (mouthRarity < 89) return MouthType.VEE;
+        if (mouthRarity < 92) return MouthType.OOO;
+        if (mouthRarity < 94) return MouthType.FLAT;
+        if (mouthRarity < 96) return MouthType.TOOTHY;
+        if (mouthRarity < 98) return MouthType.SMOOCH;
         return MouthType.CAT;
     }
 
@@ -176,11 +180,11 @@ library Traits {
     }
 
     function cheekType(bytes32 _seed) internal pure returns (CheekType) {
-        uint256 cheeksSeed = _computeSeed(_seed, "cheeks");
+        uint256 cheekRarity = _rarity(_seed, "cheeks");
 
-        if (cheeksSeed % 100 < 50) return CheekType.NONE;
-        if (cheeksSeed % 100 < 75) return CheekType.CIRCULAR;
-        if (cheeksSeed % 100 < 85) return CheekType.BIG;
+        if (cheekRarity < 50) return CheekType.NONE;
+        if (cheekRarity < 75) return CheekType.CIRCULAR;
+        if (cheekRarity < 85) return CheekType.BIG;
         return CheekType.FRECKLES;
     }
 
@@ -189,16 +193,16 @@ library Traits {
     //////////////////////////////////////////////////////////////*/
 
     function glintTrait(bytes32 _seed) internal pure returns (string memory) {
-        uint256 count_ = glintCount(_seed);
-        return Util.uint256ToString(count_);
+        uint256 count = glintCount(_seed);
+        return Util.uint256ToString(count);
     }
 
     function glintCount(bytes32 _seed) internal pure returns (uint256) {
-        uint256 glintSeed = _computeSeed(_seed, "glint");
+        uint256 glintRarity = _rarity(_seed, "glint");
 
-        if (glintSeed < 1) return 3;
-        if (glintSeed < 5) return 2;
-        if (glintSeed < 35) return 1;
+        if (glintRarity < 1) return 3;
+        if (glintRarity < 5) return 2;
+        if (glintRarity < 35) return 1;
         return 0;
     }
 
@@ -211,21 +215,21 @@ library Traits {
     }
 
     function virtueType(bytes32 _seed) internal pure returns (string memory) {
-        uint256 virtueSeed = _computeSeed(_seed, "virtue");
+        uint256 virtueRarity = _rarity(_seed, "virtue");
 
-        if (virtueSeed < 15) return "Gentleness";
-        if (virtueSeed < 30) return "Bravery";
-        if (virtueSeed < 45) return "Modesty";
-        if (virtueSeed < 60) return "Temperance";
-        if (virtueSeed < 70) return "Rightous Indignation";
-        if (virtueSeed < 80) return "Justice";
-        if (virtueSeed < 85) return "Sincerity";
-        if (virtueSeed < 88) return "Friendliness";
-        if (virtueSeed < 92) return "Dignity";
-        if (virtueSeed < 94) return "Endurance";
-        if (virtueSeed < 96) return "Greatness of Spirit";
-        if (virtueSeed < 98) return "Magnificence";
-        if (virtueSeed < 99) return "Wisdom";
+        if (virtueRarity < 15) return "Gentleness";
+        if (virtueRarity < 30) return "Bravery";
+        if (virtueRarity < 45) return "Modesty";
+        if (virtueRarity < 60) return "Temperance";
+        if (virtueRarity < 70) return "Rightous Indignation";
+        if (virtueRarity < 80) return "Justice";
+        if (virtueRarity < 85) return "Sincerity";
+        if (virtueRarity < 88) return "Friendliness";
+        if (virtueRarity < 92) return "Dignity";
+        if (virtueRarity < 94) return "Endurance";
+        if (virtueRarity < 96) return "Greatness of Spirit";
+        if (virtueRarity < 98) return "Magnificence";
+        if (virtueRarity < 99) return "Wisdom";
         return "Extreme Tardiness";
     }
 }

@@ -8,6 +8,10 @@ import {Util} from "./Util.sol";
 import {SVG} from "./SVG.sol";
 
 library Glints {
+    /*//////////////////////////////////////////////////////////////
+                                 RENDER
+    //////////////////////////////////////////////////////////////*/
+
     function render(bytes32 _seed) internal pure returns (string memory) {
         string memory glintsGroupChildren;
         uint256 glintCount = Traits.glintCount(_seed);
@@ -36,6 +40,10 @@ library Glints {
 
         return SVG.element("g", "id='glints'", glintsGroupChildren);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                INTERNAL
+    //////////////////////////////////////////////////////////////*/
 
     function _glint(
         string memory _durationShort,

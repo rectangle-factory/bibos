@@ -14,8 +14,7 @@ library Face {
 
     function render(bytes32 _seed) internal pure returns (string memory) {
         uint256 faceSeed = uint256(keccak256(abi.encodePacked(_seed, "face")));
-        bool reverse = faceSeed % 2 == 0;
-        faceSeed /= 2;
+        bool reverse = (faceSeed /= 2) % 2 == 0;
         string memory rotation = ["1", "2", "4", "6", "-1", "-2", "-4", "-6"][faceSeed % 8];
 
         string memory circleFilterId = "bibo-blur-lg";
