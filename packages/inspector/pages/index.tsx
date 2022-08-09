@@ -2,7 +2,7 @@ import { useState } from "react";
 import { xml } from "@codemirror/lang-xml";
 import { EditorView } from "@codemirror/view";
 import CodeMirror from "@uiw/react-codemirror";
-import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from "@codemirror/language";
+import { syntaxHighlighting, foldGutter, codeFolding } from "@codemirror/language";
 import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
 import { FetchStatus } from "../types";
