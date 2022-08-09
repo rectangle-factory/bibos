@@ -22,7 +22,7 @@ library Motes {
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
-    function render(bytes32 _seed, uint256 _tokenId) internal pure returns (string memory) {
+    function render(bytes32 _seed, uint256 _tokenId) external pure returns (string memory) {
         string memory motesChildren;
 
         MoteType moteType = Traits.moteType(_seed);

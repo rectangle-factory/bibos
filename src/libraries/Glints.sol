@@ -12,7 +12,7 @@ library Glints {
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) external pure returns (string memory) {
         string memory glintsGroupChildren;
         uint256 glintCount = Traits.glintCount(_seed);
 

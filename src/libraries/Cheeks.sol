@@ -17,7 +17,7 @@ library Cheeks {
                                  RENDER
     //////////////////////////////////////////////////////////////*/
 
-    function render(bytes32 _seed) internal pure returns (string memory) {
+    function render(bytes32 _seed) external pure returns (string memory) {
         CheekType cheekType = Traits.cheekType(_seed);
         if (cheekType == CheekType.CIRCULAR) return _circular();
         if (cheekType == CheekType.FRECKLES) return _freckles();

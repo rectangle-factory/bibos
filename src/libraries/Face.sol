@@ -17,14 +17,13 @@ library Face {
         bool reverse = (faceSeed /= 2) % 2 == 0;
         string memory rotation = ["1", "2", "4", "6", "-1", "-2", "-4", "-6"][faceSeed % 8];
 
-        string memory circleFilterId = "bibo-blur-lg";
         string memory circleAttributes = SVG.circleAttributes({
             _radius: "80",
             _coords: ["100", "100"],
             _fill: "white",
             _opacity: "0.2",
             _mixMode: "lighten",
-            _attributes: SVG.filterAttribute(circleFilterId)
+            _attributes: SVG.filterAttribute("bibo-blur-lg")
         });
 
         string memory faceGroupAttributes = string.concat(

@@ -1,0 +1,12 @@
+{
+  "mainnet": {
+    "Bibos": "0xf528e3381372c43f5e8a55b3e6c252e32f1a26e4",
+    "Cheeks": "0x5a56533924d6694c617172592cfa7d8c63de4b4f",
+    "Data": "0x62897c2906035e70470d0b0a37bf31fdadf7bf67",
+    "Eyes": "0xfd61aff6cc3abc7339946f233f182dd17ef97b12",
+    "Eyes2": "0xf7fd823e7a599e11150795e4b1c71240001188f9",
+    "Glints": "0x2073341d0ac112a0bc159482d7619929d4ba3456",
+    "Motes": "0x176a00344e819430136be71b66a0e7853885342f",
+    "Mouth": "0x40ccf25fc4c7e37a7aaaf58dbaf6b1f3996e478c"
+  }
+}
