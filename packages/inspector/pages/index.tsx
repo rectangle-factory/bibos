@@ -106,12 +106,7 @@ export default function Index() {
           />
         </div>
 
-        <TraitsTable
-          loading={status == FetchStatus.UNFETCHED}
-          tokenId={token.tokenId}
-          name={token.name}
-          attributes={token.attributes}
-        />
+        <TraitsTable name={token.name} attributes={token.attributes} />
         <HorizontalRule />
         <Toolbar>
           <Button

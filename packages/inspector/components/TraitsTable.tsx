@@ -1,18 +1,7 @@
-import { trait } from "../types";
+import { Trait } from "../types";
 import { isOdd } from "../util";
 
-export const TraitsTable = ({
-  name,
-  loading,
-  tokenId,
-  attributes,
-}: {
-  name: string;
-  loading: boolean;
-  tokenId: number;
-  attributes: trait[];
-}) => {
-  const Loading = () => "loading";
+export const TraitsTable = ({ name, attributes }: { name: string; attributes: Trait[] }) => {
   return (
     <div className="flex w-full flex-col">
       <span className="w-full px-8 py-2 text-label font-bold bg-[#21262d]">{name}</span>
