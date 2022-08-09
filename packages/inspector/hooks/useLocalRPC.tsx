@@ -16,16 +16,6 @@ type NFTState = {
   rawSvg: string;
 };
 
-const nftStateDefault: NFTState = {
-  status: FetchStatus.UNFETCHED,
-  metadata: {
-    image: "",
-    attributes: [],
-  },
-  tokenId: -1,
-  rawSvg: "",
-};
-
 const LOCAL_RPC_URI = "http://localhost:8545";
 export const useLocalRPC = () => {
   const [bibosContract, setBibosContract] = useState<Contract>(null);
