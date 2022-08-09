@@ -1,10 +1,8 @@
 import { useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
 import { xml } from "@codemirror/lang-xml";
 import { EditorView } from "@codemirror/view";
-import { basicSetup } from "codemirror";
 import CodeMirror from "@uiw/react-codemirror";
-import { syntaxHighlighting, bracketMatching, foldGutter, codeFolding } from "@codemirror/language";
+import { syntaxHighlighting, foldGutter, codeFolding } from "@codemirror/language";
 import { highlightDark, themeDark } from "../components/CodeMirrorTheme";
 
 import { FetchStatus } from "../types";
@@ -37,7 +35,6 @@ export default function Index() {
           <CodeMirror
             className="w-full h-full border-none scrollbar-none"
             value={formattedSvg}
-            // height={ '100%' }
             basicSetup={{
               foldGutter: false,
             }}
@@ -106,12 +103,7 @@ export default function Index() {
           />
         </div>
 
-        <TraitsTable
-          loading={status == FetchStatus.UNFETCHED}
-          tokenId={token.tokenId}
-          name={token.name}
-          attributes={token.attributes}
-        />
+        <TraitsTable name={token.name} attributes={token.attributes} />
         <HorizontalRule />
         <Toolbar>
           <Button
