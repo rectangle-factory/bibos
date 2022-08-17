@@ -13,8 +13,6 @@ import {CREATE3} from "solmate/utils/CREATE3.sol";
 import {time} from "src/util/time.sol";
 import {io} from "src/util/io.sol";
 
-// need to link bibos and deploy the contracts here.
-
 contract deploy {
     mapping(string => address) public addresses;
 
