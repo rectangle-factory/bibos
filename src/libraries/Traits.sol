@@ -226,7 +226,7 @@ library Traits {
         if (virtueRarity < 30) return "Bravery";
         if (virtueRarity < 45) return "Modesty";
         if (virtueRarity < 60) return "Temperance";
-        if (virtueRarity < 70) return "Rightous Indignation";
+        if (virtueRarity < 70) return "Righteous Indignation";
         if (virtueRarity < 80) return "Justice";
         if (virtueRarity < 85) return "Sincerity";
         if (virtueRarity < 88) return "Friendliness";
