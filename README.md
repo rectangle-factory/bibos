@@ -1,5 +1,11 @@
 # Bibos
 
+![Some bibos](header.png)
+
+## Introduction
+
+No one remembers where bibos came from, but one things for sure - they are implemented as a set of Solidity contracts which deliver animated, on-chain SVG bibos to your wallet. For now, this repo includes the inspector tool as well.
+
 ## Development
 
 ---
