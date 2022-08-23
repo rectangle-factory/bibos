@@ -9,6 +9,9 @@ import {Data} from "libraries/Data.sol";
 import {Util} from "libraries/Util.sol";
 import {MoteType} from "libraries/Motes.sol";
 
+// usage:
+// forge script compute_traits -s "run(uint256)" $TOKEN_ID
+
 /// @title compute_traits
 /// @notice Computes Bibos extended attributes
 /// @dev Seeds need to have already have been obtained on-chain
