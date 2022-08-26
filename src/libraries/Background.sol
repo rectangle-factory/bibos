@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {SVG} from "./SVG.sol";
+import {Palette} from "libraries/Palette.sol";
+import {SVG} from "libraries/SVG.sol";
 
+/// @title Background
+/// @author Bumblebee Systems
 library Background {
     /*//////////////////////////////////////////////////////////////
                                  RENDER

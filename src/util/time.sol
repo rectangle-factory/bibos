@@ -3,6 +3,8 @@ pragma solidity >=0.8.0;
 
 import {vm} from "./vm.sol";
 
+/// @title time
+/// @author Bumblebee Systems
 library time {
     string constant UNIX_TIME_PATH = "scripts/time.sh";
 

@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+/// @title TimesUncompressed
+/// @author Bumblebee Systems
 library TimesUncompressed {
     uint256 constant length = 64;
 

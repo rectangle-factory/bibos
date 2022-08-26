@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+/// @title PointsUncompressed
+/// @author Bumblebee Systems
 library PointsUncompressed {
     uint256 constant length = 64;
 

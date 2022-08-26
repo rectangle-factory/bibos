@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+/// @title PaletteUncompressed
+/// @author Bumblebee Systems
 library PaletteUncompressed {
     function lightest(uint256 _value) internal pure returns (string memory) {
         string[64] memory lightestValues = [

@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+/// @title Eyes2
+/// @author Bumblebee Systems
 library Eyes2 {
     function opaline(string memory _fill) external pure returns (string memory) {
         return

@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette, DensityType, PolarityType} from "./Palette.sol";
-import {Traits} from "./Traits.sol";
-import {Data} from "./Data.sol";
-import {Util} from "./Util.sol";
-import {SVG} from "./SVG.sol";
+import {Palette, DensityType, PolarityType} from "libraries/Palette.sol";
+import {Traits} from "libraries/Traits.sol";
+import {Data} from "libraries/Data.sol";
+import {Util} from "libraries/Util.sol";
+import {SVG} from "libraries/SVG.sol";
 
+/// @title Body
+/// @author Bumblebee Systems
 library Body {
-    uint256 constant circlesCount = 7;
+    uint256 constant CIRCLE_COUNT = 7;
 
     /*//////////////////////////////////////////////////////////////
                                  RENDER
@@ -24,7 +26,7 @@ library Body {
 
         string memory bodyGroupChildren = _bodyBackground(backgroundFill);
 
-        for (uint8 index = 0; index < circlesCount; ++index) {
+        for (uint8 index = 0; index < CIRCLE_COUNT; ++index) {
             bodyGroupChildren = string.concat(
                 bodyGroupChildren,
                 _bodyCircle(_seed, index, _tokenId, radii[index], mixBlendMode)
@@ -51,7 +53,7 @@ library Body {
     ) internal pure returns (string memory) {
         uint256 bodySeed = uint256(keccak256(abi.encodePacked(_seed, "body", _index)));
         string memory bodyFill1 = Palette.bodyFill(_seed, _index, _tokenId);
-        string memory bodyFill2 = Palette.bodyFill(_seed, _index + circlesCount, _tokenId);
+        string memory bodyFill2 = Palette.bodyFill(_seed, _index + CIRCLE_COUNT, _tokenId);
         string memory dur = Data.shortTimes(bodySeed /= Data.length);
         string[2] memory coords = (_index == 0) ? ["150", "150"] : Data.bodyPoints(bodySeed /= 2);
         bool reverse = bodySeed % 2 == 0;

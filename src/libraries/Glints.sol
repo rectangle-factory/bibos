@@ -2,11 +2,13 @@
 pragma solidity >=0.8.0;
 
 import {Traits} from "libraries/Traits.sol";
-import {Palette} from "./Palette.sol";
-import {Data} from "./Data.sol";
-import {Util} from "./Util.sol";
-import {SVG} from "./SVG.sol";
+import {Palette} from "libraries/Palette.sol";
+import {Data} from "libraries/Data.sol";
+import {Util} from "libraries/Util.sol";
+import {SVG} from "libraries/SVG.sol";
 
+/// @title Glints
+/// @author Bumblebee Systems
 library Glints {
     /*//////////////////////////////////////////////////////////////
                                  RENDER

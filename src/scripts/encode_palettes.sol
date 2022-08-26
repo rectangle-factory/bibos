@@ -5,6 +5,8 @@ import {Script, console2 as console} from "forge-std/Script.sol";
 
 import {PaletteUtil} from "dev/PaletteUtil.sol";
 
+/// @title encode_palettes
+/// @author Bumblebee Systems
 contract encode_palettes is Script {
     function encodeAll()
         public

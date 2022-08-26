@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
+
 import {Traits} from "libraries/Traits.sol";
 import {Data} from "libraries/Data.sol";
 
@@ -13,6 +14,8 @@ enum PolarityType {
     NEGATIVE
 }
 
+/// @title Palette
+/// @author Bumblebee Systems
 library Palette {
     uint256 constant length = 64;
     uint256 constant opacityLength = 5;

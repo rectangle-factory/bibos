@@ -4,16 +4,18 @@ pragma solidity >=0.8.0;
 import {Metadata} from "libraries/Metadata.sol";
 import {Util} from "libraries/Util.sol";
 import {Traits} from "libraries/Traits.sol";
-import {Data} from "./Data.sol";
+import {Data} from "libraries/Data.sol";
 import {Palette} from "libraries/Palette.sol";
-import {Background} from "./Background.sol";
-import {Body} from "./Body.sol";
-import {Face} from "./Face.sol";
-import {Motes} from "./Motes.sol";
-import {Glints} from "./Glints.sol";
-import {Traits} from "./Traits.sol";
-import {SVG} from "./SVG.sol";
+import {Background} from "libraries/Background.sol";
+import {Body} from "libraries/Body.sol";
+import {Face} from "libraries/Face.sol";
+import {Motes} from "libraries/Motes.sol";
+import {Glints} from "libraries/Glints.sol";
+import {Traits} from "libraries/Traits.sol";
+import {SVG} from "libraries/SVG.sol";
 
+/// @title Render
+/// @author Bumblebee Systems
 library Render {
     string public constant description =
         "Floating. Hypnotizing. Divine? Bibos are 1111 friendly spirits for your wallet. Join the billions of people who love and adore bibos today.";

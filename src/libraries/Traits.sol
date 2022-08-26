@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {DensityType, PolarityType} from "./Palette.sol";
-import {MoteType} from "./Motes.sol";
-import {EyeType} from "./Eyes.sol";
-import {CheekType} from "./Cheeks.sol";
-import {MouthType} from "./Mouth.sol";
-import {Glints} from "./Glints.sol";
-import {Util} from "./Util.sol";
+import {DensityType, PolarityType} from "libraries/Palette.sol";
+import {MoteType} from "libraries/Motes.sol";
+import {EyeType} from "libraries/Eyes.sol";
+import {CheekType} from "libraries/Cheeks.sol";
+import {MouthType} from "libraries/Mouth.sol";
+import {Glints} from "libraries/Glints.sol";
+import {Util} from "libraries/Util.sol";
 
+/// @title Traits
+/// @author Bumblebee Systems
 library Traits {
     /*//////////////////////////////////////////////////////////////
                                  TRAITS

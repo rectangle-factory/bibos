@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Data} from "./Data.sol";
-import {Util} from "./Util.sol";
-import {SVG} from "./SVG.sol";
-import {Traits} from "./Traits.sol";
+import {Palette} from "libraries/Palette.sol";
+import {Data} from "libraries/Data.sol";
+import {Util} from "libraries/Util.sol";
+import {SVG} from "libraries/SVG.sol";
+import {Traits} from "libraries/Traits.sol";
 
 enum MoteType {
     NONE,
@@ -15,8 +15,10 @@ enum MoteType {
     GLISTENING
 }
 
+/// @title Motes
+/// @author Bumblebee Systems
 library Motes {
-    uint256 constant GLINT_COUNT = 20;
+    uint256 constant MOTE_COUNT = 20;
 
     /*//////////////////////////////////////////////////////////////
                                  RENDER
@@ -28,7 +30,7 @@ library Motes {
         MoteType moteType = Traits.moteType(_seed);
         if (moteType == MoteType.NONE) return "";
 
-        for (uint8 i = 0; i < GLINT_COUNT; i++) {
+        for (uint8 i = 0; i < MOTE_COUNT; i++) {
             uint256 moteSeed = uint256(keccak256(abi.encodePacked(_seed, "mote", i)));
 
             string memory dur = Data.longTimes(moteSeed /= Data.length);

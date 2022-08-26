@@ -22,6 +22,8 @@ enum EyeType {
     OPALINE
 }
 
+/// @title Eyes
+/// @author Bumblebee Systems
 library Eyes {
     string constant fill = "black";
 

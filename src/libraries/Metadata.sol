@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0;
 
-import {Base64} from "./Base64.sol";
-import {Util} from "./Util.sol";
+import {Base64} from "libraries/Base64.sol";
+import {Util} from "libraries/Util.sol";
 
+/// @title Metadata
+/// @author Bumblebee Systems
 library Metadata {
     string constant JSON_BASE64_HEADER = "data:application/json;base64,";
     string constant SVG_XML_BASE64_HEADER = "data:image/svg+xml;base64,";

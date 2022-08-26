@@ -4,6 +4,8 @@ pragma solidity >=0.8.0;
 import {Util} from "libraries/Util.sol";
 import {PaletteUncompressed} from "dev/PaletteUncompressed.sol";
 
+/// @title PaletteUtil
+/// @author Bumblebee Systems
 library PaletteUtil {
     uint256 constant length = 64;
 

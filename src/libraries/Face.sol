@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {SVG} from "./SVG.sol";
-import {Eyes} from "./Eyes.sol";
-import {Mouth} from "./Mouth.sol";
-import {Cheeks} from "./Cheeks.sol";
-import {Data} from "./Data.sol";
+import {SVG} from "libraries/SVG.sol";
+import {Eyes} from "libraries/Eyes.sol";
+import {Mouth} from "libraries/Mouth.sol";
+import {Cheeks} from "libraries/Cheeks.sol";
+import {Data} from "libraries/Data.sol";
 
+/// @title Face
+/// @author Bumblebee Systems
 library Face {
     /*//////////////////////////////////////////////////////////////
                                  RENDER

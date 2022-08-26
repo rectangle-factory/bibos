@@ -19,6 +19,7 @@ pragma solidity 0.8.13;
 
 import {ERC721} from "solmate/tokens/ERC721.sol";
 import {Owned} from "solmate/auth/Owned.sol";
+
 import {Render} from "libraries/Render.sol";
 
 error InsufficentValue();
@@ -26,6 +27,8 @@ error MintedOut();
 error InvalidTokenId();
 error AmountNotAvailable();
 
+/// @title Bibos
+/// @author Bumblebee Systems
 contract Bibos is ERC721, Owned {
     /*//////////////////////////////////////////////////////////////
                                   STATE
