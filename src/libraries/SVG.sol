@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Util} from "./Util.sol";
+import {Util} from "libraries/Util.sol";
 
+/// @title SVG
+/// @author Bumblebee Systems
 library SVG {
     /*//////////////////////////////////////////////////////////////
                                  ELEMENT

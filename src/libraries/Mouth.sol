@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Palette} from "./Palette.sol";
-import {Traits} from "./Traits.sol";
+import {Palette} from "libraries/Palette.sol";
+import {Traits} from "libraries/Traits.sol";
 
 enum MouthType {
     SMILE,
@@ -19,6 +19,8 @@ enum MouthType {
     BLEP
 }
 
+/// @title Mouth
+/// @author Bumblebee Systems
 library Mouth {
     string constant fill = "black";
 

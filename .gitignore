@@ -2,6 +2,7 @@ cache/
 out/
 broadcast/
 node_modules
+.env
 
 .DS_Store
 

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Util} from "./Util.sol";
-import {SVG} from "./SVG.sol";
-import {Traits} from "./Traits.sol";
+import {Util} from "libraries/Util.sol";
+import {SVG} from "libraries/SVG.sol";
+import {Traits} from "libraries/Traits.sol";
 
 enum CheekType {
     NONE,
@@ -12,6 +12,8 @@ enum CheekType {
     BIG
 }
 
+/// @title Cheeks
+/// @author Bumblebee Systems
 library Cheeks {
     /*//////////////////////////////////////////////////////////////
                                  RENDER

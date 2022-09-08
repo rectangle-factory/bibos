@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Test, console2 as console} from "forge-std/Test.sol";
+import {Script} from "forge-std/Script.sol";
 
-import {Bibos} from "../Bibos.sol";
+import {Bibos} from "src/Bibos.sol";
 
-import {time} from "src/util/time.sol";
+import {time} from "util/time.sol";
 
-contract local_render is Test {
+/// @title local_render
+/// @author Bumblebee Systems
+contract local_render is Script {
     function run() external returns (string memory tokenURI) {
         Bibos bibos = new Bibos();
         uint256 price = bibos.price();

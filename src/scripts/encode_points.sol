@@ -5,6 +5,8 @@ import {Script, console2 as console} from "forge-std/Script.sol";
 
 import {PointsUtil} from "dev/PointsUtil.sol";
 
+/// @title encode_points
+/// @author Bumblebee Systems
 contract encode_points is Script {
     function encodeAll()
         public

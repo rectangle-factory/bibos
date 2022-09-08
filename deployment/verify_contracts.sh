@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# verify bibos contracts with external library addresses
+
 forge verify-contract --chain-id 1 --compiler-version "0.8.13+commit.abaa5c0e" \
 --libraries "src/libraries/Cheeks.sol:Cheeks:0x5a56533924d6694c617172592cfa7d8c63de4b4f" \
 --libraries "src/libraries/Data.sol:Data:0x62897c2906035e70470d0b0a37bf31fdadf7bf67" \

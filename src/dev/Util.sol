@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
+/// @title TimesUtil
+/// @author Bumblebee Systems
 library Util {
     /// @notice will revert if any characters are not in [0-9]
     function hexStringToUint256(string memory _value) internal pure returns (uint256 result) {

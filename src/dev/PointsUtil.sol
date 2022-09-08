@@ -4,6 +4,8 @@ pragma solidity >=0.8.0;
 import {Util} from "libraries/Util.sol";
 import {PointsUncompressed} from "dev/PointsUncompressed.sol";
 
+/// @title PointsUtil
+/// @author Bumblebee Systems
 library PointsUtil {
     uint256 constant length = 64;
 

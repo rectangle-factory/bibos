@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {Util} from "src/libraries/Util.sol";
+import {Util} from "libraries/Util.sol";
 import {TimesUncompressed} from "dev/TimesUncompressed.sol";
 
+/// @title TimesUtil
+/// @author Bumblebee Systems
 library TimesUtil {
     uint256 constant length = 64;
 

@@ -5,7 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {PointsUtil} from "dev/PointsUtil.sol";
 import {Data} from "libraries/Data.sol";
 import {PaletteUncompressed} from "dev/PaletteUncompressed.sol";
-import {Palette} from "../libraries/Palette.sol";
+import {Palette} from "libraries/Palette.sol";
 
 contract PaletteTest is Test {
     function setUp() public {}

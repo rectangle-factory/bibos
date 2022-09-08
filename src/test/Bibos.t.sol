@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Bibos} from "../Bibos.sol";
+import {Bibos} from "src/Bibos.sol";
 
 contract BibosTest is Test {
     Bibos bibos;

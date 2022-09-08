@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# deploy bibos to anvil
+
 # anvil rpc
 RPC_URL=http://127.0.0.1:8545
 # // anvil account 9
@@ -20,10 +22,7 @@ get_return_value() {
 SCRIPT_OUTPUT="$(forge script --private-key $PRIVATE_KEY --rpc-url $RPC_URL --broadcast --json src/scripts/deploy_bibos.sol:deploy_bibos)"
 BIBOS_ADDRESS="$(get_return_value "bibos" "$SCRIPT_OUTPUT")"
 
-# # erase deployments.json
-echo "{}" > $DEPLOYMENTS_PATH
-
-# # save the bibos address in deployments.json
+# save the bibos address in deployments.json
 write_deployment_address "Bibos" $BIBOS_ADDRESS
 
 echo "$SCRIPT_OUTPUT"

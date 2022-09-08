@@ -3,6 +3,8 @@ pragma solidity >=0.8.0;
 
 import {vm} from "./vm.sol";
 
+/// @title io
+/// @author Bumblebee Systems
 library io {
     function read(string memory filePath) internal returns (bytes memory) {
         string[] memory readInputs = new string[](2);
