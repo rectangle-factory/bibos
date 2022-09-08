@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# deploy bibos to anvil
-
-# anvil rpc
-RPC_URL=http://127.0.0.1:8545
-# // anvil account 9
-PRIVATE_KEY=0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
-PUBLIC_KEY=0xa0ee7a142d267c1f36714e4a8f75612f20a79720
+# deploy bibos
+# set env vars RPC_URL and PRIVATE_KEY using `source .env`
 
 DEPLOYMENTS_PATH=./deployment/deployments.json
 
