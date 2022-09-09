@@ -23,25 +23,34 @@ To install dependences:
 pnpm i
 ```
 
-For submodules:
+To install submodules:
 
 ```[bash]
-forge update
+forge install
 ```
 
-For some scripts, you might need `jq` JSON utility. To install on MacOS, run `brew install jq`.
+For some scripts, you will need the `jq` JSON utility. To install on MacOS, run `brew install jq`.
 
 ---
 
 ### Test
 
+To run forge tests:
+
 ```[bash]
-pnpm test
+forge test
 ```
 
 ---
 
 ### Bibos Local Inspector
+
+The Bibos Local Inspector is a local web interface which allows you to:
+
+- generate and view random Bibos from the contract
+- inspect the underlying SVG code
+
+To use:
 
 ```[bash]
 pnpm dev
