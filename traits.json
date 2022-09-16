@@ -1,0 +1,108 @@
+[
+  {
+    "tokenId": 0,
+    "traits": {
+      "density": "High",
+      "polarity": "Positive",
+      "glints": "0",
+      "motes": "None",
+      "eyes": "Clover",
+      "mouth": "Smile",
+      "cheeks": "None",
+      "virtue": "Modesty"
+    },
+    "background": "#061910",
+    "body": [
+      {
+        "fill": "#33a9ff",
+        "fill2": "#ffca33",
+        "coords": { "x": "150", "y": "150" },
+        "radius": "64"
+      },
+      {
+        "fill": "#eb33ff",
+        "fill2": "#52ff33",
+        "coords": { "x": "157", "y": "168" },
+        "radius": "64"
+      },
+      {
+        "fill": "#334bff",
+        "fill2": "#65ff33",
+        "coords": { "x": "122", "y": "152" },
+        "radius": "64"
+      },
+      {
+        "fill": "#ff33a2",
+        "fill2": "#65ff33",
+        "coords": { "x": "117", "y": "114" },
+        "radius": "56"
+      },
+      {
+        "fill": "#33f5ff",
+        "fill2": "#d6ff33",
+        "coords": { "x": "121", "y": "175" },
+        "radius": "48"
+      },
+      {
+        "fill": "#3383ff",
+        "fill2": "#3338ff",
+        "coords": { "x": "165", "y": "120" },
+        "radius": "32"
+      },
+      {
+        "fill": "#52ff33",
+        "fill2": "#4133ff",
+        "coords": { "x": "182", "y": "112" },
+        "radius": "24"
+      }
+    ],
+    "motes": [],
+    "glints": []
+  },
+  {
+    "tokenId": 1,
+    "traits": {
+      "density": "High",
+      "polarity": "Positive",
+      "glints": "0",
+      "motes": "Rising",
+      "eyes": "Sleepy",
+      "mouth": "Polite",
+      "cheeks": "None",
+      "virtue": "Justice"
+    },
+    "background": "#060a06",
+    "body": [
+      { "fill": "#33ff4d", "coords": { "x": "150", "y": "150" }, "radius": "64" },
+      { "fill": "#33e2ff", "coords": { "x": "174", "y": "171" }, "radius": "64" },
+      { "fill": "#33ff85", "coords": { "x": "154", "y": "198" }, "radius": "64" },
+      { "fill": "#6733ff", "coords": { "x": "160", "y": "158" }, "radius": "56" },
+      { "fill": "#8aff33", "coords": { "x": "123", "y": "163" }, "radius": "48" },
+      { "fill": "#c533ff", "coords": { "x": "136", "y": "124" }, "radius": "32" },
+      { "fill": "#ffb733", "coords": { "x": "136", "y": "161" }, "radius": "24" }
+    ],
+    "motes": [
+      { "coords": { "x": "135", "y": "142" }, "radius": "2", "opacity": "0.5" },
+      { "coords": { "x": "137", "y": "185" }, "radius": "1", "opacity": "0.4" },
+      { "coords": { "x": "225", "y": "134" }, "radius": "2", "opacity": "0.5" },
+      { "coords": { "x": "225", "y": "95" }, "radius": "1", "opacity": "0.6" },
+      { "coords": { "x": "142", "y": "166" }, "radius": "1", "opacity": "0.7" },
+      { "coords": { "x": "130", "y": "84" }, "radius": "1", "opacity": "0.7" },
+      { "coords": { "x": "126", "y": "113" }, "radius": "1", "opacity": "0.3" },
+      { "coords": { "x": "170", "y": "103" }, "radius": "1", "opacity": "0.4" },
+      { "coords": { "x": "210", "y": "141" }, "radius": "2", "opacity": "0.5" },
+      { "coords": { "x": "198", "y": "128" }, "radius": "1", "opacity": "0.4" },
+      { "coords": { "x": "130", "y": "84" }, "radius": "1", "opacity": "0.4" },
+      { "coords": { "x": "90", "y": "107" }, "radius": "1", "opacity": "0.5" },
+      { "coords": { "x": "242", "y": "154" }, "radius": "1", "opacity": "0.4" },
+      { "coords": { "x": "114", "y": "150" }, "radius": "2", "opacity": "0.6" },
+      { "coords": { "x": "142", "y": "166" }, "radius": "1", "opacity": "0.7" },
+      { "coords": { "x": "126", "y": "113" }, "radius": "1", "opacity": "0.5" },
+      { "coords": { "x": "198", "y": "128" }, "radius": "1", "opacity": "0.6" },
+      { "coords": { "x": "145", "y": "99" }, "radius": "2", "opacity": "0.3" },
+      { "coords": { "x": "170", "y": "132" }, "radius": "2", "opacity": "0.5" },
+      { "coords": { "x": "232", "y": "173" }, "radius": "2", "opacity": "0.6" }
+    ],
+    "glints": []
+  }
+]

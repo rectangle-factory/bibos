@@ -17,12 +17,23 @@ import {MoteType} from "libraries/Motes.sol";
 /// @dev Seeds need to have already have been obtained on-chain
 /// @author Bumblebee Systems
 contract compute_traits is Script {
-    string constant SEEDS_PATH = "seeds.json";
+    string constant SEEDS_PATH = "data/seeds.json";
     uint256 constant CIRCLES_COUNT = 7;
     uint256 constant MOTE_COUNT = 20;
+    uint256 constant BIBOS_TOTAL_SUPPLY = 1111;
 
-    function run(uint256 _tokenId) external {
-        console.log(bibosData(_tokenId));
+    function run(uint256 _start, uint256 _end) external {
+        uint256 end_ = _end > BIBOS_TOTAL_SUPPLY ? BIBOS_TOTAL_SUPPLY : _end;
+        require(_start < _end);
+        string memory bibosTraits = "[";
+
+        for (uint256 i = _start; i < end_; ++i) {
+            if (i != _start) bibosTraits = string.concat(bibosTraits, ",");
+            bibosTraits = string.concat(bibosTraits, bibosData(i));
+        }
+        bibosTraits = string.concat(bibosTraits, "]");
+
+        console.log(bibosTraits);
     }
 
     function bibosData(uint256 _tokenId) internal returns (string memory) {
@@ -31,6 +42,8 @@ contract compute_traits is Script {
 
         string memory result = string.concat(
             "{",
+            _keyValue("tokenId", Util.uint256ToString(_tokenId)),
+            ",",
             _keyValue("traits", _traits(seed, _tokenId)),
             ",",
             _keyValue("background", _background(seed, _tokenId)),
