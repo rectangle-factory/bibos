@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 BIBOS_TOTAL_SUPPLY=1111
 PAGE=0
