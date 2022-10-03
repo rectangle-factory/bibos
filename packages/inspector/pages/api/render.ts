@@ -15,7 +15,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) =>
         return resolve();
       }
 
-      response.json(JSON.parse(stdout));
+      response.send(stdout);
       resolve();
     })
   );
