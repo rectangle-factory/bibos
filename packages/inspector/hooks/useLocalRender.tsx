@@ -31,7 +31,7 @@ export const useLocalRender = () => {
       return setStatus(FetchStatus.UNFETCHED);
     }
 
-    const tokenURI = await response.json();
+    const tokenURI = await response.text();
 
     setToken(decodeTokenURI(tokenURI));
     setStatus(FetchStatus.FETCHED);
